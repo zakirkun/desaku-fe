@@ -16,7 +16,7 @@
     "dependencies": {
         "@mdi/font": "^7.4.47",
         "@vueup/vue-quill": "^1.2.0",
-        "chart.js": "3.3.2",
+        "chart.js": "^4.4.2",
         "photoswipe": "^5.4.3",
         "primeflex": "^3.3.0",
         "primeicons": "^6.0.1",
