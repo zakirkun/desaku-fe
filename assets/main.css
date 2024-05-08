@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+ol {
+    margin: 1.5rem 0;
+    margin-left: 1rem;
+    list-style-type: decimal;
+}
