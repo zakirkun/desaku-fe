@@ -7,13 +7,13 @@ export default {
         }
     },
     async mounted() {
-        const data = await $fetch('http://127.0.0.1:8000/api/sejarah')
+        const data = await $fetch('http://localhost:30001/api/sejarah')
         this.data = data.sejarah
         this.renderRichEditor = true
     },
     methods: {
         async updateContent() {
-            await $fetch('http://127.0.0.1:8000/api/sejarah', {
+            await $fetch('http://localhost:30001/api/sejarah', {
                 method: "POST",
                 body: {
                     content: this.data
