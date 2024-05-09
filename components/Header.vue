@@ -134,6 +134,8 @@ definePageMeta({
                                     <div @click="$router.push('/galeri')"
                                         class="mb-2 border-b border-slate-300 pb-3">
                                         Galeri</div>
+                                    <div @click="$router.push('/berita')">
+                                        Berita</div>
                                     <!-- <div @click="$router.push('/perangkat-desa')"
                                         class="mb-2 border-b border-slate-300 pb-3">
                                         Perangkat Desa</div>

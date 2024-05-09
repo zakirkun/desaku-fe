@@ -6,6 +6,14 @@ const model = ref([
         label: 'Menu',
         items: [
             {
+                label: 'Halaman Beranda',
+                icon: 'pi pi-fw pi-home',
+                items: [
+                    { label: 'Gambar Beranda', to: "/dashboard/gambar-beranda" },
+                    { label: 'Pengaturan', to: "/dashboard/pengaturan" },
+                ]
+            },
+            {
                 label: 'Profil Desa',
                 icon: 'pi pi-fw pi-user',
                 items: [
