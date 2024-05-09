@@ -9,7 +9,7 @@ export default {
         data: null
     }),
     async mounted() {
-        const data = await $fetch('http://localhost:3000/api/tentang')
+        const data = await $fetch('http://127.0.0.1:8000/api/tentang')
         this.data = data.tentang
     },
 }
@@ -18,7 +18,7 @@ export default {
 <template>
     <Header/>
     <!-- Content -->
-    <div class="px-[14rem] pt-[2.5rem] min-h-[26rem]">
+    <div class="px-[2rem] md:px-[14rem] pt-[2.5rem] min-h-[26rem]">
         <div class="flex mb-6 items-center bg-[#f0f0f0] pa-3 rounded-lg">
             <div class="mr-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 1024 1024">

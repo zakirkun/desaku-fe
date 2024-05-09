@@ -19,7 +19,7 @@ export default {
                             const formData = new FormData();
                             formData.append("image", file);
 
-                            await $fetch('http://localhost:3000/image', {
+                            await $fetch('http://127.0.0.1:8000/api/image', {
                                 body: formData,
                                 method: "POST"
                             })
@@ -37,12 +37,11 @@ export default {
             },
             toolbarOptions: [
                 ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-                ['blockquote', 'code-block'],
-                ['link', 'image', 'video', 'formula'],
+                ['blockquote'],
+                ['link', 'image', 'video'],
 
                 [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-                [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'list': 'check' }],
-                [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
+                [{ 'list': 'ordered' }, { 'list': 'bullet' }],
                 [{ 'direction': 'rtl' }],                         // text direction
 
                 [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown

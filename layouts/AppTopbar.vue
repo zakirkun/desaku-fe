@@ -10,9 +10,11 @@ const router = useRouter();
 onMounted(() => {
     bindOutsideClickListener();
 });
+
 onBeforeUnmount(() => {
     unbindOutsideClickListener();
 });
+
 const logoUrl = computed(() => {
     return `/layout/images/${layoutConfig.darkTheme.value ? 'logo-white' : 'logo-dark'}.svg`;
 });
@@ -63,8 +65,8 @@ const isOutsideClicked = (event) => {
 <template>
     <div class="layout-topbar">
         <router-link to="/" class="layout-topbar-logo">
-            <img :src="logoUrl" alt="logo" />
-            <span>SAKAI</span>
+            <img src="https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/images/logo_header.png" alt="logo" />
+            <span>Dashboard</span>
         </router-link>
 
         <button class="p-link layout-menu-button layout-topbar-button" @click="onMenuToggle()">
