@@ -1,0 +1,1 @@
+.animation{animation:fade-out .5s ease-out}@keyframes fade-out{0%{opacity:0}to{opacity:1}}
