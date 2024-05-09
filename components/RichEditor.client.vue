@@ -19,7 +19,7 @@ export default {
                             const formData = new FormData();
                             formData.append("image", file);
 
-                            await $fetch('http://api.desaku.muhichsan.com/image', {
+                            await $fetch('http://localhost:3000/image', {
                                 body: formData,
                                 method: "POST"
                             })

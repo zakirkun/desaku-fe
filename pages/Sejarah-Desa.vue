@@ -9,7 +9,7 @@ export default {
         data: null,
     }),
     async mounted() {
-        const data = await $fetch('http://api.desaku.muhichsan.com/api/sejarah')
+        const data = await $fetch('http://localhost:3000/api/sejarah')
         this.data = data.sejarah
         console.log(data)
     },
