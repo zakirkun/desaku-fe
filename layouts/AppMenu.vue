@@ -22,6 +22,13 @@ const model = ref([
                     { label: 'Sejarah Desa', to: "/dashboard/sejarah-desa" },
                 ]
             },
+            {
+                label: 'Informasi Publik',
+                icon: 'pi pi-fw pi-book',
+                items: [
+                    { label: 'Berita', to: "/dashboard/berita" },
+                ]
+            },
         ]
     },
 ]);
