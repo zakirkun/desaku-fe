@@ -7,13 +7,13 @@ export default {
         }
     },
     async mounted() {
-        const data = await $fetch('http://localhost:30001/api/visi')
+        const data = await $fetch('http://api.desaku.muhichsan.com/api/visi')
         this.data = data.tentang
         this.renderRichEditor = true
     },
     methods: {
         async updateContent() {
-            await $fetch('http://localhost:30001/api/visi', {
+            await $fetch('http://api.desaku.muhichsan.com/api/visi', {
                 method: "POST",
                 body: {
                     content: this.data

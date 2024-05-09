@@ -10,7 +10,7 @@ export default {
         headerActive: false
     }),
     async mounted() {
-        const data = await $fetch('http://localhost:30001/api/visi')
+        const data = await $fetch('http://api.desaku.muhichsan.com/api/visi')
         this.data = data.visi
 
         window.addEventListener('scroll', function () {

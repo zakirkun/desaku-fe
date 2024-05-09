@@ -7,13 +7,13 @@ export default {
         }
     },
     async mounted() {
-        const data = await $fetch('http://localhost:30001/api/tentang')
+        const data = await $fetch('http://api.desaku.muhichsan.com/api/tentang')
         this.data = data.tentang
         this.renderRichEditor = true
     },
     methods: {
         async updateContent() {
-            await $fetch('http://localhost:30001/api/tentang', {
+            await $fetch('http://api.desaku.muhichsan.com/api/tentang', {
                 method: "POST",
                 body: {
                     content: this.data

@@ -9,7 +9,7 @@ export default {
         data: null
     }),
     async mounted() {
-        const data = await $fetch('http://localhost:30001/api/tentang')
+        const data = await $fetch('http://api.desaku.muhichsan.com/api/tentang')
         this.data = data.tentang
     },
 }
