@@ -2,6 +2,9 @@
 export default {
     data() {
         return {
+            modalRemoveNews: false,
+            modalRemoveNewsCategory: false,
+            removedNewsId: null,
             data: null,
             renderRichEditor: false,
             form: {
@@ -10,19 +13,33 @@ export default {
                 content: null
             },
             headers: [
-                { title: 'Title', align: 'start', sortable: false, key: 'title' },
+                { title: 'Title', align: 'start', sortable: false, key: 'title', width: "200px" },
                 { title: 'Category', align: 'start', key: 'category' },
                 { title: 'Content', align: 'end', key: 'content' },
+                { title: 'Actions', align: 'center', key: 'actions', sortable: false },
+            ],
+            headersCategory: [
+                { title: 'Category Name', align: 'start', sortable: false, key: 'name', width: "200px" },
+                { title: 'Actions', align: 'end', key: 'actions', sortable: false },
             ],
             items: [],
+            itemsCategory: [],
         }
     },
     async mounted() {
-        const data = await $fetch('http://127.0.0.1:8000/api/news')
-        this.items = data
-        this.renderRichEditor = true
+        await this.loadData()
+        await this.loadNewsCategory()
     },
     methods: {
+        async loadData() {
+            const data = await $fetch('http://127.0.0.1:8000/api/news')
+            this.items = data
+            this.renderRichEditor = true
+        },
+        async loadNewsCategory() {
+            const data = await $fetch('http://127.0.0.1:8000/api/news-category')
+            this.itemsCategory = data
+        },
         async addNews() {
             this.form.content = this.data
 
@@ -33,43 +50,171 @@ export default {
         },
         contentChange(v) {
             this.data = v
+        },
+        openModalRemoveNews(id) {
+            this.modalRemoveNews = true
+            this.removedNewsId = id
+        },
+        openModalRemoveNewsCategory(id) {
+            this.modalRemoveNewsCategory = true
+            this.removedNewsCategoryId = id
+        },
+        async removeNews() {
+            await $fetch('http://127.0.0.1:8000/api/news/' + this.removedNewsId, {
+                method: "DELETE",
+            })
+
+            this.modalRemoveNews = false
+            await this.loadData()
+        },
+        async removeNewsCategory() {
+            await $fetch('http://127.0.0.1:8000/api/news-category/' + this.removedNewsCategoryId, {
+                method: "DELETE",
+            })
+
+            this.modalRemoveNewsCategory = false
+            await this.loadNewsCategory()
         }
     }
 }
 </script>
 
 <template>
-    <div class="text-2xl font-semibold mb-2">Berita</div>
+    <v-dialog v-model="modalRemoveNews" width="auto">
+        <v-card height="auto" style="scrollbar-width: none">
+            <template v-slot:title>
+                <div class="flex items-center justify-between">
+                    <div class="text-xl font-semibold">
+                        <span>Hapus Berita?</span>
+                    </div>
+                    <div @click="modalRemoveNews = false" class="cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
+                            <g fill="none" stroke="black" stroke-width="1.5">
+                                <circle cx="12" cy="12" r="10" />
+                                <path stroke-linecap="round" d="m14.5 9.5l-5 5m0-5l5 5" />
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            </template>
+            <template v-slot:text>
+                <div>
+                    <span>Berita yang dihapus tidak bisa dikembalikan kembali.</span>
+                </div>
+            </template>
+            <template v-slot:actions>
+                <div class="w-full flex justify-end">
+                    <Button @click="removeNews" class="w-fit mt-6 bg-[#FC4100] text-white px-3 mx-1 mb-2 py-2 text-md"
+                        label="Hapus"></Button>
+                </div>
+            </template>
+        </v-card>
+    </v-dialog>
+    <v-dialog v-model="modalRemoveNewsCategory" width="auto">
+        <v-card height="auto" style="scrollbar-width: none" class="pa-4 px-4">
+            <div class="flex items-center justify-between">
+                <div class="text-xl font-semibold">
+                    <span>Hapus Kategori Berita?</span>
+                </div>
+                <div @click="modalRemoveNewsCategory = false" class="cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
+                        <g fill="none" stroke="black" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10" />
+                            <path stroke-linecap="round" d="m14.5 9.5l-5 5m0-5l5 5" />
+                        </g>
+                    </svg>
+                </div>
+            </div>
+            <div class="mt-3">
+                <span>Kategori Berita yang dihapus tidak bisa dikembalikan kembali.</span>
+            </div>
+            <template v-slot:actions>
+                <Button @click="removeNewsCategory" class="mt-6 bg-[#FC4100] text-white px-3 py-2 text-md"
+                    label="Hapus"></Button>
+            </template>
+        </v-card>
+    </v-dialog>
+    <div class="flex justify-between items-center mb-3">
+        <div class="text-2xl font-semibold mb-2">Berita</div>
+        <div class="text-md font-semibold mb-2">
+            <NuxtLink to="/dashboard/tambah-berita">
+                <Button class="mt-3 bg-[#10B981] text-white px-3 py-2 text-md" label="Tambah Berita +"></Button>
+            </NuxtLink>
+        </div>
+    </div>
     <div class="grid mb-6">
         <div class="col-12">
             <div class="card">
-                <h3 class="mb-3 text-xl font-medium">List Berita</h3>
-                <v-data-table :headers="headers" :items="items" density="compact" item-key="name">
+                <v-data-table :headers="headers" :items="items" item-key="name">
                     <template v-slot:item.content="{ value }">
                         <span v-html="value.slice(0, 100)"></span>
+                    </template>
+                    <template v-slot:item.actions="{ item }">
+                        <div class="flex justify-center">
+                            <div class="cursor-pointer">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#212121"
+                                        d="M12 9a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5a5 5 0 0 1 5-5a5 5 0 0 1 5 5a5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5" />
+                                </svg>
+                            </div>
+                            <div @click="$router.push('/dashboard/ubah-berita?id=' + item.uuid)" class="cursor-pointer mx-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#212121" fill-rule="evenodd"
+                                        d="M17.204 10.796L19 9c.545-.545.818-.818.964-1.112a2 2 0 0 0 0-1.776C19.818 5.818 19.545 5.545 19 5c-.545-.545-.818-.818-1.112-.964a2 2 0 0 0-1.776 0c-.294.146-.567.419-1.112.964l-1.819 1.819a10.9 10.9 0 0 0 4.023 3.977m-5.477-2.523l-6.87 6.87c-.426.426-.638.638-.778.9c-.14.26-.199.555-.316 1.145l-.616 3.077c-.066.332-.1.498-.005.593c.095.095.26.061.593-.005l3.077-.616c.59-.117.885-.176 1.146-.316c.26-.14.473-.352.898-.777l6.89-6.89a12.901 12.901 0 0 1-4.02-3.98"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div class="cursor-pointer" @click="openModalRemoveNews(item.uuid)">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#212121"
+                                        d="M6 7H5v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7zm4 12H8v-9h2zm6 0h-2v-9h2zm.618-15L15 2H9L7.382 4H3v2h18V4z" />
+                                </svg>
+                            </div>
+                        </div>
                     </template>
                 </v-data-table>
             </div>
         </div>
     </div>
-    <div class="grid">
+    <div class="flex justify-between items-center mb-3">
+        <div class="text-2xl font-semibold mb-2">Kategori Berita</div>
+        <div class="text-md font-semibold mb-2">
+            <NuxtLink to="/dashboard/tambah-kategori-berita">
+                <Button class="mt-3 bg-[#10B981] text-white px-3 py-2 text-md" label="Tambah Kategori +"></Button>
+            </NuxtLink>
+        </div>
+    </div>
+    <div class="grid mb-6">
         <div class="col-12">
             <div class="card">
-                <h3 class="mb-3 text-xl font-medium">Tambah Berita</h3>
-                <div class="grid grid-cols-2 gap-x-6 mt-2">
-                    <div>
-                        <v-text-field v-model="form.title" variant="outlined" hide-details="auto"
-                            label="Judul Berita"></v-text-field>
-                    </div>
-                    <div>
-                        <v-select v-model="form.category" label="Kategori Berita"
-                            :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
-                            variant="outlined"></v-select>
-                    </div>
-                </div>
-                <div class="mb-3 text-lg font-medium my-2">Konten</div>
-                <RichEditor v-if="renderRichEditor" :data="data" @contentChange="contentChange" />
-                <Button @click="addNews" class="mt-3 bg-[#10B981] text-white px-3 py-2" label="Submit"></Button>
+                <v-data-table :headers="headersCategory" :items="itemsCategory" item-key="name">
+                    <template v-slot:item.content="{ value }">
+                        <span v-html="value.slice(0, 100)"></span>
+                    </template>
+                    <template v-slot:item.actions="{ item }">
+                        <div class="flex float-right">
+                            <div @click="$router.push('/dashboard/ubah-kategori-berita?id=' + item.uuid)"
+                                class="cursor-pointer mx-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#212121" fill-rule="evenodd"
+                                        d="M17.204 10.796L19 9c.545-.545.818-.818.964-1.112a2 2 0 0 0 0-1.776C19.818 5.818 19.545 5.545 19 5c-.545-.545-.818-.818-1.112-.964a2 2 0 0 0-1.776 0c-.294.146-.567.419-1.112.964l-1.819 1.819a10.9 10.9 0 0 0 4.023 3.977m-5.477-2.523l-6.87 6.87c-.426.426-.638.638-.778.9c-.14.26-.199.555-.316 1.145l-.616 3.077c-.066.332-.1.498-.005.593c.095.095.26.061.593-.005l3.077-.616c.59-.117.885-.176 1.146-.316c.26-.14.473-.352.898-.777l6.89-6.89a12.901 12.901 0 0 1-4.02-3.98"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div class="cursor-pointer" @click="openModalRemoveNewsCategory(item.uuid)">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#212121"
+                                        d="M6 7H5v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7zm4 12H8v-9h2zm6 0h-2v-9h2zm.618-15L15 2H9L7.382 4H3v2h18V4z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </template>
+                </v-data-table>
             </div>
         </div>
     </div>
