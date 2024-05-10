@@ -7,33 +7,17 @@ definePageMeta({
 <script>
 export default {
     data: () => ({
-        newsData: [
-            {
-                img: "https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/24391a1104f17cf51db1567b5cfe0e2f.jpg",
-                description: "Menguji / Melakukan Diagnosa Koneksi Jaringan Internet Di Komputer Anda Ke Aplikasi Web SIDEKA-NG Melalui Syntax PING & TRACEROUTE by Mochamad Wendy.",
-                title: "Melakukan Diagnosa Koneksi Jaringan Internet Di Komputer Anda Ke Aplikasi Web Melalui Syntaks PING dan TRACEROUTE",
-                date: "Mar 17, 2024"
-            },
-            {
-                img: "https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/24391a1104f17cf51db1567b5cfe0e2f.jpg",
-                description: "Menguji / Melakukan Diagnosa Koneksi Jaringan Internet Di Komputer Anda Ke Aplikasi Web SIDEKA-NG Melalui Syntax PING & TRACEROUTE by Mochamad Wendy.",
-                title: "Melakukan Diagnosa Koneksi Jaringan Internet Di Komputer Anda Ke Aplikasi Web Melalui Syntaks PING dan TRACEROUTE",
-                date: "Mar 17, 2024"
-            },
-            {
-                img: "https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/24391a1104f17cf51db1567b5cfe0e2f.jpg",
-                description: "Menguji / Melakukan Diagnosa Koneksi Jaringan Internet Di Komputer Anda Ke Aplikasi Web SIDEKA-NG Melalui Syntax PING & TRACEROUTE by Mochamad Wendy.",
-                title: "Melakukan Diagnosa Koneksi Jaringan Internet Di Komputer Anda Ke Aplikasi Web Melalui Syntaks PING dan TRACEROUTE",
-                date: "Mar 17, 2024"
-            },
-            {
-                img: "https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/24391a1104f17cf51db1567b5cfe0e2f.jpg",
-                description: "Menguji / Melakukan Diagnosa Koneksi Jaringan Internet Di Komputer Anda Ke Aplikasi Web SIDEKA-NG Melalui Syntax PING & TRACEROUTE by Mochamad Wendy.",
-                title: "Melakukan Diagnosa Koneksi Jaringan Internet Di Komputer Anda Ke Aplikasi Web Melalui Syntaks PING dan TRACEROUTE",
-                date: "Mar 17, 2024"
-            }
-        ],
+        news: []
     }),
+    async mounted() {
+        await this.loadData()
+    },
+    methods: {
+        async loadData() {
+            const data = await $fetch('http://127.0.0.1:8000/api/news')
+            this.news = data
+        },
+    }
 }
 </script>
 
@@ -56,9 +40,9 @@ export default {
                 <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
                     <span>Berita</span>
                 </div>
-                <div class="flex mb-2 h-[200px]" v-for="news in newsData">
+                <div class="flex mb-2 h-[200px]" v-for="news in news">
                     <div class="w-[600px] h-full">
-                        <img class="rounded-md" :src="news.img" alt="">
+                        <img class="rounded-md" :src="news.thumbnail" alt="">
                     </div>
                     <div class="block pl-4">
                         <div class="text-xl font-semibold">
