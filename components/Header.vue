@@ -23,7 +23,52 @@ definePageMeta({
     layout: false
 });
 </script>
+<script>
+export default {
+    data: () => ({
+        open: ['Users'],
+        admins: [
+            ['Management', 'mdi-account-multiple-outline'],
+            ['Settings', 'mdi-cog-outline'],
+        ],
+        cruds: [
+            ['Create', 'mdi-plus-outline'],
+            ['Read', 'mdi-file-outline'],
+            ['Update', 'mdi-update'],
+            ['Delete', 'mdi-delete'],
+        ],
+    }),
+}
+</script>
 <template>
+    <v-navigation-drawer v-model="navMobile" location="right" temporary>
+        <div class="block px-3 py-4">
+            <div class="flex cursor-pointer border-b border-slate-200 pb-4" @click="$router.push('/')">
+                <img width="40"
+                    src="https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/images/logo_header.png"
+                    alt="">
+                <div class="ml-3 block font-semibold">
+                    <div>
+                        <span>Desa Kertamulya</span>
+                    </div>
+                    <div class="text-sm">
+                        <span>Kabupaten Kulon Progo</span>
+                    </div>
+                </div>
+            </div>
+            <v-list v-model:opened="open">
+                <v-list-item prepend-icon="mdi-home" title="Home"></v-list-item>
+
+                <v-list-group value="Users">
+                    <template v-slot:activator="{ props }">
+                        <v-list-item v-bind="props" prepend-icon="mdi-account-circle" title="Users"></v-list-item>
+                    </template>
+
+                    <v-list-item prepend-icon="mdi-home" title="Home" v-for="i in 5"></v-list-item>
+                </v-list-group>
+            </v-list>
+        </div>
+    </v-navigation-drawer>
     <div class="surface-0 flex justify-content-center">
         <div id="home" class="w-100 overflow-hidden justify-between">
             <div class="flex w-full px-[1rem] md:px-[12rem] bg-[#0088CC] py-2">
@@ -84,7 +129,8 @@ definePageMeta({
                                         class="mb-2 border-b border-slate-300 pb-3">
                                         Tentang Kami</div>
                                     <div @click="$router.push('/visi-misi')"
-                                        class="mb-2 border-b border-slate-300 pb-3">Visi & Misi</div>
+                                        class="mb-2 border-b border-slate-300 pb-3">
+                                        Visi & Misi</div>
                                     <div @click="$router.push('/sejarah-desa')">Sejarah Desa</div>
                                 </div>
                             </v-menu>
@@ -131,8 +177,7 @@ definePageMeta({
 
                                 <div
                                     class="block border-t-4 border-[#0088CC] rounded-md cursor-pointer mt-4 bg-white px-4 py-5">
-                                    <div @click="$router.push('/galeri')"
-                                        class="mb-2 border-b border-slate-300 pb-3">
+                                    <div @click="$router.push('/galeri')" class="mb-2 border-b border-slate-300 pb-3">
                                         Galeri</div>
                                     <div @click="$router.push('/berita')">
                                         Berita</div>
