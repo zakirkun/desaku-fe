@@ -12,7 +12,7 @@ onMounted(() => {
 })
 
 definePageMeta({
-    layout: false
+    layout: 'app'
 });
 </script>
 

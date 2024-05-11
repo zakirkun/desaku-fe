@@ -10,13 +10,14 @@ import 'swiper/css/pagination';
 const modules = ref([Autoplay, EffectFade, Navigation, Pagination])
 
 definePageMeta({
-    layout: false
+    layout: 'app'
 });
 </script>
 
 <script>
 export default {
     data: () => ({
+        images: [],
         items: [
             { title: 'Click Me' },
             { title: 'Click Me' },
@@ -139,6 +140,18 @@ export default {
             }
         ]
     }),
+    async mounted() {
+        await this.loadImages()
+        console.log(this.images)
+    },
+    methods: {
+        async loadImages() {
+            this.images = await $fetch('http://127.0.0.1:8000/api/image-homepage')
+        },
+        backgroundImage(url){
+            return `background-image: url(${url});`
+        }
+    }
 }
 </script>
 
@@ -150,13 +163,13 @@ export default {
                 delay: 4000,
                 disableOnInteraction: false,
             }" :spaceBetween="30" :effect="'fade'" :navigation="true" :pagination="{
-            clickable: true,
-        }" :modules="modules" class="w-full h-[600px]">
-                <swiper-slide v-for="i in 6">
-                    <div class="w-screen h-full bg-cover relative"
-                        style="background-image: url(https://swiperjs.com/demos/images/nature-1.jpg);">
+                clickable: true,
+            }" :modules="modules" class="w-full h-[600px]">
+                <swiper-slide v-for="image in images">
+                    <div class="w-screen h-full bg-cover relative bg-center"
+                        :style="backgroundImage(image.url)">
                         <div class="px-8 absolute bottom-8 left-[10rem] bg-black/40 w-fit text-white">
-                            <span>Halo Guys {{ i }}</span>
+                            <span>{{ image.description }}</span>
                         </div>
                     </div>
                 </swiper-slide>
@@ -284,6 +297,7 @@ export default {
 .v-layout {
     display: block;
 }
+
 .animation {
     animation: fade-out 0.5s ease-out;
 }

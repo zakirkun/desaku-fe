@@ -26,6 +26,7 @@ definePageMeta({
 <script>
 export default {
     data: () => ({
+        navSelected: null,
         open: ['Users'],
         admins: [
             ['Management', 'mdi-account-multiple-outline'],
@@ -37,7 +38,51 @@ export default {
             ['Update', 'mdi-update'],
             ['Delete', 'mdi-delete'],
         ],
+        items: [
+            { type: 'subheader', title: 'Profil Desa' },
+            {
+                title: 'Tentang Kami',
+                value: 'tentang-kami',
+            },
+            {
+                title: 'Visi & Misi',
+                value: 'visi-misi',
+            },
+            {
+                title: 'Sejarah Desa',
+                value: 'sejarah-desa',
+            },
+            { type: 'divider' },
+            { type: 'subheader', title: 'Pemerintahan' },
+            {
+                title: 'Struktur Organisasi',
+                value: 4,
+            },
+            {
+                title: 'Perangkat Desa',
+                value: 5,
+            },
+            {
+                title: 'Lembaga Desa',
+                value: 6,
+            },
+            { type: 'divider' },
+            { type: 'subheader', title: 'Informasi Publik' },
+            {
+                title: 'Galeri',
+                value: 7,
+            },
+            {
+                title: 'Berita',
+                value: 'berita',
+            },
+        ],
     }),
+    watch: {
+        navSelected(){
+            this.$router.push(`/${this.navSelected}`)
+        }
+    },
 }
 </script>
 <template>
@@ -56,24 +101,14 @@ export default {
                     </div>
                 </div>
             </div>
-            <v-list v-model:opened="open">
-                <v-list-item prepend-icon="mdi-home" title="Home"></v-list-item>
-
-                <v-list-group value="Users">
-                    <template v-slot:activator="{ props }">
-                        <v-list-item v-bind="props" prepend-icon="mdi-account-circle" title="Users"></v-list-item>
-                    </template>
-
-                    <v-list-item prepend-icon="mdi-home" title="Home" v-for="i in 5"></v-list-item>
-                </v-list-group>
-            </v-list>
+            <v-list selectable v-model:selected="navSelected" :items="items"></v-list>
         </div>
     </v-navigation-drawer>
     <div class="surface-0 flex justify-content-center">
         <div id="home" class="w-100 overflow-hidden justify-between">
             <div class="flex w-full px-[1rem] md:px-[12rem] bg-[#0088CC] py-2">
                 <div class="flex items-center mr-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1em" viewBox="0 0 24 24">
                         <path fill="white"
                             d="m16.556 12.906l-.455.453s-1.083 1.076-4.038-1.862s-1.872-4.014-1.872-4.014l.286-.286c.707-.702.774-1.83.157-2.654L9.374 2.86C8.61 1.84 7.135 1.705 6.26 2.575l-1.57 1.56c-.433.432-.723.99-.688 1.61c.09 1.587.808 5 4.812 8.982c4.247 4.222 8.232 4.39 9.861 4.238c.516-.048.964-.31 1.325-.67l1.42-1.412c.96-.953.69-2.588-.538-3.255l-1.91-1.039c-.806-.437-1.787-.309-2.417.317" />
                     </svg>
