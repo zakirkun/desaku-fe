@@ -10,6 +10,7 @@ const model = ref([
                 icon: 'pi pi-fw pi-home',
                 items: [
                     { label: 'Gambar Beranda', to: "/dashboard/gambar-beranda" },
+                    { label: 'Lokasi Desa', to: "/dashboard/lokasi-desa" },
                     { label: 'Pengaturan', to: "/dashboard/pengaturan" },
                 ]
             },

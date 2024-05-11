@@ -18,6 +18,7 @@ definePageMeta({
 export default {
     data: () => ({
         images: [],
+        location: {},
         items: [
             { title: 'Click Me' },
             { title: 'Click Me' },
@@ -142,11 +143,15 @@ export default {
     }),
     async mounted() {
         await this.loadImages()
-        console.log(this.images)
+        await this.loadLocation()
     },
     methods: {
         async loadImages() {
             this.images = await $fetch('http://127.0.0.1:8000/api/image-homepage')
+        },
+        async loadLocation(){
+            const data = await $fetch('http://127.0.0.1:8000/api/location')
+            this.location = data
         },
         backgroundImage(url){
             return `background-image: url(${url});`
@@ -270,20 +275,49 @@ export default {
         </div>
         <!-- Maps Location -->
         <div class="block md:flex px-[2rem] md:px-[14rem] bg-white py-8">
-            <div class="flex-none w-full md:w-[65%]">
-                <iframe width="100%" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
-                    src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=1%20Grafton%20Street,%20Dublin,%20Ireland+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a
-                        href="https://www.gps.ie/">gps tracker sport</a></iframe>
+            <div class="flex-none w-full md:w-[65%]" v-html="location.maps">
             </div>
             <div class="ml-6 flex-1">
                 <p class="text-black font-semibold text-2xl">Lokasi Desa</p>
                 <div class="block mt-3">
-                    <div class="flex mb-2" v-for="location in locationData">
+                    <div class="flex mb-2">
                         <div class="w-[60%]">
-                            <span>{{ location.title }}</span>
+                            <span>Desa</span>
                         </div>
                         <div>
-                            <span>: {{ location.value }}</span>
+                            <span>: {{ location.desa }}</span>
+                        </div>
+                    </div>
+                    <div class="flex mb-2">
+                        <div class="w-[60%]">
+                            <span>Kabupaten</span>
+                        </div>
+                        <div>
+                            <span>: {{ location.kabupaten }}</span>
+                        </div>
+                    </div>
+                    <div class="flex mb-2">
+                        <div class="w-[60%]">
+                            <span>Kelurahan</span>
+                        </div>
+                        <div>
+                            <span>: {{ location.kelurahan }}</span>
+                        </div>
+                    </div>
+                    <div class="flex mb-2">
+                        <div class="w-[60%]">
+                            <span>Kecamatan</span>
+                        </div>
+                        <div>
+                            <span>: {{ location.kecamatan }}</span>
+                        </div>
+                    </div>
+                    <div class="flex mb-2">
+                        <div class="w-[60%]">
+                            <span>RT/RW</span>
+                        </div>
+                        <div>
+                            <span>: {{ location.rt }}/{{ location.rw }}</span>
                         </div>
                     </div>
                 </div>
