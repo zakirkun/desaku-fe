@@ -23,58 +23,13 @@ import 'photoswipe/style.css';
 export default {
     data: () => ({
         lightbox: null,
-        images: [
-            {
-                largeURL:
-                    'https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/gallery/pembangunan_tpt.jpg',
-                thumbnailURL:
-                    'https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/gallery/pembangunan_tpt.jpg',
-                width: 600,
-                height: 600,
-            },
-            {
-                largeURL:
-                    'https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/gallery/pemberdayaan_masyarakat.jpg',
-                thumbnailURL:
-                    'https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/gallery/pemberdayaan_masyarakat.jpg',
-                width: 600,
-                height: 600,
-            },
-            {
-                largeURL:
-                    'https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/gallery/pembangunan_tpt.jpg',
-                thumbnailURL:
-                    'https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/gallery/pembangunan_tpt.jpg',
-                width: 600,
-                height: 600,
-            },
-            {
-                largeURL:
-                    'https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/gallery/pemberdayaan_masyarakat.jpg',
-                thumbnailURL:
-                    'https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/gallery/pemberdayaan_masyarakat.jpg',
-                width: 600,
-                height: 600,
-            },
-            {
-                largeURL:
-                    'https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/gallery/pembangunan_tpt.jpg',
-                thumbnailURL:
-                    'https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/gallery/pembangunan_tpt.jpg',
-                width: 600,
-                height: 600,
-            },
-            {
-                largeURL:
-                    'https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/gallery/pemberdayaan_masyarakat.jpg',
-                thumbnailURL:
-                    'https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/gallery/pemberdayaan_masyarakat.jpg',
-                width: 600,
-                height: 600,
-            },
-        ],
+        videos: [],
+        images: [],
     }),
-    mounted() {
+    async mounted() {
+        await this.loadVideos()
+        await this.loadImages()
+
         if (!this.lightbox) {
             this.lightbox = new PhotoSwipeLightbox({
                 gallery: '#gallery',
@@ -90,6 +45,16 @@ export default {
             this.lightbox = null;
         }
     },
+    methods: {
+        async loadVideos() {
+            const data = await $fetch('http://127.0.0.1:8000/api/video-gallery')
+            this.videos = data
+        },
+        async loadImages() {
+            const data = await $fetch('http://127.0.0.1:8000/api/image-gallery')
+            this.images = data
+        },
+    }
 }
 </script>
 
@@ -111,11 +76,10 @@ export default {
         <div class="pb-8">
             <h1 class="mb-4 font-semibold text-[#0088CC] text-3xl">Galeri Video</h1>
             <div class="grid grid-cols-1 md:grid-cols-4 mb-2 gap-8">
-                <div v-for="i in 8" class="h-full">
-                    <iframe class="w-full md:w-[260px]" height="160"
-                        src="https://www.youtube.com/embed/UEqLiwV2zw0?si=2SqWo6wMW14srfhM"></iframe>
+                <div v-for="video in videos" class="h-full">
+                    <iframe class="w-full md:w-[260px]" height="160" :src="video.url"></iframe>
                     <div class="mt-3 font-semibold text-lg">
-                        <span>Pembukaan Acara Halal Bihalal</span>
+                        <span>{{ video.description }}</span>
                     </div>
                 </div>
             </div>
@@ -124,11 +88,11 @@ export default {
             <h1 class="mb-4 font-semibold text-[#0088CC] text-3xl">Galeri Foto</h1>
             <div id="gallery">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <a class="w-fit" v-for="(image, key) in images" :key="key" :href="image.largeURL"
+                    <a class="w-fit" v-for="(image, key) in images" :key="key" :href="image.url"
                         data-pswp-width="500" data-pswp-height="400" target="_blank" rel="noreferrer">
-                        <img :src="image.thumbnailURL" alt="" />
+                        <img :src="image.url" alt="" />
                         <div class="mt-3 font-semibold text-lg">
-                            <span>Pembukaan Acara Halal Bihalal</span>
+                            <span>{{ image.description }}</span>
                         </div>
                     </a>
 

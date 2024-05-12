@@ -11,6 +11,7 @@ const model = ref([
                 items: [
                     { label: 'Gambar Beranda', to: "/dashboard/gambar-beranda" },
                     { label: 'Lokasi Desa', to: "/dashboard/lokasi-desa" },
+                    { label: 'Footer', to: "/dashboard/footer" },
                     { label: 'Pengaturan', to: "/dashboard/pengaturan" },
                 ]
             },
@@ -28,6 +29,7 @@ const model = ref([
                 icon: 'pi pi-fw pi-book',
                 items: [
                     { label: 'Berita', to: "/dashboard/berita" },
+                    { label: 'Galeri', to: "/dashboard/galeri" },
                 ]
             },
         ]
