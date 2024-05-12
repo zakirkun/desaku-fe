@@ -3,6 +3,7 @@ export default {
     data() {
         return {
             data: null,
+            loading: false,
             renderRichEditor: false,
             form: {
                 name: null,
@@ -22,12 +23,14 @@ export default {
     },
     methods: {
         async addNews() {
+            this.loading = true
             this.form.content = this.data
 
             await $fetch('http://127.0.0.1:8000/api/news-category', {
                 method: "POST",
                 body: this.form
             })
+            this.loading = false
 
             this.$router.push('/dashboard/berita')
         },
@@ -47,7 +50,10 @@ export default {
                     <v-text-field v-model="form.name" variant="outlined" hide-details="auto"
                         label="Kategori Berita"></v-text-field>
                 </div>
-                <Button @click="addNews" class="mt-5 bg-[#10B981] text-white px-3 py-2" label="Submit"></Button>
+                <Button @click="addNews" class="mt-5 bg-[#10B981] text-white px-3 py-2">
+                    <span v-if="!loading">Submit</span>
+                    <Loader v-else />
+                </Button>
             </div>
         </div>
     </div>

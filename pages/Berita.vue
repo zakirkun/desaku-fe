@@ -5,17 +5,27 @@ definePageMeta({
 </script>
 
 <script>
+import moment from 'moment';
+
 export default {
     data: () => ({
-        news: []
+        news: [],
+        newsCategory: [],
+        moment: moment
     }),
     async mounted() {
         await this.loadData()
+        await this.loadNewsCategory()
     },
     methods: {
         async loadData() {
             const data = await $fetch('http://127.0.0.1:8000/api/news')
             this.news = data
+            this.latestNews = data
+        },
+        async loadNewsCategory() {
+            const data = await $fetch('http://127.0.0.1:8000/api/news-category')
+            this.newsCategory = data
         },
     }
 }
@@ -42,13 +52,28 @@ export default {
                 </div>
                 <div class="flex mb-2 h-[200px]" v-for="news in news">
                     <div class="w-[600px] h-full">
-                        <img class="rounded-md" :src="news.thumbnail" alt="">
+                        <img class="rounded-md h-[140px] object-cover" :src="news.thumbnail" alt="">
                     </div>
                     <div class="block pl-4">
                         <div class="text-xl font-semibold">
                             <span>{{ news.title }}</span>
                         </div>
-                        <div class="mt-2">
+                        <div class="text-md flex items-center font-medium mt-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="1.5em" height="1.5em" viewBox="0 0 24 24">
+                                <g fill="none">
+                                    <rect width="18" height="15" x="3" y="6" stroke="#A3A3A3" rx="2" />
+                                    <path fill="black"
+                                        d="M3 10c0-1.886 0-2.828.586-3.414C4.172 6 5.114 6 7 6h10c1.886 0 2.828 0 3.414.586C21 7.172 21 8.114 21 10z" />
+                                    <path stroke="#A3A3A3" stroke-linecap="round" d="M7 3v3m10-3v3" />
+                                    <rect width="4" height="2" x="7" y="12" fill="#A3A3A3" rx=".5" />
+                                    <rect width="4" height="2" x="7" y="16" fill="#A3A3A3" rx=".5" />
+                                    <rect width="4" height="2" x="13" y="12" fill="#A3A3A3" rx=".5" />
+                                    <rect width="4" height="2" x="13" y="16" fill="#A3A3A3" rx=".5" />
+                                </g>
+                            </svg>
+                            <span>{{ moment(news.created_at).format("LL") }}</span>
+                        </div>
+                        <div class="mt-3">
                             <span>{{ news.description }}</span>
                         </div>
                     </div>
@@ -56,26 +81,27 @@ export default {
             </div>
             <div class="col-span-2">
                 <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
-                    <span>Pengumuman</span>
+                    <span>Kategori</span>
                 </div>
-                <div class="mb-6 bg-[#0088CC] font-semibold text-white px-2 py-3 rounded-md"
-                    v-for="announcement in announcementData">
-                    <span>{{ announcement.title }}</span>
+                <div class="flex flex-wrap">
+                    <div class="bg-[#0088CC] font-semibold text-white pa-2 mr-2 mt-2 text-sm w-fit rounded-full"
+                        v-for="category in newsCategory">
+                        <span>{{ category.name }}</span>
+                    </div>
                 </div>
-                <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
-                    <span>Agenda Kegiatan</span>
+                <div class="text-[#0088CC] border-[#0088CC] border-b-2 mt-5 mb-6 text-2xl font-semibold py-3">
+                    <span>Berita Terbaru</span>
                 </div>
-                <div class="mb-2 px-2 py-3 flex" v-for="activity in acitivityData">
-                    <div
-                        class="px-1 py-2 font-semibold text-white flex-none w-[80px] h-[60px] rounded-md my-auto text-center bg-[#0088CC]">
-                        <span>Sep 02 2022</span>
+                <div class="mb-2 px-2 py-3 flex items-center" v-for="news in latestNews">
+                    <div class="w-[300px] h-full">
+                        <img class="rounded-md" :src="news.thumbnail" alt="">
                     </div>
                     <div class="block ml-3">
-                        <div class="text-[#0088CC] text-lg">
-                            <span>{{ activity.title }}</span>
+                        <div class="text-[#0088CC] text-md">
+                            <span>{{ news.title }}</span>
                         </div>
-                        <div class="">
-                            <span>Lokasi {{ activity.location }}</span>
+                        <div class="mt-1">
+                            <span>{{ moment(news.created_at).format("LL") }}</span>
                         </div>
                     </div>
                 </div>
