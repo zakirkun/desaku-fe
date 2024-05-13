@@ -30,6 +30,7 @@ const model = ref([
                 items: [
                     { label: 'Berita', to: "/dashboard/berita" },
                     { label: 'Galeri', to: "/dashboard/galeri" },
+                    { label: 'Pengumuman', to: "/dashboard/pengumuman" },
                 ]
             },
         ]

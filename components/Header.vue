@@ -70,16 +70,20 @@ export default {
             { type: 'subheader', title: 'Informasi Publik' },
             {
                 title: 'Galeri',
-                value: 7,
+                value: 'galeri',
             },
             {
                 title: 'Berita',
                 value: 'berita',
             },
+            {
+                title: 'Pengumuman',
+                value: 'pengumuman',
+            },
         ],
     }),
     watch: {
-        navSelected(){
+        navSelected() {
             this.$router.push(`/${this.navSelected}`)
         }
     },
@@ -214,8 +218,10 @@ export default {
                                     class="block border-t-4 border-[#0088CC] rounded-md cursor-pointer mt-4 bg-white px-4 py-5">
                                     <div @click="$router.push('/galeri')" class="mb-2 border-b border-slate-300 pb-3">
                                         Galeri</div>
-                                    <div @click="$router.push('/berita')">
+                                    <div @click="$router.push('/berita')" class="mb-2 border-b border-slate-300 pb-3">
                                         Berita</div>
+                                    <div @click="$router.push('/pengumuman')">
+                                        Pengumuman</div>
                                     <!-- <div @click="$router.push('/perangkat-desa')"
                                         class="mb-2 border-b border-slate-300 pb-3">
                                         Perangkat Desa</div>

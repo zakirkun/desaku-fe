@@ -1,6 +1,4 @@
 <script>
-import { createSlug } from "@/helpers/createSlug" 
-
 export default {
     data() {
         return {
@@ -11,18 +9,14 @@ export default {
             thumbnailDeleted: false,
             thumbnailUploaded: false,
             data: null,
-            renderRichEditor: false,
             form: {
                 title: null,
                 description: null,
-                category: null,
-                slug: null,
                 content: null,
                 thumbnail: null
             },
             headers: [
                 { title: 'Title', align: 'start', sortable: false, key: 'title' },
-                { title: 'Category', align: 'start', key: 'category' },
                 { title: 'Content', align: 'end', key: 'content' },
             ],
             items: [],
@@ -30,30 +24,21 @@ export default {
         }
     },
     async mounted() {
-        await this.loadCategories()
-
-        const data = await $fetch('http://127.0.0.1:8000/api/news')
-        this.items = data
         this.renderRichEditor = true
     },
     methods: {
-        async loadCategories() {
-            const data = await $fetch('http://127.0.0.1:8000/api/news-category/')
-            this.categories = data.map(v => v.name)
-        },
-        async addNews() {
+        async addAnnouncement() {
             this.loading = true
             this.form.content = this.data
             this.form.thumbnail = await this.uploadThumbnail()
-            this.form.slug = createSlug(this.form.title)
 
-            await $fetch('http://127.0.0.1:8000/api/news', {
+            await $fetch('http://127.0.0.1:8000/api/announcement', {
                 method: "POST",
                 body: this.form
             })
 
             this.loading = false
-            this.$router.push('/dashboard/berita')
+            this.$router.push('/dashboard/pengumuman')
         },
         contentChange(v) {
             this.data = v
@@ -117,21 +102,17 @@ export default {
     <div class="grid">
         <div class="col-12">
             <div class="card">
-                <h3 class="text-2xl font-medium mb-5">Tambah Berita</h3>
-                <div class="grid grid-cols-3 gap-3">
-                    <div class="col-span-2">
+                <h3 class="text-2xl font-medium mb-5">Tambah Pengumuman</h3>
+                <div class="grid grid-cols-1 gap-3">
+                    <div class="col-span-1">
                         <v-text-field v-model="form.title" variant="outlined" hide-details="auto"
-                            label="Judul Berita"></v-text-field>
-                    </div>
-                    <div>
-                        <v-select item-value="name" item-text="name" v-model="form.category" label="Kategori Berita"
-                            :items="categories" variant="outlined"></v-select>
+                            label="Judul Pengumuman"></v-text-field>
                     </div>
                 </div>
-                <div>
-                    <v-textarea rows="3" variant="outlined" label="Deskripsi Berita" clearable v-model="form.description"></v-textarea>
+                <div class="mt-5">
+                    <v-textarea rows="3" variant="outlined" label="Deskripsi Pengumuman" clearable v-model="form.description"></v-textarea>
                 </div>
-                <div class="mb-3 text-lg font-medium my-1">Thumbnail Berita</div>
+                <div class="mb-3 text-lg font-medium my-1">Thumbnail Pengumuman</div>
                 <div class="relative w-fit" v-if="thumbnailUploaded">
                     <v-img :src="form.thumbnail" width="300" />
                     <div @click="modalRemoveThumbnail = true" class="absolute cursor-pointer right-3 top-3 z-50">
@@ -152,12 +133,12 @@ export default {
                 </div>
                 <div class="mb-2 mt-6">
                     <v-file-input :clearable="false" v-if="!thumbnailUploaded" v-model="form.thumbnail"
-                        label="Thumbnail Berita" variant="outlined">
+                        label="Thumbnail Pengumuman" variant="outlined">
                     </v-file-input>
                 </div>
                 <div class="mb-3 text-lg font-medium my-1">Konten</div>
                 <RichEditor v-if="renderRichEditor" :data="data" @contentChange="contentChange" />
-                <Button @click="addNews" class="mt-5 bg-[#10B981] text-white px-3 py-2">
+                <Button @click="addAnnouncement" class="mt-5 bg-[#10B981] text-white px-3 py-2" label="Submit">
                     <span v-if="!loading">Submit</span>
                     <Loader v-else />
                 </Button>
