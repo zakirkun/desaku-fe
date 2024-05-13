@@ -19,9 +19,9 @@ const model = ref([
                 label: 'Profil Desa',
                 icon: 'pi pi-fw pi-user',
                 items: [
-                    { label: 'Tentang Kami', to: "/dashboard/tentang-kami" },
-                    { label: 'Visi & Misi', to: "/dashboard/visi-misi" },
-                    { label: 'Sejarah Desa', to: "/dashboard/sejarah-desa" },
+                    { label: 'Tentang Kami', to: "/dashboard/profile/about" },
+                    { label: 'Visi & Misi', to: "/dashboard/profile/visi" },
+                    { label: 'Sejarah Desa', to: "/dashboard/profile/history" },
                 ]
             },
             {
