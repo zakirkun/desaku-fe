@@ -19,7 +19,7 @@ const model = ref([
                 icon: 'pi pi-fw pi-book',
                 items: [
                     { label: 'Berita', to: "/dashboard/news" },
-                    { label: 'Galeri', to: "/dashboard/galeri" },
+                    { label: 'Galeri', to: "/dashboard/gallery" },
                     { label: 'Pengumuman', to: "/dashboard/announcement" },
                 ]
             },
@@ -30,7 +30,7 @@ const model = ref([
                     { label: 'Gambar Beranda', to: "/dashboard/setting/homepageimage" },
                     { label: 'Lokasi Desa', to: "/dashboard/setting/location" },
                     { label: 'Footer', to: "/dashboard/setting/footer" },
-                    { label: 'Pengaturan', to: "/dashboard/pengaturan" },
+                    // { label: 'Pengaturan', to: "/dashboard/pengaturan" },
                 ]
             },
         ]

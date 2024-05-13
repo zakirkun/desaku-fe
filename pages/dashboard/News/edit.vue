@@ -43,7 +43,7 @@ export default {
                 body: this.form
             })
 
-            this.$router.push('/dashboard/berita')
+            this.$router.push('/dashboard/news')
         },
         contentChange(v) {
             this.data = v
@@ -135,7 +135,7 @@ export default {
                         </svg>
                     </div>
                 </div>
-                <div class="mb-8 mt-6">
+                <div class="mb-1 mt-6">
                     <v-file-input :clearable="false" v-if="thumbnailDeleted || !form.thumbnail" v-model="form.thumbnail"
                         label="Thumbnail Berita" variant="outlined">
                     </v-file-input>

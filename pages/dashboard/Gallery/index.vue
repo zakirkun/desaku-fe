@@ -125,7 +125,7 @@ export default {
     <div class="flex justify-between items-center mb-3">
         <div class="text-2xl font-semibold mb-2">Gambar Galeri</div>
         <div class="text-md font-semibold mb-2">
-            <NuxtLink to="/dashboard/tambah-gambar-galeri">
+            <NuxtLink to="/dashboard/gallery/image/add">
                 <Button class="mt-3 bg-[#10B981] text-white px-3 py-2 text-md" label="Tambah Gambar +"></Button>
             </NuxtLink>
         </div>
@@ -155,7 +155,7 @@ export default {
     <div class="flex justify-between items-center mb-3">
         <div class="text-2xl font-semibold mb-2">Video</div>
         <div class="text-md font-semibold mb-2">
-            <NuxtLink to="/dashboard/tambah-video-galeri">
+            <NuxtLink to="/dashboard/gallery/video/add">
                 <Button class="mt-3 bg-[#10B981] text-white px-3 py-2 text-md" label="Tambah Video +"></Button>
             </NuxtLink>
         </div>

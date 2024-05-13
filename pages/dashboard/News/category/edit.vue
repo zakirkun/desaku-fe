@@ -28,7 +28,7 @@ export default {
                 body: this.form
             })
 
-            this.$router.push('/dashboard/berita')
+            this.$router.push('/dashboard/news')
         },
         contentChange(v) {
             this.data = v
