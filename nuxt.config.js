@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     typescript: false,
     app: {
         head: {
-            title: 'Sakai Vue',
+            titleTemplate: '%s - Desaku',
             script: [
                 // Include jQuery from CDN
                 { src: 'https://cdn.tailwindcss.com', body: true }

@@ -7,7 +7,7 @@ const model = ref([
         items: [
             {
                 label: 'Profil Desa',
-                icon: 'pi pi-fw pi-user',
+                icon: 'pi pi-fw pi-users',
                 items: [
                     { label: 'Tentang Kami', to: "/dashboard/profile/about" },
                     { label: 'Visi & Misi', to: "/dashboard/profile/visi" },

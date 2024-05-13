@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.cdnfonts.com/css/general-sans');
+
+body {
+    font-family: 'General Sans', sans-serif;
+}
+
 ol {
     margin: 1.5rem 0;
     margin-left: 1rem;

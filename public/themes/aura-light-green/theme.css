@@ -1,3 +1,5 @@
+@import url('https://fonts.cdnfonts.com/css/general-sans');
+
 :root {
   font-family: "Inter var", sans-serif;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
@@ -52,8 +54,6 @@
 :root {
   --p-focus-ring-color: var(--primary-color);
 }
-
-.v-btn__content {}
 
 @font-face {
   font-family: "Inter var";
@@ -194,6 +194,10 @@
   --primary-700: #0b825a;
   --primary-800: #096647;
   --primary-900: #064a34;
+}
+
+body {
+  font-family: 'General Sans', sans-serif;
 }
 
 .p-editor-container .p-editor-toolbar {
