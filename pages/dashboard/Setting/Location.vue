@@ -2,6 +2,7 @@
 export default {
     data() {
         return {
+            loading: false,
             form: {
                 desa: null,
                 kecamatan: null,
@@ -22,10 +23,12 @@ export default {
             this.form = data
         },
         async updateLocation() {
+            this.loading = true
             await $fetch('http://127.0.0.1:8000/api/location', {
                 method: "PATCH",
                 body: this.form
             })
+            this.loading = false
         },
     }
 }
@@ -90,8 +93,10 @@ export default {
                     </v-text-field>
                     <div class="mx-auto mt-6 flex justify-center" v-html="form.maps" v-if="form.maps"></div>
                 </div>
-                <Button @click="updateLocation" class="mt-5 bg-[#10B981] text-white px-3 py-2"
-                    label="Submit"></Button>
+                <Button @click="updateLocation" class="mt-5 bg-[#10B981] text-white px-3 py-2">
+                    <span v-if="!loading">Update</span>
+                    <Loader v-else/>
+                </Button>
             </div>
         </div>
     </div>

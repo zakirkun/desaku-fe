@@ -1,3 +1,8 @@
+<script setup>
+useHead({
+    title: 'Tambah Gambar Galeri',
+})
+</script>
 <script>
 export default {
     data() {

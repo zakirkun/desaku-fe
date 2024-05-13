@@ -1,49 +1,49 @@
-<script setup>
-useHead({
-    title: 'Tambah Pengumuman',
-})
-</script>
 <script>
 export default {
     data() {
         return {
             modalRemoveThumbnail: false,
+            data: null,
             image: null,
             categories: [],
             renderRichEditor: false,
             thumbnailDeleted: false,
-            thumbnailUploaded: false,
-            data: null,
             form: {
                 title: null,
-                description: null,
+                category: null,
                 content: null,
-                thumbnail: null
+                thumbnail: ''
             },
-            headers: [
-                { title: 'Title', align: 'start', sortable: false, key: 'title' },
-                { title: 'Content', align: 'end', key: 'content' },
-            ],
-            items: [],
-            loading: false
         }
     },
     async mounted() {
+        await this.loadCategories()
+
+        const data = await $fetch('http://127.0.0.1:8000/api/news/' + this.$route.query.id)
+        this.form = data
+        this.data = data.content
+        console.log(data)
         this.renderRichEditor = true
     },
     methods: {
-        async addAnnouncement() {
-            this.loading = true
-            this.form.content = this.data
-            this.form.thumbnail = await this.uploadThumbnail()
+        async loadCategories() {
+            const data = await $fetch('http://127.0.0.1:8000/api/news-category/')
+            this.categories = data.map(v => v.name)
+        },
+        async updateNews() {
+            if (this.thumbnailDeleted) {
+                let urlImage = await this.uploadThumbnail()
+                this.form.thumbnail = urlImage
+            }
 
-            await $fetch('http://127.0.0.1:8000/api/announcement', {
-                method: "POST",
+            this.form.content = this.data
+
+            await $fetch('http://127.0.0.1:8000/api/news/' + this.$route.query.id, {
+                method: "PATCH",
                 body: this.form
             })
 
-            this.loading = false
-            this.$router.push('/dashboard/announcement')
+            this.$router.push('/dashboard/berita')
         },
         contentChange(v) {
             this.data = v
@@ -107,18 +107,17 @@ export default {
     <div class="grid">
         <div class="col-12">
             <div class="card">
-                <h3 class="text-2xl font-medium mb-5">Tambah Pengumuman</h3>
-                <div class="grid grid-cols-1 gap-3">
-                    <div class="col-span-1">
-                        <v-text-field v-model="form.title" variant="outlined" hide-details="auto"
-                            label="Judul Pengumuman"></v-text-field>
-                    </div>
+                <h3 class="text-2xl font-medium mb-5">Ubah Berita</h3>
+                <div class="mb-8">
+                    <v-text-field v-model="form.title" variant="outlined" hide-details="auto"
+                        label="Judul Berita"></v-text-field>
                 </div>
-                <div class="mt-5">
-                    <v-textarea rows="3" variant="outlined" label="Deskripsi Pengumuman" clearable v-model="form.description"></v-textarea>
+                <div class="mb-2">
+                    <v-select item-value="name" item-text="name" v-model="form.category" label="Kategori Berita"
+                        :items="categories" variant="outlined"></v-select>
                 </div>
-                <div class="mb-3 text-lg font-medium my-1">Thumbnail Pengumuman</div>
-                <div class="relative w-fit" v-if="thumbnailUploaded">
+                <div class="mb-3 text-lg font-medium my-1">Thumbnail Berita</div>
+                <div class="relative w-fit" v-if="!thumbnailDeleted && form.thumbnail">
                     <v-img :src="form.thumbnail" width="300" />
                     <div @click="modalRemoveThumbnail = true" class="absolute cursor-pointer right-3 top-3 z-50">
                         <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 48 48">
@@ -136,17 +135,14 @@ export default {
                         </svg>
                     </div>
                 </div>
-                <div class="mb-2 mt-6">
-                    <v-file-input :clearable="false" v-if="!thumbnailUploaded" v-model="form.thumbnail"
-                        label="Thumbnail Pengumuman" variant="outlined">
+                <div class="mb-8 mt-6">
+                    <v-file-input :clearable="false" v-if="thumbnailDeleted || !form.thumbnail" v-model="form.thumbnail"
+                        label="Thumbnail Berita" variant="outlined">
                     </v-file-input>
                 </div>
                 <div class="mb-3 text-lg font-medium my-1">Konten</div>
                 <RichEditor v-if="renderRichEditor" :data="data" @contentChange="contentChange" />
-                <Button @click="addAnnouncement" class="mt-5 bg-[#10B981] text-white px-3 py-2" label="Submit">
-                    <span v-if="!loading">Submit</span>
-                    <Loader v-else />
-                </Button>
+                <Button @click="updateNews" class="mt-5 bg-[#10B981] text-white px-3 py-2" label="Ubah"></Button>
             </div>
         </div>
     </div>

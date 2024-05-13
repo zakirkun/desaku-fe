@@ -1,3 +1,8 @@
+<script setup>
+useHead({
+    title: 'Galeri',
+})
+</script>
 <script>
 export default {
     data() {

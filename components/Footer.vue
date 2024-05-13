@@ -1,3 +1,18 @@
+<script>
+export default {
+    data: () => ({
+        data: [],
+    }),
+    async mounted() {
+        await this.loadData()
+    },
+    methods: {
+        async loadData() {
+            this.data = await $fetch('http://127.0.0.1:8000/api/footer')
+        },
+    }
+}
+</script>
 <template>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-x-[6rem] px-[2rem] md:px-[14rem] bg-[#0088CC] text-white py-8">
         <div class="block">
@@ -6,24 +21,21 @@
             </div>
             <div class="text-sm mt-3 leading-6">
                 <span>
-                    Website desa dibangun sebagai bagian dari SISTEM INFORMASI DESA yang berfungsi sebagai portal
-                    informasi,
-                    transparansi, dan sosialisasi pemerintah terkait tata kelola pembangunan kawasan perdesaan
-                    (pembangunan,
-                    pembinaan dan pemberdayaan) yang dirasakan langsung oleh masyarakat sebagai penerima manfaat.
+                    {{  data.profile }}
                 </span>
             </div>
         </div>
-        <div class="block my-6 md:my-0">
+        <div class="block my-0 sm:mt-0">
             <div class="text-2xl font-semibold">
                 <span>Sosial Media</span>
             </div>
             <div class="text-sm mt-3">
                 <ul class="ml-4 list-disc">
-                    <li>Instagram</li>
-                    <li>Facebook</li>
-                    <li>Twitter</li>
-                    <li>Youtube</li>
+                    <li v-if="data.instagram"><a target="_blank" :href="data.instagram">Instagram</a></li>
+                    <li v-if="data.facebook"><a target="_blank" :href="data.facebook">Facebook</a></li>
+                    <li v-if="data.whatsapp"><a target="_blank" :href="data.whatsapp">Whatsapp</a></li>
+                    <li v-if="data.twitter"><a target="_blank" :href="data.twitter">Twitter</a></li>
+                    <li v-if="data.youtube"><a target="_blank" :href="data.youtube">Channel Youtube</a></li>
                 </ul>
             </div>
         </div>
@@ -32,8 +44,13 @@
                 <span>Alamat Lengkap</span>
             </div>
             <div class="text-sm mt-3">
-                <span>Jl. Raya Tagog No. 128 Padalarang. Kode Pos 40553</span>
+                <span>{{ data.address }}</span>
             </div>
         </div>
     </div>
 </template>
+<style scoped>
+li {
+    margin-bottom: 6px;
+}
+</style>

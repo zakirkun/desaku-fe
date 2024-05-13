@@ -18,6 +18,7 @@ definePageMeta({
 export default {
     data: () => ({
         images: [],
+        videos: [],
         location: {},
         items: [
             { title: 'Click Me' },
@@ -143,11 +144,15 @@ export default {
     }),
     async mounted() {
         await this.loadImages()
+        await this.loadVideos()
         await this.loadLocation()
     },
     methods: {
         async loadImages() {
             this.images = await $fetch('http://127.0.0.1:8000/api/image-homepage')
+        },
+        async loadVideos() {
+            this.videos = await $fetch('http://127.0.0.1:8000/api/video-gallery')
         },
         async loadLocation(){
             const data = await $fetch('http://127.0.0.1:8000/api/location')
@@ -238,16 +243,16 @@ export default {
                 </div>
             </div>
         </div>
-        <div class="block px-[2rem] md:px-[14rem] py-6">
+        <div class="block bg-[#F8F9FC] px-[2rem] md:px-[14rem] py-10">
             <div class="grid grid-cols-1 md:grid-cols-6 gap-x-12">
                 <div class="block col-span-4">
                     <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
                         <span>Galeri Foto & Video</span>
                     </div>
-                    <div class="grid grid-cols-3 mb-2 gap-x-6">
-                        <div v-for="i in 6" class="h-full">
+                    <div class="grid grid-cols-3 mb-2 gap-6">
+                        <div v-for="video in videos" class="h-full">
                             <iframe width="240" height="160"
-                                src="https://www.youtube.com/embed/UEqLiwV2zw0?si=2SqWo6wMW14srfhM"></iframe>
+                                :src="video.url"></iframe>
                         </div>
                     </div>
                 </div>
@@ -274,7 +279,7 @@ export default {
             </div>
         </div>
         <!-- Maps Location -->
-        <div class="block md:flex px-[2rem] md:px-[14rem] bg-white py-8">
+        <div class="block md:flex px-[2rem] md:px-[14rem] bg-white py-12">
             <div class="flex-none w-full md:w-[65%]" v-html="location.maps">
             </div>
             <div class="ml-6 flex-1">

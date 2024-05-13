@@ -1,3 +1,8 @@
+<script setup>
+useHead({
+    title: 'Edit Kategori Berita',
+})
+</script>
 <script>
 export default {
     data() {
