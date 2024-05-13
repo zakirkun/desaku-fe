@@ -80,7 +80,7 @@ export default {
     <div class="flex justify-between items-center mb-3">
         <div class="text-2xl font-semibold mb-2">Pengumuman</div>
         <div class="text-md font-semibold mb-2">
-            <NuxtLink to="/dashboard/tambah-pengumuman">
+            <NuxtLink to="/dashboard/announcement/add">
                 <Button class="mt-3 bg-[#10B981] text-white px-3 py-2 text-md" label="Tambah Pengumuman +"></Button>
             </NuxtLink>
         </div>

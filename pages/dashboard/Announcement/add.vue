@@ -38,7 +38,7 @@ export default {
             })
 
             this.loading = false
-            this.$router.push('/dashboard/pengumuman')
+            this.$router.push('/dashboard/announcement')
         },
         contentChange(v) {
             this.data = v
