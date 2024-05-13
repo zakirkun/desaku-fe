@@ -6,16 +6,6 @@ const model = ref([
         label: 'Menu',
         items: [
             {
-                label: 'Halaman Beranda',
-                icon: 'pi pi-fw pi-home',
-                items: [
-                    { label: 'Gambar Beranda', to: "/dashboard/gambar-beranda" },
-                    { label: 'Lokasi Desa', to: "/dashboard/lokasi-desa" },
-                    { label: 'Footer', to: "/dashboard/footer" },
-                    { label: 'Pengaturan', to: "/dashboard/pengaturan" },
-                ]
-            },
-            {
                 label: 'Profil Desa',
                 icon: 'pi pi-fw pi-user',
                 items: [
@@ -31,6 +21,16 @@ const model = ref([
                     { label: 'Berita', to: "/dashboard/news" },
                     { label: 'Galeri', to: "/dashboard/galeri" },
                     { label: 'Pengumuman', to: "/dashboard/announcement" },
+                ]
+            },
+            {
+                label: 'Pengaturan',
+                icon: 'pi pi-fw pi-cog',
+                items: [
+                    { label: 'Gambar Beranda', to: "/dashboard/setting/homepageimage" },
+                    { label: 'Lokasi Desa', to: "/dashboard/setting/location" },
+                    { label: 'Footer', to: "/dashboard/setting/footer" },
+                    { label: 'Pengaturan', to: "/dashboard/pengaturan" },
                 ]
             },
         ]
