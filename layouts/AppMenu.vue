@@ -28,7 +28,7 @@ const model = ref([
                 label: 'Informasi Publik',
                 icon: 'pi pi-fw pi-book',
                 items: [
-                    { label: 'Berita', to: "/dashboard/berita" },
+                    { label: 'Berita', to: "/dashboard/news" },
                     { label: 'Galeri', to: "/dashboard/galeri" },
                     { label: 'Pengumuman', to: "/dashboard/pengumuman" },
                 ]

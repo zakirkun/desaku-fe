@@ -138,7 +138,7 @@ export default {
     <div class="flex justify-between items-center mb-3">
         <div class="text-2xl font-semibold mb-2">Berita</div>
         <div class="text-md font-semibold mb-2">
-            <NuxtLink to="/dashboard/tambah-berita">
+            <NuxtLink to="/dashboard/news/add">
                 <Button class="mt-3 bg-[#10B981] text-white px-3 py-2 text-md" label="Tambah Berita +"></Button>
             </NuxtLink>
         </div>
@@ -186,7 +186,7 @@ export default {
     <div class="flex justify-between items-center mb-3">
         <div class="text-2xl font-semibold mb-2">Kategori Berita</div>
         <div class="text-md font-semibold mb-2">
-            <NuxtLink to="/dashboard/tambah-kategori-berita">
+            <NuxtLink to="/dashboard/news/category">
                 <Button class="mt-3 bg-[#10B981] text-white px-3 py-2 text-md" label="Tambah Kategori +"></Button>
             </NuxtLink>
         </div>

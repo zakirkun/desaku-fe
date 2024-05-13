@@ -53,7 +53,7 @@ export default {
             })
 
             this.loading = false
-            this.$router.push('/dashboard/berita')
+            this.$router.push('/dashboard/news')
         },
         contentChange(v) {
             this.data = v
