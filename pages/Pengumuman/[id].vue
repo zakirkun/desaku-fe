@@ -12,7 +12,7 @@ const post = reactive({
 })
 
 onMounted(async () => {
-    const data = await $fetch('http://127.0.0.1:8000/api/news/slug/' + route.params.id)
+    const data = await $fetch('http://127.0.0.1:8000/api/announcement/slug/' + route.params.id)
     post.title = data.title
     post.content = data.content
 
@@ -26,23 +26,16 @@ import moment from 'moment';
 
 export default {
     data: () => ({
-        news: [],
-        newsCategory: [],
-        moment: moment
+        announcements: [],
+        moment: moment,
     }),
     async mounted() {
         await this.loadData()
-        await this.loadNewsCategory()
     },
     methods: {
         async loadData() {
-            const data = await $fetch('http://127.0.0.1:8000/api/news')
-            this.news = data
-            this.latestNews = data
-        },
-        async loadNewsCategory() {
-            const data = await $fetch('http://127.0.0.1:8000/api/news-category')
-            this.newsCategory = data
+            const data = await $fetch('http://127.0.0.1:8000/api/announcement')
+            this.announcements = data
         },
     }
 }
@@ -74,28 +67,19 @@ export default {
                 <div v-html="post.content"></div>
             </div>
             <div class="col-span-2">
-                <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
-                    <span>Kategori</span>
-                </div>
-                <div class="flex flex-wrap">
-                    <div class="bg-[#0088CC] font-semibold text-white pa-2 mr-2 mt-2 text-sm w-fit rounded-full"
-                        v-for="category in newsCategory">
-                        <span>{{ category.name }}</span>
-                    </div>
-                </div>
                 <div class="text-[#0088CC] border-[#0088CC] border-b-2 mt-5 mb-6 text-2xl font-semibold py-3">
-                    <span>Berita Terbaru</span>
+                    <span>Pengumuman Terbaru</span>
                 </div>
-                <div class="mb-2 px-2 py-3 flex items-center" v-for="news in latestNews">
-                    <div class="w-[300px] h-full">
-                        <img class="rounded-md" :src="news.thumbnail" alt="">
+                <div @click="$router.push('/pengumuman/' + announcement.slug)" class="cursor-pointer mb-2 px-2 py-3 flex" v-for="announcement in announcements">
+                    <div class="w-[160px] h-full">
+                        <img class="rounded-md" :src="announcement.thumbnail" alt="">
                     </div>
                     <div class="block ml-3">
                         <div class="text-[#0088CC] text-md">
-                            <span>{{ news.title }}</span>
+                            <span>{{ announcement.title }}</span>
                         </div>
                         <div class="mt-1">
-                            <span>{{ moment(news.created_at).format("LL") }}</span>
+                            <span>{{ moment(announcement.created_at).format("LL") }}</span>
                         </div>
                     </div>
                 </div>

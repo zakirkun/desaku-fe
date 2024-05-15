@@ -18,6 +18,7 @@ export default {
             },
             headers: [
                 { title: 'Title', align: 'start', sortable: false, key: 'title', width: "300px" },
+                { title: 'Description', align: 'start', sortable: false, key: 'description', width: "300px" },
                 { title: 'Thumbnail', align: 'start', key: 'thumbnail' },
                 { title: 'Content', align: 'end', key: 'content' },
                 { title: 'Actions', align: 'center', key: 'actions', sortable: false },
@@ -100,14 +101,17 @@ export default {
                     </template>
                     <template v-slot:item.actions="{ item }">
                         <div class="flex justify-center">
-                            <div class="cursor-pointer">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em"
-                                    viewBox="0 0 24 24">
-                                    <path fill="#212121"
-                                        d="M12 9a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5a5 5 0 0 1 5-5a5 5 0 0 1 5 5a5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5" />
-                                </svg>
-                            </div>
-                            <div @click="$router.push('/dashboard/announcement/edit?id=' + item.uuid)" class="cursor-pointer mx-1">
+                            <a :href="`/pengumuman/${item.slug}`" target="_blank">
+                                <div class="cursor-pointer">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em"
+                                        viewBox="0 0 24 24">
+                                        <path fill="#212121"
+                                            d="M12 9a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5a5 5 0 0 1 5-5a5 5 0 0 1 5 5a5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5" />
+                                    </svg>
+                                </div>
+                            </a>
+                            <div @click="$router.push('/dashboard/announcement/edit?id=' + item.uuid)"
+                                class="cursor-pointer mx-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em"
                                     viewBox="0 0 24 24">
                                     <path fill="#212121" fill-rule="evenodd"

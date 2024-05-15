@@ -4,6 +4,8 @@ useHead({
 })
 </script>
 <script>
+import { createSlug } from "@/helpers/createSlug" 
+
 export default {
     data() {
         return {
@@ -36,6 +38,7 @@ export default {
             this.loading = true
             this.form.content = this.data
             this.form.thumbnail = await this.uploadThumbnail()
+            this.form.slug = createSlug(this.form.title)
 
             await $fetch('http://127.0.0.1:8000/api/announcement', {
                 method: "POST",

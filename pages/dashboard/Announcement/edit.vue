@@ -5,32 +5,27 @@ export default {
             modalRemoveThumbnail: false,
             data: null,
             image: null,
-            categories: [],
             renderRichEditor: false,
             thumbnailDeleted: false,
+            loading: false,
             form: {
                 title: null,
                 category: null,
+                description: null,
                 content: null,
                 thumbnail: ''
             },
         }
     },
     async mounted() {
-        await this.loadCategories()
-
-        const data = await $fetch('http://127.0.0.1:8000/api/news/' + this.$route.query.id)
+        const data = await $fetch('http://127.0.0.1:8000/api/announcement/' + this.$route.query.id)
         this.form = data
         this.data = data.content
-        console.log(data)
         this.renderRichEditor = true
     },
     methods: {
-        async loadCategories() {
-            const data = await $fetch('http://127.0.0.1:8000/api/news-category/')
-            this.categories = data.map(v => v.name)
-        },
-        async updateNews() {
+        async updateAnnouncement() {
+            this.loading = true
             if (this.thumbnailDeleted) {
                 let urlImage = await this.uploadThumbnail()
                 this.form.thumbnail = urlImage
@@ -38,12 +33,14 @@ export default {
 
             this.form.content = this.data
 
-            await $fetch('http://127.0.0.1:8000/api/news/' + this.$route.query.id, {
+            await $fetch('http://127.0.0.1:8000/api/announcement/' + this.$route.query.id, {
                 method: "PATCH",
                 body: this.form
             })
 
-            this.$router.push('/dashboard/berita')
+            this.loading = false
+
+            this.$router.push('/dashboard/announcement')
         },
         contentChange(v) {
             this.data = v
@@ -107,16 +104,16 @@ export default {
     <div class="grid">
         <div class="col-12">
             <div class="card">
-                <h3 class="text-2xl font-medium mb-5">Ubah Berita</h3>
+                <h3 class="text-2xl font-medium mb-5">Ubah Pengumuman</h3>
                 <div class="mb-8">
                     <v-text-field v-model="form.title" variant="outlined" hide-details="auto"
-                        label="Judul Berita"></v-text-field>
+                        label="Deskripsi Pengumuman"></v-text-field>
                 </div>
-                <div class="mb-2">
-                    <v-select item-value="name" item-text="name" v-model="form.category" label="Kategori Berita"
-                        :items="categories" variant="outlined"></v-select>
+                <div class="mb-8">
+                    <v-text-field v-model="form.description" variant="outlined" hide-details="auto"
+                        label="Deksripsi Pengumuman"></v-text-field>
                 </div>
-                <div class="mb-3 text-lg font-medium my-1">Thumbnail Berita</div>
+                <div class="mb-3 text-lg font-medium my-1">Thumbnail Pengumuman</div>
                 <div class="relative w-fit" v-if="!thumbnailDeleted && form.thumbnail">
                     <v-img :src="form.thumbnail" width="300" />
                     <div @click="modalRemoveThumbnail = true" class="absolute cursor-pointer right-3 top-3 z-50">
@@ -142,7 +139,10 @@ export default {
                 </div>
                 <div class="mb-3 text-lg font-medium my-1">Konten</div>
                 <RichEditor v-if="renderRichEditor" :data="data" @contentChange="contentChange" />
-                <Button @click="updateNews" class="mt-5 bg-[#10B981] text-white px-3 py-2" label="Ubah"></Button>
+                <Button @click="updateAnnouncement" class="mt-5 bg-[#10B981] text-white px-3 py-2">
+                    <span v-if="!loading">Ubah</span>
+                    <Loader v-else />
+                </Button>
             </div>
         </div>
     </div>

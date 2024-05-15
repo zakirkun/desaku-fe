@@ -12,11 +12,18 @@ const modules = ref([Autoplay, EffectFade, Navigation, Pagination])
 definePageMeta({
     layout: 'app'
 });
+
+useHead({
+    title: "Beranda",
+})
 </script>
 
 <script>
+import moment from 'moment';
+
 export default {
     data: () => ({
+        moment: moment,
         images: [],
         videos: [],
         location: {},
@@ -44,32 +51,7 @@ export default {
                 name: "Keuangan Desa"
             }
         ],
-        newsData: [
-            {
-                img: "https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/24391a1104f17cf51db1567b5cfe0e2f.jpg",
-                description: "Menguji / Melakukan Diagnosa Koneksi Jaringan Internet Di Komputer Anda Ke Aplikasi Web SIDEKA-NG Melalui Syntax PING & TRACEROUTE by Mochamad Wendy.",
-                title: "Melakukan Diagnosa Koneksi Jaringan Internet Di Komputer Anda Ke Aplikasi Web Melalui Syntaks PING dan TRACEROUTE",
-                date: "Mar 17, 2024"
-            },
-            {
-                img: "https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/24391a1104f17cf51db1567b5cfe0e2f.jpg",
-                description: "Menguji / Melakukan Diagnosa Koneksi Jaringan Internet Di Komputer Anda Ke Aplikasi Web SIDEKA-NG Melalui Syntax PING & TRACEROUTE by Mochamad Wendy.",
-                title: "Melakukan Diagnosa Koneksi Jaringan Internet Di Komputer Anda Ke Aplikasi Web Melalui Syntaks PING dan TRACEROUTE",
-                date: "Mar 17, 2024"
-            },
-            {
-                img: "https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/24391a1104f17cf51db1567b5cfe0e2f.jpg",
-                description: "Menguji / Melakukan Diagnosa Koneksi Jaringan Internet Di Komputer Anda Ke Aplikasi Web SIDEKA-NG Melalui Syntax PING & TRACEROUTE by Mochamad Wendy.",
-                title: "Melakukan Diagnosa Koneksi Jaringan Internet Di Komputer Anda Ke Aplikasi Web Melalui Syntaks PING dan TRACEROUTE",
-                date: "Mar 17, 2024"
-            },
-            {
-                img: "https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/24391a1104f17cf51db1567b5cfe0e2f.jpg",
-                description: "Menguji / Melakukan Diagnosa Koneksi Jaringan Internet Di Komputer Anda Ke Aplikasi Web SIDEKA-NG Melalui Syntax PING & TRACEROUTE by Mochamad Wendy.",
-                title: "Melakukan Diagnosa Koneksi Jaringan Internet Di Komputer Anda Ke Aplikasi Web Melalui Syntaks PING dan TRACEROUTE",
-                date: "Mar 17, 2024"
-            }
-        ],
+        news: [],
         announcementData: [
             {
                 "title": "Vaksin Booster 2",
@@ -144,12 +126,18 @@ export default {
     }),
     async mounted() {
         await this.loadImages()
+        await this.loadNews()
         await this.loadVideos()
         await this.loadLocation()
+
+        console.log(this.news)
     },
     methods: {
         async loadImages() {
             this.images = await $fetch('http://127.0.0.1:8000/api/image-homepage')
+        },
+        async loadNews() {
+            this.news = await $fetch('http://127.0.0.1:8000/api/news')
         },
         async loadVideos() {
             this.videos = await $fetch('http://127.0.0.1:8000/api/video-gallery')
@@ -201,15 +189,30 @@ export default {
                     <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
                         <span>Berita Terkini</span>
                     </div>
-                    <div class="flex mb-2 h-[200px]" v-for="news in newsData">
+                    <div class="flex mb-2 h-[160px] cursor-pointer" @click="$router.push('/berita/' + news.slug)" v-for="news in news">
                         <div class="w-[600px] h-full">
-                            <img :src="news.img" alt="">
+                            <img :src="news.thumbnail" alt="">
                         </div>
                         <div class="block pl-4">
                             <div class="text-xl font-semibold">
                                 <span>{{ news.title }}</span>
                             </div>
-                            <div class="mt-2">
+                            <div class="text-md flex items-center font-medium mt-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="1.5em" height="1.5em" viewBox="0 0 24 24">
+                                    <g fill="none">
+                                        <rect width="18" height="15" x="3" y="6" stroke="#A3A3A3" rx="2" />
+                                        <path fill="black"
+                                            d="M3 10c0-1.886 0-2.828.586-3.414C4.172 6 5.114 6 7 6h10c1.886 0 2.828 0 3.414.586C21 7.172 21 8.114 21 10z" />
+                                        <path stroke="#A3A3A3" stroke-linecap="round" d="M7 3v3m10-3v3" />
+                                        <rect width="4" height="2" x="7" y="12" fill="#A3A3A3" rx=".5" />
+                                        <rect width="4" height="2" x="7" y="16" fill="#A3A3A3" rx=".5" />
+                                        <rect width="4" height="2" x="13" y="12" fill="#A3A3A3" rx=".5" />
+                                        <rect width="4" height="2" x="13" y="16" fill="#A3A3A3" rx=".5" />
+                                    </g>
+                                </svg>
+                                <span>{{ moment(news.created_at).format("LL") }}</span>
+                            </div>
+                            <div class="mt-3">
                                 <span>{{ news.description }}</span>
                             </div>
                         </div>

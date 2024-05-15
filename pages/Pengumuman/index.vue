@@ -43,9 +43,9 @@ export default {
                 <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
                     <span>Pengumuman</span>
                 </div>
-                <div class="flex mb-2 h-[200px]" v-for="announcement in announcements">
-                    <div class="w-[600px] h-full">
-                        <img class="rounded-md h-[140px] object-cover" :src="announcement.thumbnail" alt="">
+                <div @click="$router.push('/pengumuman/' + announcement.slug)" class="cursor-pointer flex mb-2 h-[200px]" v-for="announcement in announcements">
+                    <div class="w-[500px] h-full">
+                        <img class="rounded-md h-[140px] w-full object-cover" :src="announcement.thumbnail" alt="">
                     </div>
                     <div class="block pl-4">
                         <div class="text-xl font-semibold">
@@ -76,8 +76,8 @@ export default {
                 <div class="text-[#0088CC] border-[#0088CC] border-b-2 mt-5 mb-6 text-2xl font-semibold py-3">
                     <span>Pengumuman Terbaru</span>
                 </div>
-                <div class="mb-2 px-2 py-3 flex items-center" v-for="announcement in announcements">
-                    <div class="w-[300px] h-full">
+                <div @click="$router.push('/pengumuman/' + announcement.slug)" class="cursor-pointer mb-2 px-2 py-3 flex" v-for="announcement in announcements">
+                    <div class="w-[140px] h-full">
                         <img class="rounded-md" :src="announcement.thumbnail" alt="">
                     </div>
                     <div class="block ml-3">

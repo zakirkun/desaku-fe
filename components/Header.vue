@@ -1,11 +1,16 @@
 <script setup>
-import { onMounted } from 'vue';
+import { onMounted, reactive } from 'vue';
 
 const headerActive = ref(false)
 const windowWidth = ref(null)
 const navMobile = ref(false)
 
-onMounted(() => {
+const headerData = reactive({
+    no_telp: null,
+    email: null
+})
+
+onMounted(async () => {
     window.addEventListener('scroll', function () {
         if (window.scrollY > 20) {
             headerActive.value = true
@@ -17,7 +22,15 @@ onMounted(() => {
     window.addEventListener('resize', function () {
         windowWidth.value = window.innerWidth
     });
+
+    await loadHeaderTop()
 })
+
+async function loadHeaderTop() {
+    const data = await $fetch('http://127.0.0.1:8000/api/header')
+    headerData.no_telp = data.no_telp
+    headerData.email = data.email
+}
 
 definePageMeta({
     layout: false
@@ -117,7 +130,7 @@ export default {
                             d="m16.556 12.906l-.455.453s-1.083 1.076-4.038-1.862s-1.872-4.014-1.872-4.014l.286-.286c.707-.702.774-1.83.157-2.654L9.374 2.86C8.61 1.84 7.135 1.705 6.26 2.575l-1.57 1.56c-.433.432-.723.99-.688 1.61c.09 1.587.808 5 4.812 8.982c4.247 4.222 8.232 4.39 9.861 4.238c.516-.048.964-.31 1.325-.67l1.42-1.412c.96-.953.69-2.588-.538-3.255l-1.91-1.039c-.806-.437-1.787-.309-2.417.317" />
                     </svg>
                     <div class="ml-2 text-white">
-                        022-6623181
+                        {{  headerData.no_telp }}
                     </div>
                 </div>
                 <div class="flex items-center">
@@ -126,7 +139,7 @@ export default {
                             d="m20 8l-8 5l-8-5V6l8 5l8-5m0-2H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2" />
                     </svg>
                     <div class="text-white ml-2">
-                        pemdes@kertamulya-padalarang.desa.id
+                        {{  headerData.email }}
                     </div>
                 </div>
             </div>

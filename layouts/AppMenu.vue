@@ -30,6 +30,7 @@ const model = ref([
                     { label: 'Gambar Beranda', to: "/dashboard/setting/homepageimage" },
                     { label: 'Lokasi Desa', to: "/dashboard/setting/location" },
                     { label: 'Footer', to: "/dashboard/setting/footer" },
+                    { label: 'Header', to: "/dashboard/setting/header" },
                     // { label: 'Pengaturan', to: "/dashboard/pengaturan" },
                 ]
             },

@@ -50,9 +50,9 @@ export default {
                 <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
                     <span>Berita</span>
                 </div>
-                <div class="flex mb-2 h-[200px]" v-for="news in news">
-                    <div class="w-[600px] h-full">
-                        <img class="rounded-md h-[140px] object-cover" :src="news.thumbnail" alt="">
+                <div @click="$router.push('/berita/' + news.slug)" class="cursor-pointer flex mb-2 h-[200px]" v-for="news in news">
+                    <div class="w-[500px] h-full">
+                        <img class="rounded-md h-[160px] w-full object-cover" :src="news.thumbnail" alt="">
                     </div>
                     <div class="block pl-4">
                         <div class="text-xl font-semibold">
@@ -92,7 +92,7 @@ export default {
                 <div class="text-[#0088CC] border-[#0088CC] border-b-2 mt-5 mb-6 text-2xl font-semibold py-3">
                     <span>Berita Terbaru</span>
                 </div>
-                <div class="mb-2 px-2 py-3 flex items-center" v-for="news in latestNews">
+                <div @click="$router.push('/berita/' + news.slug)" class="cursor-pointer mb-2 px-2 py-3 flex items-center" v-for="news in latestNews">
                     <div class="w-[300px] h-full">
                         <img class="rounded-md" :src="news.thumbnail" alt="">
                     </div>
