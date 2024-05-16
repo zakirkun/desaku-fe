@@ -1,15 +1,19 @@
+<script setup>
+useHead({
+    title: "Tambah Berita",
+})
+</script>
 <script>
-import { createSlug } from "@/helpers/createSlug" 
+import { createSlug } from "@/helpers/createSlug"
 
 export default {
     data() {
         return {
+            openMediaLibrary: false,
             modalRemoveThumbnail: false,
             image: null,
             categories: [],
             renderRichEditor: false,
-            thumbnailDeleted: false,
-            thumbnailUploaded: false,
             data: null,
             renderRichEditor: false,
             form: {
@@ -44,7 +48,6 @@ export default {
         async addNews() {
             this.loading = true
             this.form.content = this.data
-            this.form.thumbnail = await this.uploadThumbnail()
             this.form.slug = createSlug(this.form.title)
 
             await $fetch('http://127.0.0.1:8000/api/news', {
@@ -58,32 +61,16 @@ export default {
         contentChange(v) {
             this.data = v
         },
-        async uploadThumbnail() {
-            const formData = new FormData();
-            formData.append("image", this.form.thumbnail);
-
-            const resp = await $fetch('http://127.0.0.1:8000/api/image', {
-                body: formData,
-                method: "POST"
-            })
-
-            return resp.data
-        },
-        async removeThumbnailNews() {
-            let thumbnail = this.form.thumbnail.replace('http://127.0.0.1:8000/storage/', '')
-
-            await $fetch('http://127.0.0.1:8000/api/image/' + thumbnail, {
-                method: "DELETE"
-            })
-
-            this.thumbnailDeleted = true
-            this.modalRemoveThumbnail = false
+        onImageSelected(val){
+            this.form.thumbnail = val
         }
     }
 }
 </script>
 
 <template>
+    <MediaLibrary @onImageSelected="onImageSelected" @onCloseModal="openMediaLibrary = false"
+        :open="openMediaLibrary" />
     <v-dialog v-model="modalRemoveThumbnail" width="auto">
         <v-card height="auto" style="scrollbar-width: none">
             <template v-slot:title>
@@ -129,7 +116,8 @@ export default {
                     </div>
                 </div>
                 <div>
-                    <v-textarea rows="3" variant="outlined" label="Deskripsi Berita" clearable v-model="form.description"></v-textarea>
+                    <v-textarea rows="3" variant="outlined" label="Deskripsi Berita" clearable
+                        v-model="form.description"></v-textarea>
                 </div>
                 <div class="mb-3 text-lg font-medium my-1">Thumbnail Berita</div>
                 <div class="relative w-fit" v-if="thumbnailUploaded">
@@ -150,10 +138,34 @@ export default {
                         </svg>
                     </div>
                 </div>
-                <div class="mb-2 mt-6">
-                    <v-file-input :clearable="false" v-if="!thumbnailUploaded" v-model="form.thumbnail"
-                        label="Thumbnail Berita" variant="outlined">
-                    </v-file-input>
+                <div class="relative w-fit" v-if="form.thumbnail">
+                    <v-img :src="form.thumbnail" width="300" />
+                    <div @click="form.thumbnail = null" class="absolute cursor-pointer right-3 top-3 z-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 48 48">
+                            <defs>
+                                <mask id="ipSCloseOne0">
+                                    <g fill="none" stroke-linejoin="round" stroke-width="4">
+                                        <path fill="#fff" stroke="#fff"
+                                            d="M24 44c11.046 0 20-8.954 20-20S35.046 4 24 4S4 12.954 4 24s8.954 20 20 20Z" />
+                                        <path stroke="#000" stroke-linecap="round"
+                                            d="M29.657 18.343L18.343 29.657m0-11.314l11.314 11.314" />
+                                    </g>
+                                </mask>
+                            </defs>
+                            <path fill="#10B981" d="M0 0h48v48H0z" mask="url(#ipSCloseOne0)" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="mb-6 mt-6">
+                    <v-btn @click="openMediaLibrary = true" color="#10B981" class="flex-none text-white px-3 ">
+                        <div class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 20 20">
+                                <path fill="white"
+                                    d="M17.125 6.17L15.079.535c-.151-.416-.595-.637-.989-.492L.492 5.006c-.394.144-.593.597-.441 1.013l2.156 5.941V8.777c0-1.438 1.148-2.607 2.56-2.607H8.36l4.285-3.008l2.479 3.008zM19.238 8H4.767a.761.761 0 0 0-.762.777v9.42c.001.444.343.803.762.803h14.471c.42 0 .762-.359.762-.803v-9.42A.761.761 0 0 0 19.238 8M18 17H6v-2l1.984-4.018l2.768 3.436l2.598-2.662l3.338-1.205L18 14z" />
+                            </svg>
+                            <div class="ml-1 font-semibold">Media Library</div>
+                        </div>
+                    </v-btn>
                 </div>
                 <div class="mb-3 text-lg font-medium my-1">Konten</div>
                 <RichEditor v-if="renderRichEditor" :data="data" @contentChange="contentChange" />
