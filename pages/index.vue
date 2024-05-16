@@ -135,7 +135,7 @@ export default {
             this.images = await $fetch('http://127.0.0.1:8000/api/image-homepage')
         },
         async loadNews() {
-            this.news = await $fetch('http://127.0.0.1:8000/api/news')
+            this.news = await $fetch('http://127.0.0.1:8000/api/news?limit=5')
         },
         async loadVideos() {
             this.videos = await $fetch('http://127.0.0.1:8000/api/video-gallery')
@@ -164,7 +164,7 @@ export default {
                 <swiper-slide v-for="image in images">
                     <div class="w-screen h-full bg-cover relative bg-center"
                         :style="backgroundImage(image.url)">
-                        <div class="px-8 absolute bottom-8 left-[10rem] bg-black/40 w-fit text-white">
+                        <div class="px-8 absolute bottom-8 left-[10rem] bg-black/40 w-fit text-white text-xl">
                             <span>{{ image.description }}</span>
                         </div>
                     </div>
@@ -188,8 +188,8 @@ export default {
                         <span>Berita Terkini</span>
                     </div>
                     <div class="flex mb-2 h-[160px] cursor-pointer" @click="$router.push('/berita/' + news.slug)" v-for="news in news">
-                        <div class="w-[600px] h-full">
-                            <img :src="news.thumbnail" alt="">
+                        <div class="h-[180px] w-fit flex-none">
+                            <img class="w-[250px] h-[140px]" :src="news.thumbnail" alt="">
                         </div>
                         <div class="block pl-4">
                             <div class="text-xl font-semibold">
