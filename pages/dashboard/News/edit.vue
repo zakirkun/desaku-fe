@@ -1,3 +1,8 @@
+<script setup>
+useHead({
+    title: "Edit Berita",
+})
+</script>
 <script>
 export default {
     data() {
@@ -5,6 +10,7 @@ export default {
             modalRemoveThumbnail: false,
             data: null,
             image: null,
+            loading: null,
             categories: [],
             renderRichEditor: false,
             thumbnailDeleted: false,
@@ -14,6 +20,7 @@ export default {
                 content: null,
                 thumbnail: ''
             },
+            openMediaLibrary: false
         }
     },
     async mounted() {
@@ -22,7 +29,6 @@ export default {
         const data = await $fetch('http://127.0.0.1:8000/api/news/' + this.$route.query.id)
         this.form = data
         this.data = data.content
-        console.log(data)
         this.renderRichEditor = true
     },
     methods: {
@@ -31,11 +37,7 @@ export default {
             this.categories = data.map(v => v.name)
         },
         async updateNews() {
-            if (this.thumbnailDeleted) {
-                let urlImage = await this.uploadThumbnail()
-                this.form.thumbnail = urlImage
-            }
-
+            this.loading = true
             this.form.content = this.data
 
             await $fetch('http://127.0.0.1:8000/api/news/' + this.$route.query.id, {
@@ -43,37 +45,21 @@ export default {
                 body: this.form
             })
 
+            this.loading = false
             this.$router.push('/dashboard/news')
         },
         contentChange(v) {
             this.data = v
         },
-        async uploadThumbnail() {
-            const formData = new FormData();
-            formData.append("image", this.form.thumbnail);
-
-            const resp = await $fetch('http://127.0.0.1:8000/api/image', {
-                body: formData,
-                method: "POST"
-            })
-
-            return resp.data
-        },
-        async removeThumbnailNews() {
-            let thumbnail = this.form.thumbnail.replace('http://127.0.0.1:8000/storage/', '')
-
-            await $fetch('http://127.0.0.1:8000/api/image/' + thumbnail, {
-                method: "DELETE"
-            })
-
-            this.thumbnailDeleted = true
-            this.modalRemoveThumbnail = false
+        onImageSelected(val){
+            this.form.thumbnail = val
         }
     }
 }
 </script>
 
 <template>
+    <MediaLibrary @onImageSelected="onImageSelected" @onCloseModal="openMediaLibrary = false" :open="openMediaLibrary" />
     <v-dialog v-model="modalRemoveThumbnail" width="auto">
         <v-card height="auto" style="scrollbar-width: none">
             <template v-slot:title>
@@ -117,9 +103,9 @@ export default {
                         :items="categories" variant="outlined"></v-select>
                 </div>
                 <div class="mb-3 text-lg font-medium my-1">Thumbnail Berita</div>
-                <div class="relative w-fit" v-if="!thumbnailDeleted && form.thumbnail">
+                <div class="relative w-fit" v-if="form.thumbnail">
                     <v-img :src="form.thumbnail" width="300" />
-                    <div @click="modalRemoveThumbnail = true" class="absolute cursor-pointer right-3 top-3 z-50">
+                    <div @click="form.thumbnail = null" class="absolute cursor-pointer right-3 top-3 z-50">
                         <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 48 48">
                             <defs>
                                 <mask id="ipSCloseOne0">
@@ -135,14 +121,23 @@ export default {
                         </svg>
                     </div>
                 </div>
-                <div class="mb-1 mt-6">
-                    <v-file-input :clearable="false" v-if="thumbnailDeleted || !form.thumbnail" v-model="form.thumbnail"
-                        label="Thumbnail Berita" variant="outlined">
-                    </v-file-input>
+                <div class="mb-6 mt-6">
+                    <Button @click="openMediaLibrary = true" class="flex-none bg-[#10B981] text-white px-3 py-3">
+                        <div class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 20 20">
+                                <path fill="white"
+                                    d="M17.125 6.17L15.079.535c-.151-.416-.595-.637-.989-.492L.492 5.006c-.394.144-.593.597-.441 1.013l2.156 5.941V8.777c0-1.438 1.148-2.607 2.56-2.607H8.36l4.285-3.008l2.479 3.008zM19.238 8H4.767a.761.761 0 0 0-.762.777v9.42c.001.444.343.803.762.803h14.471c.42 0 .762-.359.762-.803v-9.42A.761.761 0 0 0 19.238 8M18 17H6v-2l1.984-4.018l2.768 3.436l2.598-2.662l3.338-1.205L18 14z" />
+                            </svg>
+                            <div class="ml-1 font-semibold">Media Library</div>
+                        </div>
+                    </Button>
                 </div>
                 <div class="mb-3 text-lg font-medium my-1">Konten</div>
                 <RichEditor v-if="renderRichEditor" :data="data" @contentChange="contentChange" />
-                <Button @click="updateNews" class="mt-5 bg-[#10B981] text-white px-3 py-2" label="Ubah"></Button>
+                <Button @click="updateNews" class="mt-5 bg-[#10B981] text-white px-3 py-2">
+                    <span v-if="!loading">Ubah</span>
+                    <Loader v-else/>
+                </Button>
             </div>
         </div>
     </div>

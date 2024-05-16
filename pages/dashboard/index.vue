@@ -24,13 +24,15 @@ export default {
         contentChange(v){
             this.data = v
         },
+        onImageSelected(val){
+            console.log(val)
+        }
     }
 }
 </script>
 
 <template>
     <div class="cursor-pointer" @click="openMediaLibrary = true">Halo</div>
-    <MediaLibrary @onCloseModal="openMediaLibrary = false" :open="openMediaLibrary" />
     <div class="text-2xl font-semibold mb-2">Sejarah Desa</div>
     <div class="grid">
         <div class="col-12">

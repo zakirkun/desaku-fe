@@ -122,15 +122,13 @@ export default {
                     }
                 ]
             }
-        ]
+        ],
     }),
     async mounted() {
         await this.loadImages()
         await this.loadNews()
         await this.loadVideos()
         await this.loadLocation()
-
-        console.log(this.news)
     },
     methods: {
         async loadImages() {
@@ -148,7 +146,7 @@ export default {
         },
         backgroundImage(url){
             return `background-image: url(${url});`
-        }
+        },
     }
 }
 </script>
