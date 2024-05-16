@@ -15,6 +15,7 @@ export default defineNuxtConfig({
                 { src: 'https://cdn.tailwindcss.com', body: true }
             ],
             link: [
+                { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
                 {
                     id: 'theme-css',
                     rel: 'stylesheet',

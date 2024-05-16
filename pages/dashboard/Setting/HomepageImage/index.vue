@@ -1,3 +1,8 @@
+<script setup>
+useHead({
+    title: 'Homepage Image'
+});
+</script>
 <script>
 export default {
     data() {

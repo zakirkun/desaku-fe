@@ -1,3 +1,9 @@
+<script setup>
+useHead({
+    title: 'Add Homepage Image'
+});
+</script>
+
 <script>
 export default {
     data() {
@@ -18,7 +24,7 @@ export default {
                 body: this.form
             })
 
-            this.$router.push('/dashboard/gambar-beranda')
+            this.$router.push('/dashboard/setting/homepageimage')
         },
         async uploadImage() {
             const formData = new FormData();
