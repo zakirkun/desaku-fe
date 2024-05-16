@@ -40,7 +40,7 @@ export default {
             this.form.thumbnail = await this.uploadThumbnail()
             this.form.slug = createSlug(this.form.title)
 
-            await $fetch('http://127.0.0.1:8000/api/announcement', {
+            await $fetch('http://api.desaku.muhichsan.com/api/announcement', {
                 method: "POST",
                 body: this.form
             })
@@ -55,7 +55,7 @@ export default {
             const formData = new FormData();
             formData.append("image", this.form.thumbnail);
 
-            const resp = await $fetch('http://127.0.0.1:8000/api/image', {
+            const resp = await $fetch('http://api.desaku.muhichsan.com/api/image', {
                 body: formData,
                 method: "POST"
             })
@@ -63,9 +63,9 @@ export default {
             return resp.data
         },
         async removeThumbnailNews() {
-            let thumbnail = this.form.thumbnail.replace('http://127.0.0.1:8000/storage/', '')
+            let thumbnail = this.form.thumbnail.replace('http://api.desaku.muhichsan.com/storage/', '')
 
-            await $fetch('http://127.0.0.1:8000/api/image/' + thumbnail, {
+            await $fetch('http://api.desaku.muhichsan.com/api/image/' + thumbnail, {
                 method: "DELETE"
             })
 

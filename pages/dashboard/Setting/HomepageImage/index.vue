@@ -19,7 +19,7 @@ export default {
     },
     methods: {
         async loadData() {
-            const data = await $fetch('http://127.0.0.1:8000/api/image-homepage')
+            const data = await $fetch('http://api.desaku.muhichsan.com/api/image-homepage')
             this.items = data
         },
         openModalRemoveImage(id) {
@@ -27,7 +27,7 @@ export default {
             this.removedImageId = id
         },
         async removeNews() {
-            await $fetch('http://127.0.0.1:8000/api/image-homepage/' + this.removedImageId, {
+            await $fetch('http://api.desaku.muhichsan.com/api/image-homepage/' + this.removedImageId, {
                 method: "DELETE",
             })
 

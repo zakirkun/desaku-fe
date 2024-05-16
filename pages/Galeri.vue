@@ -47,11 +47,11 @@ export default {
     },
     methods: {
         async loadVideos() {
-            const data = await $fetch('http://127.0.0.1:8000/api/video-gallery')
+            const data = await $fetch('http://api.desaku.muhichsan.com/api/video-gallery')
             this.videos = data
         },
         async loadImages() {
-            const data = await $fetch('http://127.0.0.1:8000/api/image-gallery')
+            const data = await $fetch('http://api.desaku.muhichsan.com/api/image-gallery')
             this.images = data
         },
     }

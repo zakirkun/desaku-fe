@@ -31,7 +31,7 @@ export default {
     },
     methods: {
         async loadData() {
-            const data = await $fetch('http://127.0.0.1:8000/api/announcement')
+            const data = await $fetch('http://api.desaku.muhichsan.com/api/announcement')
             this.items = data
         },
         openModalRemoveNews(id) {
@@ -39,7 +39,7 @@ export default {
             this.removedNewsId = id
         },
         async removeNews() {
-            await $fetch('http://127.0.0.1:8000/api/news/' + this.removedNewsId, {
+            await $fetch('http://api.desaku.muhichsan.com/api/news/' + this.removedNewsId, {
                 method: "DELETE",
             })
 

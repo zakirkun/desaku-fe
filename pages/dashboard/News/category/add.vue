@@ -22,7 +22,7 @@ export default {
         }
     },
     async mounted() {
-        const data = await $fetch('http://127.0.0.1:8000/api/news-category')
+        const data = await $fetch('http://api.desaku.muhichsan.com/api/news-category')
         this.items = data
         this.renderRichEditor = true
     },
@@ -31,7 +31,7 @@ export default {
             this.loading = true
             this.form.content = this.data
 
-            await $fetch('http://127.0.0.1:8000/api/news-category', {
+            await $fetch('http://api.desaku.muhichsan.com/api/news-category', {
                 method: "POST",
                 body: this.form
             })

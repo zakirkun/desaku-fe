@@ -22,7 +22,7 @@ export default {
         }
     },
     async mounted() {
-        const data = await $fetch('http://127.0.0.1:8000/api/news/slug/' + this.$route.params.id)
+        const data = await $fetch('http://api.desaku.muhichsan.com/api/news/slug/' + this.$route.params.id)
         this.post.title = data.title
         this.post.content = data.content
 
@@ -31,12 +31,12 @@ export default {
     },
     methods: {
         async loadData() {
-            const data = await $fetch('http://127.0.0.1:8000/api/news')
+            const data = await $fetch('http://api.desaku.muhichsan.com/api/news')
             this.news = data
             this.latestNews = data
         },
         async loadNewsCategory() {
-            const data = await $fetch('http://127.0.0.1:8000/api/news-category')
+            const data = await $fetch('http://api.desaku.muhichsan.com/api/news-category')
             this.newsCategory = data
         },
     }

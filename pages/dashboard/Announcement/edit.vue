@@ -18,7 +18,7 @@ export default {
         }
     },
     async mounted() {
-        const data = await $fetch('http://127.0.0.1:8000/api/announcement/' + this.$route.query.id)
+        const data = await $fetch('http://api.desaku.muhichsan.com/api/announcement/' + this.$route.query.id)
         this.form = data
         this.data = data.content
         this.renderRichEditor = true
@@ -33,7 +33,7 @@ export default {
 
             this.form.content = this.data
 
-            await $fetch('http://127.0.0.1:8000/api/announcement/' + this.$route.query.id, {
+            await $fetch('http://api.desaku.muhichsan.com/api/announcement/' + this.$route.query.id, {
                 method: "PATCH",
                 body: this.form
             })
@@ -49,7 +49,7 @@ export default {
             const formData = new FormData();
             formData.append("image", this.form.thumbnail);
 
-            const resp = await $fetch('http://127.0.0.1:8000/api/image', {
+            const resp = await $fetch('http://api.desaku.muhichsan.com/api/image', {
                 body: formData,
                 method: "POST"
             })
@@ -57,9 +57,9 @@ export default {
             return resp.data
         },
         async removeThumbnailNews() {
-            let thumbnail = this.form.thumbnail.replace('http://127.0.0.1:8000/storage/', '')
+            let thumbnail = this.form.thumbnail.replace('http://api.desaku.muhichsan.com/storage/', '')
 
-            await $fetch('http://127.0.0.1:8000/api/image/' + thumbnail, {
+            await $fetch('http://api.desaku.muhichsan.com/api/image/' + thumbnail, {
                 method: "DELETE"
             })
 

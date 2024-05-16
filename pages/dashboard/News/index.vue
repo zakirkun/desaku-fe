@@ -38,18 +38,18 @@ export default {
     },
     methods: {
         async loadData() {
-            const data = await $fetch('http://127.0.0.1:8000/api/news')
+            const data = await $fetch('http://api.desaku.muhichsan.com/api/news')
             this.items = data
             this.renderRichEditor = true
         },
         async loadNewsCategory() {
-            const data = await $fetch('http://127.0.0.1:8000/api/news-category')
+            const data = await $fetch('http://api.desaku.muhichsan.com/api/news-category')
             this.itemsCategory = data
         },
         async addNews() {
             this.form.content = this.data
 
-            await $fetch('http://127.0.0.1:8000/api/news', {
+            await $fetch('http://api.desaku.muhichsan.com/api/news', {
                 method: "POST",
                 body: this.form
             })
@@ -66,7 +66,7 @@ export default {
             this.removedNewsCategoryId = id
         },
         async removeNews() {
-            await $fetch('http://127.0.0.1:8000/api/news/' + this.removedNewsId, {
+            await $fetch('http://api.desaku.muhichsan.com/api/news/' + this.removedNewsId, {
                 method: "DELETE",
             })
 
@@ -74,7 +74,7 @@ export default {
             await this.loadData()
         },
         async removeNewsCategory() {
-            await $fetch('http://127.0.0.1:8000/api/news-category/' + this.removedNewsCategoryId, {
+            await $fetch('http://api.desaku.muhichsan.com/api/news-category/' + this.removedNewsCategoryId, {
                 method: "DELETE",
             })
 

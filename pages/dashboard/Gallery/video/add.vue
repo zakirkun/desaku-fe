@@ -16,7 +16,7 @@ export default {
     },
     methods: {
         async addVideo() {
-            await $fetch('http://127.0.0.1:8000/api/video-gallery', {
+            await $fetch('http://api.desaku.muhichsan.com/api/video-gallery', {
                 method: "POST",
                 body: this.form
             })

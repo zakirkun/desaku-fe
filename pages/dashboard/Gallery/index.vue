@@ -37,11 +37,11 @@ export default {
     },
     methods: {
         async loadImage() {
-            const data = await $fetch('http://127.0.0.1:8000/api/image-gallery')
+            const data = await $fetch('http://api.desaku.muhichsan.com/api/image-gallery')
             this.images = data
         },
         async loadVideo() {
-            const data = await $fetch('http://127.0.0.1:8000/api/video-gallery')
+            const data = await $fetch('http://api.desaku.muhichsan.com/api/video-gallery')
             this.videos = data
         },
         openModalRemoveImages(id) {
@@ -53,7 +53,7 @@ export default {
             this.removedNewsCategoryId = id
         },
         async removeImageGallery() {
-            await $fetch('http://127.0.0.1:8000/api/image-gallery/' + this.removedImageId, {
+            await $fetch('http://api.desaku.muhichsan.com/api/image-gallery/' + this.removedImageId, {
                 method: "DELETE",
             })
 
@@ -61,7 +61,7 @@ export default {
             await this.loadImage()
         },
         async removeVideoGallery() {
-            await $fetch('http://127.0.0.1:8000/api/video-gallery/' + this.removedNewsCategoryId, {
+            await $fetch('http://api.desaku.muhichsan.com/api/video-gallery/' + this.removedNewsCategoryId, {
                 method: "DELETE",
             })
 

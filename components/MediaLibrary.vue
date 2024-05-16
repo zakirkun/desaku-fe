@@ -17,7 +17,7 @@ export default {
     },
     methods: {
         async loadImages() {
-            this.images = await $fetch('http://127.0.0.1:8000/api/image')
+            this.images = await $fetch('http://api.desaku.muhichsan.com/api/image')
             this.imageSelected = this.images["1"]
         },
         closeModal() {
@@ -30,9 +30,9 @@ export default {
             this.$emit('onCloseModal')
         },
         async removeImage() {
-            this.imageSelected = this.imageSelected.replace('http://127.0.0.1:8000/storage/', '')
+            this.imageSelected = this.imageSelected.replace('http://api.desaku.muhichsan.com/storage/', '')
 
-            await $fetch('http://127.0.0.1:8000/api/image/' + this.imageSelected, {
+            await $fetch('http://api.desaku.muhichsan.com/api/image/' + this.imageSelected, {
                 method: "DELETE"
             })
 

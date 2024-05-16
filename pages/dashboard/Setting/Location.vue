@@ -19,12 +19,12 @@ export default {
     },
     methods: {
         async loadData() {
-            const data = await $fetch('http://127.0.0.1:8000/api/location')
+            const data = await $fetch('http://api.desaku.muhichsan.com/api/location')
             this.form = data
         },
         async updateLocation() {
             this.loading = true
-            await $fetch('http://127.0.0.1:8000/api/location', {
+            await $fetch('http://api.desaku.muhichsan.com/api/location', {
                 method: "PATCH",
                 body: this.form
             })
