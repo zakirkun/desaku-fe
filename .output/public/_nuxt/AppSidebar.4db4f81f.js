@@ -1,1 +1,0 @@
-import r from"./AppMenu.4e3cbc64.js";import{c as o,o as t}from"./entry.72fda17e.js";import"./AppMenuItem.364ab4cf.js";import"./layout.1bd3a08f.js";const i={__name:"AppSidebar",setup(e){return(p,a)=>(t(),o(r))}};export{i as default};
