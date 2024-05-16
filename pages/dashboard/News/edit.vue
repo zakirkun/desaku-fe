@@ -52,6 +52,7 @@ export default {
             this.data = v
         },
         onImageSelected(val){
+            console.log(val)
             this.form.thumbnail = val
         }
     }
@@ -117,12 +118,12 @@ export default {
                                     </g>
                                 </mask>
                             </defs>
-                            <path fill="#A3A3A3" d="M0 0h48v48H0z" mask="url(#ipSCloseOne0)" />
+                            <path fill="#10B981" d="M0 0h48v48H0z" mask="url(#ipSCloseOne0)" />
                         </svg>
                     </div>
                 </div>
                 <div class="mb-6 mt-6">
-                    <Button @click="openMediaLibrary = true" class="flex-none bg-[#10B981] text-white px-3 py-3">
+                    <v-btn @click="openMediaLibrary = true" color="#10B981" class="flex-none text-white px-3 ">
                         <div class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 20 20">
                                 <path fill="white"
@@ -130,7 +131,7 @@ export default {
                             </svg>
                             <div class="ml-1 font-semibold">Media Library</div>
                         </div>
-                    </Button>
+                    </v-btn>
                 </div>
                 <div class="mb-3 text-lg font-medium my-1">Konten</div>
                 <RichEditor v-if="renderRichEditor" :data="data" @contentChange="contentChange" />

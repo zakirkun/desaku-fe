@@ -1,11 +1,52 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted, defineEmits } from 'vue';
 import { useDropzone } from "vue3-dropzone";
 
 const loading = ref(false)
+const currentTab = ref("listImage")
+const images = ref([])
+const imageSelected = ref("")
+const emit = defineEmits(['onImageSelected', 'onCloseModal'])
 
-async function onDrop(acceptFiles, rejectReasons) {
-    console.log(acceptFiles);
+onMounted(async () => {
+    await loadImages()
+})
+
+async function loadImages() {
+    images.value = await $fetch('http://127.0.0.1:8000/api/image')
+    imageSelected.value = images.value["1"]
+}
+
+async function onDrop(files) {
+    const formData = new FormData();
+    formData.append("image", files[0]);
+
+    loading.value = true
+    const resp = await $fetch('http://127.0.0.1:8000/api/image', {
+        body: formData,
+        method: "POST"
+    })
+
+    setTimeout(async () => {
+        loading.value = false
+        await loadImages()
+        currentTab.value = 'listImage'
+    }, 1000)
+}
+
+async function removeImage() {
+    imageSelected.value = imageSelected.value.replace('http://127.0.0.1:8000/storage/', '')
+
+    await $fetch('http://127.0.0.1:8000/api/image/' + imageSelected.value, {
+        method: "DELETE"
+    })
+
+    await loadImages()
+}
+
+function useImage() {
+    emit('onImageSelected', imageSelected.value);
+    emit('onCloseModal')
 }
 
 const { getRootProps, getInputProps, ...rest } = useDropzone({ onDrop });
@@ -14,9 +55,6 @@ const { getRootProps, getInputProps, ...rest } = useDropzone({ onDrop });
 export default {
     data: () => ({
         openModal: false,
-        currentTab: "listImage",
-        images: [],
-        imageSelected: null
     }),
     props: ['open'],
     watch: {
@@ -24,32 +62,11 @@ export default {
             this.openModal = this.open
         }
     },
-    async mounted() {
-        await this.loadImages()
-    },
     methods: {
-        async loadImages() {
-            this.images = await $fetch('http://127.0.0.1:8000/api/image')
-            this.imageSelected = this.images["1"]
-        },
         closeModal() {
             this.openModal = false
             this.$emit('onCloseModal')
         },
-        useImage() {
-            this.$emit('onImageSelected', this.imageSelected);
-            this.openModal = false
-            this.$emit('onCloseModal')
-        },
-        async removeImage() {
-            this.imageSelected = this.imageSelected.replace('http://127.0.0.1:8000/storage/', '')
-
-            await $fetch('http://127.0.0.1:8000/api/image/' + this.imageSelected, {
-                method: "DELETE"
-            })
-
-            await this.loadImages()
-        }
     }
 }
 </script>
@@ -85,12 +102,11 @@ export default {
                         <div class="bg-[#F6F7F7] flex-1 px-6 pt-4">
                             <div class="text-xl font-semibold mb-4">Gambar Dipilih</div>
                             <img v-if="imageSelected" :src="imageSelected" />
-                            <div class="flex">
-                                <Button @click="useImage"
-                                    class="w-fit mt-6 bg-[#10B981] text-white px-3 mx-1 mb-2 py-2 text-md"
-                                    label="Pilih Gambar"></Button>
-                                <Button @click="removeImage"
-                                    class="w-fit mt-6 bg-[#FC4100] text-white px-3 mx-1 mb-2 py-2 text-md">
+                            <div class="flex pb-4">
+                                <v-btn @click="useImage" color="#10B981"
+                                    class="w-fit mt-6 text-white px-3 mx-1 mb-2 py-2 text-md">Pilih Gambar</v-btn>
+                                <v-btn @click="removeImage" color="#FC4100"
+                                    class="w-fit mt-6 text-white px-1 mx-1 mb-2 py-2 text-md">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em"
                                         viewBox="0 0 36 36">
                                         <path fill="white"
@@ -100,7 +116,7 @@ export default {
                                             d="M30.73 5H23V4a2 2 0 0 0-2-2h-6.2A2 2 0 0 0 13 4v1H5a1 1 0 1 0 0 2h25.73a1 1 0 0 0 0-2"
                                             class="clr-i-solid clr-i-solid-path-2" />
                                         <path fill="none" d="M0 0h36v36H0z" />
-                                    </svg></Button>
+                                    </svg></v-btn>
                             </div>
                         </div>
                         <div class="w-full md:w-3/4 mt-10 md:mt-0 px-3 md:px-8 grid grid-cols-2 md:grid-cols-4 gap-8">
