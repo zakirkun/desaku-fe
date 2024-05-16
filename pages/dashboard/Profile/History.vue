@@ -1,3 +1,8 @@
+<script setup>
+useHead({
+    title: 'History',
+})
+</script>
 <script>
 export default {
     data() {

@@ -25,7 +25,7 @@ export default {
                 </span>
             </div>
         </div>
-        <div class="block my-0 sm:mt-0">
+        <div class="block my-8 sm:mt-0">
             <div class="text-2xl font-semibold">
                 <span>Sosial Media</span>
             </div>

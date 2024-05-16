@@ -1,3 +1,8 @@
+<script setup>
+useHead({
+    title: 'Visi Misi',
+})
+</script>
 <script>
 export default {
     data() {

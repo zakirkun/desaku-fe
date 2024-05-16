@@ -1,3 +1,8 @@
+<script setup>
+useHead({
+    title: 'Setting Location',
+})
+</script>
 <script>
 export default {
     data() {
@@ -21,6 +26,7 @@ export default {
         async loadData() {
             const data = await $fetch('http://127.0.0.1:8000/api/location')
             this.form = data
+            this.form.maps = `<iframe src="${data.maps}" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`
         },
         async updateLocation() {
             this.loading = true
@@ -74,7 +80,7 @@ export default {
                 <div class="mb-3 text-lg font-medium my-1 mt-6">Embed Maps Desa</div>
                 <div class="mt-5 w-full">
                     <v-text-field v-model="form.maps" variant="outlined" hide-details="auto"
-                        label="Koordinat Desa">
+                        label="Koordinat Desa" placeholder="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13775.689247611277!2d110.4623105457275!3d-7.719445311589754!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a5b002c9e90df%3A0x23b5967fa1ba0b53!2sKledoan%20joglo&#39;s%20Villa!5e0!3m2!1sen!2sid!4v1715591524593!5m2!1sen!2sid">
                         <template v-slot:prepend-inner>
                             <svg class="mr-1" xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.2em"
                                 viewBox="0 0 256 367">

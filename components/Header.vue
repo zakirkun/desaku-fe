@@ -103,24 +103,34 @@ export default {
 }
 </script>
 <template>
-    <v-navigation-drawer v-model="navMobile" location="right" temporary>
-        <div class="block px-3 py-4">
-            <div class="flex cursor-pointer border-b border-slate-200 pb-4" @click="$router.push('/')">
-                <img width="40"
-                    src="https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/images/logo_header.png"
-                    alt="">
-                <div class="ml-3 block font-semibold">
-                    <div>
-                        <span>Desa Kertamulya</span>
+    <div v-if="navMobile" class="bg-white h-screen fixed w-3/4 right-0 animatenav" style="z-index: 9999;">
+        <div class="block h-screen px-3 py-4">
+            <div class="flex justify-between cursor-pointer border-b border-slate-200 pb-4" @click="$router.push('/')">
+                <div class="flex">
+                    <img width="40"
+                        src="https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/images/logo_header.png"
+                        alt="">
+                    <div class="ml-3 block font-semibold">
+                        <div>
+                            <span>Desa Kertamulya</span>
+                        </div>
+                        <div class="text-sm">
+                            <span>Kabupaten Kulon Progo</span>
+                        </div>
                     </div>
-                    <div class="text-sm">
-                        <span>Kabupaten Kulon Progo</span>
-                    </div>
+                </div>
+                <div class="flex items-center" @click="navMobile = false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 28 28">
+                        <path fill="black"
+                            d="M20.48 3.512a11.966 11.966 0 0 0-8.486-3.514C5.366-.002-.007 5.371-.007 11.999c0 3.314 1.344 6.315 3.516 8.487A11.966 11.966 0 0 0 11.995 24c6.628 0 12.001-5.373 12.001-12.001c0-3.314-1.344-6.315-3.516-8.487m-1.542 15.427a9.789 9.789 0 0 1-6.943 2.876c-5.423 0-9.819-4.396-9.819-9.819a9.789 9.789 0 0 1 2.876-6.943a9.786 9.786 0 0 1 6.942-2.876c5.422 0 9.818 4.396 9.818 9.818a9.785 9.785 0 0 1-2.876 6.942z" />
+                        <path fill="black"
+                            d="m13.537 12l3.855-3.855a1.091 1.091 0 0 0-1.542-1.541l.001-.001l-3.855 3.855l-3.855-3.855A1.091 1.091 0 0 0 6.6 8.145l-.001-.001l3.855 3.855l-3.855 3.855a1.091 1.091 0 1 0 1.541 1.542l.001-.001l3.855-3.855l3.855 3.855a1.091 1.091 0 1 0 1.542-1.541l-.001-.001z" />
+                    </svg>
                 </div>
             </div>
             <v-list selectable v-model:selected="navSelected" :items="items"></v-list>
         </div>
-    </v-navigation-drawer>
+    </div>
     <div class="surface-0 flex justify-content-center">
         <div id="home" class="w-100 overflow-hidden justify-between">
             <div class="flex w-full px-[1rem] md:px-[12rem] bg-[#0088CC] py-2">
@@ -130,7 +140,7 @@ export default {
                             d="m16.556 12.906l-.455.453s-1.083 1.076-4.038-1.862s-1.872-4.014-1.872-4.014l.286-.286c.707-.702.774-1.83.157-2.654L9.374 2.86C8.61 1.84 7.135 1.705 6.26 2.575l-1.57 1.56c-.433.432-.723.99-.688 1.61c.09 1.587.808 5 4.812 8.982c4.247 4.222 8.232 4.39 9.861 4.238c.516-.048.964-.31 1.325-.67l1.42-1.412c.96-.953.69-2.588-.538-3.255l-1.91-1.039c-.806-.437-1.787-.309-2.417.317" />
                     </svg>
                     <div class="ml-2 text-white">
-                        {{  headerData.no_telp }}
+                        {{ headerData.no_telp }}
                     </div>
                 </div>
                 <div class="flex items-center">
@@ -139,7 +149,7 @@ export default {
                             d="m20 8l-8 5l-8-5V6l8 5l8-5m0-2H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2" />
                     </svg>
                     <div class="text-white ml-2">
-                        {{  headerData.email }}
+                        {{ headerData.email }}
                     </div>
                 </div>
             </div>
@@ -254,3 +264,8 @@ export default {
         </div>
     </div>
 </template>
+<style>
+.animatenav {
+    transition: all .2s ease;
+}
+</style>

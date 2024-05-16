@@ -1,6 +1,6 @@
 <script setup>
 useHead({
-    title: 'Homepage Image'
+    title: 'Setting Homepage Image'
 });
 </script>
 <script>

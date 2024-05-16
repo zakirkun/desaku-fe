@@ -1,3 +1,8 @@
+<script setup>
+useHead({
+    title: 'About Desa',
+})
+</script>
 <script>
 export default {
     data() {
