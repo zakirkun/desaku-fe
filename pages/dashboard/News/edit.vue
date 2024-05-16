@@ -26,21 +26,21 @@ export default {
     async mounted() {
         await this.loadCategories()
 
-        const data = await $fetch('http://api.desaku.muhichsan.com/api/news/' + this.$route.query.id)
+        const data = await $fetch('http://127.0.0.1:8000/api/news/' + this.$route.query.id)
         this.form = data
         this.data = data.content
         this.renderRichEditor = true
     },
     methods: {
         async loadCategories() {
-            const data = await $fetch('http://api.desaku.muhichsan.com/api/news-category/')
+            const data = await $fetch('http://127.0.0.1:8000/api/news-category/')
             this.categories = data.map(v => v.name)
         },
         async updateNews() {
             this.loading = true
             this.form.content = this.data
 
-            await $fetch('http://api.desaku.muhichsan.com/api/news/' + this.$route.query.id, {
+            await $fetch('http://127.0.0.1:8000/api/news/' + this.$route.query.id, {
                 method: "PATCH",
                 body: this.form
             })

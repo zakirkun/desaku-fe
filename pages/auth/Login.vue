@@ -29,7 +29,7 @@ export default {
             this.form.content = this.data
 
             try {
-                const resp = await $fetch('http://api.desaku.muhichsan.com/api/auth/login', {
+                const resp = await $fetch('http://127.0.0.1:8000/api/auth/login', {
                     method: "POST",
                     body: this.form
                 })

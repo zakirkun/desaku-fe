@@ -18,7 +18,7 @@ export default {
         async addImageHomepage() {
             this.form.image = await this.uploadImage()
 
-            await $fetch('http://api.desaku.muhichsan.com/api/image-gallery', {
+            await $fetch('http://127.0.0.1:8000/api/image-gallery', {
                 method: "POST",
                 body: this.form
             })
@@ -29,7 +29,7 @@ export default {
             const formData = new FormData();
             formData.append("image", this.form.image);
 
-            const resp = await $fetch('http://api.desaku.muhichsan.com/api/image', {
+            const resp = await $fetch('http://127.0.0.1:8000/api/image', {
                 body: formData,
                 method: "POST"
             })

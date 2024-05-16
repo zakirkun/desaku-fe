@@ -8,7 +8,7 @@ export default {
     },
     methods: {
         async loadData() {
-            this.data = await $fetch('http://api.desaku.muhichsan.com/api/footer')
+            this.data = await $fetch('http://127.0.0.1:8000/api/footer')
         },
     }
 }

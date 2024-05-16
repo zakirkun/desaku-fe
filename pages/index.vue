@@ -132,16 +132,16 @@ export default {
     },
     methods: {
         async loadImages() {
-            this.images = await $fetch('http://api.desaku.muhichsan.com/api/image-homepage')
+            this.images = await $fetch('http://127.0.0.1:8000/api/image-homepage')
         },
         async loadNews() {
-            this.news = await $fetch('http://api.desaku.muhichsan.com/api/news')
+            this.news = await $fetch('http://127.0.0.1:8000/api/news')
         },
         async loadVideos() {
-            this.videos = await $fetch('http://api.desaku.muhichsan.com/api/video-gallery')
+            this.videos = await $fetch('http://127.0.0.1:8000/api/video-gallery')
         },
         async loadLocation(){
-            const data = await $fetch('http://api.desaku.muhichsan.com/api/location')
+            const data = await $fetch('http://127.0.0.1:8000/api/location')
             this.location = data
         },
         backgroundImage(url){

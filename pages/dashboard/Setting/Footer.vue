@@ -31,13 +31,13 @@ export default {
     },
     methods: {
         async loadData() {
-            const data = await $fetch('http://api.desaku.muhichsan.com/api/footer')
+            const data = await $fetch('http://127.0.0.1:8000/api/footer')
             this.form = data
         },
         async updateLocation() {
             this.loading = true
 
-            await $fetch('http://api.desaku.muhichsan.com/api/footer', {
+            await $fetch('http://127.0.0.1:8000/api/footer', {
                 method: "PATCH",
                 body: this.form
             })

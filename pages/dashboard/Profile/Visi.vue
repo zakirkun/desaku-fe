@@ -7,13 +7,13 @@ export default {
         }
     },
     async mounted() {
-        const data = await $fetch('http://api.desaku.muhichsan.com/api/visi')
+        const data = await $fetch('http://127.0.0.1:8000/api/visi')
         this.data = data.tentang
         this.renderRichEditor = true
     },
     methods: {
         async updateContent() {
-            await $fetch('http://api.desaku.muhichsan.com/api/visi', {
+            await $fetch('http://127.0.0.1:8000/api/visi', {
                 method: "POST",
                 body: {
                     content: this.data

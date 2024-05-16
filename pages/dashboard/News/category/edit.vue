@@ -21,14 +21,14 @@ export default {
         }
     },  
     async mounted() {
-        const data = await $fetch('http://api.desaku.muhichsan.com/api/news-category/' + this.$route.query.id)
+        const data = await $fetch('http://127.0.0.1:8000/api/news-category/' + this.$route.query.id)
         this.form.name = data.name
     },
     methods: {
         async addNews() {
             this.form.content = this.data
 
-            await $fetch('http://api.desaku.muhichsan.com/api/news-category/' + this.$route.query.id, {
+            await $fetch('http://127.0.0.1:8000/api/news-category/' + this.$route.query.id, {
                 method: "PATCH",
                 body: this.form
             })

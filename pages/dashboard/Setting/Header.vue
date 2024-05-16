@@ -19,13 +19,13 @@ export default {
     },
     methods: {
         async loadData() {
-            const data = await $fetch('http://api.desaku.muhichsan.com/api/header')
+            const data = await $fetch('http://127.0.0.1:8000/api/header')
             this.form = data
         },
         async updateHeader() {
             this.loading = true
 
-            await $fetch('http://api.desaku.muhichsan.com/api/header', {
+            await $fetch('http://127.0.0.1:8000/api/header', {
                 method: "PATCH",
                 body: this.form
             })
