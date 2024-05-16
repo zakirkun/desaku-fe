@@ -7,7 +7,6 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 .nuxt
-.output/
 
 node_modules
 .DS_Store
