@@ -266,6 +266,6 @@ export default {
 </template>
 <style>
 .animatenav {
-    transition: all .2s ease;
+    transition: all .5s ease;
 }
 </style>

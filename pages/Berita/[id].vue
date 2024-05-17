@@ -31,7 +31,7 @@ export default {
     },
     methods: {
         async loadData() {
-            const data = await $fetch('http://127.0.0.1:8000/api/news')
+            const data = await $fetch('http://127.0.0.1:8000/api/news?limit=5')
             this.news = data
             this.latestNews = data
         },

@@ -23,6 +23,7 @@ import moment from 'moment';
 
 export default {
     data: () => ({
+        showContent: false,
         moment: moment,
         images: [],
         videos: [],
@@ -52,20 +53,7 @@ export default {
             }
         ],
         news: [],
-        announcementData: [
-            {
-                "title": "Vaksin Booster 2",
-                "url": "/mantab"
-            },
-            {
-                "title": "Vaksin Booster 2",
-                "url": "/mantab"
-            },
-            {
-                "title": "Vaksin Booster 2",
-                "url": "/mantab"
-            }
-        ],
+        announcement: [],
         acitivityData: [
             {
                 "title": "Sosialisasi Penanggulangan Covid 19",
@@ -129,6 +117,9 @@ export default {
         await this.loadNews()
         await this.loadVideos()
         await this.loadLocation()
+        await this.loadAnnouncements()
+
+        this.showContent = true
     },
     methods: {
         async loadImages() {
@@ -137,16 +128,19 @@ export default {
         async loadNews() {
             this.news = await $fetch('http://127.0.0.1:8000/api/news?limit=5')
         },
+        async loadAnnouncements() {
+            this.announcement = await $fetch('http://127.0.0.1:8000/api/announcement?limit=5')
+        },
         async loadVideos() {
             this.videos = await $fetch('http://127.0.0.1:8000/api/video-gallery')
         },
-        async loadLocation(){
+        async loadLocation() {
             const data = await $fetch('http://127.0.0.1:8000/api/location')
-            
+
             this.location = data
             this.location.maps = `<iframe src="${data.maps}" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`
         },
-        backgroundImage(url){
+        backgroundImage(url) {
             return `background-image: url(${url});`
         },
     }
@@ -154,6 +148,11 @@ export default {
 </script>
 
 <template>
+    <div class="backdrop-blur-sm bg-white/30 h-screen flex items-center justify-center w-screen fixed" style="z-index: 999999;" v-if="!showContent">
+        <img width="120"
+            src="https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/images/logo_header.png"
+            alt="">
+    </div>
     <v-layout>
         <Header />
         <div id="hero" class="flex flex-column overflow-hidden">
@@ -164,8 +163,7 @@ export default {
                 clickable: true,
             }" :modules="modules" class="w-full h-[500px] md:h-[600px]">
                 <swiper-slide v-for="image in images">
-                    <div class="w-screen h-full bg-cover relative bg-center"
-                        :style="backgroundImage(image.url)">
+                    <div class="w-screen h-full bg-cover relative bg-center" :style="backgroundImage(image.url)">
                         <div class="px-8 absolute bottom-8 left-[10rem] bg-black/40 w-fit text-white text-xl">
                             <span>{{ image.description }}</span>
                         </div>
@@ -189,16 +187,19 @@ export default {
                     <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
                         <span>Berita Terkini</span>
                     </div>
-                    <div class="flex mb-10 cursor-pointer" @click="$router.push('/berita/' + news.slug)" v-for="news in news">
+                    <div class="flex mb-10 cursor-pointer" @click="$router.push('/berita/' + news.slug)"
+                        v-for="news in news">
                         <div class="w-fit flex-none">
-                            <img class="w-[140px] sm:w-[200px] md:w-[250px] h-[110px] md:h-[140px]" :src="news.thumbnail" alt="">
+                            <img class="w-[140px] sm:w-[200px] md:w-[250px] h-[110px] md:h-[140px]"
+                                :src="news.thumbnail" alt="">
                         </div>
                         <div class="block pl-4">
                             <div class="text-md md:text-xl font-semibold">
                                 <span>{{ news.title }}</span>
                             </div>
                             <div class="text-md flex items-center font-medium mt-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="1.5em" height="1.5em" viewBox="0 0 24 24">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="1.5em" height="1.5em"
+                                    viewBox="0 0 24 24">
                                     <g fill="none">
                                         <rect width="18" height="15" x="3" y="6" stroke="#A3A3A3" rx="2" />
                                         <path fill="black"
@@ -226,7 +227,7 @@ export default {
                         <span>Pengumuman</span>
                     </div>
                     <div class="mb-6 bg-[#0088CC] font-semibold text-white px-2 py-3 rounded-md"
-                        v-for="announcement in announcementData">
+                        v-for="announcement in announcement">
                         <span>{{ announcement.title }}</span>
                     </div>
                     <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
@@ -257,8 +258,7 @@ export default {
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-3 mb-2 gap-6">
                         <div v-for="video in videos" class="h-full w-full md:w-[260px]">
-                            <iframe width="100%" height="160"
-                                :src="video.url"></iframe>
+                            <iframe width="100%" height="160" :src="video.url"></iframe>
                         </div>
                     </div>
                 </div>

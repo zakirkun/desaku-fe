@@ -19,7 +19,6 @@ export default {
             headers: [
                 { title: 'Title', align: 'start', sortable: false, key: 'title', width: "300px" },
                 { title: 'Description', align: 'start', sortable: false, key: 'description', width: "300px" },
-                { title: 'Thumbnail', align: 'start', key: 'thumbnail' },
                 { title: 'Content', align: 'end', key: 'content' },
                 { title: 'Actions', align: 'center', key: 'actions', sortable: false },
             ],
@@ -95,6 +94,9 @@ export default {
                 <v-data-table :headers="headers" :items="items" item-key="name">
                     <template v-slot:item.content="{ value }">
                         <span v-html="value.slice(0, 100)"></span>
+                    </template>
+                    <template v-slot:item.description="{ value }">
+                        <span>{{ value.slice(0,80) }}...</span>
                     </template>
                     <template v-slot:item.thumbnail="{ value }">
                         <v-img :src="value" width="100" height="100"></v-img>

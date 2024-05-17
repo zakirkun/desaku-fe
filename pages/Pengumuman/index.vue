@@ -43,11 +43,8 @@ export default {
                 <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
                     <span>Pengumuman</span>
                 </div>
-                <div @click="$router.push('/pengumuman/' + announcement.slug)" class="cursor-pointer flex mb-2 h-[200px]" v-for="announcement in announcements">
-                    <div class="w-[500px] h-full">
-                        <img class="rounded-md h-[140px] w-full object-cover" :src="announcement.thumbnail" alt="">
-                    </div>
-                    <div class="block pl-4">
+                <div @click="$router.push('/pengumuman/' + announcement.slug)" class="cursor-pointer flex mb-7" v-for="announcement in announcements">
+                    <div class="block">
                         <div class="text-xl font-semibold">
                             <span>{{ announcement.title }}</span>
                         </div>
@@ -76,16 +73,15 @@ export default {
                 <div class="text-[#0088CC] border-[#0088CC] border-b-2 mt-5 mb-6 text-2xl font-semibold py-3">
                     <span>Pengumuman Terbaru</span>
                 </div>
-                <div @click="$router.push('/pengumuman/' + announcement.slug)" class="cursor-pointer mb-2 px-2 py-3 flex" v-for="announcement in announcements">
-                    <div class="w-[140px] h-full">
-                        <img class="rounded-md" :src="announcement.thumbnail" alt="">
-                    </div>
-                    <div class="block ml-3">
-                        <div class="text-[#0088CC] text-md">
-                            <span>{{ announcement.title }}</span>
-                        </div>
-                        <div class="mt-1">
-                            <span>{{ moment(announcement.created_at).format("LL") }}</span>
+                <div class="mb-3">
+                    <div @click="$router.push('/pengumuman/' + announcement.slug)" class="cursor-pointer mb-1 px-2 py-3 flex" v-for="announcement in announcements">
+                        <div class="block">
+                            <div class="text-[#0088CC] text-md">
+                                <span>{{ announcement.title }}</span>
+                            </div>
+                            <div class="mt-1">
+                                <span>{{ moment(announcement.created_at).format("LL") }}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
