@@ -1,0 +1,1 @@
+import{Y as c,c as n,w as r,r as e,o as a,l as s}from"./entry.ad1a8891.js";const _={};function p(l,f){const o=e("router-view"),t=e("v-app");return a(),n(t,null,{default:r(()=>[s(o)]),_:1})}const i=c(_,[["render",p]]);export{i as default};
