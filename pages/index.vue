@@ -148,8 +148,9 @@ export default {
 </script>
 
 <template>
-    <div class="backdrop-blur-sm bg-white/30 h-screen flex items-center justify-center w-screen fixed" style="z-index: 999999;" v-if="!showContent">
-        <img width="120"
+    <div class="backdrop-blur-sm bg-white/30 h-screen flex items-center justify-center w-screen fixed"
+        style="z-index: 999999;" v-if="!showContent">
+        <img class="bounce" width="120"
             src="https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/images/logo_header.png"
             alt="">
     </div>
@@ -354,6 +355,24 @@ export default {
 
     to {
         opacity: 1;
+    }
+}
+
+.bounce {
+    animation: bounce .4s ease infinite alternate;
+}
+
+@keyframes bounce {
+    0% {
+        text-shadow:
+            0 5px 0 #ccc,
+            0 2px 3px rgba(0, 0, 0, 1);
+    }
+
+    100% {
+        transform: translateY(-20px);
+        text-shadow: 0 50px 0 black,
+            0 0px 20px rgba(0, 0, 0, .8);
     }
 }
 </style>
