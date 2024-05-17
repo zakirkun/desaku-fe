@@ -16,6 +16,12 @@ export default {
             openMediaLibrary: false
         }
     },
+    async mounted() {
+        const data = await $fetch('http://127.0.0.1:8000/api/image-gallery/' + this.$route.query.id)
+
+        this.form.description = data.description
+        this.form.image = data.url
+    },
     methods: {
         async addImageHomepage() {
             this.loading = true
@@ -76,7 +82,7 @@ export default {
                 </div>
                 <v-btn @click="addImageHomepage" color="#10B981" class="mt-5 text-white px-3 py-2">
                     <span v-if="!loading">Submit</span>
-                    <Loader v-else/>
+                    <Loader v-else />
                 </v-btn>
             </div>
         </div>

@@ -8,6 +8,7 @@ export default {
     data() {
         return {
             data: null,
+            loading: false,
             form: {
                 description: null,
                 video: null
@@ -16,11 +17,13 @@ export default {
     },
     methods: {
         async addVideo() {
+            this.loading = true
             await $fetch('http://127.0.0.1:8000/api/video-gallery', {
                 method: "POST",
                 body: this.form
             })
 
+            this.loading = false
             this.$router.push('/dashboard/galeri')
         },
     }
@@ -40,8 +43,10 @@ export default {
                     <v-text-field v-model="form.video" variant="outlined" hide-details="auto"
                         label="Video Galeri" placeholder="https://www.youtube.com/embed/DhcIUYHiJDI?si=m46FieubiMP8R7P4"></v-text-field>
                 </div>
-                <Button @click="addVideo" class="mt-5 bg-[#10B981] text-white px-3 py-2"
-                    label="Submit"></Button>
+                <v-btn @click="addVideo" class="mt-5 bg-[#10B981] text-white px-3 py-2">
+                    <span v-if="!loading">Submit</span>
+                    <Loading v-else/>
+                </v-btn>
             </div>
         </div>
     </div>

@@ -144,12 +144,23 @@ export default {
                     </template>
                     <template v-slot:item.actions="{ item }">
                         <div class="flex justify-center">
-                            <div class="cursor-pointer" @click="openModalRemoveNews(item.uuid)">
+                            <div @click="$router.push('/dashboard/gallery/image/edit?id=' + item.uuid)"
+                                class="cursor-pointer mx-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em"
                                     viewBox="0 0 24 24">
-                                    <path fill="#212121"
-                                        d="M6 7H5v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7zm4 12H8v-9h2zm6 0h-2v-9h2zm.618-15L15 2H9L7.382 4H3v2h18V4z" />
+                                    <path fill="#212121" fill-rule="evenodd"
+                                        d="M17.204 10.796L19 9c.545-.545.818-.818.964-1.112a2 2 0 0 0 0-1.776C19.818 5.818 19.545 5.545 19 5c-.545-.545-.818-.818-1.112-.964a2 2 0 0 0-1.776 0c-.294.146-.567.419-1.112.964l-1.819 1.819a10.9 10.9 0 0 0 4.023 3.977m-5.477-2.523l-6.87 6.87c-.426.426-.638.638-.778.9c-.14.26-.199.555-.316 1.145l-.616 3.077c-.066.332-.1.498-.005.593c.095.095.26.061.593-.005l3.077-.616c.59-.117.885-.176 1.146-.316c.26-.14.473-.352.898-.777l6.89-6.89a12.901 12.901 0 0 1-4.02-3.98"
+                                        clip-rule="evenodd" />
                                 </svg>
+                            </div>
+                            <div class="flex justify-center">
+                                <div class="cursor-pointer" @click="openModalRemoveNews(item.uuid)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em"
+                                        viewBox="0 0 24 24">
+                                        <path fill="#212121"
+                                            d="M6 7H5v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7zm4 12H8v-9h2zm6 0h-2v-9h2zm.618-15L15 2H9L7.382 4H3v2h18V4z" />
+                                    </svg>
+                                </div>
                             </div>
                         </div>
                     </template>
@@ -170,9 +181,8 @@ export default {
             <div class="card">
                 <v-data-table :headers="headersVideos" :items="videos" item-key="name">
                     <template v-slot:item.url="{ value }">
-                        <iframe class="my-6" width="260" height="165"
-                            :src="value"
-                            title="YouTube video player" frameborder="0"
+                        <iframe class="my-6" width="260" height="165" :src="value" title="YouTube video player"
+                            frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     </template>

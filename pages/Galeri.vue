@@ -14,9 +14,14 @@ onMounted(() => {
 definePageMeta({
     layout: 'app'
 });
+
+useHead({
+    title: "Galeri"
+})
 </script>
 
 <script>
+import { Title } from 'chart.js';
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
 import 'photoswipe/style.css';
 
@@ -69,12 +74,12 @@ export default {
                         d="M946.5 505L534.6 93.4a31.93 31.93 0 0 0-45.2 0L77.5 505c-12 12-18.8 28.3-18.8 45.3c0 35.3 28.7 64 64 64h43.4V908c0 17.7 14.3 32 32 32H448V716h112v224h265.9c17.7 0 32-14.3 32-32V614.3h43.4c17 0 33.3-6.7 45.3-18.8c24.9-25 24.9-65.5-.1-90.5" />
                 </svg>
             </div>
-            <div>
+            <div class="text-[#0088CC]">
                 <span>/ Galeri</span>
             </div>
         </div>
         <div class="pb-8">
-            <h1 class="mb-4 font-semibold text-[#0088CC] text-3xl">Galeri Video</h1>
+            <h1 class="mb-6 font-semibold text-[#0088CC] text-2xl">Galeri Video</h1>
             <div class="grid grid-cols-1 md:grid-cols-4 mb-2 gap-8">
                 <div v-for="video in videos" class="h-full">
                     <iframe class="w-full md:w-[260px]" height="160" :src="video.url"></iframe>
@@ -84,13 +89,13 @@ export default {
                 </div>
             </div>
         </div>
-        <div class="pb-8">
-            <h1 class="mb-4 font-semibold text-[#0088CC] text-3xl">Galeri Foto</h1>
+        <div class="pb-[6rem]">
+            <h1 class="mb-4 font-semibold text-[#0088CC] text-2xl">Galeri Foto</h1>
             <div id="gallery">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-[4rem] md:gap-8">
                     <a class="w-fit" v-for="(image, key) in images" :key="key" :href="image.url"
-                        data-pswp-width="500" data-pswp-height="400" target="_blank" rel="noreferrer">
-                        <img :src="image.url" alt="" />
+                        data-pswp-width="600" data-pswp-height="400" target="_blank" rel="noreferrer">
+                        <img class="w-full h-full" :src="image.url" alt="" />
                         <div class="mt-3 font-semibold text-lg">
                             <span>{{ image.description }}</span>
                         </div>
