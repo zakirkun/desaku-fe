@@ -1,7 +1,6 @@
 <script setup>
-import { onMounted, reactive } from 'vue';
+import { onMounted, reactive, watch } from 'vue';
 import { onClickOutside } from '@vueuse/core'
-
 
 const headerActive = ref(false)
 const windowWidth = ref(null)
@@ -109,7 +108,7 @@ export default {
 </script>
 <template>
     <Transition>
-        <div ref="target" v-if="navMobile" class="bg-white h-screen fixed w-3/4 right-0" style="z-index: 9999;">
+        <div ref="target" v-if="navMobile" class="bg-white shadow-lg h-screen fixed w-3/4 right-0" style="z-index: 9999;">
             <div class="block h-screen px-3 py-4">
                 <div class="flex justify-between cursor-pointer border-b border-slate-200 pb-4"
                     @click="$router.push('/')">
