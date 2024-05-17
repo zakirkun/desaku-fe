@@ -85,7 +85,7 @@ export default {
                 <div v-html="post.content"></div>
             </div>
             <div class="col-span-2">
-                <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
+                <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl md:mt-0 mt-4 font-semibold py-3">
                     <span>Kategori</span>
                 </div>
                 <div class="flex flex-wrap">
