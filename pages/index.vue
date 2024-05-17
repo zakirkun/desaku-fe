@@ -165,7 +165,8 @@ export default {
             }" :modules="modules" class="w-full h-[500px] md:h-[600px]">
                 <swiper-slide v-for="image in images">
                     <div class="w-screen h-full bg-cover relative bg-center" :style="backgroundImage(image.url)">
-                        <div class="px-8 absolute bottom-8 left-[10rem] bg-black/40 w-fit text-white text-xl">
+                        <div
+                            class="px-5 absolute bottom-8 description left-[50%] md:left-[10rem] bg-black/40 w-fit text-center text-white text-xl">
                             <span>{{ image.description }}</span>
                         </div>
                     </div>
@@ -340,6 +341,12 @@ export default {
 </template>
 
 <style>
+@media screen and (max-width: 600px) {
+    .description {
+        transform: translate(-50%, -50%);
+    }
+}
+
 .v-layout {
     display: block;
 }
