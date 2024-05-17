@@ -13,7 +13,7 @@ onMounted(async () => {
 })
 
 async function loadImages() {
-    images.value = await $fetch('http://127.0.0.1:8000/api/image')
+    images.value = await $fetch('http://api.desaku.muhichsan.com/api/image')
     imageSelected.value = images.value["1"]
 }
 
@@ -22,7 +22,7 @@ async function onDrop(files) {
     formData.append("image", files[0]);
 
     loading.value = true
-    const resp = await $fetch('http://127.0.0.1:8000/api/image', {
+    const resp = await $fetch('http://api.desaku.muhichsan.com/api/image', {
         body: formData,
         method: "POST"
     })
@@ -35,9 +35,9 @@ async function onDrop(files) {
 }
 
 async function removeImage() {
-    imageSelected.value = imageSelected.value.replace('http://127.0.0.1:8000/storage/', '')
+    imageSelected.value = imageSelected.value.replace('http://api.desaku.muhichsan.com/storage/', '')
 
-    await $fetch('http://127.0.0.1:8000/api/image/' + imageSelected.value, {
+    await $fetch('http://api.desaku.muhichsan.com/api/image/' + imageSelected.value, {
         method: "DELETE"
     })
 

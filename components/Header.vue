@@ -29,7 +29,7 @@ onMounted(async () => {
 })
 
 async function loadHeaderTop() {
-    const data = await $fetch('http://127.0.0.1:8000/api/header')
+    const data = await $fetch('http://api.desaku.muhichsan.com/api/header')
     headerData.no_telp = data.no_telp
     headerData.email = data.email
 }

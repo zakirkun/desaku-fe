@@ -39,7 +39,7 @@ export default {
             this.form.content = this.data
             this.form.slug = createSlug(this.form.title)
 
-            await $fetch('http://127.0.0.1:8000/api/announcement', {
+            await $fetch('http://api.desaku.muhichsan.com/api/announcement', {
                 method: "POST",
                 body: this.form
             })

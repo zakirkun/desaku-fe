@@ -24,13 +24,13 @@ export default {
     },
     methods: {
         async loadData() {
-            const data = await $fetch('http://127.0.0.1:8000/api/location')
+            const data = await $fetch('http://api.desaku.muhichsan.com/api/location')
             this.form = data
             this.form.maps = `<iframe src="${data.maps}" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`
         },
         async updateLocation() {
             this.loading = true
-            await $fetch('http://127.0.0.1:8000/api/location', {
+            await $fetch('http://api.desaku.muhichsan.com/api/location', {
                 method: "PATCH",
                 body: this.form
             })

@@ -20,7 +20,7 @@ export default {
     methods: {
         async addImageHomepage() {
             this.loading = true
-            await $fetch('http://127.0.0.1:8000/api/image-homepage', {
+            await $fetch('http://api.desaku.muhichsan.com/api/image-homepage', {
                 method: "POST",
                 body: this.form
             })

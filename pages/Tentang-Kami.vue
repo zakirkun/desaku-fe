@@ -13,7 +13,7 @@ export default {
         data: null
     }),
     async mounted() {
-        const data = await $fetch('http://127.0.0.1:8000/api/tentang')
+        const data = await $fetch('http://api.desaku.muhichsan.com/api/tentang')
         this.data = data.tentang
     },
 }
