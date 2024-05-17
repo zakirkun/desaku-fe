@@ -2,6 +2,10 @@
 definePageMeta({
     layout: 'app'
 });
+
+useHead({
+    title: 'Berita'
+});
 </script>
 
 <script>
@@ -14,13 +18,12 @@ export default {
         moment: moment
     }),
     async mounted() {
-        console.log(this.$config.public.API_BASE_URL)
         await this.loadData()
         await this.loadNewsCategory()
     },
     methods: {
         async loadData() {
-            const data = await $fetch('http://api.desaku.muhichsan.com/api/news')
+            const data = await $fetch('http://api.desaku.muhichsan.com/api/news?limit=5')
             this.news = data
             this.latestNews = data
         },
@@ -51,15 +54,15 @@ export default {
                 <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
                     <span>Berita</span>
                 </div>
-                <div @click="$router.push('/berita/' + news.slug)" class="cursor-pointer flex mb-2 h-[200px]" v-for="news in news">
-                    <div class="w-[240px] h-full flex-none">
+                <div @click="$router.push('/berita/' + news.slug)" class="cursor-pointer flex mb-[3.5rem] md:mb-2 h-[160px] md:h-[200px]" v-for="news in news">
+                    <div class="w-[160px] md:w-[240px] h-full flex-none">
                         <img class="rounded-md h-[160px] w-full object-cover" :src="news.thumbnail" alt="">
                     </div>
                     <div class="block pl-4">
-                        <div class="text-xl font-semibold">
+                        <div class="tetx-base md:text-xl font-semibold">
                             <span>{{ news.title }}</span>
                         </div>
-                        <div class="text-md flex items-center font-medium mt-2">
+                        <div class="text-sm md:text-base flex items-center font-medium mt-2">
                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="1.5em" height="1.5em" viewBox="0 0 24 24">
                                 <g fill="none">
                                     <rect width="18" height="15" x="3" y="6" stroke="#A3A3A3" rx="2" />
@@ -74,8 +77,9 @@ export default {
                             </svg>
                             <span>{{ moment(news.created_at).format("LL") }}</span>
                         </div>
-                        <div class="mt-3">
-                            <span>{{ news.description }}</span>
+                        <div class="mt-3 text-sm md:text-base">
+                            <span class="hidden md:flex">{{ news.description }}</span>
+                            <span class="flex md:hidden">{{ news.description.slice(0, 90) }}...</span>
                         </div>
                     </div>
                 </div>
