@@ -2,6 +2,10 @@
 definePageMeta({
     layout: 'app'
 });
+
+useHead({
+    title: "Tentang Desa"
+})
 </script>
 <script>
 export default {

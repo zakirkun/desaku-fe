@@ -2,6 +2,10 @@
 definePageMeta({
     layout: 'app'
 });
+
+useHead({
+    title: "Struktur Organisasi"
+})
 </script>
 
 <script>

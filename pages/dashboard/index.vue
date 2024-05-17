@@ -1,3 +1,8 @@
+<script setup>
+useHead({
+    title: 'Sejarah Desa',
+})
+</script>
 <script>
 export default {
     data() {
@@ -32,7 +37,6 @@ export default {
 </script>
 
 <template>
-    <div class="cursor-pointer" @click="openMediaLibrary = true">Halo</div>
     <div class="text-2xl font-semibold mb-2">Sejarah Desa</div>
     <div class="grid">
         <div class="col-12">
