@@ -228,8 +228,8 @@ export default {
                     <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
                         <span>Pengumuman</span>
                     </div>
-                    <div class="mb-6 bg-[#0088CC] font-semibold text-white px-2 py-3 rounded-md"
-                        v-for="announcement in announcement">
+                    <div class="mb-6 bg-[#0088CC] cursor-pointer font-semibold text-white px-2 py-3 rounded-md"
+                        v-for="announcement in announcement" @click="$router.push('/pengumuman/' + announcement.slug)">
                         <span>{{ announcement.title }}</span>
                     </div>
                     <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">

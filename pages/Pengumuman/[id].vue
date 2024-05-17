@@ -31,6 +31,7 @@ export default {
 }
 </script>
 <template>
+
     <Head>
         <Title>{{ post.title }}</Title>
     </Head>
@@ -38,17 +39,14 @@ export default {
     <!-- Content -->
     <div class="block px-[2rem] md:px-[14rem] bg-[#F8F9FC] pt-6">
         <div class="flex mb-6 items-center bg-[#f0f0f0] pa-3 rounded-lg">
-            <div class="mr-2">
+            <div class="flex items-center mr-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 1024 1024">
                     <path fill="#0088CC"
                         d="M946.5 505L534.6 93.4a31.93 31.93 0 0 0-45.2 0L77.5 505c-12 12-18.8 28.3-18.8 45.3c0 35.3 28.7 64 64 64h43.4V908c0 17.7 14.3 32 32 32H448V716h112v224h265.9c17.7 0 32-14.3 32-32V614.3h43.4c17 0 33.3-6.7 45.3-18.8c24.9-25 24.9-65.5-.1-90.5" />
                 </svg>
-            </div>
-            <div class="text-[#0088CC]">
-                <span @click="$router.push('/pengumuman')">/ Pengumuman</span>
-            </div>
-            <div class="ml-1">
-                <span>/ {{ post.title }}</span>
+                <div class="ml-2 text-[#0088CC]">
+                    <span class="cursor-pointer" @click="$router.push('/pengumuman')">/ &nbsp; Pengumuman &nbsp;</span><span>/ &nbsp;{{ post.title }}</span>
+                </div>
             </div>
         </div>
         <div class="pb-12 grid grid-cols-1 md:grid-cols-6 md:gap-x-12">
@@ -78,8 +76,8 @@ export default {
                 <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
                     <span>Pengumuman Terbaru</span>
                 </div>
-                <div @click="$router.push('/pengumuman/' + announcement.slug)"
-                    class="cursor-pointer mb-2 py-1 flex" v-for="announcement in announcements">
+                <div @click="$router.push('/pengumuman/' + announcement.slug)" class="cursor-pointer mb-2 py-1 flex"
+                    v-for="announcement in announcements">
                     <div class="block ml-0">
                         <div class="text-[#0088CC] text-md">
                             <span>{{ announcement.title }}</span>
