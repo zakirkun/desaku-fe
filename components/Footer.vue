@@ -14,7 +14,7 @@ export default {
 }
 </script>
 <template>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-x-[6rem] px-[2rem] md:px-[14rem] bg-[#0088CC] text-white py-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-x-[6rem] gap-y-8 px-[2rem] md:px-[14rem] bg-[#0088CC] text-white py-8">
         <div class="block">
             <div class="text-2xl font-semibold">
                 <span>Profil</span>
@@ -25,7 +25,7 @@ export default {
                 </span>
             </div>
         </div>
-        <div class="block my-8 sm:mt-0">
+        <div class="block">
             <div class="text-2xl font-semibold">
                 <span>Sosial Media</span>
             </div>
