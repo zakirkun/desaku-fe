@@ -161,7 +161,7 @@ export default {
                 </div>
             </div>
             <div :class="{ 'fixed top-0 z-50 animation': headerActive }"
-                class="py-4 px-[2rem] md:px-[12rem] w-full flex items-center bg-white/80 backdrop-blur-sm justify-between top-8">
+                class="py-4 px-[1rem] md:px-[12rem] w-full flex items-center bg-white/80 backdrop-blur-sm justify-between top-8">
                 <div class="flex cursor-pointer" @click="$router.push('/')">
                     <img width="40"
                         src="https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/images/logo_header.png"

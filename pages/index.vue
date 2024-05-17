@@ -121,7 +121,7 @@ export default {
 <template>
     <div class="backdrop-blur-sm bg-white/30 h-screen flex items-center justify-center w-screen fixed"
         style="z-index: 999999;" v-if="!showContent">
-        <img class="bounce mr-6" width="120"
+        <img class="bounce" width="120"
             src="https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/images/logo_header.png"
             alt="">
     </div>
@@ -138,7 +138,7 @@ export default {
                     <swiper-slide v-for="image in images">
                         <div class="w-screen h-full bg-cover relative bg-center" :style="backgroundImage(image.url)">
                             <div
-                                class="px-5 absolute bottom-8 description left-[50%] md:left-[10rem] bg-black/40 w-fit text-center text-white text-xl">
+                                class="px-5 absolute bottom-8 description left-[50%] md:left-[10rem] bg-black/40 w-fit text-center text-white text-base md:text-xl">
                                 <span>{{ image.description }}</span>
                             </div>
                         </div>
@@ -264,7 +264,7 @@ export default {
             <div class="block md:flex px-[2rem] md:px-[14rem] w-ful l bg-white py-12">
                 <div class="flex-none w-full md:w-[65%]" v-html="location.maps">
                 </div>
-                <div class="ml-6 flex-1 mt-10 md:mt-0">
+                <div class="ml-0 md:ml-6 flex-1 mt-10 md:mt-0">
                     <p class="text-black font-semibold text-2xl">Lokasi Desa</p>
                     <div class="block mt-3">
                         <div class="flex mb-2">

@@ -64,13 +64,13 @@ export default {
                         d="M946.5 505L534.6 93.4a31.93 31.93 0 0 0-45.2 0L77.5 505c-12 12-18.8 28.3-18.8 45.3c0 35.3 28.7 64 64 64h43.4V908c0 17.7 14.3 32 32 32H448V716h112v224h265.9c17.7 0 32-14.3 32-32V614.3h43.4c17 0 33.3-6.7 45.3-18.8c24.9-25 24.9-65.5-.1-90.5" />
                 </svg>
             </div>
-            <div>
+            <div class="text-sm md:text-lg">
                 <span>/ {{ post.title }}</span>
             </div>
         </div>
         <div class="pb-12 grid grid-cols-1 md:grid-cols-6 md:gap-x-12">
             <div class="block col-span-1 md:col-span-4">
-                <div class="text-[#0088CC] mb-2 text-3xl font-semibold py-3">
+                <div class="text-[#0088CC] text-xl mb-2 md:text-3xl font-semibold py-3">
                     <span>{{ post.title }}</span>
                 </div>
                 <div class="text-md flex items-center font-medium mt-2 mb-4">
@@ -89,10 +89,10 @@ export default {
                     </svg>
                     <span>{{ moment(post.created_at).format("LL") }}</span>
                 </div>
-                <div v-html="post.content"></div>
+                <div class="w-full" v-html="post.content"></div>
             </div>
             <div class="col-span-2">
-                <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl md:mt-0 mt-4 font-semibold py-3">
+                <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-xl md:text-2xl md:mt-0 mt-4 font-semibold py-3">
                     <span>Kategori</span>
                 </div>
                 <div class="flex flex-wrap">
@@ -101,10 +101,10 @@ export default {
                         <span>{{ category.name }}</span>
                     </div>
                 </div>
-                <div class="text-[#0088CC] border-[#0088CC] border-b-2 mt-5 mb-6 text-2xl font-semibold py-3">
+                <div class="text-[#0088CC] border-[#0088CC] border-b-2 mt-5 mb-6 text-xl md:text-2xl font-semibold py-3">
                     <span>Berita Terbaru</span>
                 </div>
-                <div class="mb-2 px-2 py-3 flex" v-for="news in latestNews">
+                <div @click="$router.push('/berita/' + news.slug)" class="mb-2 px-2 py-3 flex" v-for="news in latestNews">
                     <div class="w-[300px] h-full">
                         <img class="rounded-md" :src="news.thumbnail" alt="">
                     </div>

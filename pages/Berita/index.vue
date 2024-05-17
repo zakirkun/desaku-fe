@@ -54,9 +54,9 @@ export default {
                 <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
                     <span>Berita</span>
                 </div>
-                <div @click="$router.push('/berita/' + news.slug)" class="cursor-pointer flex mb-[3.5rem] md:mb-2 h-[160px] md:h-[200px]" v-for="news in news">
-                    <div class="w-[160px] md:w-[240px] h-full flex-none">
-                        <img class="rounded-md h-[160px] w-full object-cover" :src="news.thumbnail" alt="">
+                <div @click="$router.push('/berita/' + news.slug)" class="cursor-pointer flex mb-[0.5rem] md:mb-2 h-[160px] md:h-[200px]" v-for="news in news">
+                    <div class="w-[120px] md:w-[240px] h-full flex-none">
+                        <img class="rounded-md h-[120px] md:h-[160px] w-full object-cover" :src="news.thumbnail" alt="">
                     </div>
                     <div class="block pl-4">
                         <div class="tetx-base md:text-xl font-semibold">
@@ -79,7 +79,7 @@ export default {
                         </div>
                         <div class="mt-3 text-sm md:text-base">
                             <span class="hidden md:flex">{{ news.description }}</span>
-                            <span class="flex md:hidden">{{ news.description.slice(0, 90) }}...</span>
+                            <span class="flex md:hidden">{{ news.description.slice(0, 50) }}...</span>
                         </div>
                     </div>
                 </div>
@@ -98,7 +98,7 @@ export default {
                     <span>Berita Terbaru</span>
                 </div>
                 <div @click="$router.push('/berita/' + news.slug)" class="cursor-pointer mb-2 px-2 py-3 flex items-center" v-for="news in latestNews">
-                    <div class="w-[300px] h-full">
+                    <div class="w-[240px] h-full">
                         <img class="rounded-md" :src="news.thumbnail" alt="">
                     </div>
                     <div class="block ml-3">

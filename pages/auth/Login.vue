@@ -60,7 +60,7 @@ export default {
             <img class="w-[100px] mb-6 mx-auto"
                 src="https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/images/logo_header.png"
                 alt="App logo" />
-            <div class="bg-white w-[360px]"
+            <div class="bg-white px-8"
                 style="border-radius: 36px; padding: 0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%)">
                 <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius: 53px">
                     <div class="text-center mb-5 text-white">
@@ -100,8 +100,6 @@ export default {
             </div>
         </div>
     </div>
-
-    <AppConfig simple />
 </template>
 
 <style scoped>

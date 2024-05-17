@@ -16,7 +16,7 @@ export default {
 <template>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-x-[6rem] gap-y-8 px-[2rem] md:px-[14rem] bg-[#0088CC] text-white py-8">
         <div class="block">
-            <div class="text-2xl font-semibold">
+            <div class="text-xl md:text-2xl font-semibold">
                 <span>Profil</span>
             </div>
             <div class="text-sm mt-3 leading-6">
@@ -26,7 +26,7 @@ export default {
             </div>
         </div>
         <div class="block">
-            <div class="text-2xl font-semibold">
+            <div class="text-xl md:text-2xl font-semibold">
                 <span>Sosial Media</span>
             </div>
             <div class="text-sm mt-3">
@@ -40,7 +40,7 @@ export default {
             </div>
         </div>
         <div class="block">
-            <div class="text-2xl font-semibold">
+            <div class="text-xl md:text-2xl font-semibold">
                 <span>Alamat Lengkap</span>
             </div>
             <div class="text-sm mt-3">
