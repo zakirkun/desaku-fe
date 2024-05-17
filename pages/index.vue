@@ -232,7 +232,7 @@ export default {
                             <span>Galeri Foto & Video</span>
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-3 mb-2 gap-6">
-                            <div v-for="video in videos" class="h-full w-full md:w-[260px]">
+                            <div v-for="video in videos" class="h-full w-full">
                                 <iframe width="100%" height="160" :src="video.url"></iframe>
                             </div>
                         </div>

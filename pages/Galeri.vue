@@ -82,7 +82,7 @@ export default {
             <h1 class="mb-6 font-semibold text-[#0088CC] text-2xl">Galeri Video</h1>
             <div class="grid grid-cols-1 md:grid-cols-4 mb-2 gap-8">
                 <div v-for="video in videos" class="h-full">
-                    <iframe class="w-full md:w-[260px]" height="160" :src="video.url"></iframe>
+                    <iframe class="w-full" height="160" :src="video.url"></iframe>
                     <div class="mt-3 font-semibold text-lg">
                         <span>{{ video.description }}</span>
                     </div>

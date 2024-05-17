@@ -8,7 +8,8 @@ export default {
     data() {
         return {
             data: null,
-            renderRichEditor: false
+            renderRichEditor: false,
+            loading: false
         }
     },
     async mounted() {
@@ -18,12 +19,14 @@ export default {
     },
     methods: {
         async updateContent() {
+            this.loading = true
             await $fetch('http://api.desaku.muhichsan.com/api/tentang', {
                 method: "POST",
                 body: {
                     content: this.data
                 }
             })
+            this.loading = false
         },
         contentChange(v){
             this.data = v
@@ -39,7 +42,10 @@ export default {
             <div class="card">
                 <h3 class="mb-3 text-xl font-medium">Konten</h3>
                 <RichEditor v-if="renderRichEditor" :data="data" @contentChange="contentChange"/>
-                <Button @click="updateContent" class="mt-3 bg-[#10B981] text-white px-3 py-2" label="Submit"></Button>
+                <Button @click="updateContent" class="mt-3 bg-[#10B981] text-white px-3 py-2">
+                    <span v-if="!loading">Submit</span>
+                    <Loader v-else />
+                </Button>
             </div>
         </div>
     </div>

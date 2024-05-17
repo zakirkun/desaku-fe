@@ -14,6 +14,7 @@ export default {
         moment: moment
     }),
     async mounted() {
+        console.log(this.$config.public.API_BASE_URL)
         await this.loadData()
         await this.loadNewsCategory()
     },
@@ -51,7 +52,7 @@ export default {
                     <span>Berita</span>
                 </div>
                 <div @click="$router.push('/berita/' + news.slug)" class="cursor-pointer flex mb-2 h-[200px]" v-for="news in news">
-                    <div class="w-[500px] h-full">
+                    <div class="w-[240px] h-full flex-none">
                         <img class="rounded-md h-[160px] w-full object-cover" :src="news.thumbnail" alt="">
                     </div>
                     <div class="block pl-4">

@@ -119,7 +119,7 @@ export default {
                                     </svg></v-btn>
                             </div>
                         </div>
-                        <div class="w-full md:w-3/4 mt-10 md:mt-0 px-3 md:px-8 grid grid-cols-2 md:grid-cols-4 gap-8">
+                        <div class="w-full md:w-3/4 md:mt-0 mt-10 px-3 md:px-8 grid grid-cols-2 md:grid-cols-4 gap-8">
                             <div @click="imageSelected = image"
                                 :class="{ 'border-4 border-[#10B981]': imageSelected == image }"
                                 class="relative cursor-pointer h-[146px] items-center flex" v-for="image in images">

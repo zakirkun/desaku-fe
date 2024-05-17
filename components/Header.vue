@@ -14,7 +14,7 @@ const headerData = reactive({
 
 onMounted(async () => {
     window.addEventListener('scroll', function () {
-        if (window.scrollY > 20) {
+        if (window.scrollY > 40) {
             headerActive.value = true
         } else {
             headerActive.value = false

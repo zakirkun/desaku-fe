@@ -63,7 +63,7 @@ export default {
                         </svg>
                     </div>
                 </div>
-                <div class="mb-6 mt-6">
+                <div class="my-1">
                     <v-btn @click="openMediaLibrary = true" color="#10B981" class="flex-none text-white px-3 ">
                         <div class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 20 20">

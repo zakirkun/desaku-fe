@@ -8,12 +8,32 @@
     font-family: 'General Sans', sans-serif;
 }
 
+
 body {
-    font-family: 'General Sans', sans-serif;
+    font-family: 'General Sans', sans-serif !important;
 }
 
 ol {
     margin: 1.5rem 0;
     margin-left: 1rem;
     list-style-type: decimal;
+}
+
+a {
+    color: #0088CC;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+h2 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+h3 {
+    font-size: 28px;
+    font-weight: 500;
 }

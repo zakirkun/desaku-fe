@@ -11,6 +11,7 @@ export default {
         news: [],
         newsCategory: [],
         moment: moment,
+        showContent: false,
         post: {
             title: null,
             content: null,
@@ -28,6 +29,7 @@ export default {
 
         await this.loadData()
         await this.loadNewsCategory()
+        this.showContent = true
     },
     methods: {
         async loadData() {
@@ -43,7 +45,12 @@ export default {
 }
 </script>
 <template>
-
+    <div class="backdrop-blur-sm bg-white/30 h-screen flex items-center justify-center w-screen fixed"
+        style="z-index: 999999;" v-if="!showContent">
+        <img class="bounce mr-6" width="120"
+            src="https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/images/logo_header.png"
+            alt="">
+    </div>
     <Head>
         <Title>{{ post.title }}</Title>
     </Head>

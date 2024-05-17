@@ -14,6 +14,7 @@ export default {
             content: null
         },
         moment: moment,
+        showContent: false
     }),
     async mounted() {
         const data = await $fetch('http://api.desaku.muhichsan.com/api/announcement/slug/' + this.$route.params.id)
@@ -21,6 +22,7 @@ export default {
         this.post.content = data.content
 
         await this.loadData()
+        this.showContent = true
     },
     methods: {
         async loadData() {
@@ -31,6 +33,12 @@ export default {
 }
 </script>
 <template>
+    <div class="backdrop-blur-sm bg-white/30 h-screen flex items-center justify-center w-screen fixed"
+        style="z-index: 999999;" v-if="!showContent">
+        <img class="bounce mr-6" width="120"
+            src="https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/images/logo_header.png"
+            alt="">
+    </div>
 
     <Head>
         <Title>{{ post.title }}</Title>
@@ -45,7 +53,8 @@ export default {
                         d="M946.5 505L534.6 93.4a31.93 31.93 0 0 0-45.2 0L77.5 505c-12 12-18.8 28.3-18.8 45.3c0 35.3 28.7 64 64 64h43.4V908c0 17.7 14.3 32 32 32H448V716h112v224h265.9c17.7 0 32-14.3 32-32V614.3h43.4c17 0 33.3-6.7 45.3-18.8c24.9-25 24.9-65.5-.1-90.5" />
                 </svg>
                 <div class="ml-2 text-[#0088CC]">
-                    <span class="cursor-pointer" @click="$router.push('/pengumuman')">/ &nbsp; Pengumuman &nbsp;</span><span>/ &nbsp;{{ post.title }}</span>
+                    <span class="cursor-pointer" @click="$router.push('/pengumuman')">/ &nbsp; Pengumuman
+                        &nbsp;</span><span>/ &nbsp;{{ post.title }}</span>
                 </div>
             </div>
         </div>

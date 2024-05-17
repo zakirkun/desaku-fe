@@ -31,11 +31,11 @@ export default {
             </div>
             <div class="text-sm mt-3">
                 <ul class="ml-4 list-disc">
-                    <li v-if="data.instagram"><a target="_blank" :href="data.instagram">Instagram</a></li>
-                    <li v-if="data.facebook"><a target="_blank" :href="data.facebook">Facebook</a></li>
-                    <li v-if="data.whatsapp"><a target="_blank" :href="data.whatsapp">Whatsapp</a></li>
-                    <li v-if="data.twitter"><a target="_blank" :href="data.twitter">Twitter</a></li>
-                    <li v-if="data.youtube"><a target="_blank" :href="data.youtube">Channel Youtube</a></li>
+                    <li v-if="data.instagram"><a class="text-white" target="_blank" :href="data.instagram">Instagram</a></li>
+                    <li v-if="data.facebook"><a class="text-white" target="_blank" :href="data.facebook">Facebook</a></li>
+                    <li v-if="data.whatsapp"><a class="text-white" target="_blank" :href="data.whatsapp">Whatsapp</a></li>
+                    <li v-if="data.twitter"><a class="text-white" target="_blank" :href="data.twitter">Twitter</a></li>
+                    <li v-if="data.youtube"><a class="text-white" target="_blank" :href="data.youtube">Channel Youtube</a></li>
                 </ul>
             </div>
         </div>

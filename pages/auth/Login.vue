@@ -32,6 +32,8 @@ export default {
                     body: this.form
                 })
 
+                localStorage.setItem('token', resp.token)
+
                 this.$router.push('/dashboard/news')
             } catch (err) {
                 this.toastUnauthorized = true
@@ -88,7 +90,7 @@ export default {
                             </template>
                         </v-text-field>
 
-                        <v-btn @click="login" color="#10B981" text-color="white"
+                        <v-btn elevation="0" @click="login" color="#10B981" text-color="white"
                             class="w-full mt-8 bg-[#10B981] text-white px-3 py-2">
                             <span v-if="!loading">Login</span>
                             <Loader v-else />
@@ -114,6 +116,7 @@ export default {
 }
 
 ::v-deep .v-btn__content {
+    text-transform: capitalize;
     font-family: 'General Sans', sans-serif !important;
 }
 
