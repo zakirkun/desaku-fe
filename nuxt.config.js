@@ -11,7 +11,6 @@ export default defineNuxtConfig({
         head: {
             titleTemplate: '%s - Desaku',
             script: [
-                // Include jQuery from CDN
                 { src: 'https://cdn.tailwindcss.com', body: true }
             ],
             link: [
