@@ -42,6 +42,9 @@ export default {
 
             await $fetch('http://api.desaku.muhichsan.com/api/news/' + this.$route.query.id, {
                 method: "PATCH",
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token")
+                },
                 body: this.form
             })
 

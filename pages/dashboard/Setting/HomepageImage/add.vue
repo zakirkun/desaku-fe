@@ -22,6 +22,9 @@ export default {
             this.loading = true
             await $fetch('http://api.desaku.muhichsan.com/api/image-homepage', {
                 method: "POST",
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token")
+                },
                 body: this.form
             })
             this.loading = false

@@ -40,6 +40,9 @@ export default {
 
             await $fetch('http://api.desaku.muhichsan.com/api/announcement/' + this.$route.query.id, {
                 method: "PATCH",
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token")
+                },
                 body: this.form
             })
 
@@ -50,27 +53,6 @@ export default {
         contentChange(v) {
             this.data = v
         },
-        async uploadThumbnail() {
-            const formData = new FormData();
-            formData.append("image", this.form.thumbnail);
-
-            const resp = await $fetch('http://api.desaku.muhichsan.com/api/image', {
-                body: formData,
-                method: "POST"
-            })
-
-            return resp.data
-        },
-        async removeThumbnailNews() {
-            let thumbnail = this.form.thumbnail.replace('http://api.desaku.muhichsan.com/storage/', '')
-
-            await $fetch('http://api.desaku.muhichsan.com/api/image/' + thumbnail, {
-                method: "DELETE"
-            })
-
-            this.thumbnailDeleted = true
-            this.modalRemoveThumbnail = false
-        }
     }
 }
 </script>

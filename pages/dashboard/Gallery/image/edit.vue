@@ -26,6 +26,9 @@ export default {
         async addImageHomepage() {
             this.loading = true
             await $fetch('http://api.desaku.muhichsan.com/api/image-gallery', {
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token")
+                },
                 method: "POST",
                 body: this.form
             })

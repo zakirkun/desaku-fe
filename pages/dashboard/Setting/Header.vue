@@ -27,6 +27,9 @@ export default {
 
             await $fetch('http://api.desaku.muhichsan.com/api/header', {
                 method: "PATCH",
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token")
+                },
                 body: this.form
             })
 

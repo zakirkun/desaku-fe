@@ -20,6 +20,9 @@ export default {
             this.loading = true
             await $fetch('http://api.desaku.muhichsan.com/api/video-gallery', {
                 method: "POST",
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token")
+                },
                 body: this.form
             })
 

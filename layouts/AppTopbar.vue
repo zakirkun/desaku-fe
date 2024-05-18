@@ -1,6 +1,10 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { useLayout } from './composables/layout';
+import { useToken } from '~/stores/token'
+import { useRouter } from 'nuxt/app';
+
+const router = useRouter()
 const { onMenuToggle } = useLayout();
 const topbarMenuActive = ref(false);
 
@@ -9,6 +13,11 @@ const topbarMenuClasses = computed(() => {
         'layout-topbar-menu-mobile-active': topbarMenuActive.value
     };
 });
+
+function logout(){
+    useToken().token = null
+    router.push('/')
+}
 </script>
 
 <template>
@@ -25,7 +34,7 @@ const topbarMenuClasses = computed(() => {
         
         <v-menu>
             <template v-slot:activator="{ props }">
-                <Button v-bind="props" class="p-link layout-topbar-menu-button layout-topbar-button" @click="onTopBarMenuButton()">
+                <Button v-bind="props" class="p-link layout-topbar-menu-button layout-topbar-button">
                     <i class="pi pi-ellipsis-v"></i>
                 </Button>
             </template>
@@ -44,7 +53,7 @@ const topbarMenuClasses = computed(() => {
                         <div>admindesaku@gmail.com</div>
                     </div>
                 </div>
-                <div @click="$router.push('/admin-profile')" class="mb-2 mt-2 px-7 pt-3 hover:bg-[#EDEDED] flex pb-3">
+                <div @click="logout" class="mb-2 mt-2 px-7 pt-3 hover:bg-[#EDEDED] flex pb-3">
                     <div class="bg-[#FFF4F2] rounded-lg flex items-center justify-center w-[40px] h-[40px]">
                         <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
                             <path fill="none" stroke="#CB3A31" stroke-linecap="round" stroke-linejoin="round"

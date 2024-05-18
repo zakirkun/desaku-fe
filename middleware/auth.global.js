@@ -1,8 +1,9 @@
-export default defineNuxtRouteMiddleware((to, from) => { 
-    // console.log(localStorage.getItem('token'))   
-    // console.log(localStorage.getItem('token'))
-    // console.log(999)   
-    // if (to.path == '/login') {
-    //     return navigateTo('/')
-    // }
+import { useToken } from '~/stores/token'
+
+export default defineNuxtRouteMiddleware((to, from) => {
+    let token = useToken().token
+
+    if (to.path.includes('/dashboard') && !token) {
+        return navigateTo('/auth/login')
+    }
 })

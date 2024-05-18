@@ -25,11 +25,14 @@ export default {
         this.form.name = data.name
     },
     methods: {
-        async addNews() {
+        async updateNews() {
             this.form.content = this.data
 
             await $fetch('http://api.desaku.muhichsan.com/api/news-category/' + this.$route.query.id, {
                 method: "PATCH",
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token")
+                },
                 body: this.form
             })
 
@@ -51,7 +54,7 @@ export default {
                     <v-text-field v-model="form.name" variant="outlined" hide-details="auto"
                         label="Kategori Berita"></v-text-field>
                 </div>
-                <Button @click="addNews" class="mt-5 bg-[#10B981] text-white px-3 py-2" label="Ubah"></Button>
+                <Button @click="updateNews" class="mt-5 bg-[#10B981] text-white px-3 py-2" label="Ubah"></Button>
             </div>
         </div>
     </div>

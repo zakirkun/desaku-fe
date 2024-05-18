@@ -9,6 +9,8 @@ useHead({
 </script>
 
 <script>
+import { useToken } from '~/stores/token'
+
 export default {
     data() {
         return {
@@ -32,7 +34,7 @@ export default {
                     body: this.form
                 })
 
-                localStorage.setItem('token', resp.token)
+                useToken().token = resp.token
 
                 this.$router.push('/dashboard/news')
             } catch (err) {

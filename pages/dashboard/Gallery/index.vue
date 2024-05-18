@@ -55,6 +55,9 @@ export default {
         async removeImageGallery() {
             await $fetch('http://api.desaku.muhichsan.com/api/image-gallery/' + this.removedImageId, {
                 method: "DELETE",
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token")
+                },
             })
 
             this.modalRemoveImage = false
@@ -63,6 +66,9 @@ export default {
         async removeVideoGallery() {
             await $fetch('http://api.desaku.muhichsan.com/api/video-gallery/' + this.removedNewsCategoryId, {
                 method: "DELETE",
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token")
+                },
             })
 
             this.modalRemoveVideo = false

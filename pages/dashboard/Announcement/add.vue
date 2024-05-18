@@ -41,6 +41,9 @@ export default {
 
             await $fetch('http://api.desaku.muhichsan.com/api/announcement', {
                 method: "POST",
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token")
+                },
                 body: this.form
             })
 

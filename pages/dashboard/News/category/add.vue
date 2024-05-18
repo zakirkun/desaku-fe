@@ -33,6 +33,9 @@ export default {
 
             await $fetch('http://api.desaku.muhichsan.com/api/news-category', {
                 method: "POST",
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token")
+                },
                 body: this.form
             })
             this.loading = false

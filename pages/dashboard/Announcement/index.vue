@@ -40,6 +40,9 @@ export default {
         async removeNews() {
             await $fetch('http://api.desaku.muhichsan.com/api/news/' + this.removedNewsId, {
                 method: "DELETE",
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token")
+                },
             })
 
             this.modalRemoveNews = false
