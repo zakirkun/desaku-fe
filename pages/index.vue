@@ -109,7 +109,6 @@ export default {
             const data = await $fetch(this.$config.public.API_BASE_URL + '/api/location')
 
             this.location = data
-            this.location.maps = `<iframe src="${data.maps}" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`
         },
         backgroundImage(url) {
             return `background-image: url(${url});`
@@ -262,9 +261,9 @@ export default {
             </div>
             <!-- Maps Location -->
             <div class="block md:flex px-[2rem] md:px-[14rem] w-ful l bg-white py-12">
-                <div class="flex-none w-full md:w-[65%]" v-html="location.maps">
+                <div class="flex-none w-full md:w-[60%] mb-8 md:mb-2" v-html="location.maps">
                 </div>
-                <div class="ml-0 md:ml-6 flex-1 mt-10 md:mt-0">
+                <div class="ml-0 md:ml-6 md:pl-10 flex-1">
                     <p class="text-black font-semibold text-2xl">Lokasi Desa</p>
                     <div class="block mt-3">
                         <div class="flex mb-2">
