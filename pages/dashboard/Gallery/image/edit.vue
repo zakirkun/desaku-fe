@@ -33,7 +33,7 @@ export default {
             this.loading = true
             await $fetch(this.$config.public.API_BASE_URL + '/api/image-gallery', {
                 headers: {
-                    Authorization: "Bearer " + localStorage.getItem("token")
+                    Authorization: "Bearer " + useToken().token
                 },
                 method: "POST",
                 body: this.form

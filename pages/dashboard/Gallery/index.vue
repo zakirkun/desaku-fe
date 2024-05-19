@@ -57,7 +57,7 @@ export default {
             await $fetch(this.$config.public.API_BASE_URL + '/api/image-gallery/' + this.removedImageId, {
                 method: "DELETE",
                 headers: {
-                    Authorization: "Bearer " + localStorage.getItem("token")
+                    Authorization: "Bearer " + useToken().token
                 },
             })
 
@@ -68,7 +68,7 @@ export default {
             await $fetch(this.$config.public.API_BASE_URL + '/api/video-gallery/' + this.removedVideoId, {
                 method: "DELETE",
                 headers: {
-                    Authorization: "Bearer " + localStorage.getItem("token")
+                    Authorization: "Bearer " + useToken().token
                 },
             })
 

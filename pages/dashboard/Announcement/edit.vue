@@ -41,7 +41,7 @@ export default {
             await $fetch(this.$config.public.API_BASE_URL + '/api/announcement/' + this.$route.query.id, {
                 method: "PATCH",
                 headers: {
-                    Authorization: "Bearer " + localStorage.getItem("token")
+                    Authorization: "Bearer " + useToken().token
                 },
                 body: this.form
             })

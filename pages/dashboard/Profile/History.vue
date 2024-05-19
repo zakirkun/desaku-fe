@@ -23,7 +23,7 @@ export default {
             await $fetch(this.$config.public.API_BASE_URL + '/api/sejarah', {
                 method: "POST",
                 headers: {
-                    Authorization: "Bearer " + localStorage.getItem("token")
+                    Authorization: "Bearer " + useToken().token
                 },
                 body: {
                     content: this.data

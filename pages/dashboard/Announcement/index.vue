@@ -41,7 +41,7 @@ export default {
             await $fetch(this.$config.public.API_BASE_URL + '/api/news/' + this.removedNewsId, {
                 method: "DELETE",
                 headers: {
-                    Authorization: "Bearer " + localStorage.getItem("token")
+                    Authorization: "Bearer " + useToken().token
                 },
             })
 
