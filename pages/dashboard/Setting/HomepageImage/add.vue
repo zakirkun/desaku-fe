@@ -19,6 +19,12 @@ export default {
     },
     methods: {
         async addImageHomepage() {
+            const { valid } = await this.$refs.form.validate()
+
+            if (!valid) {
+                return
+            }
+
             this.loading = true
             await $fetch(this.$config.public.API_BASE_URL + '/api/image-homepage', {
                 method: "POST",
@@ -31,7 +37,7 @@ export default {
 
             this.$router.push('/dashboard/setting/homepageimage')
         },
-        onImageSelected(val){
+        onImageSelected(val) {
             this.form.image = val
         }
     }
@@ -45,10 +51,12 @@ export default {
         <div class="col-12">
             <div class="card">
                 <h3 class="text-2xl font-medium mb-5">Tambah Gambar Beranda</h3>
-                <div>
-                    <v-textarea rows="2" variant="outlined" label="Deskripsi Gambar" clearable
-                        v-model="form.description"></v-textarea>
-                </div>
+                <v-form ref="form">
+                    <div>
+                        <v-textarea :rules="[v => !!v || 'Field is required']" rows="2" variant="outlined"
+                            label="Deskripsi Gambar" clearable v-model="form.description"></v-textarea>
+                    </div>
+                </v-form>
                 <div class="relative w-fit" v-if="form.image">
                     <v-img :src="form.image" width="300" />
                     <div @click="form.image = null" class="absolute cursor-pointer right-3 top-3 z-50">
@@ -79,7 +87,7 @@ export default {
                     </v-btn>
                 </div>
                 <v-btn @click="addImageHomepage" color="#10B981" class="mt-5 text-white px-3 py-2">
-                    <span v-if="!loading">Submit</span>
+                    <span class="capitalize" v-if="!loading">Submit</span>
                     <Loader v-else />
                 </v-btn>
             </div>

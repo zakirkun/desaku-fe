@@ -78,7 +78,9 @@ export default {
         <div class="text-2xl font-semibold mb-2">Gambar Beranda</div>
         <div class="text-md font-semibold mb-2">
             <NuxtLink to="/dashboard/setting/homepageimage/add">
-                <Button class="mt-3 bg-[#10B981] text-white px-3 py-2 text-md" label="Tambah Gambar +"></Button>
+                <v-btn color="#10B981" class="mt-3 text-white px-3 py-2 text-md">
+                    <span class="capitalize">Tambah Gambar +</span>
+                </v-btn>
             </NuxtLink>
         </div>
     </div>
