@@ -46,6 +46,12 @@ export default {
             this.categories = data.map(v => v.name)
         },
         async addNews() {
+            const { valid } = await this.$refs.form.validate()
+
+            if (!valid) {
+                return
+            }
+
             this.loading = true
             this.form.content = this.data
             this.form.slug = createSlug(this.form.title)
@@ -64,7 +70,7 @@ export default {
         contentChange(v) {
             this.data = v
         },
-        onImageSelected(val){
+        onImageSelected(val) {
             this.form.thumbnail = val
         }
     }
@@ -108,20 +114,22 @@ export default {
         <div class="col-12">
             <div class="card">
                 <h3 class="text-2xl font-medium mb-5">Tambah Berita</h3>
-                <div class="grid grid-cols-3 gap-3">
-                    <div class="col-span-2">
-                        <v-text-field v-model="form.title" variant="outlined" hide-details="auto"
-                            label="Judul Berita"></v-text-field>
+                <v-form ref="form">
+                    <div class="grid grid-cols-3 gap-3">
+                        <div class="col-span-2">
+                            <v-text-field :rules="[v => !!v || 'Field is required']" v-model="form.title" variant="outlined" hide-details="auto"
+                                label="Judul Berita"></v-text-field>
+                        </div>
+                        <div>
+                            <v-select :rules="[v => !!v || 'Field is required']" item-value="name" item-text="name" v-model="form.category" label="Kategori Berita"
+                                :items="categories" variant="outlined"></v-select>
+                        </div>
                     </div>
-                    <div>
-                        <v-select item-value="name" item-text="name" v-model="form.category" label="Kategori Berita"
-                            :items="categories" variant="outlined"></v-select>
+                    <div class="mt-3">
+                        <v-textarea :rules="[v => !!v || 'Field is required']" rows="3" variant="outlined" label="Deskripsi Berita" clearable
+                            v-model="form.description"></v-textarea>
                     </div>
-                </div>
-                <div>
-                    <v-textarea rows="3" variant="outlined" label="Deskripsi Berita" clearable
-                        v-model="form.description"></v-textarea>
-                </div>
+                </v-form>
                 <div class="mb-3 text-lg font-medium my-1">Thumbnail Berita</div>
                 <div class="relative w-fit" v-if="thumbnailUploaded">
                     <v-img :src="form.thumbnail" width="300" />

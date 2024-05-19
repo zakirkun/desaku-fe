@@ -51,6 +51,9 @@ export default {
 
             await $fetch(this.$config.public.API_BASE_URL + '/api/news', {
                 method: "POST",
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token")
+                },
                 body: this.form
             })
         },
@@ -68,6 +71,9 @@ export default {
         async removeNews() {
             await $fetch(this.$config.public.API_BASE_URL + '/api/news/' + this.removedNewsId, {
                 method: "DELETE",
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token")
+                },
             })
 
             this.modalRemoveNews = false
@@ -76,6 +82,9 @@ export default {
         async removeNewsCategory() {
             await $fetch(this.$config.public.API_BASE_URL + '/api/news-category/' + this.removedNewsCategoryId, {
                 method: "DELETE",
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token")
+                },
             })
 
             this.modalRemoveNewsCategory = false

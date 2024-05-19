@@ -8,6 +8,7 @@ export default {
     data() {
         return {
             data: null,
+            loading: false,
             renderRichEditor: false,
             form: {
                 name: null,
@@ -19,13 +20,20 @@ export default {
             ],
             items: [],
         }
-    },  
+    },
     async mounted() {
         const data = await $fetch(this.$config.public.API_BASE_URL + '/api/news-category/' + this.$route.query.id)
         this.form.name = data.name
     },
     methods: {
-        async updateNews() {
+        async updateNewsCategory() {
+            const { valid } = await this.$refs.form.validate()
+
+            if (!valid) {
+                return
+            }
+
+            this.loading = true
             this.form.content = this.data
 
             await $fetch(this.$config.public.API_BASE_URL + '/api/news-category/' + this.$route.query.id, {
@@ -36,6 +44,7 @@ export default {
                 body: this.form
             })
 
+            this.loading = false
             this.$router.push('/dashboard/news')
         },
         contentChange(v) {
@@ -50,11 +59,16 @@ export default {
         <div class="col-12">
             <div class="card">
                 <h3 class="text-2xl font-medium mb-5">Ubah Kategori Berita</h3>
-                <div>
-                    <v-text-field v-model="form.name" variant="outlined" hide-details="auto"
-                        label="Kategori Berita"></v-text-field>
-                </div>
-                <Button @click="updateNews" class="mt-5 bg-[#10B981] text-white px-3 py-2" label="Ubah"></Button>
+                <v-form ref="form">
+                    <div>
+                        <v-text-field :rules="[v => !!v || 'Field is required']" v-model="form.name" variant="outlined"
+                            hide-details="auto" label="Kategori Berita"></v-text-field>
+                    </div>
+                </v-form>
+                <v-btn @click="updateNewsCategory" color="#10B981" class="mt-5 text-white px-3 py-2">
+                    <span class="capitalize" v-if="!loading">Submit</span>
+                    <Loader v-else />
+                </v-btn>
             </div>
         </div>
     </div>

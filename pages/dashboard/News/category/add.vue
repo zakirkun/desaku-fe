@@ -28,6 +28,12 @@ export default {
     },
     methods: {
         async addNews() {
+            const { valid } = await this.$refs.form.validate()
+
+            if (!valid) {
+                return
+            }
+
             this.loading = true
             this.form.content = this.data
 
@@ -38,8 +44,8 @@ export default {
                 },
                 body: this.form
             })
+            
             this.loading = false
-
             this.$router.push('/dashboard/news')
         },
         contentChange(v) {
@@ -54,10 +60,12 @@ export default {
         <div class="col-12">
             <div class="card">
                 <h3 class="text-2xl font-medium mb-5">Tambah Kategori Berita</h3>
-                <div>
-                    <v-text-field v-model="form.name" variant="outlined" hide-details="auto"
-                        label="Kategori Berita"></v-text-field>
-                </div>
+                <v-form ref="form">
+                    <div>
+                        <v-text-field :rules="[v => !!v || 'Field is required']" v-model="form.name" variant="outlined" hide-details="auto"
+                            label="Kategori Berita"></v-text-field>
+                    </div>
+                </v-form>
                 <v-btn @click="addNews" color="#10B981" class="mt-5 text-white px-3 py-2">
                     <span class="capitalize" v-if="!loading">Submit</span>
                     <Loader v-else />
