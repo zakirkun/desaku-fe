@@ -8,8 +8,9 @@ export default {
     data() {
         return {
             modalRemoveImage: false,
+            modalRemoveVideo: false,
             modalRemoveNewsCategory: false,
-            removedNewsId: null,
+            removedVideoId: null,
             data: null,
             renderRichEditor: false,
             form: {
@@ -49,8 +50,8 @@ export default {
             this.removedImageId = id
         },
         openModalRemoveVideos(id) {
-            this.modalRemoveNewsCategory = true
-            this.removedNewsCategoryId = id
+            this.modalRemoveVideo = true
+            this.removedVideoId = id
         },
         async removeImageGallery() {
             await $fetch(this.$config.public.API_BASE_URL + '/api/image-gallery/' + this.removedImageId, {
@@ -64,7 +65,7 @@ export default {
             await this.loadImage()
         },
         async removeVideoGallery() {
-            await $fetch(this.$config.public.API_BASE_URL + '/api/video-gallery/' + this.removedNewsCategoryId, {
+            await $fetch(this.$config.public.API_BASE_URL + '/api/video-gallery/' + this.removedVideoId, {
                 method: "DELETE",
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem("token")
@@ -113,7 +114,7 @@ export default {
         <v-card height="auto" style="scrollbar-width: none" class="pa-4 px-4">
             <div class="flex items-center justify-between">
                 <div class="text-xl font-semibold">
-                    <span>Hapus Kategori Berita?</span>
+                    <span>Hapus Video Galeri?</span>
                 </div>
                 <div @click="modalRemoveVideo = false" class="cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
