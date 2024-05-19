@@ -23,13 +23,15 @@ export default {
             toastUnauthorized: false
         }
     },
+    mounted() {
+    },
     methods: {
         async login() {
             this.loading = true
             this.form.content = this.data
 
             try {
-                const resp = await $fetch('http://api.desaku.muhichsan.com/api/auth/login', {
+                const resp = await $fetch(this.$config.public.API_BASE_URL + '/api/auth/login', {
                     method: "POST",
                     body: this.form
                 })
@@ -58,8 +60,8 @@ export default {
         </template>
     </v-snackbar>
     <div class="bg-[#F8FAFC] flex items-center justify-center min-h-screen min-w-screen overflow-hidden">
-        <div class="flex flex-column align-items-center justify-center">
-            <img class="w-[100px] mb-6 mx-auto"
+        <div class="md:w-[400px] flex flex-column align-items-center justify-center">
+            <img @click="$router.push('/')" class="cursor-pointer w-[100px] mb-6 mx-auto"
                 src="https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/images/logo_header.png"
                 alt="App logo" />
             <div class="bg-white px-8"

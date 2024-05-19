@@ -8,7 +8,7 @@ export default {
     },
     methods: {
         async loadData() {
-            this.data = await $fetch('http://api.desaku.muhichsan.com/api/footer')
+            this.data = await $fetch(this.$config.public.API_BASE_URL + '/api/footer')
         },
     }
 }

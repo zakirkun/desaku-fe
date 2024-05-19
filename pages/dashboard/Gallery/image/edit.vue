@@ -17,7 +17,7 @@ export default {
         }
     },
     async mounted() {
-        const data = await $fetch('http://api.desaku.muhichsan.com/api/image-gallery/' + this.$route.query.id)
+        const data = await $fetch(this.$config.public.API_BASE_URL + '/api/image-gallery/' + this.$route.query.id)
 
         this.form.description = data.description
         this.form.image = data.url
@@ -25,7 +25,7 @@ export default {
     methods: {
         async addImageHomepage() {
             this.loading = true
-            await $fetch('http://api.desaku.muhichsan.com/api/image-gallery', {
+            await $fetch(this.$config.public.API_BASE_URL + '/api/image-gallery', {
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem("token")
                 },

@@ -37,11 +37,11 @@ export default {
     },
     methods: {
         async loadImage() {
-            const data = await $fetch('http://api.desaku.muhichsan.com/api/image-gallery')
+            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/image-gallery')
             this.images = data
         },
         async loadVideo() {
-            const data = await $fetch('http://api.desaku.muhichsan.com/api/video-gallery')
+            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/video-gallery')
             this.videos = data
         },
         openModalRemoveImages(id) {
@@ -53,7 +53,7 @@ export default {
             this.removedNewsCategoryId = id
         },
         async removeImageGallery() {
-            await $fetch('http://api.desaku.muhichsan.com/api/image-gallery/' + this.removedImageId, {
+            await $fetch(this.$config.public.API_BASE_URL + '/api/image-gallery/' + this.removedImageId, {
                 method: "DELETE",
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem("token")
@@ -64,7 +64,7 @@ export default {
             await this.loadImage()
         },
         async removeVideoGallery() {
-            await $fetch('http://api.desaku.muhichsan.com/api/video-gallery/' + this.removedNewsCategoryId, {
+            await $fetch(this.$config.public.API_BASE_URL + '/api/video-gallery/' + this.removedNewsCategoryId, {
                 method: "DELETE",
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem("token")
@@ -137,7 +137,9 @@ export default {
         <div class="text-2xl font-semibold mb-2">Gambar Galeri</div>
         <div class="text-md font-semibold mb-2">
             <NuxtLink to="/dashboard/gallery/image/add">
-                <Button class="mt-3 bg-[#10B981] text-white px-3 py-2 text-md" label="Tambah Gambar +"></Button>
+                <v-btn color="#10B981" class="mt-3 text-white px-3 py-2">
+                    <span class="capitalize">Tambah Gambar +</span>
+                </v-btn>
             </NuxtLink>
         </div>
     </div>
@@ -178,7 +180,9 @@ export default {
         <div class="text-2xl font-semibold mb-2">Video</div>
         <div class="text-md font-semibold mb-2">
             <NuxtLink to="/dashboard/gallery/video/add">
-                <Button class="mt-3 bg-[#10B981] text-white px-3 py-2 text-md" label="Tambah Video +"></Button>
+                <v-btn color="#10B981" class="mt-3 text-white px-3 py-2">
+                    <span class="capitalize">Tambah Video +</span>
+                </v-btn>
             </NuxtLink>
         </div>
     </div>

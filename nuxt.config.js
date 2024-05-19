@@ -10,9 +10,6 @@ export default defineNuxtConfig({
     app: {
         head: {
             titleTemplate: '%s - Desaku',
-            // script: [
-            //     { src: 'https://cdn.tailwindcss.com', body: true }
-            // ],
             link: [
                 { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
                 {
@@ -36,7 +33,7 @@ export default defineNuxtConfig({
     },
     runtimeConfig: {
         public: {
-            API_BASE_URL: 'http://api.desaku.muhichsan.com',
+            API_BASE_URL: 'http://127.0.0.1:8000',
         },
     },
     css: ['vuetify/lib/styles/main.sass', 'primeicons/primeicons.css', 'primevue/resources/primevue.min.css', '@/assets/styles.scss', '@/assets/main.css']

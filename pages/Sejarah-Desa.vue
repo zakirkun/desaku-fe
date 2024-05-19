@@ -13,7 +13,7 @@ export default {
         data: null,
     }),
     async mounted() {
-        const data = await $fetch('http://api.desaku.muhichsan.com/api/sejarah')
+        const data = await $fetch(this.$config.public.API_BASE_URL + '/api/sejarah')
         this.data = data.sejarah
         console.log(data)
     },

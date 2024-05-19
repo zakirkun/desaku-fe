@@ -28,7 +28,7 @@ function logout(){
             <span>Dashboard</span>
         </router-link>
 
-        <button class="p-link layout-menu-button layout-topbar-button" @click="onMenuToggle()">
+        <button class="ml-2 p-link layout-menu-button layout-topbar-button" @click="onMenuToggle()">
             <i class="pi pi-bars"></i>
         </button>
         
@@ -40,7 +40,7 @@ function logout(){
             </template>
 
             <div class="block rounded-lg cursor-pointer mt-2 bg-white border border-slate-200 pt-2">
-                <div @click="$router.push('/admin-profile')"
+                <div @click="$router.push('/dashboard/admin-profile')"
                     class="mb-2 pt-4 flex px-7 border-b hover:bg-[#EDEDED] border-slate-300 pb-3">
                     <div class="bg-[#DBEAFE] rounded-lg flex items-center justify-center w-[40px] h-[40px]">
                         <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
@@ -78,7 +78,7 @@ function logout(){
                 </template>
 
                 <div class="block rounded-lg cursor-pointer mt-2 bg-white border border-slate-200 pt-2">
-                    <div @click="$router.push('/admin-profile')" class="mb-2 pt-4 flex px-7 border-b hover:bg-[#EDEDED] border-slate-300 pb-3">
+                    <div @click="$router.push('/dashboard/admin-profile')" class="mb-2 pt-4 flex px-7 border-b hover:bg-[#EDEDED] border-slate-300 pb-3">
                         <div class="bg-[#DBEAFE] rounded-lg flex items-center justify-center w-[40px] h-[40px]">
                             <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
                                 <path fill="#3267E3"
@@ -90,7 +90,7 @@ function logout(){
                             <div>admindesaku@gmail.com</div>
                         </div>
                     </div>
-                    <div @click="$router.push('/admin-profile')" class="mb-2 mt-2 px-7 pt-3 hover:bg-[#EDEDED] flex pb-3">
+                    <div @click="logout" class="mb-2 mt-2 px-7 pt-3 hover:bg-[#EDEDED] flex pb-3">
                         <div class="bg-[#FFF4F2] rounded-lg flex items-center justify-center w-[40px] h-[40px]">
                             <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
                                 <path fill="none" stroke="#CB3A31" stroke-linecap="round" stroke-linejoin="round"

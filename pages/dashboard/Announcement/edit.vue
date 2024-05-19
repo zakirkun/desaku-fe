@@ -23,7 +23,7 @@ export default {
         }
     },
     async mounted() {
-        const data = await $fetch('http://api.desaku.muhichsan.com/api/announcement/' + this.$route.query.id)
+        const data = await $fetch(this.$config.public.API_BASE_URL + '/api/announcement/' + this.$route.query.id)
         this.form = data
         this.data = data.content
         this.renderRichEditor = true
@@ -38,7 +38,7 @@ export default {
 
             this.form.content = this.data
 
-            await $fetch('http://api.desaku.muhichsan.com/api/announcement/' + this.$route.query.id, {
+            await $fetch(this.$config.public.API_BASE_URL + '/api/announcement/' + this.$route.query.id, {
                 method: "PATCH",
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem("token")

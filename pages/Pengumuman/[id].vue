@@ -17,7 +17,7 @@ export default {
         showContent: false
     }),
     async mounted() {
-        const data = await $fetch('http://api.desaku.muhichsan.com/api/announcement/slug/' + this.$route.params.id)
+        const data = await $fetch(this.$config.public.API_BASE_URL + '/api/announcement/slug/' + this.$route.params.id)
         this.post.title = data.title
         this.post.content = data.content
 
@@ -26,7 +26,7 @@ export default {
     },
     methods: {
         async loadData() {
-            const data = await $fetch('http://api.desaku.muhichsan.com/api/announcement')
+            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/announcement')
             this.announcements = data
         },
     }

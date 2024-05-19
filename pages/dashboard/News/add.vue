@@ -36,13 +36,13 @@ export default {
     async mounted() {
         await this.loadCategories()
 
-        const data = await $fetch('http://api.desaku.muhichsan.com/api/news')
+        const data = await $fetch(this.$config.public.API_BASE_URL + '/api/news')
         this.items = data
         this.renderRichEditor = true
     },
     methods: {
         async loadCategories() {
-            const data = await $fetch('http://api.desaku.muhichsan.com/api/news-category/')
+            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/news-category/')
             this.categories = data.map(v => v.name)
         },
         async addNews() {
@@ -50,7 +50,7 @@ export default {
             this.form.content = this.data
             this.form.slug = createSlug(this.form.title)
 
-            await $fetch('http://api.desaku.muhichsan.com/api/news', {
+            await $fetch(this.$config.public.API_BASE_URL + '/api/news', {
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem("token")
@@ -172,10 +172,10 @@ export default {
                 </div>
                 <div class="mb-3 text-lg font-medium my-1">Konten</div>
                 <RichEditor v-if="renderRichEditor" :data="data" @contentChange="contentChange" />
-                <Button @click="addNews" class="mt-5 bg-[#10B981] text-white px-3 py-2">
-                    <span v-if="!loading">Submit</span>
+                <v-btn @click="addNews" color="#10B981" class="mt-5 text-white px-3 py-2">
+                    <span class="capitalize" v-if="!loading">Submit</span>
                     <Loader v-else />
-                </Button>
+                </v-btn>
             </div>
         </div>
     </div>

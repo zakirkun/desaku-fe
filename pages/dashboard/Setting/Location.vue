@@ -24,13 +24,12 @@ export default {
     },
     methods: {
         async loadData() {
-            const data = await $fetch('http://api.desaku.muhichsan.com/api/location')
+            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/location')
             this.form = data
-            this.form.maps = `<iframe src="${data.maps}" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`
         },
         async updateLocation() {
             this.loading = true
-            await $fetch('http://api.desaku.muhichsan.com/api/location', {
+            await $fetch(this.$config.public.API_BASE_URL + '/api/location', {
                 method: "PATCH",
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem("token")
@@ -102,10 +101,10 @@ export default {
                     </v-text-field>
                     <div class="mx-auto mt-6 flex justify-center" v-html="form.maps" v-if="form.maps"></div>
                 </div>
-                <Button @click="updateLocation" class="mt-5 bg-[#10B981] text-white px-3 py-2">
-                    <span v-if="!loading">Update</span>
+                <v-btn @click="updateLocation" color="#10B981" class="mt-5 text-white px-3 py-2">
+                    <span class="capitalize" v-if="!loading">Update</span>
                     <Loader v-else/>
-                </Button>
+                </v-btn>
             </div>
         </div>
     </div>

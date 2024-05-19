@@ -94,19 +94,19 @@ export default {
     },
     methods: {
         async loadImages() {
-            this.images = await $fetch('http://api.desaku.muhichsan.com/api/image-homepage')
+            this.images = await $fetch(this.$config.public.API_BASE_URL + '/api/image-homepage')
         },
         async loadNews() {
-            this.news = await $fetch('http://api.desaku.muhichsan.com/api/news?limit=5')
+            this.news = await $fetch(this.$config.public.API_BASE_URL + '/api/news?limit=5')
         },
         async loadAnnouncements() {
-            this.announcement = await $fetch('http://api.desaku.muhichsan.com/api/announcement?limit=5')
+            this.announcement = await $fetch(this.$config.public.API_BASE_URL + '/api/announcement?limit=5')
         },
         async loadVideos() {
-            this.videos = await $fetch('http://api.desaku.muhichsan.com/api/video-gallery')
+            this.videos = await $fetch(this.$config.public.API_BASE_URL + '/api/video-gallery')
         },
         async loadLocation() {
-            const data = await $fetch('http://api.desaku.muhichsan.com/api/location')
+            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/location')
 
             this.location = data
             this.location.maps = `<iframe src="${data.maps}" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`

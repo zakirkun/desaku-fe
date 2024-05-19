@@ -23,12 +23,12 @@ export default {
     },
     methods: {
         async loadData() {
-            const data = await $fetch('http://api.desaku.muhichsan.com/api/news?limit=5')
+            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/news?limit=5')
             this.news = data
             this.latestNews = data
         },
         async loadNewsCategory() {
-            const data = await $fetch('http://api.desaku.muhichsan.com/api/news-category')
+            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/news-category')
             this.newsCategory = data
         },
     }

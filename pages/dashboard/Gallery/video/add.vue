@@ -18,7 +18,7 @@ export default {
     methods: {
         async addVideo() {
             this.loading = true
-            await $fetch('http://api.desaku.muhichsan.com/api/video-gallery', {
+            await $fetch(this.$config.public.API_BASE_URL + '/api/video-gallery', {
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem("token")
@@ -46,8 +46,8 @@ export default {
                     <v-text-field v-model="form.video" variant="outlined" hide-details="auto"
                         label="Video Galeri" placeholder="https://www.youtube.com/embed/DhcIUYHiJDI?si=m46FieubiMP8R7P4"></v-text-field>
                 </div>
-                <v-btn @click="addVideo" class="mt-5 bg-[#10B981] text-white px-3 py-2">
-                    <span v-if="!loading">Submit</span>
+                <v-btn @click="addVideo" color="#10B981" class="mt-5 text-white px-3 py-2">
+                    <span class="capitalize" v-if="!loading">Submit</span>
                     <Loading v-else/>
                 </v-btn>
             </div>

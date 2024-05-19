@@ -19,13 +19,13 @@ export default {
     },
     methods: {
         async loadData() {
-            const data = await $fetch('http://api.desaku.muhichsan.com/api/header')
+            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/header')
             this.form = data
         },
         async updateHeader() {
             this.loading = true
 
-            await $fetch('http://api.desaku.muhichsan.com/api/header', {
+            await $fetch(this.$config.public.API_BASE_URL + '/api/header', {
                 method: "PATCH",
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem("token")

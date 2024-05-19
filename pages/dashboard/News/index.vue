@@ -38,18 +38,18 @@ export default {
     },
     methods: {
         async loadData() {
-            const data = await $fetch('http://api.desaku.muhichsan.com/api/news')
+            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/news')
             this.items = data
             this.renderRichEditor = true
         },
         async loadNewsCategory() {
-            const data = await $fetch('http://api.desaku.muhichsan.com/api/news-category')
+            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/news-category')
             this.itemsCategory = data
         },
         async addNews() {
             this.form.content = this.data
 
-            await $fetch('http://api.desaku.muhichsan.com/api/news', {
+            await $fetch(this.$config.public.API_BASE_URL + '/api/news', {
                 method: "POST",
                 body: this.form
             })
@@ -66,7 +66,7 @@ export default {
             this.removedNewsCategoryId = id
         },
         async removeNews() {
-            await $fetch('http://api.desaku.muhichsan.com/api/news/' + this.removedNewsId, {
+            await $fetch(this.$config.public.API_BASE_URL + '/api/news/' + this.removedNewsId, {
                 method: "DELETE",
             })
 
@@ -74,7 +74,7 @@ export default {
             await this.loadData()
         },
         async removeNewsCategory() {
-            await $fetch('http://api.desaku.muhichsan.com/api/news-category/' + this.removedNewsCategoryId, {
+            await $fetch(this.$config.public.API_BASE_URL + '/api/news-category/' + this.removedNewsCategoryId, {
                 method: "DELETE",
             })
 
@@ -144,7 +144,9 @@ export default {
         <div class="text-2xl font-semibold mb-2">Berita</div>
         <div class="text-md font-semibold mb-2">
             <NuxtLink to="/dashboard/news/add">
-                <Button class="mt-3 bg-[#10B981] text-white px-3 py-2 text-md" label="Tambah Berita +"></Button>
+                <v-btn color="#10B981" class="mt-3 text-white px-3 py-2 text-md">
+                    <span class="capitalize">Tambah Berita +</span>
+                </v-btn>
             </NuxtLink>
         </div>
     </div>
@@ -193,7 +195,9 @@ export default {
         <div class="text-2xl font-semibold mb-2">Kategori Berita</div>
         <div class="text-md font-semibold mb-2">
             <NuxtLink to="/dashboard/news/category/add">
-                <Button class="mt-3 bg-[#10B981] text-white px-3 py-2 text-md" label="Tambah Kategori +"></Button>
+                <v-btn color="#10B981" class="mt-3 text-white px-3 py-2 text-md">
+                    <span class="capitalize">Tambah Kategori +</span>
+                </v-btn>
             </NuxtLink>
         </div>
     </div>

@@ -31,13 +31,13 @@ export default {
     },
     methods: {
         async loadData() {
-            const data = await $fetch('http://api.desaku.muhichsan.com/api/footer')
+            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/footer')
             this.form = data
         },
         async updateLocation() {
             this.loading = true
 
-            await $fetch('http://api.desaku.muhichsan.com/api/footer', {
+            await $fetch(this.$config.public.API_BASE_URL + '/api/footer', {
                 method: "PATCH",
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem("token")

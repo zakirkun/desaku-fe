@@ -14,7 +14,7 @@ export default {
         headerActive: false
     }),
     async mounted() {
-        const data = await $fetch('http://api.desaku.muhichsan.com/api/visi')
+        const data = await $fetch(this.$config.public.API_BASE_URL + '/api/visi')
         this.data = data.visi
 
         window.addEventListener('scroll', function () {

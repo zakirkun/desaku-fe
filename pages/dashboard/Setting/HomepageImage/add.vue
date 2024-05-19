@@ -20,7 +20,7 @@ export default {
     methods: {
         async addImageHomepage() {
             this.loading = true
-            await $fetch('http://api.desaku.muhichsan.com/api/image-homepage', {
+            await $fetch(this.$config.public.API_BASE_URL + '/api/image-homepage', {
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem("token")

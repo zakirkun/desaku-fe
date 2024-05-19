@@ -17,7 +17,7 @@ export default {
     },
     methods: {
         async loadData() {
-            const data = await $fetch('http://api.desaku.muhichsan.com/api/announcement')
+            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/announcement')
             this.announcements = data
         },
     }

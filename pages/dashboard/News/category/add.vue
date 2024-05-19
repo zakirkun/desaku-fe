@@ -22,7 +22,7 @@ export default {
         }
     },
     async mounted() {
-        const data = await $fetch('http://api.desaku.muhichsan.com/api/news-category')
+        const data = await $fetch(this.$config.public.API_BASE_URL + '/api/news-category')
         this.items = data
         this.renderRichEditor = true
     },
@@ -31,7 +31,7 @@ export default {
             this.loading = true
             this.form.content = this.data
 
-            await $fetch('http://api.desaku.muhichsan.com/api/news-category', {
+            await $fetch(this.$config.public.API_BASE_URL + '/api/news-category', {
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem("token")
@@ -58,10 +58,10 @@ export default {
                     <v-text-field v-model="form.name" variant="outlined" hide-details="auto"
                         label="Kategori Berita"></v-text-field>
                 </div>
-                <Button @click="addNews" class="mt-5 bg-[#10B981] text-white px-3 py-2">
-                    <span v-if="!loading">Submit</span>
+                <v-btn @click="addNews" color="#10B981" class="mt-5 text-white px-3 py-2">
+                    <span class="capitalize" v-if="!loading">Submit</span>
                     <Loader v-else />
-                </Button>
+                </v-btn>
             </div>
         </div>
     </div>
