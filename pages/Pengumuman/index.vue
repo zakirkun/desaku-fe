@@ -47,13 +47,15 @@ export default {
                 <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
                     <span>Pengumuman</span>
                 </div>
-                <div @click="$router.push('/pengumuman/' + announcement.slug)" class="cursor-pointer flex mb-7" v-for="announcement in announcements">
+                <div @click="$router.push('/pengumuman/' + announcement.slug)" class="cursor-pointer flex mb-7"
+                    v-for="announcement in announcements">
                     <div class="block">
                         <div class="text-xl font-semibold">
                             <span>{{ announcement.title }}</span>
                         </div>
                         <div class="text-md flex items-center font-medium mt-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="1.5em" height="1.5em" viewBox="0 0 24 24">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="1.5em" height="1.5em"
+                                viewBox="0 0 24 24">
                                 <g fill="none">
                                     <rect width="18" height="15" x="3" y="6" stroke="#A3A3A3" rx="2" />
                                     <path fill="black"
@@ -74,11 +76,12 @@ export default {
                 </div>
             </div>
             <div class="col-span-2">
-                <div class="text-[#0088CC] border-[#0088CC] border-b-2 mt-5 mb-6 text-2xl font-semibold py-3">
+                <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
                     <span>Pengumuman Terbaru</span>
                 </div>
                 <div class="mb-3">
-                    <div @click="$router.push('/pengumuman/' + announcement.slug)" class="cursor-pointer mb-1 px-2 py-3 flex" v-for="announcement in announcements">
+                    <div @click="$router.push('/pengumuman/' + announcement.slug)"
+                        class="cursor-pointer mb-1 py-3 flex" v-for="announcement in announcements">
                         <div class="block">
                             <div class="text-[#0088CC] text-md">
                                 <span>{{ announcement.title }}</span>

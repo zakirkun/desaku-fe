@@ -104,8 +104,9 @@ export default {
             </template>
             <template v-slot:actions>
                 <div class="w-full flex justify-end">
-                    <Button @click="removeImageGallery"
-                        class="w-fit mt-6 bg-[#FC4100] text-white px-3 mx-1 mb-2 py-2 text-md" label="Hapus"></Button>
+                    <v-btn @click="removeImageGallery" variant="flat" color="#FC4100" class="mt-6 text-white px-3 py-2  text-md">
+                        <span class="capitalize">Hapus</span>
+                    </v-btn>
                 </div>
             </template>
         </v-card>
@@ -129,8 +130,9 @@ export default {
                 <span>Video yang dihapus tidak bisa dikembalikan kembali.</span>
             </div>
             <template v-slot:actions>
-                <Button @click="removeVideoGallery" class="mt-6 bg-[#FC4100] text-white px-3 py-2 text-md"
-                    label="Hapus"></Button>
+                <v-btn @click="removeVideoGallery" variant="flat" color="#FC4100" class="mt-6 text-white px-3 py-2  text-md">
+                    <span class="capitalize">Hapus</span>
+                </v-btn>
             </template>
         </v-card>
     </v-dialog>

@@ -46,10 +46,10 @@ export default {
             <div class="card">
                 <h3 class="mb-3 text-xl font-medium">Konten</h3>
                 <RichEditor v-if="renderRichEditor" :data="data" @contentChange="contentChange" />
-                <Button @click="updateContent" class="mt-3 bg-[#10B981] text-white px-3 py-2">
-                    <span v-if="!loading">Submit</span>
+                <v-btn @click="updateContent" color="#10B981" class="mt-3 text-white px-3 py-2">
+                    <span class="capitalize" v-if="!loading">Submit</span>
                     <Loader v-else />
-                </Button>
+                </v-btn>
             </div>
         </div>
     </div>

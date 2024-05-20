@@ -54,16 +54,19 @@ export default {
                 <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
                     <span>Berita</span>
                 </div>
-                <div @click="$router.push('/berita/' + news.slug)" class="cursor-pointer flex mb-[0.5rem] md:mb-2 h-[160px] md:h-[200px]" v-for="news in news">
-                    <div class="w-[160px] h-full flex-none">
+                <div @click="$router.push('/berita/' + news.slug)"
+                    class="cursor-pointer flex mb-[0.5rem] md:mb-2 h-[160px] md:h-[200px]" v-for="news in news">
+                    <div class="w-[160px] md:w-[240px] h-full flex-none">
                         <img class="rounded-md h-[120px] md:h-[160px] w-full object-cover" :src="news.thumbnail" alt="">
                     </div>
                     <div class="block pl-4">
                         <div class="tetx-base md:text-xl font-semibold">
-                            <span>{{ news.title }}</span>
+                            <span class="hidden md:flex">{{ news.title }}</span>
+                            <span class="flex md:hidden">{{ news.title.slice(0, 40) }}...</span>
                         </div>
                         <div class="text-sm md:text-base flex items-center font-medium mt-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="1.5em" height="1.5em" viewBox="0 0 24 24">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="1.5em" height="1.5em"
+                                viewBox="0 0 24 24">
                                 <g fill="none">
                                     <rect width="18" height="15" x="3" y="6" stroke="#A3A3A3" rx="2" />
                                     <path fill="black"
@@ -97,16 +100,19 @@ export default {
                 <div class="text-[#0088CC] border-[#0088CC] border-b-2 mt-5 mb-6 text-2xl font-semibold py-3">
                     <span>Berita Terbaru</span>
                 </div>
-                <div @click="$router.push('/berita/' + news.slug)" class="cursor-pointer mb-2 px-2 py-3 flex items-center" v-for="news in latestNews">
-                    <div class="w-[240px] h-full">
-                        <img class="rounded-md" :src="news.thumbnail" alt="">
-                    </div>
-                    <div class="block ml-3">
-                        <div class="text-[#0088CC] text-base font-medium">
-                            <span>{{ news.title }}</span>
+                <div class="mb-10">
+                    <div @click="$router.push('/berita/' + news.slug)"
+                        class="cursor-pointer mb-2 px-2 py-3 flex items-center" v-for="news in latestNews">
+                        <div class="w-[240px] h-full">
+                            <img class="rounded-md" :src="news.thumbnail" alt="">
                         </div>
-                        <div class="mt-1">
-                            <span>{{ moment(news.created_at).format("LL") }}</span>
+                        <div class="block ml-3">
+                            <div class="text-[#0088CC] text-base font-medium">
+                                <span>{{ news.title }}</span>
+                            </div>
+                            <div class="mt-1">
+                                <span>{{ moment(news.created_at).format("LL") }}</span>
+                            </div>
                         </div>
                     </div>
                 </div>

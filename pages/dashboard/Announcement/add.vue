@@ -82,8 +82,9 @@ export default {
             </template>
             <template v-slot:actions>
                 <div class="w-full flex justify-end">
-                    <Button @click="removeThumbnailNews"
-                        class="w-fit mt-6 bg-[#FC4100] text-white px-3 mx-1 mb-2 py-2 text-md" label="Hapus"></Button>
+                    <v-btn @click="removeThumbnailNews" color="#FC4100" class="mt-3 text-white px-3 py-2">
+                        <span class="capitalize">Hapus</span>
+                    </v-btn>
                 </div>
             </template>
         </v-card>

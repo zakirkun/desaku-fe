@@ -77,8 +77,10 @@ export default {
             </template>
             <template v-slot:actions>
                 <div class="w-full flex justify-end">
-                    <Button @click="removeNews" class="w-fit mt-6 bg-[#FC4100] text-white px-3 mx-1 mb-2 py-2 text-md"
-                        label="Hapus"></Button>
+                    <v-btn variant="flat" @click="removeNews" color="#FC4100"
+                        class="w-fit mt-6 text-white px-3 mx-1 mb-2 py-2 text-md">
+                        <span class="capitalize">Hapus</span>
+                    </v-btn>
                 </div>
             </template>
         </v-card>
@@ -101,7 +103,7 @@ export default {
                         <span v-html="value.slice(0, 100)"></span>
                     </template>
                     <template v-slot:item.description="{ value }">
-                        <span>{{ value.slice(0,80) }}...</span>
+                        <span>{{ value.slice(0, 80) }}...</span>
                     </template>
                     <template v-slot:item.thumbnail="{ value }">
                         <v-img :src="value" width="100" height="100"></v-img>

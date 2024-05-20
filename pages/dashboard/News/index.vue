@@ -119,8 +119,10 @@ export default {
             </template>
             <template v-slot:actions>
                 <div class="w-full flex justify-end">
-                    <Button @click="removeNews" class="w-fit mt-6 bg-[#FC4100] text-white px-3 mx-1 mb-2 py-2 text-md"
-                        label="Hapus"></Button>
+                    <v-btn @click="removeNews" variant="flat" color="#FC4100"
+                        class="mt-6 text-white px-3 py-2  text-md">
+                        <span class="capitalize">Hapus</span>
+                    </v-btn>
                 </div>
             </template>
         </v-card>
@@ -144,8 +146,10 @@ export default {
                 <span>Kategori Berita yang dihapus tidak bisa dikembalikan kembali.</span>
             </div>
             <template v-slot:actions>
-                <Button @click="removeNewsCategory" class="mt-6 bg-[#FC4100] text-white px-3 py-2 text-md"
-                    label="Hapus"></Button>
+                <v-btn @click="removeNewsCategory" variant="flat" color="#FC4100"
+                    class="mt-6 text-white px-3 py-2  text-md">
+                    <span class="capitalize">Hapus</span>
+                </v-btn>
             </template>
         </v-card>
     </v-dialog>
