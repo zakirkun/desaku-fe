@@ -69,7 +69,7 @@ export default {
                 src="https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/images/logo_header.png"
                 alt="App logo" />
             <div class="bg-white px-8"
-                style="border-radius: 36px; padding: 0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%)">
+                style="border-radius: 36px; padding: 0.3rem; background: linear-gradient(180deg, #0088CC 10%, rgba(33, 150, 243, 0) 30%)">
                 <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius: 53px">
                     <div class="text-center mb-5 text-white">
                         <div class="text-900 text-3xl font-medium mb-3">Welcome Back!</div>
@@ -102,8 +102,8 @@ export default {
                                 </template>
                             </v-text-field>
 
-                            <v-btn elevation="0" @click="login" color="#10B981" text-color="white"
-                                class="w-full mt-8 bg-[#10B981] text-white px-3 py-2">
+                            <v-btn elevation="0" @click="login" color="#0088CC" text-color="white"
+                                class="w-full mt-8 text-white px-3 py-2">
                                 <span v-if="!loading">Login</span>
                                 <Loader v-else />
                             </v-btn>

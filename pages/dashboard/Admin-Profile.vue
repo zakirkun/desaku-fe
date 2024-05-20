@@ -8,7 +8,7 @@ export default {
     data() {
         return {
             form: {
-                username: null,
+                name: null,
                 email: null,
                 password: null,
             },
@@ -26,12 +26,14 @@ export default {
                     Authorization: "Bearer " + useToken().token
                 },
             })
-            this.form = data
+            this.form.name = data.name
+            this.form.email = data.email
+            this.form.password = data.password
         },
         async updateAdmin() {
             this.loading = true
 
-            await $fetch(this.$config.public.API_BASE_URL + '/api/admin', {
+            await $fetch(this.$config.public.API_BASE_URL + '/api/admin-profile/', {
                 method: "PATCH",
                 headers: {
                     Authorization: "Bearer " + useToken().token
@@ -52,8 +54,8 @@ export default {
     <div class="grid mb-6">
         <div class="col-12">
             <div class="card">
-                <v-text-field v-model="form.username" variant="outlined" hide-details="auto"
-                    label="Username"></v-text-field>
+                <v-text-field v-model="form.name" variant="outlined" hide-details="auto"
+                    label="Name"></v-text-field>
                 <v-text-field class="my-5" v-model="form.email" variant="outlined" hide-details="auto"
                     label="Email*"></v-text-field>
                 <v-text-field :type="showPassword ? 'text' : 'password'" v-model="form.password" dense

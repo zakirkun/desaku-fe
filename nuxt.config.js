@@ -21,7 +21,7 @@ export default defineNuxtConfig({
             ]
         }
     },
-    modules: ['nuxt-primevue', '@pinia/nuxt', '@pinia-plugin-persistedstate/nuxt'],
+    modules: ['@pinia/nuxt', '@pinia-plugin-persistedstate/nuxt'],
     primevue: {
         options: { ripple: true },
         components: {

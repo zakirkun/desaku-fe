@@ -14,9 +14,32 @@ const topbarMenuClasses = computed(() => {
     };
 });
 
-function logout(){
+function logout() {
     useToken().token = null
     router.push('/')
+}
+</script>
+<script>
+export default {
+    data(){
+        return {
+            data: {}
+        }
+    },
+    async mounted() {
+        await this.loadData()
+    },
+    methods: {
+        async loadData() {
+            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/admin', {
+                headers: {
+                    Authorization: "Bearer " + useToken().token
+                },
+            })
+            this.data.name = data.name
+            this.data.email = data.email
+        },
+    }
 }
 </script>
 
@@ -31,7 +54,7 @@ function logout(){
         <button class="ml-2 p-link layout-menu-button layout-topbar-button" @click="onMenuToggle()">
             <i class="pi pi-bars"></i>
         </button>
-        
+
         <v-menu>
             <template v-slot:activator="{ props }">
                 <Button v-bind="props" class="p-link layout-topbar-menu-button layout-topbar-button">
@@ -49,8 +72,8 @@ function logout(){
                         </svg>
                     </div>
                     <div class="block ml-3">
-                        <div class="font-semibold">Admin Desaku</div>
-                        <div>admindesaku@gmail.com</div>
+                        <div class="font-semibold">{{ data.name }}</div>
+                        <div>{{ data.email }}</div>
                     </div>
                 </div>
                 <div @click="logout" class="mb-2 mt-2 px-7 pt-3 hover:bg-[#EDEDED] flex pb-3">
@@ -78,7 +101,8 @@ function logout(){
                 </template>
 
                 <div class="block rounded-lg cursor-pointer mt-2 bg-white border border-slate-200 pt-2">
-                    <div @click="$router.push('/dashboard/admin-profile')" class="mb-2 pt-4 flex px-7 border-b hover:bg-[#EDEDED] border-slate-300 pb-3">
+                    <div @click="$router.push('/dashboard/admin-profile')"
+                        class="mb-2 pt-4 flex px-7 border-b hover:bg-[#EDEDED] border-slate-300 pb-3">
                         <div class="bg-[#DBEAFE] rounded-lg flex items-center justify-center w-[40px] h-[40px]">
                             <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
                                 <path fill="#3267E3"
@@ -86,8 +110,8 @@ function logout(){
                             </svg>
                         </div>
                         <div class="block ml-3">
-                            <div class="font-semibold">Admin Desaku</div>
-                            <div>admindesaku@gmail.com</div>
+                            <div class="font-semibold">{{ data.name }}</div>
+                            <div>{{ data.email }}</div>
                         </div>
                     </div>
                     <div @click="logout" class="mb-2 mt-2 px-7 pt-3 hover:bg-[#EDEDED] flex pb-3">
