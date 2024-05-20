@@ -2,6 +2,10 @@
 definePageMeta({
     layout: 'app'
 });
+
+useHead({
+    title: "Pengumuman"
+})
 </script>
 
 <script>

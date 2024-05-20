@@ -55,7 +55,7 @@ export default {
                     <span>Berita</span>
                 </div>
                 <div @click="$router.push('/berita/' + news.slug)" class="cursor-pointer flex mb-[0.5rem] md:mb-2 h-[160px] md:h-[200px]" v-for="news in news">
-                    <div class="w-[120px] md:w-[240px] h-full flex-none">
+                    <div class="w-[160px] h-full flex-none">
                         <img class="rounded-md h-[120px] md:h-[160px] w-full object-cover" :src="news.thumbnail" alt="">
                     </div>
                     <div class="block pl-4">
@@ -77,7 +77,7 @@ export default {
                             </svg>
                             <span>{{ moment(news.created_at).format("LL") }}</span>
                         </div>
-                        <div class="mt-3 text-sm md:text-base">
+                        <div class="mt-2 text-sm md:text-base">
                             <span class="hidden md:flex">{{ news.description }}</span>
                             <span class="flex md:hidden">{{ news.description.slice(0, 50) }}...</span>
                         </div>
@@ -102,7 +102,7 @@ export default {
                         <img class="rounded-md" :src="news.thumbnail" alt="">
                     </div>
                     <div class="block ml-3">
-                        <div class="text-[#0088CC] text-md">
+                        <div class="text-[#0088CC] text-base font-medium">
                             <span>{{ news.title }}</span>
                         </div>
                         <div class="mt-1">

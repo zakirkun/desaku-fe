@@ -4,6 +4,8 @@ useHead({
 })
 </script>
 <script>
+import { createSlug } from "@/helpers/createSlug" 
+
 export default {
     data() {
         return {
@@ -12,13 +14,8 @@ export default {
             renderRichEditor: false,
             form: {
                 name: null,
+                slug: null,
             },
-            headers: [
-                { title: 'Title', align: 'start', sortable: false, key: 'title' },
-                { title: 'Category', align: 'start', key: 'category' },
-                { title: 'Content', align: 'end', key: 'content' },
-            ],
-            items: [],
         }
     },
     async mounted() {
@@ -35,7 +32,7 @@ export default {
             }
 
             this.loading = true
-            this.form.content = this.data
+            this.form.slug = createSlug(this.form.name)
 
             await $fetch(this.$config.public.API_BASE_URL + '/api/news-category', {
                 method: "POST",

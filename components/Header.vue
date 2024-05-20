@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted, reactive, watch } from 'vue';
 import { onClickOutside } from '@vueuse/core'
+const config = useRuntimeConfig()
 
 const headerActive = ref(false)
 const windowWidth = ref(null)
@@ -29,7 +30,8 @@ onMounted(async () => {
 })
 
 async function loadHeaderTop() {
-    const data = await $fetch(this.$config.public.API_BASE_URL + '/api/header')
+    const data = await $fetch(config.public.API_BASE_URL + '/api/header')
+
     headerData.no_telp = data.no_telp
     headerData.email = data.email
 }
@@ -110,9 +112,8 @@ export default {
     <Transition>
         <div ref="target" v-if="navMobile" class="bg-white shadow-lg h-screen fixed w-3/4 right-0" style="z-index: 9999;">
             <div class="block h-screen px-3 py-4">
-                <div class="flex justify-between cursor-pointer border-b border-slate-200 pb-4"
-                    @click="$router.push('/')">
-                    <div class="flex-none flex">
+                <div class="flex justify-between cursor-pointer border-b border-slate-200 pb-4">
+                    <div class="flex-none flex" @click="$router.push('/')">
                         <img width="40"
                             src="https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/images/logo_header.png"
                             alt="">

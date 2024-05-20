@@ -49,7 +49,7 @@ export default {
                         <a class="text-white" target="_blank" :href="data.facebook">Facebook</a>
                     </li>
                     <li v-if="data.whatsapp" class="flex items-center">
-                        <svg class="mr-1" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                        <svg class="mr-1" xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em"
                             viewBox="0 0 16 16">
                             <path fill="white"
                                 d="M13.95 4.24C11.86 1 7.58.04 4.27 2.05C1.04 4.06 0 8.44 2.09 11.67l.17.26l-.7 2.62l2.62-.7l.26.17c1.13.61 2.36.96 3.58.96c1.31 0 2.62-.35 3.75-1.05c3.23-2.1 4.19-6.39 2.18-9.71Zm-1.83 6.74c-.35.52-.79.87-1.4.96c-.35 0-.79.17-2.53-.52c-1.48-.7-2.71-1.84-3.58-3.15c-.52-.61-.79-1.4-.87-2.19c0-.7.26-1.31.7-1.75c.17-.17.35-.26.52-.26h.44c.17 0 .35 0 .44.35c.17.44.61 1.49.61 1.58c.09.09.05.76-.35 1.14c-.22.25-.26.26-.17.44c.35.52.79 1.05 1.22 1.49c.52.44 1.05.79 1.66 1.05c.17.09.35.09.44-.09c.09-.17.52-.61.7-.79c.17-.17.26-.17.44-.09l1.4.7c.17.09.35.17.44.26c.09.26.09.61-.09.87Z" />
@@ -57,7 +57,7 @@ export default {
                         <a class="text-white" target="_blank" :href="data.whatsapp">Whatsapp</a>
                     </li>
                     <li v-if="data.twitter" class="flex items-center">
-                        <svg class="mr-1" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 14 14">
+                        <svg class="mr-1" xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 14 14">
                             <g fill="none">
                                 <g clip-path="url(#primeTwitter0)">
                                     <path fill="white"
@@ -73,7 +73,7 @@ export default {
                         <a class="text-white" target="_blank" :href="data.twitter">Twitter</a>
                     </li>
                     <li v-if="data.youtube" class="flex items-center">
-                        <svg class="mr-1" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+                        <svg class="mr-1" xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 24 24">
                             <path fill="white" fill-rule="evenodd"
                                 d="M6.989 4.89a64.248 64.248 0 0 1 10.022 0l2.24.176a2.725 2.725 0 0 1 2.476 2.268c.517 3.09.517 6.243 0 9.332a2.725 2.725 0 0 1-2.475 2.268l-2.24.175a64.24 64.24 0 0 1-10.023 0l-2.24-.175a2.725 2.725 0 0 1-2.476-2.268a28.315 28.315 0 0 1 0-9.332a2.725 2.725 0 0 1 2.475-2.268zM10 14.47V9.53a.3.3 0 0 1 .454-.257l4.117 2.47a.3.3 0 0 1 0 .514l-4.117 2.47A.3.3 0 0 1 10 14.47"
                                 clip-rule="evenodd" />
