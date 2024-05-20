@@ -158,7 +158,7 @@ export default {
                         <div class="flex mb-10 cursor-pointer" @click="$router.push('/berita/' + news.slug)"
                             v-for="news in news">
                             <div class="w-fit flex-none">
-                                <img class="w-[140px] sm:w-[200px] md:w-[250px] h-[110px] md:h-[140px]"
+                                <img class="rounded-md w-[140px] sm:w-[200px] md:w-[250px] h-[110px] md:h-[140px]"
                                     :src="news.thumbnail" alt="">
                             </div>
                             <div class="block pl-4">
