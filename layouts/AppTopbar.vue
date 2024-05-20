@@ -48,7 +48,7 @@ export default {
         <router-link to="/dashboard" class="layout-topbar-logo">
             <img src="https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/images/logo_header.png"
                 alt="logo" />
-            <span>Dashboard</span>
+            <span class="font-medium">Dashboard</span>
         </router-link>
 
         <button class="ml-2 p-link layout-menu-button layout-topbar-button" @click="onMenuToggle()">

@@ -58,31 +58,31 @@ export default {
                 <v-form ref="form">
                     <div class="grid grid-cols-2 gap-x-4">
                         <div>
-                            <v-text-field v-model="form.desa" variant="outlined" hide-details="auto"
+                            <v-text-field :rules="[v => !!v || 'Field is required']" v-model="form.desa" variant="outlined" hide-details="auto"
                                 label="Desa"></v-text-field>
                         </div>
                         <div>
-                            <v-text-field v-model="form.kabupaten" variant="outlined" hide-details="auto"
+                            <v-text-field :rules="[v => !!v || 'Field is required']" v-model="form.kabupaten" variant="outlined" hide-details="auto"
                                 label="Kabupaten"></v-text-field>
                         </div>
                     </div>
                     <div class="grid grid-cols-2 my-5 gap-x-4">
                         <div>
-                            <v-text-field v-model="form.kecamatan" variant="outlined" hide-details="auto"
+                            <v-text-field :rules="[v => !!v || 'Field is required']" v-model="form.kecamatan" variant="outlined" hide-details="auto"
                                 label="Kecamatan"></v-text-field>
                         </div>
                         <div>
-                            <v-text-field v-model="form.kelurahan" variant="outlined" hide-details="auto"
+                            <v-text-field :rules="[v => !!v || 'Field is required']" v-model="form.kelurahan" variant="outlined" hide-details="auto"
                                 label="Kelurahan"></v-text-field>
                         </div>
                     </div>
                     <div class="grid grid-cols-2 gap-x-4">
                         <div>
-                            <v-text-field v-model="form.rt" variant="outlined" hide-details="auto"
+                            <v-text-field :rules="[v => !!v || 'Field is required']" v-model="form.rt" variant="outlined" hide-details="auto"
                                 label="RT"></v-text-field>
                         </div>
                         <div>
-                            <v-text-field v-model="form.rw" variant="outlined" hide-details="auto"
+                            <v-text-field :rules="[v => !!v || 'Field is required']" v-model="form.rw" variant="outlined" hide-details="auto"
                                 label="RW"></v-text-field>
                         </div>
                     </div>

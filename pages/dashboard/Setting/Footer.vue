@@ -111,10 +111,10 @@ export default {
                         </div>
                     </div>
                 </v-form>
-                <Button @click="updateFooter" class="mt-1 bg-[#10B981] text-white px-3 py-2">
-                    <span v-if="!loading">Update</span>
+                <v-btn @click="updateFooter" color="#10B981" class="mt-1 text-white px-3 py-2">
+                    <span class="capitalize" v-if="!loading">Update</span>
                     <Loader v-else />
-                </Button>
+                </v-btn>
             </div>
         </div>
     </div>
