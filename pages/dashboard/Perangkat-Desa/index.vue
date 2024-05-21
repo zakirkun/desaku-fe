@@ -1,25 +1,21 @@
 <script setup>
 useHead({
-    title: 'Pengumuman',
+    title: 'Perangkat Desa',
 })
 </script>
 <script>
 export default {
     data() {
         return {
-            modalRemoveNews: false,
-            modalRemoveNewsCategory: false,
-            removedAnnouncementId: null,
+            enabled: true,
+            modalremovePerangkat: false,
+            modalremovePerangkatCategory: false,
+            removedPerangkatId: null,
             data: null,
-            form: {
-                title: null,
-                category: null,
-                content: null
-            },
             headers: [
-                { title: 'Title', align: 'start', sortable: false, key: 'title', width: "300px" },
-                { title: 'Description', align: 'start', sortable: false, key: 'description', width: "300px" },
-                { title: 'Content', align: 'end', key: 'content' },
+                { title: 'Name', align: 'start', sortable: false, key: 'name', width: "300px" },
+                { title: 'Job', align: 'start', sortable: false, key: 'job', width: "300px" },
+                { title: 'Image', align: 'start', sortable: false, key: 'image', width: "300px" },
                 { title: 'Actions', align: 'center', key: 'actions', sortable: false },
             ],
             items: [],
@@ -30,22 +26,33 @@ export default {
     },
     methods: {
         async loadData() {
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/activities')
+            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/perangkat-desa')
             this.items = data
         },
-        openModalRemoveAnnouncement(id) {
-            this.modalRemoveNews = true
-            this.removedAnnouncementId = id
+        openModalRemovePerangkat(id) {
+            this.modalremovePerangkat = true
+            this.removedPerangkatId = id
         },
-        async removeNews() {
-            await $fetch(this.$config.public.API_BASE_URL + '/api/activities/' + this.removedAnnouncementId, {
+        async removePerangkat() {
+            await $fetch(this.$config.public.API_BASE_URL + '/api/perangkat-desa/' + this.removedPerangkatId, {
                 method: "DELETE",
                 headers: {
                     Authorization: "Bearer " + useToken().token
                 },
             })
 
-            this.modalRemoveNews = false
+            this.modalremovePerangkat = false
+            await this.loadData()
+        },
+        async updatePerangkatOrder() {
+            await $fetch(this.$config.public.API_BASE_URL + '/api/perangkat-desa/' + this.removedPerangkatId, {
+                method: "DELETE",
+                headers: {
+                    Authorization: "Bearer " + useToken().token
+                },
+            })
+
+            this.modalremovePerangkat = false
             await this.loadData()
         },
     }
@@ -53,14 +60,14 @@ export default {
 </script>
 
 <template>
-    <v-dialog v-model="modalRemoveNews" width="auto">
+    <v-dialog v-model="modalremovePerangkat" width="auto">
         <v-card height="auto" style="scrollbar-width: none">
             <template v-slot:title>
                 <div class="flex items-center justify-between">
                     <div class="text-xl font-semibold">
-                        <span>Hapus Berita?</span>
+                        <span>Hapus Perangkat Desa?</span>
                     </div>
-                    <div @click="modalRemoveNews = false" class="cursor-pointer">
+                    <div @click="modalremovePerangkat = false" class="cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
                             <g fill="none" stroke="black" stroke-width="1.5">
                                 <circle cx="12" cy="12" r="10" />
@@ -72,12 +79,12 @@ export default {
             </template>
             <template v-slot:text>
                 <div>
-                    <span>Berita yang dihapus tidak bisa dikembalikan kembali.</span>
+                    <span>Perangkat Desa yang dihapus tidak bisa dikembalikan kembali.</span>
                 </div>
             </template>
             <template v-slot:actions>
                 <div class="w-full flex justify-end">
-                    <v-btn variant="flat" @click="removeNews" color="#FC4100"
+                    <v-btn variant="flat" @click="removePerangkat" color="#FC4100"
                         class="w-fit mt-6 text-white px-3 mx-1 mb-2 py-2 text-md">
                         <span class="capitalize">Hapus</span>
                     </v-btn>
@@ -86,11 +93,11 @@ export default {
         </v-card>
     </v-dialog>
     <div class="flex justify-between items-center mb-3">
-        <div class="text-2xl font-semibold mb-2">Kegiatan</div>
+        <div class="text-2xl font-semibold mb-2">Perangkat Desa</div>
         <div class="text-md font-semibold mb-2">
-            <NuxtLink to="/dashboard/activities/add">
+            <NuxtLink to="/dashboard/perangkat-desa/add">
                 <v-btn @click="updateContent" color="#10B981" class="mt-3 text-white px-3 py-2">
-                    <span class="capitalize">Tambah Kegiatan +</span>
+                    <span class="capitalize">Tambah Perangkat Desa +</span>
                 </v-btn>
             </NuxtLink>
         </div>
@@ -99,12 +106,8 @@ export default {
         <div class="col-12">
             <div class="card">
                 <v-data-table :headers="headers" :items="items" item-key="name">
-                    <template v-slot:item.content="{ value }">
-                        <span v-if="value" v-html="value.slice(0, 100)"></span>
-                        <span v-else>-</span>
-                    </template>
-                    <template v-slot:item.description="{ value }">
-                        <span>{{ value.slice(0, 80) }}...</span>
+                    <template v-slot:item.image="{ value }">
+                        <v-img :src="value" width="100" height="100"></v-img>
                     </template>
                     <template v-slot:item.actions="{ item }">
                         <div class="flex justify-center">
@@ -117,7 +120,7 @@ export default {
                                     </svg>
                                 </div>
                             </a>
-                            <div @click="$router.push('/dashboard/activities/edit?id=' + item.uuid)"
+                            <div @click="$router.push('/dashboard/perangkat-desa/edit?id=' + item.uuid)"
                                 class="cursor-pointer mx-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em"
                                     viewBox="0 0 24 24">
@@ -126,7 +129,7 @@ export default {
                                         clip-rule="evenodd" />
                                 </svg>
                             </div>
-                            <div class="cursor-pointer" @click="openModalRemoveAnnouncement(item.uuid)">
+                            <div class="cursor-pointer" @click="openModalRemovePerangkat(item.uuid)">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em"
                                     viewBox="0 0 24 24">
                                     <path fill="#212121"

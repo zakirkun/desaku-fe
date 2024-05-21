@@ -13,7 +13,12 @@ onMounted(async () => {
 })
 
 async function loadImages() {
-    images.value = await $fetch(this.$config.public.API_BASE_URL + '/api/image')
+    images.value = await $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/image', {
+        headers: {
+            Authorization: "Bearer " + useToken().token
+        },
+    })
+
     imageSelected.value = images.value["1"]
 }
 
@@ -22,8 +27,11 @@ async function onDrop(files) {
     formData.append("image", files[0]);
 
     loading.value = true
-    const resp = await $fetch(this.$config.public.API_BASE_URL + '/api/image', {
+    const resp = await $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/image', {
         body: formData,
+        headers: {
+            Authorization: "Bearer " + useToken().token
+        },
         method: "POST"
     })
 
@@ -35,10 +43,13 @@ async function onDrop(files) {
 }
 
 async function removeImage() {
-    imageSelected.value = imageSelected.value.replace(this.$config.public.API_BASE_URL + '/storage/', '')
+    imageSelected.value = imageSelected.value.replace(useRuntimeConfig().public.API_BASE_URL + '/storage/', '')
 
-    await $fetch(this.$config.public.API_BASE_URL + '/api/image/' + imageSelected.value, {
-        method: "DELETE"
+    await $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/image/' + imageSelected.value, {
+        method: "DELETE",
+        headers: {
+            Authorization: "Bearer " + useToken().token
+        },
     })
 
     await loadImages()

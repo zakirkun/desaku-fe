@@ -25,6 +25,14 @@ const model = ref([
                 ]
             },
             {
+                label: 'Pemerintahan',
+                icon: 'pi pi-fw pi-sitemap',
+                items: [
+                    { label: 'Perangkat Desa', to: "/dashboard/perangkat-desa" },
+                    { label: 'Jabatan', to: "/dashboard/jabatan" },
+                ]
+            },
+            {
                 label: 'Pengaturan',
                 icon: 'pi pi-fw pi-cog',
                 items: [
@@ -32,7 +40,6 @@ const model = ref([
                     { label: 'Lokasi Desa', to: "/dashboard/setting/location" },
                     { label: 'Footer', to: "/dashboard/setting/footer" },
                     { label: 'Header', to: "/dashboard/setting/header" },
-                    // { label: 'Pengaturan', to: "/dashboard/pengaturan" },
                 ]
             },
             {

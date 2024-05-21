@@ -75,7 +75,7 @@ export default {
             this.announcement = await $fetch(this.$config.public.API_BASE_URL + '/api/announcement?limit=5')
         },
         async loadVideos() {
-            this.videos = await $fetch(this.$config.public.API_BASE_URL + '/api/video-gallery')
+            this.videos = await $fetch(this.$config.public.API_BASE_URL + '/api/video-gallery?limit=6')
         },
         async loadLocation() {
             const data = await $fetch(this.$config.public.API_BASE_URL + '/api/location')
@@ -196,7 +196,7 @@ export default {
                 <div class="grid grid-cols-1 md:grid-cols-6 md:gap-x-12">
                     <div class="block col-span-4">
                         <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
-                            <span>Galeri Foto & Video</span>
+                            <span>Galeri Video</span>
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-3 mb-2 gap-6">
                             <div v-for="video in videos" class="h-full w-full">
@@ -206,7 +206,7 @@ export default {
                     </div>
                     <div class="col-span-2">
                         <div
-                            class="text-[#0088CC] mt-5 md:mt-0 border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
+                            class="text-[#0088CC] struktur border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
                             <span>Struktur Organisasi</span>
                         </div>
                         <div class="font-semibold text-white px-2 rounded-md">
@@ -287,6 +287,14 @@ export default {
     .description {
         transform: translate(-50%, -50%);
     }
+
+    .struktur {
+        margin-top: 10px;
+    }
+}
+
+.struktur {
+    margin-top: 0;
 }
 
 .v-layout {

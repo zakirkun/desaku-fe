@@ -81,10 +81,6 @@ export default {
                 title: 'Perangkat Desa',
                 value: 5,
             },
-            {
-                title: 'Lembaga Desa',
-                value: 6,
-            },
             { type: 'divider' },
             { type: 'subheader', title: 'Informasi Publik' },
             {
@@ -99,6 +95,10 @@ export default {
                 title: 'Pengumuman',
                 value: 'pengumuman',
             },
+            {
+                title: 'Kegiatan',
+                value: 'kegiatan',
+            },
         ],
     }),
     watch: {
@@ -110,7 +110,8 @@ export default {
 </script>
 <template>
     <Transition>
-        <div ref="target" v-if="navMobile" class="bg-white shadow-lg h-screen fixed w-3/4 right-0" style="z-index: 9999;">
+        <div ref="target" v-if="navMobile" class="bg-white shadow-lg h-screen fixed w-3/4 right-0"
+            style="z-index: 9999;">
             <div class="block h-screen px-3 py-4">
                 <div class="flex justify-between cursor-pointer border-b border-slate-200 pb-4">
                     <div class="flex-none flex" @click="$router.push('/')">
@@ -224,10 +225,7 @@ export default {
                                     <div @click="$router.push('/struktur-organisasi')"
                                         class="mb-2 border-b border-slate-300 pb-3">
                                         Struktur Organisasi</div>
-                                    <div @click="$router.push('/perangkat-desa')"
-                                        class="mb-2 border-b border-slate-300 pb-3">
-                                        Perangkat Desa</div>
-                                    <div @click="$router.push('/lembaga-desa')">Lembaga Desa</div>
+                                    <div @click="$router.push('/perangkat-desa')">Perangkat Desa</div>
                                 </div>
                             </v-menu>
                         </div>
@@ -251,8 +249,10 @@ export default {
                                         Galeri</div>
                                     <div @click="$router.push('/berita')" class="mb-2 border-b border-slate-300 pb-3">
                                         Berita</div>
-                                    <div @click="$router.push('/pengumuman')">
+                                    <div @click="$router.push('/pengumuman')" class="mb-2 border-b border-slate-300 pb-3">
                                         Pengumuman</div>
+                                    <div @click="$router.push('/kegiatan')">
+                                        Kegiatan</div>
                                     <!-- <div @click="$router.push('/perangkat-desa')"
                                         class="mb-2 border-b border-slate-300 pb-3">
                                         Perangkat Desa</div>
