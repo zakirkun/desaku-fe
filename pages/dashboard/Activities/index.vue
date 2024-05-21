@@ -30,7 +30,7 @@ export default {
     },
     methods: {
         async loadData() {
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/announcement')
+            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/activities')
             this.items = data
         },
         openModalRemoveAnnouncement(id) {
@@ -38,7 +38,7 @@ export default {
             this.removedAnnouncementId = id
         },
         async removeNews() {
-            await $fetch(this.$config.public.API_BASE_URL + '/api/announcement/' + this.removedAnnouncementId, {
+            await $fetch(this.$config.public.API_BASE_URL + '/api/activities/' + this.removedAnnouncementId, {
                 method: "DELETE",
                 headers: {
                     Authorization: "Bearer " + useToken().token
@@ -86,11 +86,11 @@ export default {
         </v-card>
     </v-dialog>
     <div class="flex justify-between items-center mb-3">
-        <div class="text-2xl font-semibold mb-2">Pengumuman</div>
+        <div class="text-2xl font-semibold mb-2">Kegiatan</div>
         <div class="text-md font-semibold mb-2">
-            <NuxtLink to="/dashboard/announcement/add">
+            <NuxtLink to="/dashboard/activities/add">
                 <v-btn @click="updateContent" color="#10B981" class="mt-3 text-white px-3 py-2">
-                    <span class="capitalize">Tambah Pengumuman +</span>
+                    <span class="capitalize">Tambah Kegiatan +</span>
                 </v-btn>
             </NuxtLink>
         </div>

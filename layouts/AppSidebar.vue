@@ -21,6 +21,7 @@ const model = ref([
                     { label: 'Berita', to: "/dashboard/news" },
                     { label: 'Galeri', to: "/dashboard/gallery" },
                     { label: 'Pengumuman', to: "/dashboard/announcement" },
+                    { label: 'Kegiatan', to: "/dashboard/activities" },
                 ]
             },
             {

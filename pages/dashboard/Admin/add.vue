@@ -18,7 +18,7 @@ export default {
         }
     },
     methods: {
-        async addAnnouncement() {
+        async addAdmin() {
             const { valid } = await this.$refs.form.validate()
 
             if (!valid) {
@@ -81,7 +81,7 @@ export default {
                         </template>
                     </v-text-field>
                 </v-form>
-                <v-btn @click="addAnnouncement" color="#10B981" class="mt-5 text-white px-3 py-2">
+                <v-btn @click="addAdmin" color="#10B981" class="mt-5 text-white px-3 py-2">
                     <span class="capitalize" v-if="!loading">Submit</span>
                     <Loader v-else />
                 </v-btn>

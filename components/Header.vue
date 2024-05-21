@@ -194,7 +194,7 @@ export default {
                                 </template>
 
                                 <div
-                                    class="block border-t-4 border-[#0088CC] rounded-md cursor-pointer mt-4 bg-white px-4 py-5">
+                                    class="block border-t-4 border-[#0088CC] shadow-md rounded-md cursor-pointer mt-4 bg-white px-4 py-5">
                                     <div @click="$router.push('/tentang-kami')"
                                         class="mb-2 border-b border-slate-300 pb-3">
                                         Tentang Kami</div>
@@ -220,7 +220,7 @@ export default {
                                 </template>
 
                                 <div
-                                    class="block border-t-4 border-[#0088CC] rounded-md cursor-pointer mt-4 bg-white px-4 py-5">
+                                    class="block border-t-4 border-[#0088CC] shadow-md rounded-md cursor-pointer mt-4 bg-white px-4 py-5">
                                     <div @click="$router.push('/struktur-organisasi')"
                                         class="mb-2 border-b border-slate-300 pb-3">
                                         Struktur Organisasi</div>
@@ -246,7 +246,7 @@ export default {
                                 </template>
 
                                 <div
-                                    class="block border-t-4 border-[#0088CC] rounded-md cursor-pointer mt-4 bg-white px-4 py-5">
+                                    class="block border-t-4 border-[#0088CC] shadow-md rounded-md cursor-pointer mt-4 bg-white px-4 py-5">
                                     <div @click="$router.push('/galeri')" class="mb-2 border-b border-slate-300 pb-3">
                                         Galeri</div>
                                     <div @click="$router.push('/berita')" class="mb-2 border-b border-slate-300 pb-3">

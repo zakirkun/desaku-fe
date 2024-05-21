@@ -28,12 +28,6 @@ export default {
         images: [],
         videos: [],
         location: {},
-        items: [
-            { title: 'Click Me' },
-            { title: 'Click Me' },
-            { title: 'Click Me' },
-            { title: 'Click Me 2' },
-        ],
         features: [
             {
                 img: "https://kertamulya-padalarang.desa.id/themes/default/assets/images/illustrator/services.svg",
@@ -54,37 +48,12 @@ export default {
         ],
         news: [],
         announcement: [],
-        acitivityData: [
-            {
-                "title": "Sosialisasi Penanggulangan Covid 19",
-                "location": "Aula Desa"
-            },
-            {
-                "title": "Vaksin Booster 2",
-                "location": "Aula Desa"
-            },
-            {
-                "title": "Vaksin Booster 2",
-                "location": "Aula Desa"
-            }
-        ],
-        galleryData: [
-            {
-                "title": "Sosialisasi Penanggulangan Covid 19",
-                "location": "Aula Desa"
-            },
-            {
-                "title": "Vaksin Booster 2",
-                "location": "Aula Desa"
-            },
-            {
-                "title": "Vaksin Booster 2",
-                "location": "Aula Desa"
-            }
-        ],
+        acitivityData: [],
+        activities: []
     }),
     async mounted() {
         await this.loadImages()
+        await this.loadActivities()
         await this.loadNews()
         await this.loadVideos()
         await this.loadLocation()
@@ -95,6 +64,9 @@ export default {
     methods: {
         async loadImages() {
             this.images = await $fetch(this.$config.public.API_BASE_URL + '/api/image-homepage')
+        },
+        async loadActivities() {
+            this.activities = await $fetch(this.$config.public.API_BASE_URL + '/api/activities?limit=5')
         },
         async loadNews() {
             this.news = await $fetch(this.$config.public.API_BASE_URL + '/api/news?limit=5')
@@ -194,7 +166,7 @@ export default {
                         <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
                             <span>Pengumuman</span>
                         </div>
-                        <div class="mb-6 bg-[#0088CC] cursor-pointer font-semibold text-white px-2 py-3 rounded-md"
+                        <div class="mb-4 bg-[#0088CC] cursor-pointer font-semibold text-white px-2 py-3 rounded-md"
                             v-for="announcement in announcement"
                             @click="$router.push('/pengumuman/' + announcement.slug)">
                             <span>{{ announcement.title }}</span>
@@ -202,10 +174,11 @@ export default {
                         <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
                             <span>Agenda Kegiatan</span>
                         </div>
-                        <div class="mb-2 px-2 py-3 flex" v-for="activity in acitivityData">
+                        <div class="mb-2 py-2 flex cursor-pointer font-medium" @click="$router.push('/kegiatan/' + activity.slug)"
+                            v-for="activity in activities">
                             <div
                                 class="px-1 py-2 font-semibold text-white flex-none w-[80px] h-[60px] rounded-md my-auto text-center bg-[#0088CC]">
-                                <span>Sep 02 2022</span>
+                                <span>{{ moment(news.created_at).format("DD MMM YYYY") }}</span>
                             </div>
                             <div class="block ml-3">
                                 <div class="text-[#0088CC] text-lg">

@@ -1,6 +1,6 @@
 <script setup>
 useHead({
-    title: 'Tambah Pengumuman',
+    title: 'Tambah Kegiatan',
 })
 </script>
 <script>
@@ -9,18 +9,13 @@ import { createSlug } from "@/helpers/createSlug"
 export default {
     data() {
         return {
-            modalRemoveThumbnail: false,
             image: null,
-            categories: [],
             renderRichEditor: false,
-            thumbnailDeleted: false,
-            thumbnailUploaded: false,
             data: null,
             form: {
                 title: null,
                 description: null,
                 content: null,
-                thumbnail: null
             },
             headers: [
                 { title: 'Title', align: 'start', sortable: false, key: 'title' },
@@ -45,7 +40,7 @@ export default {
             this.form.content = this.data
             this.form.slug = createSlug(this.form.title)
 
-            await $fetch(this.$config.public.API_BASE_URL + '/api/announcement', {
+            await $fetch(this.$config.public.API_BASE_URL + '/api/activities', {
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + useToken().token
@@ -54,7 +49,7 @@ export default {
             })
 
             this.loading = false
-            this.$router.push('/dashboard/announcement')
+            this.$router.push('/dashboard/activities')
         },
         contentChange(v) {
             this.data = v
@@ -64,49 +59,18 @@ export default {
 </script>
 
 <template>
-    <v-dialog v-model="modalRemoveThumbnail" width="auto">
-        <v-card height="auto" style="scrollbar-width: none">
-            <template v-slot:title>
-                <div class="flex items-center justify-between">
-                    <div class="text-xl font-semibold">
-                        <span>Hapus Thumbnail?</span>
-                    </div>
-                    <div @click="modalRemoveThumbnail = false" class="cursor-pointer">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
-                            <g fill="none" stroke="black" stroke-width="1.5">
-                                <circle cx="12" cy="12" r="10" />
-                                <path stroke-linecap="round" d="m14.5 9.5l-5 5m0-5l5 5" />
-                            </g>
-                        </svg>
-                    </div>
-                </div>
-            </template>
-            <template v-slot:text>
-                <div>
-                    <span>Thumbnail akan dihapus dari server, apakah anda yakin untuk menghapusnya?</span>
-                </div>
-            </template>
-            <template v-slot:actions>
-                <div class="w-full flex justify-end">
-                    <v-btn @click="removeThumbnailNews" color="#FC4100" class="mt-3 text-white px-3 py-2">
-                        <span class="capitalize">Hapus</span>
-                    </v-btn>
-                </div>
-            </template>
-        </v-card>
-    </v-dialog>
     <div class="grid">
         <div class="col-12">
             <div class="card">
-                <h3 class="text-2xl font-medium mb-5">Tambah Pengumuman</h3>
+                <h3 class="text-2xl font-medium mb-5">Tambah Kegiatan</h3>
                 <v-form ref="form">
                     <div class="grid grid-cols-1 gap-3">
                         <div class="col-span-1">
                             <v-text-field :rules="[v => !!v || 'Field is required']" v-model="form.title" variant="outlined" hide-details="auto"
-                                label="Judul Pengumuman"></v-text-field>
+                                label="Judul Kegiatan"></v-text-field>
                         </div>
                         <div class="mt-3">
-                            <v-textarea :rules="[v => !!v || 'Field is required']" rows="3" variant="outlined" label="Deskripsi Pengumuman" clearable v-model="form.description"></v-textarea>
+                            <v-textarea :rules="[v => !!v || 'Field is required']" rows="3" variant="outlined" label="Deskripsi Kegiatan" clearable v-model="form.description"></v-textarea>
                         </div>
                     </div>
                 </v-form>
