@@ -1,5 +1,3 @@
-@import url('https://fonts.cdnfonts.com/css/general-sans');
-
 :root {
   font-family: "Inter var", sans-serif;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
@@ -55,23 +53,6 @@
   --p-focus-ring-color: var(--primary-color);
 }
 
-@font-face {
-  font-family: "Inter var";
-  font-weight: 100 900;
-  font-display: swap;
-  font-style: normal;
-  font-named-instance: "Regular";
-  src: url("./fonts/Inter-roman.var.woff2?v=3.19") format("woff2");
-}
-
-@font-face {
-  font-family: "Inter var";
-  font-weight: 100 900;
-  font-display: swap;
-  font-style: italic;
-  font-named-instance: "Italic";
-  src: url("./fonts/Inter-italic.var.woff2?v=3.19") format("woff2");
-}
 
 :root {
   --blue-50: #f5f9ff;
@@ -196,9 +177,6 @@
   --primary-900: #064a34;
 }
 
-body {
-  font-family: 'General Sans', sans-serif;
-}
 
 .p-editor-container .p-editor-toolbar {
   background: #ffffff;

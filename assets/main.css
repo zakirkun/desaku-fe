@@ -2,7 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.cdnfonts.com/css/general-sans');
+@font-face {
+    font-family: 'General Sans';
+    src: url('./fonts/GeneralSans-Variable.woff2') format('woff2'),
+        url('./fonts/GeneralSans-Variable.woff') format('woff'),
+        url('./fonts/GeneralSans-Variable.ttf') format('truetype');
+    font-weight: 200 700;
+    font-display: swap;
+    font-style: normal;
+}
 
 body {
     font-family: 'General Sans', sans-serif !important;
@@ -20,7 +28,9 @@ a {
 }
 
 p span {
-    word-wrap:break-word; 
+    word-wrap: break-word;
+    font-size: 16px;
+    line-height: 1.8rem;
 }
 
 h1 {
@@ -52,21 +62,21 @@ h3 {
 
 .scale-enter-active,
 .scale-leave-active {
-  transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 
 .scale-enter-from,
 .scale-leave-to {
-  opacity: 0;
-  transform: scale(0.9);
+    opacity: 0;
+    transform: scale(0.9);
 }
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s ease;
+    transition: opacity 0.5s ease;
 }
 
 .fade-enter-from,
 .fade-leave-to {
-  opacity: 0;
+    opacity: 0;
 }

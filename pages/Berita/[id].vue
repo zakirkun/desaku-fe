@@ -85,7 +85,7 @@ export default {
                     </svg>
                     <span>{{ moment(post.created_at).format("LL") }}</span>
                 </div>
-                <div class="w-full" v-html="post.content"></div>
+                <div class="w-full font-normal" v-html="post.content"></div>
             </div>
             <div class="col-span-2">
                 <div
@@ -108,7 +108,7 @@ export default {
                         <img class="rounded-md" :src="news.thumbnail" alt="">
                     </div>
                     <div class="block ml-3">
-                        <div class="text-[#0088CC] text-md">
+                        <div class="text-[#0088CC] text-md font-medium">
                             <span>{{ news.title }}</span>
                         </div>
                         <div class="mt-1">

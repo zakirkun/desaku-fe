@@ -154,7 +154,7 @@ export default {
                                     <span class="text-sm md:text-md">{{ moment(news.created_at).format("LL") }}</span>
                                 </div>
                                 <div class="mt-2 hidden md:flex">
-                                    <span class="text-sm md:text-base">{{ news.description }}</span>
+                                    <span class="text-sm md:text-base font-normal">{{ news.description }}</span>
                                 </div>
                                 <div class="mt-2 flex md:hidden">
                                     <span class="text-sm md:text-base">{{ news.description.substring(0, 70) }}...</span>
