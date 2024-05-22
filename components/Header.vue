@@ -15,7 +15,7 @@ const headerData = reactive({
 
 onMounted(async () => {
     window.addEventListener('scroll', function () {
-        if (window.scrollY > 40) {
+        if (window.scrollY > document.getElementById('header').offsetHeight) {
             headerActive.value = true
         } else {
             headerActive.value = false
@@ -140,7 +140,7 @@ export default {
             </div>
         </div>
     </Transition>
-    <div class="surface-0 flex justify-content-center">
+    <div id="header" class="surface-0 flex justify-content-center">
         <div id="home" class="w-100 overflow-hidden justify-between">
             <div class="flex w-full px-[1rem] md:px-[12rem] bg-[#0088CC] py-2">
                 <div class="flex items-center mr-3">

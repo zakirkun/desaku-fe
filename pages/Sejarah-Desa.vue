@@ -15,7 +15,6 @@ export default {
     async mounted() {
         const data = await $fetch(this.$config.public.API_BASE_URL + '/api/sejarah')
         this.data = data.sejarah
-        console.log(data)
     },
 }
 </script>

@@ -17,6 +17,7 @@ export default {
             form: {
                 name: null,
                 job: null,
+                job_id: null,
                 image: null,
             },
             loading: false
@@ -29,7 +30,7 @@ export default {
     methods: {
         async loadJabatan() {
             this.jabatan = await $fetch(this.$config.public.API_BASE_URL + '/api/jabatan')
-            this.jabatan = this.jabatan.map(v => v.name)
+            this.jabatanName = this.jabatan.map(v => v.name)
         },
         async addAnnouncement() {
             const { valid } = await this.$refs.form.validate()
@@ -38,6 +39,7 @@ export default {
                 return
             }
 
+            this.form.job_id = this.jabatan.filter(v => v.name == this.form.job)[0].uuid
             this.loading = true
 
             await $fetch(this.$config.public.API_BASE_URL + '/api/perangkat-desa', {
@@ -75,7 +77,7 @@ export default {
                                 variant="outlined" hide-details="auto" label="Nama"></v-text-field>
                         </div>
                         <div class="mt-3">
-                            <v-select :rules="[v => !!v || 'Field is required']" v-model="form.job" :items="jabatan" variant="outlined" hide-details="auto"
+                            <v-select :rules="[v => !!v || 'Field is required']" v-model="form.job" :items="jabatanName" variant="outlined" hide-details="auto"
                                 label="Jabatan"></v-select>
                         </div>
                         <div class="relative w-fit mt-4" v-if="form.image">

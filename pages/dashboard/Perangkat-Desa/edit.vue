@@ -16,17 +16,25 @@ export default {
             form: {
                 name: null,
                 job: null,
+                job_id: null,
                 image: null,
             },
-            loading: false
+            loading: false,
+            jabatan: [],
+            jabatanName: [],
         }
     },
     async mounted() {
+        await this.loadJabatan()
         const data = await $fetch(this.$config.public.API_BASE_URL + '/api/perangkat-desa/' + this.$route.query.id)
         this.form = data
         this.renderRichEditor = true
     },
     methods: {
+        async loadJabatan() {
+            this.jabatan = await $fetch(this.$config.public.API_BASE_URL + '/api/jabatan')
+            this.jabatanName = this.jabatan.map(v => v.name)
+        },
         async updatePerangkat() {
             const { valid } = await this.$refs.form.validate()
 
@@ -34,6 +42,7 @@ export default {
                 return
             }
 
+            this.form.job_id = this.jabatan.filter(v => v.name == this.form.job)[0].uuid
             this.loading = true
 
             await $fetch(this.$config.public.API_BASE_URL + '/api/perangkat-desa/' + this.$route.query.id, {
@@ -71,8 +80,8 @@ export default {
                                 variant="outlined" hide-details="auto" label="Nama"></v-text-field>
                         </div>
                         <div class="mt-3">
-                            <v-text-field :rules="[v => !!v || 'Field is required']" v-model="form.job"
-                                variant="outlined" hide-details="auto" label="Jabatan"></v-text-field>
+                            <v-select :rules="[v => !!v || 'Field is required']" v-model="form.job" :items="jabatanName" variant="outlined" hide-details="auto"
+                                label="Jabatan"></v-select>
                         </div>
                         <div class="relative w-fit mt-4" v-if="form.image">
                             <v-img :src="form.image" width="300" />

@@ -11,23 +11,29 @@ useHead({
 <script>
 export default {
     data: () => ({
-        items: [
-            { title: 'Kepala Desa' },
-            { title: 'Wakil Kepala Desa' },
-            { title: 'Sekretaris Desa' },
-            { title: 'Kaur Pembangunan' },
-            { title: 'Kaur Umum' },
-            { title: 'Ketua Karang Taruna' },
-            { title: 'Pranata Komputer' },
-        ],
+        jabatan: [],
+        selectedJabatan: null,
+        currentPerangkat: null
     }),
+    async mounted() {
+        await this.loadJabatan()
+    },
+    methods: {
+        async loadJabatan() {
+            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/jabatan')
+            this.jabatan = data
+        },
+        async getPerangkat(id) {
+            this.currentPerangkat = await $fetch(this.$config.public.API_BASE_URL + '/api/jabatan/perangkat/' + id)
+        },
+    }
 }
 </script>
 
 <template>
     <Header />
     <!-- Content -->
-    <div class="px-[14rem] pt-[2.5rem] min-h-[26rem]">
+    <div class="px-[14rem] pt-[2.5rem] min-h-[35rem]">
         <div class="flex mb-6 items-center bg-[#f0f0f0] px-2 py-3 rounded-lg">
             <div class="mr-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 1024 1024">
@@ -41,18 +47,32 @@ export default {
         </div>
         <div class="pb-8 flex">
             <div class="block flex-none w-[240px]">
-                <div class="border-b cursor-pointer border-slate-300 py-2 flex" v-for="item in items">
+                <div class="border-b cursor-pointer border-slate-300 py-2 flex" @click="getPerangkat(item.uuid)"
+                    v-for="item in jabatan">
                     <svg xmlns="http://www.w3.org/2000/svg" width="1.8em" height="1.8em" viewBox="0 0 24 24">
                         <path fill="#0088CC"
                             d="m11.71 15.29l2.59-2.59a.996.996 0 0 0 0-1.41L11.71 8.7c-.63-.62-1.71-.18-1.71.71v5.17c0 .9 1.08 1.34 1.71.71" />
                     </svg>
-                    <span>{{ item.title }}</span>
+                    <span>{{ item.name }}</span>
                 </div>
             </div>
             <div class="block flex-1 pl-10">
-                <h1 class="mb-4 font-semibold text-[#0088CC] text-3xl">Struktur Organisasi</h1>
-                <img src="https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/struktur_org_desa.png"
-                    alt="" srcset="">
+                <div v-if="!currentPerangkat">
+                    <h1 class="mb-4 font-semibold text-[#0088CC] text-3xl">Struktur Organisasi</h1>
+                    <img src="https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/struktur_org_desa.png">
+                </div>
+                <div v-else class="grid grid-cols-4">
+                    <div class="rounded-lg block shadow-lg" v-for="item in currentPerangkat">
+                        <div class="w-full h-[180px]">
+                            <img :src="item.image" class="w-full h-full object-cover rounded-t-lg" />
+                        </div>
+                        <div class="bg-[#0088CC] rounded-b-lg text-white text-base font-medium pa-2">
+                            <span>{{ item.name }}</span>
+                            <br>
+                            <span class="text-sm font-normal">{{ item.job }}</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
