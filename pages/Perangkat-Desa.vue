@@ -16,9 +16,7 @@ export default {
     }),
     async mounted() {
         await this.loadPerangkatDesa()
-        setTimeout(() => {
-            this.showContent = true
-        }, 30000)
+        this.showContent = true
     },
     methods: {
         async loadPerangkatDesa() {
