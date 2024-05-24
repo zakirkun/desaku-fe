@@ -28,7 +28,7 @@ export default {
 <template>
     <Header />
     <!-- Content -->
-    <div class="px-[14rem] pt-[2.5rem] min-h-[30rem]">
+    <div class="px-[2rem] md:px-[14rem] pt-[2.5rem] min-h-[30rem]">
         <div class="flex mb-6 items-center bg-[#f0f0f0] px-2 py-3 rounded-lg">
             <div class="mr-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 1024 1024">
@@ -40,7 +40,7 @@ export default {
                 <span>/ Perangkat Desa</span>
             </div>
         </div>
-        <div class="mt-8 grid grid-cols-5 pb-8 gap-x-8">
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-5 pb-8 gap-x-8 gap-y-10">
             <div class="rounded-lg block shadow-lg" v-for="item in perangkat">
                 <div class="w-full h-[180px]">
                     <img :src="item.image" class="w-full h-full object-cover rounded-t-lg" />

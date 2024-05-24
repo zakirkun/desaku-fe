@@ -1,11 +1,30 @@
 import { createVuetify } from 'vuetify'
-import * as components from 'vuetify/components'
+import { VApp, VBtn, VCard, VDataTable, VDialog, VForm, VImg, VLayout, VList, VMenu, VSelect, VSnackbar, VTabs, VTextField, VTextarea } from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import { aliases, mdi } from 'vuetify/lib/iconsets/mdi-svg'
 
 export default defineNuxtPlugin(nuxtApp => {
   const vuetify = createVuetify({
-    components,
+    display: {
+      mobileBreakpoint: "sm"
+    },
+    components: {
+      VBtn,
+      VMenu,
+      VDialog,
+      VTabs,
+      VCard,
+      VLayout,
+      VApp,
+      VSnackbar,
+      VForm,
+      VTextField,
+      VTextarea,
+      VDataTable,
+      VList,
+      VSelect,
+      VImg
+    },
     directives,
     icons: {
       defaultSet: 'mdi',

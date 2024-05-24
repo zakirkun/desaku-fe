@@ -11,18 +11,20 @@ useHead({
 export default {
     data: () => ({
         data: {
-            name: null
+            name: null,
+            showContent: false
         },
     }),
     async mounted() {
-        const data = await $fetch(this.$config.public.API_BASE_URL + '/api/lembaga/' + this.$route.params.id)
+        const data = await $fetch(this.$config.public.API_BASE_URL + '/api/lembaga/slug/' + this.$route.params.id)
         this.data = data
-        console.log(data);
+        this.showContent = true
     },
 }
 </script>
 
 <template>
+    <AnimationLoading v-if="!showContent" />
     <Header />
     <!-- Content -->
     <div class="px-[2rem] md:px-[14rem] pt-[2.5rem] min-h-[26rem]">
@@ -39,11 +41,11 @@ export default {
         </div>
         <div class="pb-8">
             <h1 class="mb-8 font-semibold text-[#0088CC] text-3xl">{{ data.name }}</h1>
-            <div class="flex">
-                <div clas="flex-none">
-                    <img class="w-[300px]" :src="data.image" alt="">
+            <div class="block md:flex">
+                <div clas="flex-none w-full md:w-[300px]">
+                    <img class="w-full md:w-[300px] rounded-md" :src="data.image" alt="">
                 </div>
-                <div class="block ml-8">
+                <div class="block description-lembaga">
                     <div class="flex text-xl font-medium py-3 border-b border-slate-300">
                         <div class="flex-none w-[200px]">
                             Nama Lembaga
@@ -70,6 +72,26 @@ export default {
                     </div>
                 </div>
             </div>
+            <div class="mt-8">
+                <div class="border border-[#0088CC] rounded-md">
+                    <div class="bg-[#0088CC] text-white px-2 text-xl py-3 font-medium rounded-t-md">
+                        Profil Lembaga
+                    </div>
+                    <div class="px-3 py-5" v-if="data.profile" v-html="data.profile"></div>
+                </div>
+                <div class="border border-[#0088CC] rounded-md mt-8">
+                    <div class="bg-[#0088CC] text-white px-2 text-xl py-3 font-medium rounded-t-md">
+                        Visi & Misi
+                    </div>
+                    <div class="px-3 py-5" v-if="data.visi" v-html="data.visi"></div>
+                </div>
+                <div class="border border-[#0088CC] rounded-md mt-8">
+                    <div class="bg-[#0088CC] text-white px-2 text-xl py-3 font-medium rounded-t-md">
+                        Tugas
+                    </div>
+                    <div class="px-3 py-5" v-if="data.tugas" v-html="data.tugas"></div>
+                </div>
+            </div>
         </div>
     </div>
     <Footer />
@@ -87,6 +109,18 @@ export default {
 
     to {
         opacity: 1;
+    }
+}
+
+.description-lembaga {
+    margin-left: 24px;
+    margin-top: 0;
+}
+
+@media screen and (max-width: 600px) {
+    .description-lembaga {
+        margin-left: 0;
+        margin-top: 12px;
     }
 }
 </style>

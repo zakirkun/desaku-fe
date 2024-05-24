@@ -13,7 +13,7 @@ export default {
     data: () => ({
         jabatan: [],
         selectedJabatan: null,
-        currentPerangkat: null
+        currentPerangkat: null,
     }),
     async mounted() {
         await this.loadJabatan()
@@ -24,6 +24,11 @@ export default {
             this.jabatan = data
         },
         async getPerangkat(id) {
+            console.log(this.selectedJabatan)
+            if (!id) {
+                id = this.selectedJabatan
+            }
+
             this.currentPerangkat = await $fetch(this.$config.public.API_BASE_URL + '/api/jabatan/perangkat/' + id)
         },
     }
@@ -33,7 +38,7 @@ export default {
 <template>
     <Header />
     <!-- Content -->
-    <div class="px-[14rem] pt-[2.5rem] min-h-[35rem]">
+    <div class="px-[2rem] md:px-[14rem] pt-[2.5rem] min-h-[35rem]">
         <div class="flex mb-6 items-center bg-[#f0f0f0] px-2 py-3 rounded-lg">
             <div class="mr-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 1024 1024">
@@ -45,8 +50,8 @@ export default {
                 <span>/ Struktur Organisasi</span>
             </div>
         </div>
-        <div class="pb-8 flex">
-            <div class="block flex-none w-[240px]">
+        <div class="pb-8 block md:flex">
+            <div v-if="!$vuetify.display.mobile" class="md:block flex-none w-[240px] hidden">
                 <div class="border-b cursor-pointer border-slate-300 py-2 flex" @click="getPerangkat(item.uuid)"
                     v-for="item in jabatan">
                     <svg xmlns="http://www.w3.org/2000/svg" width="1.8em" height="1.8em" viewBox="0 0 24 24">
@@ -56,20 +61,29 @@ export default {
                     <span>{{ item.name }}</span>
                 </div>
             </div>
-            <div class="block flex-1 pl-10">
+            <div v-else>
+                <v-select v-model="selectedJabatan" @update:modelValue="getPerangkat(null)" label="Pilih Jabatan" 
+                    :items="jabatan" item-value="uuid" item-title="name"></v-select>
+            </div>
+
+            <div class="block flex-1" :class="$vuetify.display.mobile ? 'pl-0' : 'pl-10'">
                 <div v-if="!currentPerangkat">
                     <h1 class="mb-4 font-semibold text-[#0088CC] text-3xl">Struktur Organisasi</h1>
-                    <img src="https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/struktur_org_desa.png">
+                    <img
+                        src="https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/struktur_org_desa.png">
                 </div>
-                <div v-else class="grid grid-cols-4">
-                    <div class="rounded-lg block shadow-lg" v-for="item in currentPerangkat">
-                        <div class="w-full h-[180px]">
-                            <img :src="item.image" class="w-full h-full object-cover rounded-t-lg" />
-                        </div>
-                        <div class="bg-[#0088CC] rounded-b-lg text-white text-base font-medium pa-2">
-                            <span>{{ item.name }}</span>
-                            <br>
-                            <span class="text-sm font-normal">{{ item.job }}</span>
+                <div v-else>
+                    <p class="text-2xl mb-5 font-semibold">{{ currentPerangkat[0].job }}</p>
+                    <div class="grid grid-cols-1 gap-8 md:grid-cols-4">
+                        <div @click="" class="cursor-pointer rounded-lg block shadow-lg" v-for="item in currentPerangkat">
+                            <div class="w-full h-[180px]">
+                                <img :src="item.image" class="w-full h-full object-cover rounded-t-lg" />
+                            </div>
+                            <div class="bg-[#0088CC] rounded-b-lg text-white text-base font-medium pa-2">
+                                <span>{{ item.name }}</span>
+                                <br>
+                                <span class="text-sm font-normal">{{ item.job }}</span>
+                            </div>
                         </div>
                     </div>
                 </div>

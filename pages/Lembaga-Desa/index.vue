@@ -11,16 +11,19 @@ useHead({
 export default {
     data: () => ({
         data: null,
-        headerActive: false
+        headerActive: false,
+        showContent: false
     }),
     async mounted() {
         const data = await $fetch(this.$config.public.API_BASE_URL + '/api/lembaga')
         this.data = data
+        this.showContent = true
     },
 }
 </script>
 
 <template>
+    <AnimationLoading v-if="!showContent" />
     <Header />
     <!-- Content -->
     <div class="px-[2rem] md:px-[14rem] pt-[2.5rem] min-h-[26rem]">
