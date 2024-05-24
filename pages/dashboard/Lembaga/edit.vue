@@ -4,6 +4,8 @@ useHead({
 })
 </script>
 <script>
+import { createSlug } from "@/helpers/createSlug" 
+
 export default {
     data() {
         return {
@@ -18,11 +20,13 @@ export default {
             jabatan: [],
             form: {
                 name: null,
+                address: null,
                 surname: null,
                 image: null,
                 visi: null,
                 tugas: null,
-                profile: null
+                profile: null,
+                slug: null
             },
             loading: false
         }
@@ -43,14 +47,16 @@ export default {
         async updateLembaga() {
             const { valid } = await this.$refs.form.validate()
 
-            if (!valid) {
+            if (!valid) {   
                 return
             }
 
             this.loading = true
+            this.form.slug = createSlug(this.form.name)
+            console.log(this.form.slug)
 
-            await $fetch(this.$config.public.API_BASE_URL + '/api/lembaga', {
-                method: "POST",
+            await $fetch(this.$config.public.API_BASE_URL + '/api/lembaga/' + this.$route.query.id, {
+                method: "PATCH",
                 headers: {
                     Authorization: "Bearer " + useToken().token
                 },
@@ -89,10 +95,14 @@ export default {
                             <v-text-field :rules="[v => !!v || 'Field is required']" v-model="form.name"
                                 variant="outlined" hide-details="auto" label="Nama Lembaga"></v-text-field>
                         </div>
-                            <div class="col-span-1 my-3">
-                                <v-text-field :rules="[v => !!v || 'Field is required']" v-model="form.surname"
-                                    variant="outlined" hide-details="auto" label="Singkatan Lembaga"></v-text-field>
-                            </div>
+                        <div class="col-span-1 my-3">
+                            <v-text-field :rules="[v => !!v || 'Field is required']" v-model="form.surname"
+                                variant="outlined" hide-details="auto" label="Singkatan Lembaga"></v-text-field>
+                        </div>
+                        <div class="col-span-1 mb-3">
+                            <v-text-field :rules="[v => !!v || 'Field is required']" v-model="form.address"
+                                variant="outlined" hide-details="auto" label="Alamat Kantor"></v-text-field>
+                        </div>
                         <div class="relative w-fit mt-4" v-if="form.image">
                             <v-img :src="form.image" width="300" />
                             <div @click="form.image = null" class="absolute cursor-pointer right-3 top-3 z-50">

@@ -75,15 +75,15 @@ export default {
             { type: 'subheader', title: 'Pemerintahan' },
             {
                 title: 'Struktur Organisasi',
-                value: 4,
+                value: 'struktur-organisasi',
             },
             {
                 title: 'Perangkat Desa',
-                value: 5,
+                value: 'perangkat-desa',
             },
             {
                 title: 'Lembaga Desa',
-                value: 5,
+                value: 'lembaga-desa',
             },
             { type: 'divider' },
             { type: 'subheader', title: 'Informasi Publik' },

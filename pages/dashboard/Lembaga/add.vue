@@ -4,6 +4,8 @@ useHead({
 })
 </script>
 <script>
+import { createSlug } from "@/helpers/createSlug" 
+
 export default {
     data() {
         return {
@@ -17,7 +19,9 @@ export default {
                 image: null,
                 visi: null,
                 tugas: null,
-                profile: null
+                profile: null,
+                address: null,
+                slug: null
             },
             loading: false
         }
@@ -34,6 +38,7 @@ export default {
             }
 
             this.loading = true
+            this.form.slug = createSlug(this.form.name)
 
             await $fetch(this.$config.public.API_BASE_URL + '/api/lembaga', {
                 method: "POST",
@@ -44,7 +49,7 @@ export default {
             })
 
             this.loading = false
-            // this.$router.push('/dashboard/lembaga')
+            this.$router.push('/dashboard/lembaga')
         },
         contentChangeVisi(v) {
             this.form.visi = v
@@ -78,6 +83,10 @@ export default {
                         <div class="col-span-1 my-3">
                             <v-text-field :rules="[v => !!v || 'Field is required']" v-model="form.surname"
                                 variant="outlined" hide-details="auto" label="Singkatan Lembaga"></v-text-field>
+                        </div>
+                        <div class="col-span-1 mb-3">
+                            <v-text-field :rules="[v => !!v || 'Field is required']" v-model="form.address"
+                                variant="outlined" hide-details="auto" label="Alamat Kantor"></v-text-field>
                         </div>
                         <div>
                             <span class="font-medium text-xl">Gambar Lembaga</span>
