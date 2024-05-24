@@ -1,10 +1,10 @@
 <template>
-    <div class="backdrop-blur-sm bg-white/30 h-screen flex items-center justify-center w-screen min-h-[26rem]">
+    <div class="backdrop-blur-sm bg-white/30 flex items-center justify-center w-full" style="min-height: calc(100vh - 5.5rem);">
         <div>
-            <img class="bounce mr-6" width="120"
+            <img class="bounce mr-1" width="120"
                 src="https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/images/logo_header.png"
                 alt="">
-            <p class="font-semibold text-center mx-auto text-xl mr-4">Loading...</p>
+            <p class="font-semibold text-center mx-auto text-xl ml-1">Loading...</p>
         </div>
     </div>
 </template>
