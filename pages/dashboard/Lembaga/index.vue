@@ -103,20 +103,21 @@ export default {
         <div class="col-12">
             <div class="card">
                 <v-data-table :loading="loadingData" :headers="headers" :items="items" item-key="name">
+                    <template #bottom></template>
                     <template v-slot:item.image="{ value }">
                         <v-img :src="value" width="100" height="100"></v-img>
                     </template>
                     <template v-slot:item.visi="{ value }">
-                        <span v-if="value">{{ value.slice(0, 80) }}...</span>
-                        <span else>-</span>
+                        <div v-if="value">{{ value.replace(/(<([^>]+)>)/ig, '').slice(0,100) }}</div>
+                        <span v-else>-</span>
                     </template>
                     <template v-slot:item.tugas="{ value }">
-                        <span v-if="value">{{ value.slice(0, 80) }}...</span>
-                        <span else>-</span>
+                        <div v-if="value">{{ value.replace(/(<([^>]+)>)/ig, '').slice(0,100) }}</div>
+                        <span v-else>-</span>
                     </template>
                     <template v-slot:item.profile="{ value }">
-                        <span v-if="value">{{ value.slice(0, 80) }}...</span>
-                        <span else>-</span>
+                        <div v-if="value">{{ value.replace(/(<([^>]+)>)/ig, '').slice(0,100) }}</div>
+                        <span v-else>-</span>
                     </template>
                     <template v-slot:item.actions="{ item }">
                         <div class="flex justify-center">

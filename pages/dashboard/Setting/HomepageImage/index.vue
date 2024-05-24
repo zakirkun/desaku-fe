@@ -89,6 +89,7 @@ export default {
         <div class="col-12">
             <div class="card">
                 <v-data-table :headers="headers" :items="items" item-key="name">
+                    <template #bottom></template>
                     <template v-slot:item.url="{ value }">
                         <v-img :src="value" width="100" height="100"></v-img>
                     </template>

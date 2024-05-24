@@ -172,6 +172,7 @@ export default {
         <div class="col-12">
             <div class="card">
                 <v-data-table :loading="loadingData" :headers="headers" :items="items" item-key="name">
+                    <template #bottom></template>
                     <template v-slot:item.content="{ value }">
                         <span v-html="value.slice(0, 100)"></span>
                     </template>
@@ -223,6 +224,7 @@ export default {
         <div class="col-12">
             <div class="card">
                 <v-data-table :headers="headersCategory" :items="itemsCategory" item-key="name">
+                    <template #bottom></template>
                     <template v-slot:item.content="{ value }">
                         <span v-html="value.slice(0, 100)"></span>
                     </template>

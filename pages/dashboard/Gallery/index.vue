@@ -160,6 +160,7 @@ export default {
         <div class="col-12">
             <div class="card">
                 <v-data-table :loading="loadingImage" :headers="headersImages" :items="images" item-key="name">
+                    <template #bottom></template>
                     <template v-slot:item.url="{ value }">
                         <v-img :src="value" width="100" height="100"></v-img>
                     </template>
@@ -203,6 +204,7 @@ export default {
         <div class="col-12">
             <div class="card">
                 <v-data-table :loading="loadingVideo" :headers="headersVideos" :items="videos" item-key="name">
+                    <template #bottom></template>
                     <template v-slot:item.url="{ value }">
                         <iframe class="my-6" width="260" height="165" :src="value" title="YouTube video player"
                             frameborder="0"

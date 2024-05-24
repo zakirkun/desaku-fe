@@ -120,6 +120,7 @@ export default {
         <div class="col-12">
             <div class="card">
                 <v-data-table :loading="loadingData" :headers="headers" :items="items" item-key="name">
+                    <template #bottom></template>
                     <template v-slot:item.actions="{ item }">
                         <div class="flex justify-center">
                             <div @click="$router.push('/dashboard/jabatan/edit?id=' + item.uuid)"
