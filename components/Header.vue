@@ -36,7 +36,14 @@ async function loadHeaderTop() {
     headerData.email = data.email
 }
 
-onClickOutside(target, event => navMobile.value = false)
+function openNavMobile() {
+    navMobile.value = !navMobile.value
+}
+
+onClickOutside(target, event => {
+    navMobile.value = false
+    document.body.style.overflow = '';
+})
 
 definePageMeta({
     layout: false
@@ -60,8 +67,8 @@ export default {
         items: [
             { type: 'subheader', title: 'Profil Desa' },
             {
-                title: 'Tentang Kami',
-                value: 'tentang-kami',
+                title: 'Tentang Desa',
+                value: 'tentang-desa',
             },
             {
                 title: 'Visi & Misi',
@@ -131,7 +138,7 @@ export default {
                             </div>
                         </div>
                     </div>
-                    <div class="flex items-center" @click="navMobile = false">
+                    <div class="flex items-center" @click="openNavMobile">
                         <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 28 28">
                             <path fill="black"
                                 d="M20.48 3.512a11.966 11.966 0 0 0-8.486-3.514C5.366-.002-.007 5.371-.007 11.999c0 3.314 1.344 6.315 3.516 8.487A11.966 11.966 0 0 0 11.995 24c6.628 0 12.001-5.373 12.001-12.001c0-3.314-1.344-6.315-3.516-8.487m-1.542 15.427a9.789 9.789 0 0 1-6.943 2.876c-5.423 0-9.819-4.396-9.819-9.819a9.789 9.789 0 0 1 2.876-6.943a9.786 9.786 0 0 1 6.942-2.876c5.422 0 9.818 4.396 9.818 9.818a9.785 9.785 0 0 1-2.876 6.942z" />
@@ -140,7 +147,9 @@ export default {
                         </svg>
                     </div>
                 </div>
-                <v-list selectable v-model:selected="navSelected" :items="items"></v-list>
+                <div class="overflow-y-scroll" style="height: calc(100vh - 60px);">
+                    <v-list selectable v-model:selected="navSelected" :items="items"></v-list>
+                </div>
             </div>
         </div>
     </Transition>
@@ -153,7 +162,7 @@ export default {
                             d="m16.556 12.906l-.455.453s-1.083 1.076-4.038-1.862s-1.872-4.014-1.872-4.014l.286-.286c.707-.702.774-1.83.157-2.654L9.374 2.86C8.61 1.84 7.135 1.705 6.26 2.575l-1.57 1.56c-.433.432-.723.99-.688 1.61c.09 1.587.808 5 4.812 8.982c4.247 4.222 8.232 4.39 9.861 4.238c.516-.048.964-.31 1.325-.67l1.42-1.412c.96-.953.69-2.588-.538-3.255l-1.91-1.039c-.806-.437-1.787-.309-2.417.317" />
                     </svg>
                     <div class="ml-1 text-white">
-                        {{ headerData.no_telp }}
+                        {{ headerData.no_telp ?? '-' }}
                     </div>
                 </div>
                 <div class="flex items-center">
@@ -162,7 +171,7 @@ export default {
                             d="m20 8l-8 5l-8-5V6l8 5l8-5m0-2H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2" />
                     </svg>
                     <div class="text-white ml-2">
-                        {{ headerData.email }}
+                        {{ headerData.email ?? '-' }}
                     </div>
                 </div>
             </div>
@@ -184,6 +193,8 @@ export default {
 
                 <div class="items-center justify-between flex px-0 md:px-6 lg:px-0 z-2">
                     <ul class="list-none p-0 m-0 items-center select-none md:flex hidden cursor-pointer">
+                        <div @click="$router.push('/')" class="font-semibold text-[#0088CC] mr-5 border-slate-300">
+                            Beranda</div>
                         <div class="mr-3">
                             <v-menu open-on-hover>
                                 <template v-slot:activator="{ props }">
@@ -200,9 +211,9 @@ export default {
 
                                 <div
                                     class="block border-t-4 border-[#0088CC] shadow-md rounded-md cursor-pointer mt-4 bg-white px-4 py-5">
-                                    <div @click="$router.push('/tentang-kami')"
+                                    <div @click="$router.push('/tentang-desa')"
                                         class="mb-2 border-b border-slate-300 pb-3">
-                                        Tentang Kami</div>
+                                        Tentang Desa</div>
                                     <div @click="$router.push('/visi-misi')"
                                         class="mb-2 border-b border-slate-300 pb-3">
                                         Visi & Misi</div>
@@ -269,7 +280,7 @@ export default {
                             </v-menu>
                         </div>
                     </ul>
-                    <div @click="navMobile = !navMobile" class="md:hidden cursor-pointer bg-[#0088CC] pa-2 rounded-lg">
+                    <div @click="openNavMobile" class="md:hidden cursor-pointer bg-[#0088CC] pa-2 rounded-lg">
                         <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
                             <path fill="white"
                                 d="M22 18.005c0 .55-.446.995-.995.995h-8.01a.995.995 0 0 1 0-1.99h8.01c.55 0 .995.445.995.995M22 12c0 .55-.446.995-.995.995H2.995a.995.995 0 1 1 0-1.99h18.01c.55 0 .995.446.995.995m-.995-5.01a.995.995 0 0 0 0-1.99H8.995a.995.995 0 1 0 0 1.99z" />
@@ -304,5 +315,19 @@ export default {
 
 .v-enter-active {
     transition: all 0.5s ease;
+}
+
+.animation {
+    animation: fade-out 0.5s ease-out;
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 </style>

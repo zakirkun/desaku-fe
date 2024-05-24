@@ -39,7 +39,7 @@ export default {
 </script>
 
 <template>
-    <div class="text-2xl font-semibold mb-2">Tentang Kami</div>
+    <div class="text-2xl font-semibold mb-2">Tentang Desa</div>
     <div class="grid">
         <div class="col-12">
             <div class="card">

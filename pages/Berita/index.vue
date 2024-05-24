@@ -15,11 +15,13 @@ export default {
     data: () => ({
         news: [],
         newsCategory: [],
-        moment: moment
+        moment: moment,
+        showContent: false
     }),
     async mounted() {
         await this.loadData()
         await this.loadNewsCategory()
+        this.showContent = true
     },
     methods: {
         async loadData() {
@@ -36,8 +38,8 @@ export default {
 </script>
 
 <template>
-    <Header />
-    <div class="block px-[2rem] md:px-[14rem] bg-[#F8F9FC] pt-6">
+    <AnimationLoading v-if="!showContent" />
+    <div v-else class="animate-fade block px-[2rem] md:px-[14rem] bg-[#F8F9FC] pt-6">
         <div class="flex mb-6 items-center bg-[#f0f0f0] pa-3 rounded-lg">
             <div class="mr-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 1024 1024">
@@ -122,19 +124,3 @@ export default {
 
     <Footer />
 </template>
-
-<style>
-.animation {
-    animation: fade-out 0.5s ease-out;
-}
-
-@keyframes fade-out {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-</style>

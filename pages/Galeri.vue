@@ -30,6 +30,7 @@ export default {
         lightbox: null,
         videos: [],
         images: [],
+        showContent: false
     }),
     async mounted() {
         await this.loadVideos()
@@ -43,6 +44,8 @@ export default {
             });
             this.lightbox.init();
         }
+
+        this.showContent = true
     },
     unmounted() {
         if (this.lightbox) {
@@ -64,9 +67,8 @@ export default {
 </script>
 
 <template>
-    <Header />
-    <!-- Content -->
-    <div class="px-[2rem] md:px-[14rem] pt-[2.5rem] min-h-[26rem]">
+    <AnimationLoading v-if="!showContent" />
+    <div v-else class="animate-fade px-[2rem] md:px-[14rem] pt-[2.5rem] min-h-[26rem]">
         <div class="flex mb-6 items-center bg-[#f0f0f0] px-2 py-3 rounded-lg">
             <div class="mr-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 1024 1024">
@@ -105,21 +107,4 @@ export default {
             </div>
         </div>
     </div>
-    <Footer />
 </template>
-
-<style>
-.animation {
-    animation: fade-out 0.5s ease-out;
-}
-
-@keyframes fade-out {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-</style>

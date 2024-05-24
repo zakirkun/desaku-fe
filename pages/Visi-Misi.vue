@@ -11,27 +11,20 @@ useHead({
 export default {
     data: () => ({
         data: null,
-        headerActive: false
+        showContent: false
     }),
     async mounted() {
         const data = await $fetch(this.$config.public.API_BASE_URL + '/api/visi')
         this.data = data.visi
 
-        window.addEventListener('scroll', function () {
-            if (window.scrollY > 20) {
-                headerActive.value = true
-            } else {
-                headerActive.value = false
-            }
-        })
+        this.showContent = true
     },
 }
 </script>
 
 <template>
-    <Header />
-    <!-- Content -->
-    <div class="px-[2rem] md:px-[14rem] pt-[2.5rem] min-h-[26rem]">
+    <AnimationLoading v-if="!showContent" />
+    <div v-else class="animate-fade px-[2rem] md:px-[14rem] pt-[2.5rem] min-h-[26rem]">
         <div class="flex mb-6 items-center bg-[#f0f0f0] px-3 py-3 rounded-lg">
             <div class="mr-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 1024 1024">
@@ -48,21 +41,4 @@ export default {
             <div v-if="data" v-html="data"></div>
         </div>
     </div>
-    <Footer />
 </template>
-
-<style>
-.animation {
-    animation: fade-out 0.5s ease-out;
-}
-
-@keyframes fade-out {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-</style>

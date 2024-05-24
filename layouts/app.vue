@@ -1,7 +1,11 @@
 <template>
-    <v-app>
-        <div class="min-h-screen">
-            <router-view></router-view>
-        </div>
-    </v-app>
+    <v-layout>
+        <v-app>
+            <div class="min-h-screen">
+                <Header />
+                <router-view></router-view>
+                <Footer />
+            </div>
+        </v-app>
+    </v-layout>
 </template>
