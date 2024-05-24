@@ -81,6 +81,10 @@ export default {
                 title: 'Perangkat Desa',
                 value: 5,
             },
+            {
+                title: 'Lembaga Desa',
+                value: 5,
+            },
             { type: 'divider' },
             { type: 'subheader', title: 'Informasi Publik' },
             {
@@ -225,6 +229,9 @@ export default {
                                     <div @click="$router.push('/struktur-organisasi')"
                                         class="mb-2 border-b border-slate-300 pb-3">
                                         Struktur Organisasi</div>
+                                    <div @click="$router.push('/lembaga-desa')"
+                                        class="mb-2 border-b border-slate-300 pb-3">
+                                        Lembaga Desa</div>
                                     <div @click="$router.push('/perangkat-desa')">Perangkat Desa</div>
                                 </div>
                             </v-menu>
@@ -249,7 +256,8 @@ export default {
                                         Galeri</div>
                                     <div @click="$router.push('/berita')" class="mb-2 border-b border-slate-300 pb-3">
                                         Berita</div>
-                                    <div @click="$router.push('/pengumuman')" class="mb-2 border-b border-slate-300 pb-3">
+                                    <div @click="$router.push('/pengumuman')"
+                                        class="mb-2 border-b border-slate-300 pb-3">
                                         Pengumuman</div>
                                     <div @click="$router.push('/kegiatan')">
                                         Kegiatan</div>

@@ -1,30 +1,27 @@
 <script setup>
 useHead({
-    title: 'Jabatan',
+    title: 'Lembaga',
 })
 </script>
 <script>
-import { VueDraggableNext } from 'vue-draggable-next'
-
 export default {
-    components: {
-        draggable: VueDraggableNext,
-    },
     data() {
         return {
             enabled: true,
-            list: [],
-            dragging: false,
-            modalRemoveJabatan: false,
-            modalRemoveJabatanCategory: false,
-            removedJabatanId: null,
+            modalremoveLembaga: false,
+            modalremoveLembagaCategory: false,
+            removedLembagaId: null,
             data: null,
             headers: [
                 { title: 'Name', align: 'start', sortable: false, key: 'name', width: "300px" },
+                { title: 'Surname', align: 'start', sortable: false, key: 'surname', width: "300px" },
+                { title: 'Profile', align: 'start', sortable: false, key: 'profile', width: "300px" },
+                { title: 'Visi', align: 'start', sortable: false, key: 'visi', width: "300px" },
+                { title: 'Tugas', align: 'start', sortable: false, key: 'tugas', width: "300px" },
+                { title: 'Image', align: 'start', sortable: false, key: 'image', width: "300px" },
                 { title: 'Actions', align: 'center', key: 'actions', sortable: false },
             ],
             items: [],
-            loading: false
         }
     },
     async mounted() {
@@ -32,53 +29,37 @@ export default {
     },
     methods: {
         async loadData() {
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/jabatan')
+            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/lembaga')
             this.items = data
-            this.list = data
         },
-        openModalRemoveJabatan(id) {
-            this.modalRemoveJabatan = true
-            this.removedJabatanId = id
+        openModalremoveLembaga(id) {
+            this.modalremoveLembaga = true
+            this.removedLembagaId = id
         },
-        async removeJabatan() {
-            await $fetch(this.$config.public.API_BASE_URL + '/api/jabatan/' + this.removedJabatanId, {
+        async removeLembaga() {
+            await $fetch(this.$config.public.API_BASE_URL + '/api/lembaga/' + this.removedLembagaId, {
                 method: "DELETE",
                 headers: {
                     Authorization: "Bearer " + useToken().token
                 },
             })
 
-            this.modalRemoveJabatan = false
+            this.modalremoveLembaga = false
             await this.loadData()
-        },
-        async updateOrderJabatan() {
-            this.loading = true
-
-            await $fetch(this.$config.public.API_BASE_URL + '/api/jabatan/order', {
-                method: "PATCH",
-                headers: {
-                    Authorization: "Bearer " + useToken().token
-                },
-                body: {
-                    data: this.list
-                }
-            })
-
-            this.loading = false
         },
     }
 }
 </script>
 
 <template>
-    <v-dialog v-model="modalRemoveJabatan" width="auto">
+    <v-dialog v-model="modalremoveLembaga" width="auto">
         <v-card height="auto" style="scrollbar-width: none">
             <template v-slot:title>
                 <div class="flex items-center justify-between">
                     <div class="text-xl font-semibold">
-                        <span>Hapus Jabatan?</span>
+                        <span>Hapus Lembaga?</span>
                     </div>
-                    <div @click="modalRemoveJabatan = false" class="cursor-pointer">
+                    <div @click="modalremoveLembaga = false" class="cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
                             <g fill="none" stroke="black" stroke-width="1.5">
                                 <circle cx="12" cy="12" r="10" />
@@ -90,12 +71,12 @@ export default {
             </template>
             <template v-slot:text>
                 <div>
-                    <span>Jabatan yang dihapus tidak bisa dikembalikan kembali.</span>
+                    <span>Lembaga yang dihapus tidak bisa dikembalikan kembali.</span>
                 </div>
             </template>
             <template v-slot:actions>
                 <div class="w-full flex justify-end">
-                    <v-btn variant="flat" @click="removeJabatan" color="#FC4100"
+                    <v-btn variant="flat" @click="removeLembaga" color="#FC4100"
                         class="w-fit mt-6 text-white px-3 mx-1 mb-2 py-2 text-md">
                         <span class="capitalize">Hapus</span>
                     </v-btn>
@@ -104,11 +85,11 @@ export default {
         </v-card>
     </v-dialog>
     <div class="flex justify-between items-center mb-3">
-        <div class="text-2xl font-semibold mb-2">Jabatan</div>
+        <div class="text-2xl font-semibold mb-2">Lembaga</div>
         <div class="text-md font-semibold mb-2">
-            <NuxtLink to="/dashboard/jabatan/add">
-                <v-btn color="#10B981" class="mt-3 text-white px-3 py-2">
-                    <span class="capitalize">Tambah Jabatan +</span>
+            <NuxtLink to="/dashboard/lembaga/add">
+                <v-btn @click="updateContent" color="#10B981" class="mt-3 text-white px-3 py-2">
+                    <span class="capitalize">Tambah Lembaga +</span>
                 </v-btn>
             </NuxtLink>
         </div>
@@ -117,9 +98,33 @@ export default {
         <div class="col-12">
             <div class="card">
                 <v-data-table :headers="headers" :items="items" item-key="name">
+                    <template v-slot:item.image="{ value }">
+                        <v-img :src="value" width="100" height="100"></v-img>
+                    </template>
+                    <template v-slot:item.visi="{ value }">
+                        <span v-if="value">{{ value.slice(0, 80) }}...</span>
+                        <span else>-</span>
+                    </template>
+                    <template v-slot:item.tugas="{ value }">
+                        <span v-if="value">{{ value.slice(0, 80) }}...</span>
+                        <span else>-</span>
+                    </template>
+                    <template v-slot:item.profile="{ value }">
+                        <span v-if="value">{{ value.slice(0, 80) }}...</span>
+                        <span else>-</span>
+                    </template>
                     <template v-slot:item.actions="{ item }">
                         <div class="flex justify-center">
-                            <div @click="$router.push('/dashboard/jabatan/edit?id=' + item.uuid)"
+                            <a :href="`/kegiatan/${item.slug}`" target="_blank">
+                                <div class="cursor-pointer">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em"
+                                        viewBox="0 0 24 24">
+                                        <path fill="#212121"
+                                            d="M12 9a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5a5 5 0 0 1 5-5a5 5 0 0 1 5 5a5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5" />
+                                    </svg>
+                                </div>
+                            </a>
+                            <div @click="$router.push('/dashboard/lembaga/edit?id=' + item.uuid)"
                                 class="cursor-pointer mx-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em"
                                     viewBox="0 0 24 24">
@@ -128,7 +133,7 @@ export default {
                                         clip-rule="evenodd" />
                                 </svg>
                             </div>
-                            <div class="cursor-pointer" @click="openModalRemoveJabatan(item.uuid)">
+                            <div class="cursor-pointer" @click="openModalremoveLembaga(item.uuid)">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em"
                                     viewBox="0 0 24 24">
                                     <path fill="#212121"
@@ -138,25 +143,6 @@ export default {
                         </div>
                     </template>
                 </v-data-table>
-            </div>
-        </div>
-    </div>
-    <div class="flex justify-between items-center mb-3">
-        <div class="text-xl md:text-2xl font-semibold mb-2">Urutan Jabatan</div>
-    </div>
-    <div class="grid mb-6">
-        <div class="col-12">
-            <div class="card">
-                <draggable class="dragArea list-group w-full" :list="list" @change="log">
-                    <div class="list-group-item bg-gray-300 m-1 p-3 rounded-md text-center" v-for="element in list"
-                        :key="element.name">
-                        {{ element.name }}
-                    </div>
-                </draggable>
-                <v-btn @click="updateOrderJabatan" color="#10B981" class="mt-5 text-white px-3 py-2">
-                    <span class="capitalize" v-if="!loading">Update</span>
-                    <Loader v-else />
-                </v-btn>
             </div>
         </div>
     </div>

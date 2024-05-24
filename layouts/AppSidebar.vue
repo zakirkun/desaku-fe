@@ -30,6 +30,7 @@ const model = ref([
                 items: [
                     { label: 'Perangkat Desa', to: "/dashboard/perangkat-desa" },
                     { label: 'Jabatan', to: "/dashboard/jabatan" },
+                    { label: 'Lembaga', to: "/dashboard/lembaga" },
                 ]
             },
             {
