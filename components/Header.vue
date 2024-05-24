@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, reactive, watch } from 'vue';
+import { onMounted, reactive } from 'vue';
 import { onClickOutside } from '@vueuse/core'
 const config = useRuntimeConfig()
 
@@ -7,6 +7,7 @@ const headerActive = ref(false)
 const windowWidth = ref(null)
 const navMobile = ref(false)
 const target = ref(null)
+const navSelected = ref(null)
 
 const headerData = reactive({
     no_telp: null,
@@ -40,6 +41,11 @@ function openNavMobile() {
     navMobile.value = !navMobile.value
 }
 
+function changePage() {
+    navMobile.value = false
+    useRouter().push(`/${navSelected.value}`)
+}
+
 onClickOutside(target, event => {
     navMobile.value = false
     document.body.style.overflow = '';
@@ -52,7 +58,6 @@ definePageMeta({
 <script>
 export default {
     data: () => ({
-        navSelected: null,
         open: ['Users'],
         admins: [
             ['Management', 'mdi-account-multiple-outline'],
@@ -112,11 +117,6 @@ export default {
             },
         ],
     }),
-    watch: {
-        navSelected() {
-            this.$router.push(`/${this.navSelected}`)
-        }
-    },
 }
 </script>
 <template>
@@ -148,7 +148,8 @@ export default {
                     </div>
                 </div>
                 <div class="overflow-y-scroll" style="height: calc(100vh - 60px);">
-                    <v-list selectable v-model:selected="navSelected" :items="items"></v-list>
+                    <v-list selectable v-model:selected="navSelected" @update:selected="changePage"
+                        :items="items"></v-list>
                 </div>
             </div>
         </div>
