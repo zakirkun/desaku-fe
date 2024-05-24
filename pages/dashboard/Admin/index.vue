@@ -11,6 +11,7 @@ export default {
             modalRemoveNewsCategory: false,
             removedNewsId: null,
             data: null,
+            loadingData: false,
             form: {
                 title: null,
                 category: null,
@@ -29,12 +30,14 @@ export default {
     },
     methods: {
         async loadData() {
+            this.loadingData = true
             const data = await $fetch(this.$config.public.API_BASE_URL + '/api/admin/list/all', {
                 headers: {
                     Authorization: "Bearer " + useToken().token
                 },
             })
             this.items = data
+            this.loadingData = false
         },
         openModalRemoveUser(id) {
             this.modalRemoveNews = true
@@ -100,7 +103,7 @@ export default {
     <div class="grid mb-6">
         <div class="col-12">
             <div class="card">
-                <v-data-table :headers="headers" :items="items" item-key="name">
+                <v-data-table :loading="loadingData" :headers="headers" :items="items" item-key="name">
                     <template v-slot:item.actions="{ item }">
                         <div class="flex justify-end">
                             <div @click="$router.push('/dashboard/admin/edit?id=' + item.uuid)"

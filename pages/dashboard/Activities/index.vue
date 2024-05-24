@@ -16,6 +16,7 @@ export default {
                 category: null,
                 content: null
             },
+            loadingData: false,
             headers: [
                 { title: 'Title', align: 'start', sortable: false, key: 'title', width: "300px" },
                 { title: 'Description', align: 'start', sortable: false, key: 'description', width: "300px" },
@@ -30,8 +31,10 @@ export default {
     },
     methods: {
         async loadData() {
+            this.loadingData = true
             const data = await $fetch(this.$config.public.API_BASE_URL + '/api/activities')
             this.items = data
+            this.loadingData = false
         },
         openModalRemoveAnnouncement(id) {
             this.modalRemoveNews = true
@@ -98,7 +101,7 @@ export default {
     <div class="grid mb-6">
         <div class="col-12">
             <div class="card">
-                <v-data-table :headers="headers" :items="items" item-key="name">
+                <v-data-table :loading="loadingData" :headers="headers" :items="items" item-key="name">
                     <template v-slot:item.content="{ value }">
                         <span v-if="value" v-html="value.slice(0, 100)"></span>
                         <span v-else>-</span>

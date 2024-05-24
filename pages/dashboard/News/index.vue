@@ -30,6 +30,7 @@ export default {
             ],
             items: [],
             itemsCategory: [],
+            loadingData: false
         }
     },
     async mounted() {
@@ -38,9 +39,13 @@ export default {
     },
     methods: {
         async loadData() {
+            this.loadingData = true
+
             const data = await $fetch(this.$config.public.API_BASE_URL + '/api/news')
             this.items = data
             this.renderRichEditor = true
+
+            this.loadingData = false
         },
         async loadNewsCategory() {
             const data = await $fetch(this.$config.public.API_BASE_URL + '/api/news-category')
@@ -166,7 +171,7 @@ export default {
     <div class="grid mb-6">
         <div class="col-12">
             <div class="card">
-                <v-data-table :headers="headers" :items="items" item-key="name">
+                <v-data-table :loading="loadingData" :headers="headers" :items="items" item-key="name">
                     <template v-slot:item.content="{ value }">
                         <span v-html="value.slice(0, 100)"></span>
                     </template>

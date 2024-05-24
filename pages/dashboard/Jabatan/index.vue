@@ -24,7 +24,8 @@ export default {
                 { title: 'Actions', align: 'center', key: 'actions', sortable: false },
             ],
             items: [],
-            loading: false
+            loading: false,
+            loadingData: false
         }
     },
     async mounted() {
@@ -32,9 +33,11 @@ export default {
     },
     methods: {
         async loadData() {
+            this.loadingData = true
             const data = await $fetch(this.$config.public.API_BASE_URL + '/api/jabatan')
             this.items = data
             this.list = data
+            this.loadingData = false
         },
         openModalRemoveJabatan(id) {
             this.modalRemoveJabatan = true
@@ -116,7 +119,7 @@ export default {
     <div class="grid mb-6">
         <div class="col-12">
             <div class="card">
-                <v-data-table :headers="headers" :items="items" item-key="name">
+                <v-data-table :loading="loadingData" :headers="headers" :items="items" item-key="name">
                     <template v-slot:item.actions="{ item }">
                         <div class="flex justify-center">
                             <div @click="$router.push('/dashboard/jabatan/edit?id=' + item.uuid)"

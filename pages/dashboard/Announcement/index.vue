@@ -7,6 +7,7 @@ useHead({
 export default {
     data() {
         return {
+            laodingData: false,
             modalRemoveNews: false,
             modalRemoveNewsCategory: false,
             removedAnnouncementId: null,
@@ -30,8 +31,10 @@ export default {
     },
     methods: {
         async loadData() {
+            this.loadingData = true
             const data = await $fetch(this.$config.public.API_BASE_URL + '/api/announcement')
             this.items = data
+            this.loadingData = false
         },
         openModalRemoveAnnouncement(id) {
             this.modalRemoveNews = true
@@ -98,7 +101,8 @@ export default {
     <div class="grid mb-6">
         <div class="col-12">
             <div class="card">
-                <v-data-table :headers="headers" :items="items" item-key="name">
+                <v-data-table :loading="loadingData" :headers="headers" :items="items" item-key="name">
+                    <template #bottom></template>
                     <template v-slot:item.content="{ value }">
                         <span v-if="value" v-html="value.slice(0, 100)"></span>
                         <span v-else>-</span>

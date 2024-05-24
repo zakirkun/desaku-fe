@@ -8,6 +8,7 @@ export default {
     data() {
         return {
             enabled: true,
+            loadingData: false,
             modalremovePerangkat: false,
             modalremovePerangkatCategory: false,
             removedPerangkatId: null,
@@ -26,8 +27,12 @@ export default {
     },
     methods: {
         async loadData() {
+            this.loadingData = true
+
             const data = await $fetch(this.$config.public.API_BASE_URL + '/api/perangkat-desa')
             this.items = data
+
+            this.loadingData = false
         },
         openModalRemovePerangkat(id) {
             this.modalremovePerangkat = true
@@ -105,7 +110,7 @@ export default {
     <div class="grid mb-6">
         <div class="col-12">
             <div class="card">
-                <v-data-table :headers="headers" :items="items" item-key="name">
+                <v-data-table :loading="loadingData" :headers="headers" :items="items" item-key="name">
                     <template v-slot:item.image="{ value }">
                         <v-img :src="value" width="100" height="100"></v-img>
                     </template>

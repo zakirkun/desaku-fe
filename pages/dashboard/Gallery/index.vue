@@ -30,6 +30,8 @@ export default {
             ],
             images: [],
             videos: [],
+            loadingImage: false,
+            loadingVideo: false,
         }
     },
     async mounted() {
@@ -38,12 +40,20 @@ export default {
     },
     methods: {
         async loadImage() {
+            this.loadingImage = true
+
             const data = await $fetch(this.$config.public.API_BASE_URL + '/api/image-gallery')
             this.images = data
+
+            this.loadingImage = false
         },
         async loadVideo() {
+            this.loadingVideo = true
+
             const data = await $fetch(this.$config.public.API_BASE_URL + '/api/video-gallery')
             this.videos = data
+
+            this.loadingVideo = false
         },
         openModalRemoveImages(id) {
             this.modalRemoveImage = true
@@ -149,7 +159,7 @@ export default {
     <div class="grid mb-6">
         <div class="col-12">
             <div class="card">
-                <v-data-table :headers="headersImages" :items="images" item-key="name">
+                <v-data-table :loading="loadingImage" :headers="headersImages" :items="images" item-key="name">
                     <template v-slot:item.url="{ value }">
                         <v-img :src="value" width="100" height="100"></v-img>
                     </template>
@@ -192,7 +202,7 @@ export default {
     <div class="grid mb-6">
         <div class="col-12">
             <div class="card">
-                <v-data-table :headers="headersVideos" :items="videos" item-key="name">
+                <v-data-table :loading="loadingVideo" :headers="headersVideos" :items="videos" item-key="name">
                     <template v-slot:item.url="{ value }">
                         <iframe class="my-6" width="260" height="165" :src="value" title="YouTube video player"
                             frameborder="0"
