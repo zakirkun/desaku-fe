@@ -36,5 +36,5 @@ export default defineNuxtConfig({
             API_BASE_URL: 'http://127.0.0.1:8000',
         },
     },
-    css: ['vuetify/lib/styles/main.sass', 'primeicons/primeicons.css', 'primevue/resources/primevue.min.css', '@/assets/styles.scss', '@/assets/main.css']
+    css: ['vuetify/lib/styles/main.sass', 'primeicons/primeicons.css', '@/assets/styles.scss', '@/assets/main.css']
 });
