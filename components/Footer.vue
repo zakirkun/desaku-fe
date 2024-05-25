@@ -94,7 +94,7 @@ export default {
         </div>
     </div>
     <div class="bg-[#0077B3] px-[2rem] md:px-[14rem] text-white py-5">
-        <p>2024 © Desa Kertamulya Kabupaten Sleman.</p>
+        <p class="text-base">2024 © Desa Kertamulya Kabupaten Sleman.</p>
     </div>
 </template>
 <style scoped>

@@ -15,6 +15,7 @@ export default {
                 rt: null,
                 rw: null,
                 kabupaten: null,
+                provinsi: null,
                 maps: null,
             },
         }
@@ -58,32 +59,38 @@ export default {
                 <v-form ref="form">
                     <div class="grid grid-cols-2 gap-x-4">
                         <div>
-                            <v-text-field :rules="[v => !!v || 'Field is required']" v-model="form.desa" variant="outlined" hide-details="auto"
+                            <v-text-field v-model="form.desa" variant="outlined" hide-details="auto"
                                 label="Desa"></v-text-field>
                         </div>
                         <div>
-                            <v-text-field :rules="[v => !!v || 'Field is required']" v-model="form.kabupaten" variant="outlined" hide-details="auto"
+                            <v-text-field v-model="form.kabupaten" variant="outlined" hide-details="auto"
                                 label="Kabupaten"></v-text-field>
                         </div>
                     </div>
                     <div class="grid grid-cols-2 my-5 gap-x-4">
                         <div>
-                            <v-text-field :rules="[v => !!v || 'Field is required']" v-model="form.kecamatan" variant="outlined" hide-details="auto"
+                            <v-text-field v-model="form.kecamatan" variant="outlined" hide-details="auto"
                                 label="Kecamatan"></v-text-field>
                         </div>
                         <div>
-                            <v-text-field :rules="[v => !!v || 'Field is required']" v-model="form.kelurahan" variant="outlined" hide-details="auto"
+                            <v-text-field v-model="form.kelurahan" variant="outlined" hide-details="auto"
                                 label="Kelurahan"></v-text-field>
                         </div>
                     </div>
                     <div class="grid grid-cols-2 gap-x-4">
                         <div>
-                            <v-text-field :rules="[v => !!v || 'Field is required']" v-model="form.rt" variant="outlined" hide-details="auto"
+                            <v-text-field v-model="form.rt" variant="outlined" hide-details="auto"
                                 label="RT"></v-text-field>
                         </div>
                         <div>
-                            <v-text-field :rules="[v => !!v || 'Field is required']" v-model="form.rw" variant="outlined" hide-details="auto"
+                            <v-text-field v-model="form.rw" variant="outlined" hide-details="auto"
                                 label="RW"></v-text-field>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-x-4 mt-6">
+                        <div>
+                            <v-text-field v-model="form.provinsi" variant="outlined" hide-details="auto"
+                                label="Provinsi"></v-text-field>
                         </div>
                     </div>
                     <div class="mb-3 text-lg font-medium my-1 mt-6">Embed Maps Desa</div>

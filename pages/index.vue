@@ -235,7 +235,15 @@ export default {
                             <span>Desa</span>
                         </div>
                         <div>
-                            <span>: {{ location.desa }}</span>
+                            <span>: {{ location.desa ?? '-' }}</span>
+                        </div>
+                    </div>
+                    <div class="flex mb-2">
+                        <div class="w-[60%]">
+                            <span>Provinsi</span>
+                        </div>
+                        <div>
+                            <span>: {{ location.provinsi ?? '-' }}</span>
                         </div>
                     </div>
                     <div class="flex mb-2">
@@ -243,7 +251,7 @@ export default {
                             <span>Kabupaten</span>
                         </div>
                         <div>
-                            <span>: {{ location.kabupaten }}</span>
+                            <span>: {{ location.kabupaten ?? '-' }}</span>
                         </div>
                     </div>
                     <div class="flex mb-2">
@@ -251,7 +259,7 @@ export default {
                             <span>Kelurahan</span>
                         </div>
                         <div>
-                            <span>: {{ location.kelurahan }}</span>
+                            <span>: {{ location.kelurahan ?? '-' }}</span>
                         </div>
                     </div>
                     <div class="flex mb-2">
@@ -259,7 +267,7 @@ export default {
                             <span>Kecamatan</span>
                         </div>
                         <div>
-                            <span>: {{ location.kecamatan }}</span>
+                            <span>: {{ location.kecamatan ?? '-' }}</span>
                         </div>
                     </div>
                     <div class="flex mb-2">
@@ -267,7 +275,7 @@ export default {
                             <span>RT/RW</span>
                         </div>
                         <div>
-                            <span>: {{ location.rt }}/{{ location.rw }}</span>
+                            <span>: {{ location.rt ?? '-' }}/{{ location.rw ?? '-' }}</span>
                         </div>
                     </div>
                 </div>
