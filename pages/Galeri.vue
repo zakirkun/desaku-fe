@@ -4,7 +4,7 @@ definePageMeta({
 });
 
 useHead({
-    title: "Galeri"
+    title: "Galeri Desa"
 })
 </script>
 
@@ -15,12 +15,10 @@ import 'photoswipe/style.css';
 export default {
     data: () => ({
         lightbox: null,
-        videos: [],
         images: [],
         showContent: false
     }),
     async mounted() {
-        await this.loadVideos()
         await this.loadImages()
 
         this.showContent = true
@@ -43,10 +41,6 @@ export default {
         }
     },
     methods: {
-        async loadVideos() {
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/video-gallery')
-            this.videos = data
-        },
         async loadImages() {
             const data = await $fetch(this.$config.public.API_BASE_URL + '/api/image-gallery')
             this.images = data
@@ -67,22 +61,11 @@ export default {
                 </svg>
             </div>
             <div class="text-[#0088CC]">
-                <span>/ Galeri</span>
-            </div>
-        </div>
-        <div class="pb-8">
-            <h1 class="mb-6 font-semibold text-[#0088CC] text-2xl">Galeri Video</h1>
-            <div class="grid grid-cols-1 md:grid-cols-4 mb-2 gap-8">
-                <div v-for="video in videos" class="h-full">
-                    <iframe class="w-full" height="160" :src="video.url"></iframe>
-                    <div class="mt-3 font-semibold text-lg">
-                        <span>{{ video.description }}</span>
-                    </div>
-                </div>
+                <span>/ Galeri Desa</span>
             </div>
         </div>
         <div class="pb-[6rem]">
-            <h1 class="mb-4 font-semibold text-[#0088CC] text-2xl">Galeri Foto</h1>
+            <h1 class="mb-4 font-semibold text-[#0088CC] text-2xl">Galeri Desa</h1>
             <div id="gallery" class="grid grid-cols-1 md:grid-cols-3 gap-[4rem] md:gap-8">
                 <a class="w-fit" v-for="(image, key) in images" :key="key" :href="image.url" data-pswp-width="600"
                     data-pswp-height="400" target="_blank" rel="noreferrer">

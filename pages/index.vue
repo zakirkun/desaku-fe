@@ -20,13 +20,16 @@ useHead({
 
 <script>
 import moment from 'moment';
+import PhotoSwipeLightbox from 'photoswipe/lightbox';
+import 'photoswipe/style.css';
 
 export default {
     data: () => ({
+        lightbox: null,
         showContent: false,
         moment: moment,
         images: [],
-        videos: [],
+        imagesGallery: [],
         location: {},
         features: [
             {
@@ -55,11 +58,28 @@ export default {
         await this.loadImages()
         await this.loadActivities()
         await this.loadNews()
-        await this.loadVideos()
+        await this.loadImagesGallery()
         await this.loadLocation()
         await this.loadAnnouncements()
 
         this.showContent = true
+
+        await this.$nextTick(() => {
+            if (!this.lightbox) {
+                this.lightbox = new PhotoSwipeLightbox({
+                    gallery: '#gallery',
+                    children: 'a',
+                    pswpModule: () => import('photoswipe'),
+                });
+                this.lightbox.init();
+            }
+        })
+    },
+    unmounted() {
+        if (this.lightbox) {
+            this.lightbox.destroy();
+            this.lightbox = null;
+        }
     },
     methods: {
         async loadImages() {
@@ -74,8 +94,8 @@ export default {
         async loadAnnouncements() {
             this.announcement = await $fetch(this.$config.public.API_BASE_URL + '/api/announcement?limit=5')
         },
-        async loadVideos() {
-            this.videos = await $fetch(this.$config.public.API_BASE_URL + '/api/video-gallery?limit=6')
+        async loadImagesGallery() {
+            this.imagesGallery = await $fetch(this.$config.public.API_BASE_URL + '/api/image-gallery?limit=6')
         },
         async loadLocation() {
             const data = await $fetch(this.$config.public.API_BASE_URL + '/api/location')
@@ -109,7 +129,8 @@ export default {
                 </swiper-slide>
             </swiper>
         </div>
-        <div class="bg-[#F8F9FC] block md:flex justify-between items-center px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-8 pb-3">
+        <div
+            class="bg-[#F8F9FC] block md:flex justify-between items-center px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-8 pb-3">
             <div class="block w-fit mx-auto md:mb-0 mb-10" v-for="feature in features">
                 <div class="w-fit mx-auto">
                     <img class="w-[80px] h-[80px]" :src="feature.img" alt="" srcset="">
@@ -193,12 +214,13 @@ export default {
             <div class="grid grid-cols-1 md:grid-cols-6 md:gap-x-12">
                 <div class="block col-span-4">
                     <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
-                        <span>Galeri Video</span>
+                        <span>Galeri Desa</span>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 mb-2 gap-6">
-                        <div v-for="video in videos" class="h-full w-full">
-                            <iframe width="100%" height="160" :src="video.url"></iframe>
-                        </div>
+                    <div id="gallery" class="grid grid-cols-1 md:grid-cols-3 mb-2 gap-6">
+                        <a class="h-full w-full" v-for="(image, key) in imagesGallery" :key="key" :href="image.url"
+                            data-pswp-width="600" data-pswp-height="400" target="_blank" rel="noreferrer">
+                            <img class="w-full h-full" :src="image.url" alt="" />
+                        </a>
                     </div>
                 </div>
                 <div class="col-span-2">
@@ -224,7 +246,8 @@ export default {
             </div>
         </div>
         <!-- Maps Location -->
-        <div class="block md:flex px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] w-ful l bg-white py-12">
+        <div
+            class="block md:flex px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] w-ful l bg-white py-12">
             <div class="flex-none w-full md:w-[60%] mb-8 md:mb-2" v-html="location.maps">
             </div>
             <div class="ml-0 md:ml-6 md:pl-10 flex-1">
