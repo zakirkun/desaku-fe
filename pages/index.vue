@@ -35,11 +35,11 @@ export default {
             },
             {
                 img: "https://kertamulya-padalarang.desa.id/themes/default/assets/images/illustrator/Asset186.svg",
-                name: "Potensi Desa"
+                name: "Pengumuman"
             },
             {
                 img: "https://kertamulya-padalarang.desa.id/themes/default/assets/images/illustrator/Asset187.svg",
-                name: "Pembangunan Desa"
+                name: "Berita Desa"
             },
             {
                 img: "https://kertamulya-padalarang.desa.id/themes/default/assets/images/illustrator/Asset192.svg",
@@ -114,7 +114,7 @@ export default {
                 <div class="w-fit mx-auto">
                     <img class="w-[80px] h-[80px]" :src="feature.img" alt="" srcset="">
                 </div>
-                <div class="mt-2">
+                <div class="mt-2 text-center font-medium text-base md:text-lg">
                     <span>{{ feature.name }}</span>
                 </div>
             </div>
