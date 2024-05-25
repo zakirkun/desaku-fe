@@ -190,7 +190,7 @@ export default {
             </div>
         </div>
     </div>
-    <div class="flex justify-between items-center mb-3">
+    <!-- <div class="flex justify-between items-center mb-3">
         <div class="text-2xl font-semibold mb-2">Video</div>
         <div class="text-md font-semibold mb-2">
             <NuxtLink to="/dashboard/gallery/video/add">
@@ -225,5 +225,5 @@ export default {
                 </v-data-table>
             </div>
         </div>
-    </div>
+    </div> -->
 </template>
