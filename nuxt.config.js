@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+    devtools: { enabled: true },
     postcss: {
         plugins: {
             tailwindcss: {},
@@ -21,7 +22,7 @@ export default defineNuxtConfig({
             ]
         }
     },
-    modules: ['@pinia/nuxt', '@pinia-plugin-persistedstate/nuxt'],
+    modules: ['nuxt-purgecss', '@pinia/nuxt', '@pinia-plugin-persistedstate/nuxt'],
     primevue: {
         options: { ripple: true },
         components: {
@@ -36,6 +37,6 @@ export default defineNuxtConfig({
             API_BASE_URL: process.env.API_URL,
         },
     },
-    plugins: [ { src: '~/plugins/scrollTo.js', mode: 'client' } ],
+    plugins: [{ src: '~/plugins/scrollTo.js', mode: 'client' }],
     css: ['vuetify/lib/styles/main.sass', 'primeicons/primeicons.css', '@/assets/styles.scss', '@/assets/main.css']
 });
