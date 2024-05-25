@@ -16,7 +16,7 @@ export default {
             thumbnailDeleted: false,
             form: {
                 title: null,
-                category: null,
+                category_id: null,
                 content: null,
                 thumbnail: ''
             },
@@ -30,11 +30,12 @@ export default {
         this.form = data
         this.data = data.content
         this.renderRichEditor = true
+        console.log(data)
     },
     methods: {
         async loadCategories() {
             const data = await $fetch(this.$config.public.API_BASE_URL + '/api/news-category/')
-            this.categories = data.map(v => v.name)
+            this.categories = data
         },
         async updateNews() {
             const { valid } = await this.$refs.form.validate()
@@ -80,7 +81,7 @@ export default {
                                 label="Judul Berita"></v-text-field>
                         </div>
                         <div>
-                            <v-select :rules="[v => !!v || 'Field is required']" item-value="name" item-text="name" v-model="form.category" label="Kategori Berita"
+                            <v-select :rules="[v => !!v || 'Field is required']" item-value="uuid" item-title="name" v-model="form.category_id" label="Kategori Berita"
                                 :items="categories" variant="outlined"></v-select>
                         </div>
                     </div>

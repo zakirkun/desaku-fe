@@ -27,7 +27,7 @@ a {
     color: #0088CC;
 }
 
-p span, p {
+p span, p, td {
     word-wrap: break-word;
     font-size: 16px;
     line-height: 1.8rem;

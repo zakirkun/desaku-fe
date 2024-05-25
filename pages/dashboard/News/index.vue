@@ -19,7 +19,7 @@ export default {
             },
             headers: [
                 { title: 'Title', align: 'start', sortable: false, key: 'title', width: "300px" },
-                { title: 'Category', align: 'start', key: 'category' },
+                { title: 'Category', align: 'start', key: 'name' },
                 { title: 'Thumbnail', align: 'start', key: 'thumbnail' },
                 { title: 'Content', align: 'end', key: 'content' },
                 { title: 'Actions', align: 'center', key: 'actions', sortable: false },
@@ -36,6 +36,7 @@ export default {
     async mounted() {
         await this.loadData()
         await this.loadNewsCategory()
+        console.log(this.items)
     },
     methods: {
         async loadData() {

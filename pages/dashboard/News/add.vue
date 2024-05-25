@@ -10,16 +10,14 @@ export default {
     data() {
         return {
             openMediaLibrary: false,
-            modalRemoveThumbnail: false,
             image: null,
             categories: [],
             renderRichEditor: false,
             data: null,
-            renderRichEditor: false,
             form: {
                 title: null,
                 description: null,
-                category: null,
+                category_id: null,
                 slug: null,
                 content: null,
                 thumbnail: null
@@ -91,7 +89,7 @@ export default {
                                 label="Judul Berita"></v-text-field>
                         </div>
                         <div>
-                            <v-select :rules="[v => !!v || 'Field is required']" item-value="name" item-text="name" v-model="form.category" label="Kategori Berita"
+                            <v-select :rules="[v => !!v || 'Field is required']" item-value="uuid" item-title="name" v-model="form.category_id" label="Kategori Berita"
                                 :items="categories" variant="outlined"></v-select>
                         </div>
                     </div>

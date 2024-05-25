@@ -1,5 +1,5 @@
 import { createVuetify } from 'vuetify'
-import { VApp, VBtn, VCard, VDataTable, VDialog, VForm, VImg, VLayout, VList, VMenu, VSelect, VSnackbar, VTabs, VTextField, VTextarea } from 'vuetify/components'
+import { VApp, VBtn, VCard, VDataTable, VDialog, VForm, VImg, VLayout, VList, VMenu, VSelect, VSnackbar, VTab, VTabs, VTextField, VTextarea } from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import { aliases, mdi } from 'vuetify/lib/iconsets/mdi-svg'
 
@@ -13,6 +13,7 @@ export default defineNuxtPlugin(nuxtApp => {
       VMenu,
       VDialog,
       VTabs,
+      VTab,
       VCard,
       VLayout,
       VApp,

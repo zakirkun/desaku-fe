@@ -48,7 +48,7 @@ export default {
                 </svg>
             </div>
             <div>
-                <span>/ Berita</span>
+                <span>/ Berita / </span>
             </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-6 md:gap-x-12">
