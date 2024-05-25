@@ -1,5 +1,6 @@
 <template>
-    <div class="backdrop-blur-sm bg-white/30 flex items-center justify-center w-full" style="min-height: calc(100vh - 5.5rem);">
+    <div class="backdrop-blur-sm bg-white/30 flex items-center justify-center w-full"
+        style="min-height: calc(100vh - 5.5rem);">
         <div>
             <img class="bounce mr-1" width="120"
                 src="https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/images/logo_header.png"

@@ -103,7 +103,7 @@ export default {
                     class="text-[#0088CC] border-[#0088CC] border-b-2 mt-5 mb-6 text-xl md:text-2xl font-semibold py-3">
                     <span>Berita Terbaru</span>
                 </div>
-                <div @click="$router.push('/berita/' + news.slug)" class="mb-2 px-2 py-3 flex"
+                <div @click="$router.push('/berita/' + news.slug)" class="cursor-pointer mb-2 px-2 py-3 flex"
                     v-for="news in latestNews">
                     <div class="w-[300px] h-full">
                         <img class="rounded-md" :src="news.thumbnail" alt="">

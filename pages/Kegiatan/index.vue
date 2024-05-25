@@ -13,7 +13,7 @@ import moment from 'moment';
 
 export default {
     data: () => ({
-        announcements: [],
+        activities: [],
         moment: moment,
         showContent: false
     }),
@@ -23,8 +23,8 @@ export default {
     },
     methods: {
         async loadData() {
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/activities')
-            this.announcements = data
+            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/activities?limit=5')
+            this.activities = data
         },
     }
 }
@@ -49,11 +49,11 @@ export default {
                 <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
                     <span>Kegiatan</span>
                 </div>
-                <div @click="$router.push('/pengumuman/' + announcement.slug)" class="cursor-pointer flex mb-7"
-                    v-for="announcement in announcements">
+                <div @click="$router.push('/kegiatan/' + activity.slug)" class="cursor-pointer flex mb-7"
+                    v-for="activity in activities">
                     <div class="block">
                         <div class="text-xl font-semibold">
-                            <span>{{ announcement.title }}</span>
+                            <span>{{ activity.title }}</span>
                         </div>
                         <div class="text-md flex items-center font-medium mt-2">
                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="1.5em" height="1.5em"
@@ -69,27 +69,27 @@ export default {
                                     <rect width="4" height="2" x="13" y="16" fill="#A3A3A3" rx=".5" />
                                 </g>
                             </svg>
-                            <span>{{ moment(announcement.created_at).format("LL") }}</span>
+                            <span>{{ moment(activity.created_at).format("LL") }}</span>
                         </div>
                         <div class="mt-3">
-                            <span>{{ announcement.description }}</span>
+                            <span>{{ activity.description }}</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-span-2">
+            <div class="col-span-2 pb-6">
                 <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
                     <span>Kegiatan Terbaru</span>
                 </div>
                 <div class="mb-3">
-                    <div @click="$router.push('/pengumuman/' + announcement.slug)"
-                        class="cursor-pointer mb-1 py-3 flex" v-for="announcement in announcements">
+                    <div @click="$router.push('/kegiatan/' + activity.slug)"
+                        class="cursor-pointer mb-1 py-3 flex" v-for="activity in activities">
                         <div class="block">
                             <div class="text-[#0088CC] text-md">
-                                <span>{{ announcement.title }}</span>
+                                <span>{{ activity.title }}</span>
                             </div>
                             <div class="mt-1">
-                                <span>{{ moment(announcement.created_at).format("LL") }}</span>
+                                <span>{{ moment(activity.created_at).format("LL") }}</span>
                             </div>
                         </div>
                     </div>

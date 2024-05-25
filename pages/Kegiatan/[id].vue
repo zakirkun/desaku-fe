@@ -75,7 +75,7 @@ export default {
             </div>
             <div class="col-span-2">
                 <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-3 text-xl md:text-2xl font-semibold py-3">
-                    <span>Pengumuman Terbaru</span>
+                    <span>Kegiatan Terbaru</span>
                 </div>
                 <div @click="$router.push('/kegiatan/' + activity.slug)" class="cursor-pointer font-medium mb-2 py-1 flex"
                     v-for="activity in activities">

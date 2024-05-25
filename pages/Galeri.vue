@@ -1,16 +1,4 @@
 <script setup>
-const headerActive = ref(false)
-
-onMounted(() => {
-    window.addEventListener('scroll', function () {
-        if (window.scrollY > 20) {
-            headerActive.value = true
-        } else {
-            headerActive.value = false
-        }
-    })
-})
-
 definePageMeta({
     layout: 'app'
 });
@@ -21,7 +9,6 @@ useHead({
 </script>
 
 <script>
-import { Title } from 'chart.js';
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
 import 'photoswipe/style.css';
 
@@ -36,16 +23,18 @@ export default {
         await this.loadVideos()
         await this.loadImages()
 
-        if (!this.lightbox) {
-            this.lightbox = new PhotoSwipeLightbox({
-                gallery: '#gallery',
-                children: 'a',
-                pswpModule: () => import('photoswipe'),
-            });
-            this.lightbox.init();
-        }
-
         this.showContent = true
+
+        await this.$nextTick(() => {
+            if (!this.lightbox) {
+                this.lightbox = new PhotoSwipeLightbox({
+                    gallery: '#gallery',
+                    children: 'a',
+                    pswpModule: () => import('photoswipe'),
+                });
+                this.lightbox.init();
+            }
+        })
     },
     unmounted() {
         if (this.lightbox) {
@@ -68,7 +57,8 @@ export default {
 
 <template>
     <AnimationLoading v-if="!showContent" />
-    <div v-else class="animate-fade px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-[2.5rem] min-h-[26rem]">
+    <div v-else
+        class="animate-fade px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-[2.5rem] min-h-[26rem]">
         <div class="flex mb-6 items-center bg-[#f0f0f0] px-2 py-3 rounded-lg">
             <div class="mr-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 1024 1024">
@@ -93,17 +83,14 @@ export default {
         </div>
         <div class="pb-[6rem]">
             <h1 class="mb-4 font-semibold text-[#0088CC] text-2xl">Galeri Foto</h1>
-            <div id="gallery">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-[4rem] md:gap-8">
-                    <a class="w-fit" v-for="(image, key) in images" :key="key" :href="image.url"
-                        data-pswp-width="600" data-pswp-height="400" target="_blank" rel="noreferrer">
-                        <img class="w-full h-full" :src="image.url" alt="" />
-                        <div class="mt-3 font-semibold text-lg">
-                            <span>{{ image.description }}</span>
-                        </div>
-                    </a>
-
-                </div>
+            <div id="gallery" class="grid grid-cols-1 md:grid-cols-3 gap-[4rem] md:gap-8">
+                <a class="w-fit" v-for="(image, key) in images" :key="key" :href="image.url" data-pswp-width="600"
+                    data-pswp-height="400" target="_blank" rel="noreferrer">
+                    <img class="w-full h-full" :src="image.url" alt="" />
+                    <div class="mt-3 font-semibold text-lg">
+                        <span>{{ image.description }}</span>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
