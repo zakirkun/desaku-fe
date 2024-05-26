@@ -115,19 +115,12 @@ export default {
                             <img v-if="imageSelected" :src="imageSelected" />
                             <div class="flex pb-4">
                                 <v-btn @click="useImage" color="#10B981"
-                                    class="w-fit mt-6 text-white px-3 mx-1 mb-2 py-2 text-md">Pilih Gambar</v-btn>
+                                    class="w-fit mt-6 text-white px-3 mx-1 mb-2 py-2 text-md">
+                                    <span class="capitalize">Pilih Gambar</span></v-btn>
                                 <v-btn @click="removeImage" color="#FC4100"
                                     class="w-fit mt-6 text-white px-1 mx-1 mb-2 py-2 text-md">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em"
-                                        viewBox="0 0 36 36">
-                                        <path fill="white"
-                                            d="M6 9v22a2.93 2.93 0 0 0 2.86 3h18.23A2.93 2.93 0 0 0 30 31V9Zm9 20h-2V14h2Zm8 0h-2V14h2Z"
-                                            class="clr-i-solid clr-i-solid-path-1" />
-                                        <path fill="white"
-                                            d="M30.73 5H23V4a2 2 0 0 0-2-2h-6.2A2 2 0 0 0 13 4v1H5a1 1 0 1 0 0 2h25.73a1 1 0 0 0 0-2"
-                                            class="clr-i-solid clr-i-solid-path-2" />
-                                        <path fill="none" d="M0 0h36v36H0z" />
-                                    </svg></v-btn>
+                                    <IconsTrash/>
+                                </v-btn>
                             </div>
                         </div>
                         <div class="w-full md:w-3/4 md:mt-0 mt-10 px-3 md:px-8 grid grid-cols-2 md:grid-cols-4 gap-8">
