@@ -71,13 +71,13 @@ const checkActiveRoute = (item) => {
             {{ item.label }}
         </div>
         <a v-if="(!item.to || item.items) && item.visible !== false" :href="item.url" @click="itemClick($event, item, index)" :class="item.class" :target="item.target" tabindex="0">
-            <i :class="item.icon" class="layout-menuitem-icon"></i>
-            <span class="layout-menuitem-text">{{ item.label }}</span>
+            <i :class="item.icon" class="text-lg layout-menuitem-icon"></i>
+            <span class="layout-menuitem-text text-lg">{{ item.label }}</span>
             <i v-if="item.items" class="pi pi-fw pi-angle-down layout-submenu-toggler"></i>
         </a>
         <router-link v-if="item.to && !item.items && item.visible !== false" @click="itemClick($event, item, index)" :class="[item.class, { 'active-route': checkActiveRoute(item) }]" tabindex="0" :to="item.to">
-            <i :class="item.icon" class="layout-menuitem-icon"></i>
-            <span class="layout-menuitem-text">{{ item.label }}</span>
+            <i :class="item.icon" class="text-lg layout-menuitem-icon"></i>
+            <span class="layout-menuitem-text text-lg">{{ item.label }}</span>
             <i v-if="item.items" class="pi pi-fw pi-angle-down layout-submenu-toggler"></i>
         </router-link>
         <Transition v-if="item.items && item.visible !== false" name="layout-submenu">

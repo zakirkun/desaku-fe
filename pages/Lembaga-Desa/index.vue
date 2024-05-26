@@ -37,7 +37,7 @@ export default {
             </div>
         </div>
         <div class="pb-8">
-            <h1 class="mb-8 font-semibold text-[#0088CC] text-3xl">Lembaga Desa</h1>
+            <h1 class="mb-8 font-semibold text-[#0088CC] text-2xl md:text-3xl">Lembaga Desa</h1>
             <div class="w-full">
                 <div class="shadow overflow-hidden rounded border-b border-gray-200">
                     <table class="min-w-full bg-white">
@@ -50,15 +50,15 @@ export default {
                         </thead>
                         <tbody class="text-gray-700">
                             <tr v-for="(item, index) in data" @click="$router.push('/lembaga-desa/' + item.slug)" class="cursor-pointer" :class="index % 2 == 0 ? 'bg-gray-100' : ''">
-                                <td class="text-[#0088CC] font-normal text-xl tw-1/3 text-left py-3 px-4">
+                                <td class="text-[#0088CC] font-normal tw-1/3 text-left text-base md:text-xl  py-3 px-4">
                                     <div>
                                         {{ item.name }}
                                     </div>
-                                    <div class="bg-[#0088CC] text-white w-fit px-2 rounded-md text-sm py-1 mt-2">
+                                    <div class="bg-[#0088CC] text-white w-fit px-2 text-base rounded-md py-1 mt-2">
                                         {{  item.surname }}
                                     </div>
                                 </td>
-                                <td class="w-1/3 text-left py-3 px-4">{{ item.address }}</td>
+                                <td class="w-1/3 text-left py-3 px-4 text-base md:text-xl ">{{ item.address }}</td>
                                 <td class="text-left py-3 px-4">
                                     <img :src="item.image" width="160" />
                                 </td>

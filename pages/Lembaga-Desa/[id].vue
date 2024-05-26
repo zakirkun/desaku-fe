@@ -12,8 +12,8 @@ export default {
     data: () => ({
         data: {
             name: null,
-            showContent: false
         },
+        showContent: false
     }),
     async mounted() {
         const data = await $fetch(this.$config.public.API_BASE_URL + '/api/lembaga/slug/' + this.$route.params.id)
@@ -38,13 +38,13 @@ export default {
             </div>
         </div>
         <div class="pb-8">
-            <h1 class="mb-8 font-semibold text-[#0088CC] text-3xl">{{ data.name }}</h1>
+            <h1 class="mb-8 font-semibold text-[#0088CC] text-2xl md:text-3xl">{{ data.name }}</h1>
             <div class="block md:flex">
                 <div clas="flex-none w-full md:w-[300px]">
                     <img class="w-full md:w-[300px] rounded-md" :src="data.image" alt="">
                 </div>
                 <div class="block description-lembaga">
-                    <div class="flex text-xl font-medium py-3 border-b border-slate-300">
+                    <div class="flex text-lg md:text-xl font-medium py-3 border-b border-slate-300">
                         <div class="flex-none w-[200px]">
                             Nama Lembaga
                         </div>
@@ -52,7 +52,7 @@ export default {
                             : {{ data.name }}
                         </div>
                     </div>
-                    <div class="flex text-xl font-medium py-3 border-b border-slate-300">
+                    <div class="flex text-lg md:text-xl font-medium py-3 border-b border-slate-300">
                         <div class="flex-none w-[200px]">
                             Singkatan
                         </div>
@@ -60,7 +60,7 @@ export default {
                             : {{ data.surname }}
                         </div>
                     </div>
-                    <div class="flex text-xl font-medium py-3 border-b border-slate-300">
+                    <div class="flex text-lg md:text-xl font-medium py-3 border-b border-slate-300">
                         <div class="flex-none w-[200px]">
                             Alamat Lengkap
                         </div>
@@ -92,7 +92,6 @@ export default {
             </div>
         </div>
     </div>
-    <Footer />
 </template>
 
 <style>
