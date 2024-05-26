@@ -20,7 +20,8 @@ export default {
                 job_id: null,
                 image: null,
                 slug: null,
-                nip: null
+                nip: null,
+                visi: null
             },
             loading: false
         }
@@ -57,7 +58,7 @@ export default {
             this.$router.push('/dashboard/perangkat-desa')
         },
         contentChange(v) {
-            this.data = v
+            this.form.visi = v
         },
         onImageSelected(val) {
             this.form.image = val
@@ -84,9 +85,11 @@ export default {
                                 label="NIP (Nomor Identitas Pegawai)"></v-text-field>
                         </div>
                         <div class="mt-3">
-                            <v-select :rules="[v => !!v || 'Field is required']" v-model="form.job" :items="jabatanName" variant="outlined" hide-details="auto"
-                                label="Jabatan"></v-select>
+                            <v-select :rules="[v => !!v || 'Field is required']" v-model="form.job" :items="jabatanName"
+                                variant="outlined" hide-details="auto" label="Jabatan"></v-select>
                         </div>
+                        <div class="mb-3 text-lg font-medium my-1">Visi & Misi</div>
+                        <RichEditor v-if="renderRichEditor" @contentChange="contentChange" />
                         <div class="relative w-fit mt-4" v-if="form.image">
                             <v-img :src="form.image" width="300" />
                             <div @click="form.image = null" class="absolute cursor-pointer right-3 top-3 z-50">

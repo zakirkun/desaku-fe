@@ -59,8 +59,8 @@ export default {
                     <span>{{ data.name }}</span>
                 </div>
                 <div class="block md:flex">
-                    <img class="w-[200px] rounded-lg flex-none mx-auto mb-6 md:mb-0" :src="data.image" alt="">
-                    <div class="ml-6 flex-1 py-5 pl-4 pr-10 border-2 rounded-md h-fit border-slate-300">
+                    <img class="w-[200px] h-full rounded-lg flex-none mx-auto mb-6 md:mb-0" :src="data.image" alt="">
+                    <div class="md:ml-6 flex-1 py-5 md:pl-4 md:pr-10 md:border rounded-md h-fit border-slate-300">
                         <div class="flex border-b border-slate-300 pb-3 text-base md:text-lg mb-2">
                             <div class="font-semibold w-[140px]">
                                 <span>Nama Lengkap</span>
@@ -85,6 +85,10 @@ export default {
                                 <span>: &nbsp; {{ data.nip ?? '-' }}</span>
                             </div>
                         </div>
+                        <div>
+                            <p class="font-semibold mb-4 mt-3">Visi & Misi</p>
+                            <div v-html="data.visi"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -92,9 +96,12 @@ export default {
                 <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
                     <span>Perangkat Desa Lainya</span>
                 </div>
-                <div class="mb-3">
-                    <div @click="$router.push('/perangkat-desa/' + perangkat.slug)" class="cursor-pointer mb-1 py-2 flex"
+                <div class="mb-3 bg-white px-5 py-3 rounded-md border border-slate-300">
+                    <div @click="$router.push('/perangkat-desa/' + perangkat.slug)" class="border-b border-slate-300 pb-5 cursor-pointer mb-1 py-2 flex"
                         v-for="perangkat in perangkatDesa">
+                        <div class="flex-none mr-4">
+                            <img class="w-[75px] h-[60px] rounded-md" :src="perangkat.image" alt="">
+                        </div>
                         <div class="block">
                             <div class="font-medium text-[#0088CC] text-base md:text-xl">
                                 <span>{{ perangkat.name }}</span>
