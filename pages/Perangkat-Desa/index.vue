@@ -42,7 +42,7 @@ export default {
             </div>
         </div>
         <div class="mt-8 grid grid-cols-1 md:grid-cols-5 pb-8 gap-x-8 gap-y-10">
-            <div class="rounded-lg block shadow-lg" v-for="item in perangkat">
+            <div class="rounded-lg block shadow-lg cursor-pointer" @click="$router.push('/perangkat-desa/' + item.slug)" v-for="item in perangkat">
                 <div class="w-full h-[180px]">
                     <img :src="item.image" class="w-full h-full object-cover rounded-t-lg" />
                 </div>

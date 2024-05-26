@@ -14,19 +14,26 @@ import moment from 'moment';
 export default {
     data: () => ({
         news: [],
+        latestNews: [],
         newsCategory: [],
+        category_name: null,
         moment: moment,
         showContent: false
     }),
     async mounted() {
         await this.loadData()
+        await this.loadLatestNews()
         await this.loadNewsCategory()
         this.showContent = true
     },
     methods: {
         async loadData() {
+            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/news?category=' + this.$route.params.id)
+            this.category_name = data.category_name
+            this.news = data.data
+        },
+        async loadLatestNews() {
             const data = await $fetch(this.$config.public.API_BASE_URL + '/api/news?limit=5')
-            this.news = data
             this.latestNews = data
         },
         async loadNewsCategory() {
@@ -48,13 +55,13 @@ export default {
                 </svg>
             </div>
             <div>
-                <span>/ Berita / </span>
+                <span>/ Berita / {{ category_name }}</span>
             </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-6 md:gap-x-12">
             <div class="block col-span-1 md:col-span-4">
                 <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
-                    <span>Berita</span>
+                    <span>Berita: {{ category_name }}</span>
                 </div>
                 <div @click="$router.push('/berita/' + news.slug)"
                     class="cursor-pointer flex mb-[0.5rem] md:mb-2 h-[160px] md:h-[200px]" v-for="news in news">

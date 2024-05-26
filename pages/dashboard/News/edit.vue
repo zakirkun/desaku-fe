@@ -4,6 +4,8 @@ useHead({
 })
 </script>
 <script>
+import { createSlug } from "@/helpers/createSlug"
+
 export default {
     data() {
         return {
@@ -13,12 +15,12 @@ export default {
             loading: null,
             categories: [],
             renderRichEditor: false,
-            thumbnailDeleted: false,
             form: {
                 title: null,
                 category_id: null,
                 content: null,
-                thumbnail: ''
+                thumbnail: '',
+                slug: null
             },
             openMediaLibrary: false
         }
@@ -30,7 +32,6 @@ export default {
         this.form = data
         this.data = data.content
         this.renderRichEditor = true
-        console.log(data)
     },
     methods: {
         async loadCategories() {
@@ -46,6 +47,7 @@ export default {
             
             this.loading = true
             this.form.content = this.data
+            this.form.slug = createSlug(this.form.title)
 
             await $fetch(this.$config.public.API_BASE_URL + '/api/news/' + this.$route.query.id, {
                 method: "PATCH",

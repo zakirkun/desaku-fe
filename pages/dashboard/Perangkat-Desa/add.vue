@@ -19,6 +19,8 @@ export default {
                 job: null,
                 job_id: null,
                 image: null,
+                slug: null,
+                nip: null
             },
             loading: false
         }
@@ -40,6 +42,7 @@ export default {
             }
 
             this.form.job_id = this.jabatan.filter(v => v.name == this.form.job)[0].uuid
+            this.form.slug = createSlug(this.form.name)
             this.loading = true
 
             await $fetch(this.$config.public.API_BASE_URL + '/api/perangkat-desa', {
@@ -75,6 +78,10 @@ export default {
                         <div class="col-span-1">
                             <v-text-field :rules="[v => !!v || 'Field is required']" v-model="form.name"
                                 variant="outlined" hide-details="auto" label="Nama"></v-text-field>
+                        </div>
+                        <div class="col-span-1 mt-3">
+                            <v-text-field v-model="form.nip" variant="outlined" hide-details="auto"
+                                label="NIP (Nomor Identitas Pegawai)"></v-text-field>
                         </div>
                         <div class="mt-3">
                             <v-select :rules="[v => !!v || 'Field is required']" v-model="form.job" :items="jabatanName" variant="outlined" hide-details="auto"

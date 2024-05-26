@@ -93,7 +93,7 @@ export default {
                     <span>Kategori</span>
                 </div>
                 <div class="flex flex-wrap">
-                    <div @click="$router.push('/berita?category=' + category.slug)"
+                    <div @click="$router.push('/berita/category/' + category.slug)"
                         class="bg-[#0088CC] cursor-pointer font-semibold text-white pa-2 mr-2 mt-2 text-sm w-fit rounded-full"
                         v-for="category in newsCategory">
                         <span>{{ category.name }}</span>

@@ -67,10 +67,10 @@ export default {
         <div class="pb-[6rem]">
             <h1 class="mb-4 font-semibold text-[#0088CC] text-2xl">Galeri Desa</h1>
             <div id="gallery" class="grid grid-cols-1 md:grid-cols-3 gap-[4rem] md:gap-8">
-                <a class="w-fit" v-for="(image, key) in images" :key="key" :href="image.url" data-pswp-width="600"
+                <a class="w-fit rounded-lg" v-for="(image, key) in images" :key="key" :href="image.url" data-pswp-width="600"
                     data-pswp-height="400" target="_blank" rel="noreferrer">
-                    <img class="w-full h-full" :src="image.url" alt="" />
-                    <div class="mt-3 font-semibold text-lg">
+                    <img class="w-full h-full rounded-t-lg" :src="image.url" alt="" />
+                    <div class="rounded-b-lg py-3 px-2 font-semibold text-lg bg-[#F0F0F0]">
                         <span>{{ image.description }}</span>
                     </div>
                 </a>
