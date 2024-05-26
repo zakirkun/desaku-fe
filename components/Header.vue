@@ -115,6 +115,7 @@ export default {
                 title: 'Kegiatan',
                 value: 'kegiatan',
             },
+            { type: 'subheader', title: 'Potensi Desa' },
         ],
     }),
 }
@@ -280,6 +281,9 @@ export default {
                                 </div>
                             </v-menu>
                         </div>
+                        <div @click="$router.push('/potensi-desa')"
+                            class="font-semibold text-[#0088CC] mr-5 border-slate-300">
+                            Potensi Desa</div>
                     </ul>
                     <div @click="openNavMobile" class="md:hidden cursor-pointer bg-[#0088CC] pa-2 rounded-lg">
                         <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
