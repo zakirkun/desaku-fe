@@ -22,6 +22,7 @@ const model = ref([
                     { label: 'Galeri', to: "/dashboard/gallery" },
                     { label: 'Pengumuman', to: "/dashboard/announcement" },
                     { label: 'Kegiatan', to: "/dashboard/activities" },
+                    { label: 'Potensi Desa', to: "/dashboard/potensi-desa" },
                 ]
             },
             {

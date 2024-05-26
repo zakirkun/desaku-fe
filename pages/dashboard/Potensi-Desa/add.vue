@@ -1,0 +1,133 @@
+<script setup>
+useHead({
+    title: 'Tambah Potensi Desa',
+})
+</script>
+<script>
+import { createSlug } from "@/helpers/createSlug"
+
+export default {
+    data() {
+        return {
+            openMediaLibrary: false,
+            potensiCategory: [
+                {
+                    "name": "Potensi Pariwisata",
+                    "slug": "pariwisata"
+                }
+            ],
+            renderRichEditor: false,
+            form: {
+                title: null,
+                description: null,
+                category: null,
+                content: null,
+                thumbnail: null
+            },
+            headers: [
+                { title: 'Title', align: 'start', sortable: false, key: 'title' },
+                { title: 'Content', align: 'end', key: 'content' },
+            ],
+            items: [],
+            loading: false
+        }
+    },
+    async mounted() {
+        this.renderRichEditor = true
+    },
+    methods: {
+        async addPotensi() {
+            const { valid } = await this.$refs.form.validate()
+
+            if (!valid) {
+                return
+            }
+
+            this.loading = true
+            this.form.slug = createSlug(this.form.title)
+
+            await $fetch(this.$config.public.API_BASE_URL + '/api/potensi-desa', {
+                method: "POST",
+                headers: {
+                    Authorization: "Bearer " + useToken().token
+                },
+                body: this.form
+            })
+
+            this.loading = false
+            this.$router.push('/dashboard/potensi-desa')
+        },
+        contentChange(v) {
+            this.form.content = v
+        },
+        onImageSelected(val) {
+            this.form.thumbnail = val
+        }
+    }
+}
+</script>
+
+<template>
+    <MediaLibrary @onImageSelected="onImageSelected" @onCloseModal="openMediaLibrary = false"
+        :open="openMediaLibrary" />
+    <div class="grid">
+        <div class="col-12">
+            <div class="card">
+                <h3 class="text-2xl font-medium mb-5">Tambah Potensi Desa</h3>
+                <v-form ref="form">
+                    <div class="grid grid-cols-1 gap-3">
+                        <div class="col-span-1">
+                            <v-text-field :rules="[v => !!v || 'Field is required']" v-model="form.title"
+                                variant="outlined" hide-details="auto" label="Judul Potensi Desa"></v-text-field>
+                        </div>
+                        <div class="mt-4">
+                            <v-textarea :rules="[v => !!v || 'Field is required']" rows="3" variant="outlined"
+                                label="Deskripsi Potensi Desa" clearable v-model="form.description"></v-textarea>
+                        </div>
+                        <v-select :rules="[v => !!v || 'Field is required']" v-model="form.category" variant="outlined"
+                            label="Kategori Potensi" :items="potensiCategory" item-value="slug"
+                            item-title="name"></v-select>
+                        <div class="mb-1 text-lg font-medium my-1">Thumbnail Berita</div>
+                        <div class="relative w-fit" v-if="form.thumbnail">
+                            <v-img :src="form.thumbnail" width="300" />
+                            <div @click="form.thumbnail = null" class="absolute cursor-pointer right-3 top-3 z-50">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em"
+                                    viewBox="0 0 48 48">
+                                    <defs>
+                                        <mask id="ipSCloseOne0">
+                                            <g fill="none" stroke-linejoin="round" stroke-width="4">
+                                                <path fill="#fff" stroke="#fff"
+                                                    d="M24 44c11.046 0 20-8.954 20-20S35.046 4 24 4S4 12.954 4 24s8.954 20 20 20Z" />
+                                                <path stroke="#000" stroke-linecap="round"
+                                                    d="M29.657 18.343L18.343 29.657m0-11.314l11.314 11.314" />
+                                            </g>
+                                        </mask>
+                                    </defs>
+                                    <path fill="#10B981" d="M0 0h48v48H0z" mask="url(#ipSCloseOne0)" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="mb-6 mt-1">
+                            <v-btn @click="openMediaLibrary = true" color="#10B981" class="flex-none text-white px-3 ">
+                                <div class="flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em"
+                                        viewBox="0 0 20 20">
+                                        <path fill="white"
+                                            d="M17.125 6.17L15.079.535c-.151-.416-.595-.637-.989-.492L.492 5.006c-.394.144-.593.597-.441 1.013l2.156 5.941V8.777c0-1.438 1.148-2.607 2.56-2.607H8.36l4.285-3.008l2.479 3.008zM19.238 8H4.767a.761.761 0 0 0-.762.777v9.42c.001.444.343.803.762.803h14.471c.42 0 .762-.359.762-.803v-9.42A.761.761 0 0 0 19.238 8M18 17H6v-2l1.984-4.018l2.768 3.436l2.598-2.662l3.338-1.205L18 14z" />
+                                    </svg>
+                                    <div class="ml-1 font-semibold">Media Library</div>
+                                </div>
+                            </v-btn>
+                        </div>
+                    </div>
+                </v-form>
+                <div class="mb-3 text-lg font-medium my-1">Konten</div>
+                <RichEditor v-if="renderRichEditor" @contentChange="contentChange" />
+                <v-btn @click="addPotensi" color="#10B981" class="mt-5 text-white px-3 py-2">
+                    <span class="capitalize" v-if="!loading">Submit</span>
+                    <Loader v-else />
+                </v-btn>
+            </div>
+        </div>
+    </div>
+</template>
