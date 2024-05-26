@@ -13,7 +13,7 @@ export default {
             potensiCategory: [
                 {
                     "name": "Potensi Pariwisata",
-                    "slug": "pariwisata"
+                    "slug": "Potensi Pariwisata"
                 }
             ],
             renderRichEditor: false,

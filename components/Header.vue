@@ -115,7 +115,10 @@ export default {
                 title: 'Kegiatan',
                 value: 'kegiatan',
             },
-            { type: 'subheader', title: 'Potensi Desa' },
+            {
+                title: 'Potensi Desa',
+                value: 'potensi-desa',
+            },
         ],
     }),
 }
@@ -124,7 +127,7 @@ export default {
     <Transition>
         <div ref="target" v-if="navMobile" class="bg-white shadow-lg h-screen fixed w-3/4 right-0"
             style="z-index: 9999;">
-            <div class="block h-screen px-3 py-4">
+            <div class="block h-screen pb-10 px-3 py-4">
                 <div class="flex justify-between cursor-pointer border-b border-slate-200 pb-4">
                     <div class="flex-none flex" @click="$router.push('/')">
                         <img width="40"
@@ -148,7 +151,7 @@ export default {
                         </svg>
                     </div>
                 </div>
-                <div class="overflow-y-scroll" style="height: calc(100vh - 60px);">
+                <div class="overflow-y-scroll pb-7" style="height: calc(100vh - 60px);">
                     <v-list selectable v-model:selected="navSelected" @update:selected="changePage"
                         :items="items"></v-list>
                 </div>
@@ -157,7 +160,7 @@ export default {
     </Transition>
     <div id="header" class="surface-0 flex justify-content-center">
         <div id="home" class="w-100 overflow-hidden justify-between">
-            <div class="flex w-full px-[1rem] md:px-[12rem] bg-[#0088CC] py-2">
+            <div class="flex w-full px-[1rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] bg-[#0088CC] py-2">
                 <div class="flex items-center mr-3">
                     <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1em" viewBox="0 0 24 24">
                         <path fill="white"
@@ -178,7 +181,7 @@ export default {
                 </div>
             </div>
             <div :class="{ 'fixed top-0 z-50 animation': headerActive }"
-                class="py-4 px-[1rem] md:px-[12rem] w-full flex items-center bg-white/80 backdrop-blur-sm justify-between top-8">
+                class="py-4 px-[1rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] w-full flex items-center bg-white/80 backdrop-blur-sm justify-between top-8">
                 <div class="flex cursor-pointer" @click="$router.push('/')">
                     <img width="40"
                         src="https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/images/logo_header.png"
