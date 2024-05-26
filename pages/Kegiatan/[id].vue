@@ -18,6 +18,15 @@ export default {
     }),
     async mounted() {
         const data = await $fetch(this.$config.public.API_BASE_URL + '/api/activities/slug/' + this.$route.params.id)
+        
+        if (!data.title) {
+            throw createError({
+                statusCode: 404,
+                message: 'not found',
+                fatal: true
+            })
+        }
+
         this.post.title = data.title
         this.post.content = data.content
 
