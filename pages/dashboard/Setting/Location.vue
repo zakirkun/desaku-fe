@@ -8,6 +8,12 @@ export default {
     data() {
         return {
             loading: false,
+            formAlamat: [
+                {
+                    name: "Provinsi",
+                    value: null
+                }
+            ],
             form: {
                 desa: null,
                 kecamatan: null,
@@ -22,11 +28,16 @@ export default {
     },
     async mounted() {
         await this.loadData()
+        await this.loadAlamat()
     },
     methods: {
         async loadData() {
             const data = await $fetch(this.$config.public.API_BASE_URL + '/api/location')
             this.form = data
+        },
+        async loadAlamat() {
+            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/address')
+            this.formAlamat = data
         },
         async updateLocation() {
             const { valid } = await this.$refs.form.validate()
@@ -34,8 +45,10 @@ export default {
             if (!valid) {
                 return
             }
-            
+
             this.loading = true
+
+            await this.updateAlamat()
             await $fetch(this.$config.public.API_BASE_URL + '/api/location', {
                 method: "PATCH",
                 headers: {
@@ -45,6 +58,28 @@ export default {
             })
             this.loading = false
         },
+        async updateAlamat() {
+            await $fetch(this.$config.public.API_BASE_URL + '/api/address', {
+                method: "POST",
+                headers: {
+                    Authorization: "Bearer " + useToken().token
+                },
+                body: {
+                    address: this.formAlamat
+                }
+            })
+        },
+        addAlamat() {
+            this.formAlamat.push({
+                name: null,
+                value: null
+            })
+        },
+        removeAlamat(index) {
+            this.formAlamat = this.formAlamat.filter((v, i) => {
+                return i != index
+            })
+        }
     }
 }
 </script>
@@ -57,45 +92,40 @@ export default {
         <div class="col-12">
             <div class="card">
                 <v-form ref="form">
-                    <div class="grid grid-cols-2 gap-x-4">
-                        <div>
-                            <v-text-field v-model="form.desa" variant="outlined" hide-details="auto"
-                                label="Desa"></v-text-field>
-                        </div>
-                        <div>
-                            <v-text-field v-model="form.kabupaten" variant="outlined" hide-details="auto"
-                                label="Kabupaten"></v-text-field>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 my-5 gap-x-4">
-                        <div>
-                            <v-text-field v-model="form.kecamatan" variant="outlined" hide-details="auto"
-                                label="Kecamatan"></v-text-field>
-                        </div>
-                        <div>
-                            <v-text-field v-model="form.kelurahan" variant="outlined" hide-details="auto"
-                                label="Kelurahan"></v-text-field>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-x-4">
-                        <div>
-                            <v-text-field v-model="form.rt" variant="outlined" hide-details="auto"
-                                label="RT"></v-text-field>
-                        </div>
-                        <div>
-                            <v-text-field v-model="form.rw" variant="outlined" hide-details="auto"
-                                label="RW"></v-text-field>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-x-4 mt-6">
-                        <div>
-                            <v-text-field v-model="form.provinsi" variant="outlined" hide-details="auto"
-                                label="Provinsi"></v-text-field>
+                    <div class="block">
+                        <div v-for="(alamat, index) in formAlamat" class="mb-6 flex w-full">
+                            <div class="w-1/3 flex-none">
+                                <v-text-field :rules="[v => !!v || 'Field is required']" v-model="alamat.name"
+                                    variant="outlined" hide-details="auto" label="Nama Sosial Media"></v-text-field>
+                            </div>
+                            <v-text-field :rules="[v => !!v || 'Field is required']" class="mx-3" v-model="alamat.value"
+                                variant="outlined" hide-details="auto" label="Link"></v-text-field>
+                            <div class="flex-none flex pt-3">
+                                <v-btn v-if="index == formAlamat.length - 1" @click="addAlamat()"
+                                    color="#10B981"
+                                    style="height: 40px !important;width: 20px !important;padding: 0 0px !important">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="1.8em" height="1.8em"
+                                        viewBox="0 0 24 24">
+                                        <path fill="none" stroke="currentColor" stroke-linecap="round"
+                                            stroke-linejoin="round" stroke-width="2" d="M12 5v14m-7-7h14" />
+                                    </svg>
+                                </v-btn>
+                                <v-btn v-else @click="removeAlamat(index)" color="#FC4100"
+                                    style="height: 40px !important;width: 20px !important;padding: 0 0px !important">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="1.7em" height="1.7em"
+                                        viewBox="0 0 24 24">
+                                        <path fill="none" stroke="currentColor" stroke-linecap="round"
+                                            stroke-linejoin="round" stroke-width="2"
+                                            d="M4 7h16m-10 4v6m4-6v6M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3" />
+                                    </svg>
+                                </v-btn>
+                            </div>
                         </div>
                     </div>
                     <div class="mb-3 text-lg font-medium my-1 mt-6">Embed Maps Desa</div>
                     <div class="mt-5 w-full">
-                        <v-text-field :rules="[v => !!v || 'Field is required']" v-model="form.maps" variant="outlined" hide-details="auto" label="Koordinat Desa"
+                        <v-text-field :rules="[v => !!v || 'Field is required']" v-model="form.maps" variant="outlined"
+                            hide-details="auto" label="Koordinat Desa"
                             placeholder="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13775.689247611277!2d110.4623105457275!3d-7.719445311589754!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a5b002c9e90df%3A0x23b5967fa1ba0b53!2sKledoan%20joglo&#39;s%20Villa!5e0!3m2!1sen!2sid!4v1715591524593!5m2!1sen!2sid">
                             <template v-slot:prepend-inner>
                                 <svg class="mr-1" xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.2em"

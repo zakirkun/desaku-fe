@@ -29,6 +29,7 @@ export default {
         showContent: false,
         moment: moment,
         images: [],
+        alamat: [],
         imagesGallery: [],
         location: {},
         features: [
@@ -64,6 +65,7 @@ export default {
         await this.loadImagesGallery()
         await this.loadLocation()
         await this.loadAnnouncements()
+        await this.loadAddress()
 
         this.showContent = true
 
@@ -87,6 +89,9 @@ export default {
     methods: {
         async loadImages() {
             this.images = await $fetch(this.$config.public.API_BASE_URL + '/api/image-homepage')
+        },
+        async loadAddress() {
+            this.alamat = await $fetch(this.$config.public.API_BASE_URL + '/api/address')
         },
         async loadActivities() {
             this.activities = await $fetch(this.$config.public.API_BASE_URL + '/api/activities?limit=5')
@@ -256,52 +261,12 @@ export default {
             <div class="ml-0 md:ml-6 md:pl-10 flex-1">
                 <p class="text-black font-semibold text-2xl">Lokasi Desa</p>
                 <div class="block mt-3">
-                    <div class="flex mb-2">
+                    <div v-for="unit in alamat" class="flex text-base md:text-lg mb-2">
                         <div class="w-[60%]">
-                            <span>Desa</span>
+                            <span>{{ unit.name }}</span>
                         </div>
                         <div>
-                            <span>: {{ location.desa ?? '-' }}</span>
-                        </div>
-                    </div>
-                    <div class="flex mb-2">
-                        <div class="w-[60%]">
-                            <span>Provinsi</span>
-                        </div>
-                        <div>
-                            <span>: {{ location.provinsi ?? '-' }}</span>
-                        </div>
-                    </div>
-                    <div class="flex mb-2">
-                        <div class="w-[60%]">
-                            <span>Kabupaten</span>
-                        </div>
-                        <div>
-                            <span>: {{ location.kabupaten ?? '-' }}</span>
-                        </div>
-                    </div>
-                    <div class="flex mb-2">
-                        <div class="w-[60%]">
-                            <span>Kelurahan</span>
-                        </div>
-                        <div>
-                            <span>: {{ location.kelurahan ?? '-' }}</span>
-                        </div>
-                    </div>
-                    <div class="flex mb-2">
-                        <div class="w-[60%]">
-                            <span>Kecamatan</span>
-                        </div>
-                        <div>
-                            <span>: {{ location.kecamatan ?? '-' }}</span>
-                        </div>
-                    </div>
-                    <div class="flex mb-2">
-                        <div class="w-[60%]">
-                            <span>RT/RW</span>
-                        </div>
-                        <div>
-                            <span>: {{ location.rt ?? '-' }}/{{ location.rw ?? '-' }}</span>
+                            <span>: {{ unit.value }}</span>
                         </div>
                     </div>
                 </div>
