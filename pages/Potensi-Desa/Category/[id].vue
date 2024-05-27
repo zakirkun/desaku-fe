@@ -26,10 +26,10 @@ export default {
     },
     methods: {
         async loadData() {
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/potensi-desa?category=' + this.$route.params.id)
-            
-            this.potensi = data.data
-            this.latestPotensi = data.data
+            const { data: data } = await $fetch(this.$config.public.API_BASE_URL + '/api/potensi-desa?category=' + this.$route.params.id)
+
+            this.potensi = data
+            this.latestPotensi = data
             this.category_name = data.category_name
         },
         async loadPotensiCategory() {
@@ -60,33 +60,37 @@ export default {
                 <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
                     <span>Potensi Desa: {{ category_name }}</span>
                 </div>
-                <div @click="$router.push('/potensi-desa/' + potensi.slug)"
-                    class="cursor-pointer flex mb-[0.5rem] md:mb-2 h-[160px] md:h-[200px]" v-for="potensi in potensi">
-                    <div class="w-[160px] md:w-[240px] h-full flex-none">
-                        <img class="rounded-md h-[120px] md:h-[160px] w-full object-cover" :src="potensi.thumbnail"
-                            alt="">
-                    </div>
-                    <div class="block pl-4">
-                        <div class="tetx-base md:text-xl font-semibold">
-                            <span class="hidden md:flex">{{ potensi.title }}</span>
-                            <span class="flex md:hidden">{{ potensi.title.slice(0, 30) }}...</span>
+                <div v-if="potensi.length > 0">
+                    <div @click="$router.push('/potensi-desa/' + potensi.slug)"
+                        class="cursor-pointer flex mb-[0.5rem] md:mb-2 h-[160px] md:h-[200px]"
+                        v-for="potensi in potensi">
+                        <div class="w-[160px] md:w-[240px] h-full flex-none">
+                            <img class="rounded-md h-[120px] md:h-[160px] w-full object-cover" :src="potensi.thumbnail"
+                                alt="">
                         </div>
-                        <div class="block md:flex">
-                            <div class="text-xs md:text-base flex items-center font-medium mt-2">
-                                <IconsDate />
-                                <span class="ml-1">{{ moment(potensi.created_at).format("LL") }}</span>
+                        <div class="block pl-4">
+                            <div class="tetx-base md:text-xl font-semibold">
+                                <span class="hidden md:flex">{{ potensi.title }}</span>
+                                <span class="flex md:hidden">{{ potensi.title.slice(0, 30) }}...</span>
                             </div>
-                            <div class="text-xs md:text-base flex items-center font-medium mt-2 ml-2">
-                                <IconsTag />
-                                <span class="ml-1">{{ potensi.category_name }}</span>
+                            <div class="block md:flex">
+                                <div class="text-xs md:text-base flex items-center font-medium mt-2">
+                                    <IconsDate />
+                                    <span class="ml-1">{{ moment(potensi.created_at).format("LL") }}</span>
+                                </div>
+                                <div class="text-xs md:text-base flex items-center font-medium mt-2 ml-2">
+                                    <IconsTag />
+                                    <span class="ml-1">{{ potensi.category_name }}</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="mt-2 text-sm md:text-base">
-                            <span class="hidden md:flex">{{ potensi.description }}</span>
-                            <span class="flex md:hidden">{{ potensi.description.slice(0, 40) }}...</span>
+                            <div class="mt-2 text-sm md:text-base">
+                                <span class="hidden md:flex">{{ potensi.description }}</span>
+                                <span class="flex md:hidden">{{ potensi.description.slice(0, 40) }}...</span>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <EmptyData v-else />
             </div>
             <div class="col-span-2">
                 <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">

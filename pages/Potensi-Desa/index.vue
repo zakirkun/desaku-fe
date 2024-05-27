@@ -25,7 +25,7 @@ export default {
     },
     methods: {
         async loadData() {
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/potensi-desa?limit=5')
+            const { data: data } = await $fetch(this.$config.public.API_BASE_URL + '/api/potensi-desa?limit=5')
             this.potensi = data
             this.latestPotensi = data
         },
@@ -57,10 +57,11 @@ export default {
                 <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
                     <span>Potensi Desa</span>
                 </div>
-                <div @click="$router.push('/potensi-desa/' + potensi.slug)"
+                <div v-if="potensi.length > 0" @click="$router.push('/potensi-desa/' + potensi.slug)"
                     class="cursor-pointer flex mb-[0.5rem] md:mb-2 h-[160px] md:h-[200px]" v-for="potensi in potensi">
                     <div class="w-[160px] md:w-[240px] h-full flex-none">
-                        <img class="rounded-md h-[120px] md:h-[160px] w-full object-cover" :src="potensi.thumbnail" alt="">
+                        <img class="rounded-md h-[120px] md:h-[160px] w-full object-cover" :src="potensi.thumbnail"
+                            alt="">
                     </div>
                     <div class="block pl-4">
                         <div class="tetx-base md:text-xl font-semibold">
@@ -83,6 +84,7 @@ export default {
                         </div>
                     </div>
                 </div>
+                <EmptyData v-else />
             </div>
             <div class="col-span-2">
                 <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
@@ -99,8 +101,8 @@ export default {
                     <span>Potensi Desa Terbaru</span>
                 </div>
                 <div class="mb-10">
-                    <div @click="$router.push('/potensi-desa/' + potensi.slug)" class="cursor-pointer mb-2 px-2 py-3 flex"
-                        v-for="potensi in latestPotensi">
+                    <div @click="$router.push('/potensi-desa/' + potensi.slug)"
+                        class="cursor-pointer mb-2 px-2 py-3 flex" v-for="potensi in latestPotensi">
                         <div class="w-[140px] h-full flex-none">
                             <img class="rounded-md" :src="potensi.thumbnail" alt="">
                         </div>

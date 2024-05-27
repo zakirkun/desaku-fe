@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full h-screen flex justify-center items-center">
+    <div class="w-full min-h-screen flex justify-center items-center">
         <div>
             <img @click="$router.push('/')" class="cursor-pointer mx-auto mb-3" width="100"
                 src="https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/images/logo_header.png"

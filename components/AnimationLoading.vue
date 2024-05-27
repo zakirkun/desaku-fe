@@ -9,7 +9,7 @@
         </div>
     </div>
 </template>
-<style>
+<style scoped>
 .bounce {
     animation: bounce .4s ease infinite alternate;
 }
