@@ -53,7 +53,6 @@ export default {
 
             this.loading = true
             this.form.slug = createSlug(this.form.name)
-            console.log(this.form.slug)
 
             await $fetch(this.$config.public.API_BASE_URL + '/api/lembaga/' + this.$route.query.id, {
                 method: "PATCH",
