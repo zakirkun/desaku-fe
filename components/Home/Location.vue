@@ -1,0 +1,35 @@
+<script setup>
+const location = ref(null)
+const address = ref(null)
+
+const { data } = await useAsyncData(
+    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/location')
+)
+
+location.value = data.value
+
+const { data: addressData } = await useAsyncData(
+    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/address')
+)
+
+address.value = addressData.value
+</script>
+<template>
+    <div class="block md:flex px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] w-ful l bg-white py-12">
+        <div class="flex-none w-full md:w-[60%] mb-8 md:mb-2" v-html="location.maps">
+        </div>
+        <div class="ml-0 md:ml-6 md:pl-10 flex-1">
+            <p class="text-black font-semibold text-2xl">Lokasi Desa</p>
+            <div class="block mt-3">
+                <div v-for="unit in address" class="flex text-base md:text-lg mb-2">
+                    <div class="w-[60%]">
+                        <span>{{ unit.name }}</span>
+                    </div>
+                    <div>
+                        <span>: {{ unit.value }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

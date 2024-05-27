@@ -1,23 +1,18 @@
-<script>
-export default {
-    data: () => ({
-        data: [],
-        socialMedia: []
-    }),
-    async mounted() {
-        await this.loadData()
-        await this.loadSocialMedia()
-    },
-    methods: {
-        async loadData() {
-            this.data = await $fetch(this.$config.public.API_BASE_URL + '/api/footer')
-        },
-        async loadSocialMedia() {
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/social-media')
-            this.socialMedia = data
-        },
-    }
-}
+<script setup>
+const data = ref([])
+const socialMedia = ref([])
+
+const { data: footer } = await useAsyncData(
+    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/footer')
+)
+
+data.value = footer.value
+
+const { data: social_media } = await useAsyncData(
+    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/social-media')
+)
+
+socialMedia.value = social_media.value
 </script>
 <template>
     <div class="flex-none">

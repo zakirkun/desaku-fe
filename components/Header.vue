@@ -1,7 +1,6 @@
 <script setup>
 import { onMounted, reactive } from 'vue';
 import { onClickOutside } from '@vueuse/core'
-const config = useRuntimeConfig()
 
 const headerActive = ref(false)
 const windowWidth = ref(null)
@@ -26,16 +25,14 @@ onMounted(async () => {
     window.addEventListener('resize', function () {
         windowWidth.value = window.innerWidth
     });
-
-    await loadHeaderTop()
 })
 
-async function loadHeaderTop() {
-    const data = await $fetch(config.public.API_BASE_URL + '/api/header')
+const { data } = await useAsyncData(
+    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/header')
+)
 
-    headerData.no_telp = data.no_telp
-    headerData.email = data.email
-}
+headerData.no_telp = data.value.no_telp
+headerData.email = data.value.email
 
 function openNavMobile() {
     navMobile.value = !navMobile.value
@@ -277,10 +274,6 @@ export default {
                                         Pengumuman</div>
                                     <div @click="$router.push('/kegiatan')">
                                         Kegiatan</div>
-                                    <!-- <div @click="$router.push('/perangkat-desa')"
-                                        class="mb-2 border-b border-slate-300 pb-3">
-                                        Perangkat Desa</div>
-                                    <div @click="$router.push('/lembaga-desa')">Lembaga Desa</div> -->
                                 </div>
                             </v-menu>
                         </div>

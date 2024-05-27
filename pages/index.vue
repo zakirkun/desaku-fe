@@ -8,6 +8,29 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 const modules = ref([Autoplay, EffectFade, Navigation, Pagination])
+const images = ref(null)
+const perangkatDesa = ref(null)
+const showContent = ref(false)
+
+const { data } = await useAsyncData(
+    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/image-gallery')
+)
+
+images.value = data.value
+
+const { data: perangkatDesaData } = await useAsyncData(
+    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/perangkat-desa')
+)
+
+perangkatDesa.value = perangkatDesaData.value
+
+function backgroundImage(url) {
+    return `background-image: url(${url});`
+}
+
+setTimeout(() => {
+    showContent.value = true
+}, 500)
 
 definePageMeta({
     layout: 'app'
@@ -17,111 +40,6 @@ useHead({
     title: "Beranda",
 })
 </script>
-
-<script>
-import moment from 'moment';
-import PhotoSwipeLightbox from 'photoswipe/lightbox';
-import 'photoswipe/style.css';
-
-export default {
-    data: () => ({
-        lightbox: null,
-        showContent: false,
-        moment: moment,
-        images: [],
-        alamat: [],
-        imagesGallery: [],
-        location: {},
-        features: [
-            {
-                img: "https://kertamulya-padalarang.desa.id/themes/default/assets/images/illustrator/services.svg",
-                name: "Pengumuman",
-                href: "/pengumuman"
-            },
-            {
-                img: "https://kertamulya-padalarang.desa.id/themes/default/assets/images/illustrator/Asset186.svg",
-                name: "Potensi Desa",
-                href: "/potensi-desa"
-            },
-            {
-                img: "https://kertamulya-padalarang.desa.id/themes/default/assets/images/illustrator/Asset187.svg",
-                name: "Berita Desa",
-                href: "/berita"
-            },
-            {
-                img: "https://kertamulya-padalarang.desa.id/themes/default/assets/images/illustrator/Asset192.svg",
-                name: "Keuangan Desa"
-            }
-        ],
-        news: [],
-        announcement: [],
-        acitivityData: [],
-        activities: [],
-        perangkatDesa: []
-    }),
-    async mounted() {
-        await this.loadImages()
-        await this.loadActivities()
-        await this.loadNews()
-        await this.loadImagesGallery()
-        await this.loadLocation()
-        await this.loadAnnouncements()
-        await this.loadPerangkatDesa()
-        await this.loadAddress()
-
-        this.showContent = true
-
-        await this.$nextTick(() => {
-            if (!this.lightbox) {
-                this.lightbox = new PhotoSwipeLightbox({
-                    gallery: '#gallery',
-                    children: 'a',
-                    pswpModule: () => import('photoswipe'),
-                });
-                this.lightbox.init();
-            }
-        })
-    },
-    unmounted() {
-        if (this.lightbox) {
-            this.lightbox.destroy();
-            this.lightbox = null;
-        }
-    },
-    methods: {
-        async loadImages() {
-            this.images = await $fetch(this.$config.public.API_BASE_URL + '/api/image-homepage')
-        },
-        async loadPerangkatDesa() {
-            this.perangkatDesa = await $fetch(this.$config.public.API_BASE_URL + '/api/perangkat-desa')
-        },
-        async loadAddress() {
-            this.alamat = await $fetch(this.$config.public.API_BASE_URL + '/api/address')
-        },
-        async loadActivities() {
-            this.activities = await $fetch(this.$config.public.API_BASE_URL + '/api/activities?limit=5')
-        },
-        async loadNews() {
-            this.news = await $fetch(this.$config.public.API_BASE_URL + '/api/news?limit=5')
-        },
-        async loadAnnouncements() {
-            this.announcement = await $fetch(this.$config.public.API_BASE_URL + '/api/announcement?limit=5')
-        },
-        async loadImagesGallery() {
-            this.imagesGallery = await $fetch(this.$config.public.API_BASE_URL + '/api/image-gallery?limit=6')
-        },
-        async loadLocation() {
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/location')
-
-            this.location = data
-        },
-        backgroundImage(url) {
-            return `background-image: url(${url});`
-        },
-    }
-}
-</script>
-
 <template>
     <AnimationLoading v-if="!showContent" />
     <div v-else class="animate-fade flex-1">
@@ -142,106 +60,30 @@ export default {
                 </swiper-slide>
             </swiper>
         </div>
-        <div
-            class=" block md:flex justify-between items-center px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-8 pb-3">
-            <div @click="$router.push(feature.href)" class="cursor-pointer block w-fit mx-auto md:mb-0 mb-10"
-                v-for="feature in features">
-                <div class="w-fit mx-auto">
-                    <img class="w-[80px] h-[80px]" :src="feature.img" alt="" srcset="">
-                </div>
-                <div class="mt-2 text-center font-medium text-base md:text-lg">
-                    <span>{{ feature.name }}</span>
-                </div>
-            </div>
-        </div>
+        <HomeFeatures />
         <div class="block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] bg-white pt-6">
             <div class="grid grid-cols-1 md:grid-cols-6 md:gap-x-12">
                 <div class="block col-span-1 md:col-span-4">
                     <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
                         <span>Berita Terkini</span>
                     </div>
-                    <div class="flex mb-10 cursor-pointer" @click="$router.push('/berita/' + news.slug)"
-                        v-for="news in news">
-                        <div class="w-fit flex-none">
-                            <img class="rounded-md w-[140px] sm:w-[200px] md:w-[250px] h-[110px] md:h-[140px]"
-                                :src="news.thumbnail" alt="">
-                        </div>
-                        <div class="block pl-4">
-                            <div class="text-md md:text-xl font-semibold">
-                                <span>{{ news.title }}</span>
-                            </div>
-                            <div class="text-md flex items-center font-medium mt-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="1.5em" height="1.5em"
-                                    viewBox="0 0 24 24">
-                                    <g fill="none">
-                                        <rect width="18" height="15" x="3" y="6" stroke="#A3A3A3" rx="2" />
-                                        <path fill="black"
-                                            d="M3 10c0-1.886 0-2.828.586-3.414C4.172 6 5.114 6 7 6h10c1.886 0 2.828 0 3.414.586C21 7.172 21 8.114 21 10z" />
-                                        <path stroke="#A3A3A3" stroke-linecap="round" d="M7 3v3m10-3v3" />
-                                        <rect width="4" height="2" x="7" y="12" fill="#A3A3A3" rx=".5" />
-                                        <rect width="4" height="2" x="7" y="16" fill="#A3A3A3" rx=".5" />
-                                        <rect width="4" height="2" x="13" y="12" fill="#A3A3A3" rx=".5" />
-                                        <rect width="4" height="2" x="13" y="16" fill="#A3A3A3" rx=".5" />
-                                    </g>
-                                </svg>
-                                <span class="text-sm md:text-md">{{ moment(news.created_at).format("LL") }}</span>
-                            </div>
-                            <div class="mt-2 hidden md:flex">
-                                <span class="text-sm md:text-base font-normal">{{ news.description }}</span>
-                            </div>
-                            <div class="mt-2 flex md:hidden">
-                                <span class="text-sm md:text-base">{{ news.description.substring(0, 70) }}...</span>
-                            </div>
-                        </div>
-                    </div>
+                    <HomeLatestNews />
                 </div>
                 <div class="col-span-2">
                     <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
                         <span>Pengumuman</span>
                     </div>
-                    <div class="mb-4 bg-[#0088CC] cursor-pointer font-semibold text-white px-2 py-3 rounded-md"
-                        v-for="announcement in announcement" @click="$router.push('/pengumuman/' + announcement.slug)">
-                        <span>{{ announcement.title }}</span>
-                    </div>
+                    <HomeLatestAnnouncement />
                     <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
                         <span>Agenda Kegiatan</span>
                     </div>
-                    <div class="mb-2 py-2 flex cursor-pointer font-medium"
-                        @click="$router.push('/kegiatan/' + activity.slug)" v-for="activity in activities">
-                        <div
-                            class="px-1 py-2 font-semibold text-white flex-none w-[80px] h-[60px] rounded-md my-auto text-center bg-[#0088CC]">
-                            <span>{{ moment(news.created_at).format("DD MMM YYYY") }}</span>
-                        </div>
-                        <div class="block ml-3">
-                            <div class="text-[#0088CC] text-lg">
-                                <span>{{ activity.title }}</span>
-                            </div>
-                            <div class="">
-                                <span>Lokasi {{ activity.location }}</span>
-                            </div>
-                        </div>
-                    </div>
+                    <HomeLatestActivities />
                 </div>
             </div>
         </div>
-        <div class="block  px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] py-10">
+        <div class="block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] py-10">
             <div class="grid grid-cols-1 md:grid-cols-6 md:gap-x-12">
-                <div class="block col-span-4">
-                    <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
-                        <span>Galeri Desa</span>
-                    </div>
-                    <div id="gallery" class="grid grid-cols-1 md:grid-cols-3 mb-2 gap-6">
-                        <a class="rounded-md h-full w-full relative" v-for="(image, key) in imagesGallery" :key="key"
-                            :href="image.url" data-pswp-width="600" data-pswp-height="400" target="_blank"
-                            rel="noreferrer">
-                            <img class="rounded-md w-full h-full" :src="image.url" alt="" />
-                            <div
-                                class="rounded-b-md z-50 py-1 backdrop-blur-xl opacity-90 pl-2 bg-[#0088CC] bottom-0 absolute w-full text-white">
-                                <p class="truncate">{{ image.description }}</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                <HomeGallery />
                 <div class="col-span-2">
                     <div class="text-[#0088CC] struktur border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
                         <span>Struktur Organisasi</span>
@@ -263,25 +105,7 @@ export default {
                 </div>
             </div>
         </div>
-        <!-- Maps Location -->
-        <div
-            class="block md:flex px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] w-ful l bg-white py-12">
-            <div class="flex-none w-full md:w-[60%] mb-8 md:mb-2" v-html="location.maps">
-            </div>
-            <div class="ml-0 md:ml-6 md:pl-10 flex-1">
-                <p class="text-black font-semibold text-2xl">Lokasi Desa</p>
-                <div class="block mt-3">
-                    <div v-for="unit in alamat" class="flex text-base md:text-lg mb-2">
-                        <div class="w-[60%]">
-                            <span>{{ unit.name }}</span>
-                        </div>
-                        <div>
-                            <span>: {{ unit.value }}</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <HomeLocation />
     </div>
 </template>
 

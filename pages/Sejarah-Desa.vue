@@ -11,7 +11,7 @@ const data = ref(null)
 const showContent = ref(false)
 
 const { data: dataSejarah } = await useAsyncData(
-    () => $fetch('http://127.0.0.1:8000/api/sejarah')
+    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/sejarah')
 )
 
 data.value = dataSejarah.value.sejarah
