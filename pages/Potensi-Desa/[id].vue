@@ -38,11 +38,13 @@ export default {
                     fatal: true
                 })
             }
+
             this.post = data
         },
+
         async loadLatestPotensi() {
             const data = await $fetch(this.$config.public.API_BASE_URL + '/api/potensi-desa?limit=5')
-            this.latestPotensi = data
+            this.latestPotensi = data.data
         },
     }
 }

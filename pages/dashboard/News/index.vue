@@ -36,7 +36,6 @@ export default {
     async mounted() {
         await this.loadData()
         await this.loadNewsCategory()
-        console.log(this.items)
     },
     methods: {
         async loadData() {

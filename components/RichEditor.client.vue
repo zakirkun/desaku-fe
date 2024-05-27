@@ -15,7 +15,6 @@ export default {
                 module: ImageUploader,
                 options: {
                     upload: file => {
-                        console.log(file)
                         return new Promise(async (resolve, reject) => {
                             const formData = new FormData();
                             formData.append("image", file);
@@ -25,7 +24,6 @@ export default {
                                 method: "POST"
                             })
                                 .then(res => {
-                                    console.log(res.data)
                                     resolve(res.data);
                                 })
                                 .catch(err => {

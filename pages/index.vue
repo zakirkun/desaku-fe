@@ -139,7 +139,7 @@ export default {
         </div>
         <div
             class=" block md:flex justify-between items-center px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-8 pb-3">
-            <div @click="$router.push('/feature' + feature.href)" class="block w-fit mx-auto md:mb-0 mb-10" v-for="feature in features">
+            <div @click="$router.push(feature.href)" class="cursor-pointer block w-fit mx-auto md:mb-0 mb-10" v-for="feature in features">
                 <div class="w-fit mx-auto">
                     <img class="w-[80px] h-[80px]" :src="feature.img" alt="" srcset="">
                 </div>

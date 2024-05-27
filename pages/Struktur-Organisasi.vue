@@ -26,7 +26,6 @@ export default {
             this.jabatan = data
         },
         async getPerangkat(id) {
-            console.log(this.selectedJabatan)
             if (!id) {
                 id = this.selectedJabatan
             }

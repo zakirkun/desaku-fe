@@ -32,7 +32,6 @@ export default {
     },
     methods: {
         async login() {
-            console.log("kolak")
             this.loading = true
             this.form.content = this.data
 

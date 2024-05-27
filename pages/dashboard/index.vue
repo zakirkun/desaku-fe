@@ -33,7 +33,6 @@ export default {
             this.data = v
         },
         onImageSelected(val) {
-            console.log(val)
         }
     }
 }
