@@ -10,6 +10,7 @@ export default {
             form: {
                 profile_desa: null,
                 address: null,
+                copyright: null,
             },
             formSocialMedia: [
                 {
@@ -91,6 +92,8 @@ export default {
                         label="Profil Desa" clearable v-model="form.profile"></v-textarea>
                     <v-textarea :rules="[v => !!v || 'Field is required']" rows="2" variant="outlined"
                         label="Alamat Lengkap" clearable v-model="form.address"></v-textarea>
+                    <v-textarea :rules="[v => !!v || 'Field is required']" rows="2" variant="outlined"
+                        label="Copyright" clearable v-model="form.copyright"></v-textarea>
                     <div class="mb-5 text-lg font-medium my-1">Sosial Media</div>
                     <div class="block">
                         <div v-for="(sosmed, index) in formSocialMedia" class="mb-6 flex w-full">

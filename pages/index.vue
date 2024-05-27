@@ -56,7 +56,8 @@ export default {
         news: [],
         announcement: [],
         acitivityData: [],
-        activities: []
+        activities: [],
+        perangkatDesa: []
     }),
     async mounted() {
         await this.loadImages()
@@ -65,6 +66,7 @@ export default {
         await this.loadImagesGallery()
         await this.loadLocation()
         await this.loadAnnouncements()
+        await this.loadPerangkatDesa()
         await this.loadAddress()
 
         this.showContent = true
@@ -89,6 +91,9 @@ export default {
     methods: {
         async loadImages() {
             this.images = await $fetch(this.$config.public.API_BASE_URL + '/api/image-homepage')
+        },
+        async loadPerangkatDesa() {
+            this.perangkatDesa = await $fetch(this.$config.public.API_BASE_URL + '/api/perangkat-desa')
         },
         async loadAddress() {
             this.alamat = await $fetch(this.$config.public.API_BASE_URL + '/api/address')
@@ -139,7 +144,8 @@ export default {
         </div>
         <div
             class=" block md:flex justify-between items-center px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-8 pb-3">
-            <div @click="$router.push(feature.href)" class="cursor-pointer block w-fit mx-auto md:mb-0 mb-10" v-for="feature in features">
+            <div @click="$router.push(feature.href)" class="cursor-pointer block w-fit mx-auto md:mb-0 mb-10"
+                v-for="feature in features">
                 <div class="w-fit mx-auto">
                     <img class="w-[80px] h-[80px]" :src="feature.img" alt="" srcset="">
                 </div>
@@ -225,9 +231,14 @@ export default {
                         <span>Galeri Desa</span>
                     </div>
                     <div id="gallery" class="grid grid-cols-1 md:grid-cols-3 mb-2 gap-6">
-                        <a class="h-full w-full" v-for="(image, key) in imagesGallery" :key="key" :href="image.url"
-                            data-pswp-width="600" data-pswp-height="400" target="_blank" rel="noreferrer">
-                            <img class="w-full h-full" :src="image.url" alt="" />
+                        <a class="rounded-md h-full w-full relative" v-for="(image, key) in imagesGallery" :key="key"
+                            :href="image.url" data-pswp-width="600" data-pswp-height="400" target="_blank"
+                            rel="noreferrer">
+                            <img class="rounded-md w-full h-full" :src="image.url" alt="" />
+                            <div
+                                class="rounded-b-md z-50 py-1 backdrop-blur-xl opacity-90 pl-2 bg-[#0088CC] bottom-0 absolute w-full text-white">
+                                <p class="truncate">{{ image.description }}</p>
+                            </div>
                         </a>
                     </div>
                 </div>
@@ -235,19 +246,18 @@ export default {
                     <div class="text-[#0088CC] struktur border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
                         <span>Struktur Organisasi</span>
                     </div>
-                    <div class="font-semibold text-white px-2 rounded-md">
+                    <div class="font-medium text-white px-2 rounded-md">
                         <swiper :autoplay="{
                             delay: 4000,
                             disableOnInteraction: false,
                         }" :spaceBetween="30" :effect="'fade'" :navigation="true" :modules="modules" class="w-full">
-                            <swiper-slide><img class="h-[340px] w-full"
-                                    src="https://swiperjs.com/demos/images/nature-1.jpg" /></swiper-slide>
-                            <swiper-slide><img class="h-[340px] w-full"
-                                    src="https://swiperjs.com/demos/images/nature-2.jpg" /></swiper-slide>
-                            <swiper-slide><img class="h-[340px] w-full"
-                                    src="https://swiperjs.com/demos/images/nature-3.jpg" /></swiper-slide>
-                            <swiper-slide><img class="h-[340px] w-full"
-                                    src="https://swiperjs.com/demos/images/nature-4.jpg" /></swiper-slide>
+                            <swiper-slide v-for="item in perangkatDesa" class="relative">
+                                <img class="rounded-md h-[360px] w-full" :src="item.image" />
+                                <div
+                                    class="rounded-b-md z-50 py-1 backdrop-blur-xl opacity-90 pl-2 bg-[#0088CC] bottom-0 absolute w-full text-white">
+                                    <p>{{ item.name }} - {{ item.job }}</p>
+                                </div>
+                            </swiper-slide>
                         </swiper>
                     </div>
                 </div>

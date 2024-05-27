@@ -60,7 +60,7 @@ export default {
             </div>
         </div>
         <div class="bg-[#0077B3] px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] text-white py-5">
-            <p class="text-base">2024 © Desa Kertamulya Kabupaten Sleman.</p>
+            <p class="text-base">{{ data.copyright }}</p>
         </div>
     </div>
 </template>
