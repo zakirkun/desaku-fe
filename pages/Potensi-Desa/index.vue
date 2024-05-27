@@ -40,7 +40,7 @@ export default {
 <template>
     <AnimationLoading v-if="!showContent" />
     <div v-else
-        class="animate-fade block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] bg-[#F8F9FC] pt-6">
+        class="flex-1 animate-fade flex-1 block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem]  pt-6">
         <div class="flex mb-6 items-center bg-[#f0f0f0] pa-3 rounded-lg">
             <div class="mr-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 1024 1024">
@@ -52,7 +52,7 @@ export default {
                 <span>/ Potensi Desa</span>
             </div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-6 md:gap-x-12">
+        <div class="grid grid-cols-1 md:grid-cols-6 md:gap-x-12 h-full">
             <div class="block col-span-1 md:col-span-4">
                 <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
                     <span>Potensi Desa</span>

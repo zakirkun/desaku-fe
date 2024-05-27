@@ -119,7 +119,7 @@ export default {
 
 <template>
     <AnimationLoading v-if="!showContent" />
-    <div v-else class="animate-fade">
+    <div v-else class="animate-fade flex-1">
         <div id="hero" class="flex flex-column overflow-hidden">
             <swiper :autoplay="{
                 delay: 4000,
@@ -138,7 +138,7 @@ export default {
             </swiper>
         </div>
         <div
-            class="bg-[#F8F9FC] block md:flex justify-between items-center px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-8 pb-3">
+            class=" block md:flex justify-between items-center px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-8 pb-3">
             <div @click="$router.push('/feature' + feature.href)" class="block w-fit mx-auto md:mb-0 mb-10" v-for="feature in features">
                 <div class="w-fit mx-auto">
                     <img class="w-[80px] h-[80px]" :src="feature.img" alt="" srcset="">
@@ -218,7 +218,7 @@ export default {
                 </div>
             </div>
         </div>
-        <div class="block bg-[#F8F9FC] px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] py-10">
+        <div class="block  px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] py-10">
             <div class="grid grid-cols-1 md:grid-cols-6 md:gap-x-12">
                 <div class="block col-span-4">
                     <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">

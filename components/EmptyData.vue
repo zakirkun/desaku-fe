@@ -1,5 +1,5 @@
 <template>
-    <div class="flex justify-center w-full py-[6rem]">
+    <div class="flex justify-center items-center w-full h-full">
         <div>
             <div class="flex justify-center">
                 <img width="120"

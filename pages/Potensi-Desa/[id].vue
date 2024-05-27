@@ -54,7 +54,7 @@ export default {
     </Head>
     <AnimationLoading v-if="!showContent" />
     <div v-else
-        class="animate-fade block pb-[5rem] px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] bg-[#F8F9FC] pt-6">
+        class="animate-fade flex-1 block pb-[5rem] px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem]  pt-6">
         <div class="flex mb-6 items-center bg-[#f0f0f0] pa-3 rounded-lg">
             <div class="flex items-center mr-2">
                 <svg class="flex-none" xmlns="http://www.w3.org/2000/svg" width="1.1em" height="1.1em"
