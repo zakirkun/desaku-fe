@@ -40,7 +40,7 @@ export default {
 
 <template>
     <div class="text-2xl font-semibold mb-2">Tentang Desa</div>
-    <div class="grid">
+    <div class="grid animate-fade">
         <div class="col-12">
             <div class="card">
                 <h3 class="mb-3 text-xl font-medium">Konten</h3>

@@ -107,7 +107,7 @@ export default {
             </NuxtLink>
         </div>
     </div>
-    <div class="grid mb-6">
+    <div class="grid mb-6 animate-fade">
         <div class="col-12">
             <div class="card">
                 <v-data-table :loading="loadingData" :headers="headers" :items="items" item-key="name">

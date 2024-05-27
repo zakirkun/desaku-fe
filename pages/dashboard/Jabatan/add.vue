@@ -39,7 +39,7 @@ export default {
 </script>
 
 <template>
-    <div class="grid">
+    <div class="grid animate-fade">
         <div class="col-12">
             <div class="card">
                 <h3 class="text-2xl font-medium mb-5">Tambah Jabatan</h3>

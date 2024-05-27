@@ -69,7 +69,7 @@ export default {
 <template>
     <MediaLibrary @onImageSelected="onImageSelected" @onCloseModal="openMediaLibrary = false"
         :open="openMediaLibrary" />
-    <div class="grid">
+    <div class="grid animate-fade">
         <div class="col-12">
             <div class="card">
                 <h3 class="text-2xl font-medium mb-5">Ubah Potensi Desa</h3>
