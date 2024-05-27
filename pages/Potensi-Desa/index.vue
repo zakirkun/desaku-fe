@@ -40,7 +40,7 @@ export default {
 <template>
     <AnimationLoading v-if="!showContent" />
     <div v-else
-        class="flex-1 animate-fade flex-1 block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem]  pt-6">
+        class="flex-1 animate-fade block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem]  pt-6">
         <div class="flex mb-6 items-center bg-[#f0f0f0] pa-3 rounded-lg">
             <div class="mr-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 1024 1024">
@@ -57,7 +57,7 @@ export default {
                 <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
                     <span>Potensi Desa</span>
                 </div>
-                <div v-if="potensi.length > 0" @click="$router.push('/potensi-desa/' + potensi.slug)"
+                <div v-if="potensi.length > 0" @click="navigateTo('/potensi-desa/' + potensi.slug)"
                     class="cursor-pointer flex mb-[0.5rem] md:mb-2 h-[160px] md:h-[200px]" v-for="potensi in potensi">
                     <div class="w-[160px] md:w-[240px] h-full flex-none">
                         <img class="rounded-md h-[120px] md:h-[160px] w-full object-cover" :src="potensi.thumbnail"
@@ -91,7 +91,7 @@ export default {
                     <span>Kategori</span>
                 </div>
                 <div class="flex flex-wrap">
-                    <div @click="$router.push('/potensi-desa/category/' + category.slug)"
+                    <div @click="navigateTo('/potensi-desa/category/' + category.slug)"
                         class="bg-[#0088CC] cursor-pointer font-semibold text-white pa-2 mr-2 mt-2 text-sm w-fit rounded-full"
                         v-for="category in potensiCategory">
                         <span>{{ category.name }}</span>
@@ -101,7 +101,7 @@ export default {
                     <span>Potensi Desa Terbaru</span>
                 </div>
                 <div class="mb-10">
-                    <div @click="$router.push('/potensi-desa/' + potensi.slug)"
+                    <div @click="navigateTo('/potensi-desa/' + potensi.slug)"
                         class="cursor-pointer mb-2 px-2 py-3 flex" v-for="potensi in latestPotensi">
                         <div class="w-[140px] h-full flex-none">
                             <img class="rounded-md" :src="potensi.thumbnail" alt="">

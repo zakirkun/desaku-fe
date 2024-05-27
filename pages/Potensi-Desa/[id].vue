@@ -1,8 +1,7 @@
 <script setup>
 import moment from 'moment';
 
-const route = useRoute()
-const potensi = ref(null)
+const route = useRouter().currentRoute.value
 const latestPotensi = ref(null)
 const categoryName = ref(null)
 const showContent = ref(null)
@@ -11,11 +10,12 @@ const post = reactive({
     content: null
 })
 
+console.log(route.params)
+
 const { data } = await useAsyncData(
     () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/potensi-desa/slug/' + route.params.id)
 )
 
-console.log(data.value)
 post.title = data.value.title
 post.content = data.value.content
 categoryName.value = data.value.name
@@ -68,7 +68,7 @@ definePageMeta({
                 <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-xl md:text-2xl font-semibold py-3">
                     <span>Potensi Desa Terbaru</span>
                 </div>
-                <div @click="$router.push('/berita/' + news.slug)" class="cursor-pointer mb-1 px-2 py-2 flex"
+                <div @click="$router.push('/potensi-desa/' + news.slug)" class="cursor-pointer mb-1 px-2 py-2 flex"
                     v-for="potensi in latestPotensi">
                     <div class="w-[140px] h-[90px] flex-none">
                         <img class="rounded-md h-full" :src="potensi.thumbnail" alt="">
