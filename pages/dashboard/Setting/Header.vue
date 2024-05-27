@@ -52,7 +52,7 @@ export default {
     <div class="flex justify-between items-center mb-3">
         <div class="text-2xl font-semibold mb-2">Pengaturan Header</div>
     </div>
-    <div class="grid mb-6">
+    <div class="grid animate-fade mb-6">
         <div class="col-12">
             <div class="card">
                 <v-text-field v-model="form.no_telp" variant="outlined" hide-details="auto"

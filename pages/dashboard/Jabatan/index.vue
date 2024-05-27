@@ -116,7 +116,7 @@ export default {
             </NuxtLink>
         </div>
     </div>
-    <div class="grid mb-6">
+    <div class="grid animate-fade mb-6">
         <div class="col-12">
             <div class="card">
                 <v-data-table :loading="loadingData" :headers="headers" :items="items" item-key="name">
@@ -148,7 +148,7 @@ export default {
     <div class="flex justify-between items-center mb-3">
         <div class="text-xl md:text-2xl font-semibold mb-2">Urutan Jabatan</div>
     </div>
-    <div class="grid mb-6">
+    <div class="grid animate-fade mb-6">
         <div class="col-12">
             <div class="card">
                 <draggable class="dragArea list-group w-full" :list="list" @change="log">
