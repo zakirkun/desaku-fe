@@ -1,6 +1,6 @@
 <script setup>
 definePageMeta({
-    layout: 'blank',
+    layout: 'Blank',
 });
 
 useHead({

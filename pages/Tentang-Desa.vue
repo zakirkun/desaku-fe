@@ -4,29 +4,25 @@ definePageMeta({
 });
 
 useHead({
-    title: "Tentang Desa",
-    showContent: false
+    title: "Tentang Desa"
 })
-</script>
-<script>
-export default {
-    data: () => ({
-        data: null,
-        showContent: false
-    }),
-    async mounted() {
-        const data = await $fetch(this.$config.public.API_BASE_URL + '/api/tentang')
-        this.data = data.tentang
-        setTimeout(() => {
-            this.showContent = true
-        }, 5000)
-    },
-}
-</script>
 
+const data = ref(null)
+const showContent = ref(false)
+
+const { data: dataVisi } = await useAsyncData(
+    () => $fetch('http://127.0.0.1:8000/api/visi')
+)
+
+data.value = dataVisi.value.visi
+
+setTimeout(() => {
+    showContent.value = true
+}, 500)
+</script>
 <template>
     <AnimationLoading v-if="!showContent" />
-    <div v-else class="animate-fade flex-1 px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-[2.5rem] min-h-[26rem]">
+    <div v-else class="animate-fade flex-1 px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-[2.5rem] ">
         <div class="flex mb-6 items-center bg-[#f0f0f0] pa-3 rounded-lg">
             <div class="mr-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 1024 1024">
