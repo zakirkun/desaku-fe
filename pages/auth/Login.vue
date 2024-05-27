@@ -61,7 +61,6 @@ export default {
 <template>
     <v-snackbar v-model="toastUnauthorized" color="red" :timeout="3000">
         User tidak ditemukan!
-
         <template v-slot:actions>
             <v-btn color="white" variant="text" @click="toastUnauthorized = false">
                 Tutup
@@ -69,7 +68,7 @@ export default {
         </template>
     </v-snackbar>
     <div class="bg-[#F8FAFC] flex items-center justify-center min-h-screen min-w-screen overflow-hidden">
-        <div class="md:w-[400px] flex flex-column align-items-center justify-center">
+        <div class="w-[85%] md:w-[400px] flex flex-column align-items-center justify-center">
             <img @click="$router.push('/')" class="cursor-pointer w-[100px] mb-6 mx-auto"
                 src="https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/images/logo_header.png"
                 alt="App logo" />
