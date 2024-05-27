@@ -10,8 +10,6 @@ const post = reactive({
     content: null
 })
 
-console.log(route.params)
-
 const { data } = await useAsyncData(
     () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/potensi-desa/slug/' + route.params.id)
 )

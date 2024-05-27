@@ -1,36 +1,29 @@
 <script setup>
+import moment from 'moment';
+
+const post = reactive({
+    title: null,
+    content: null,
+    created_at: null,
+})
+const route = useRouter().currentRoute.value
+const showContent = ref(false)
+
+const { data } = await useAsyncData(
+    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/announcement/slug/' + route.params.id)
+)
+
+post.title = data.value.title
+post.content = data.value.content
+post.created_at = data.value.created_at
+
+setTimeout(() => {
+    showContent.value = true
+}, 500)
+
 definePageMeta({
     layout: 'app'
 });
-</script>
-<script>
-import moment from 'moment';
-
-export default {
-    data: () => ({
-        announcements: [],
-        post: {
-            title: null,
-            content: null
-        },
-        moment: moment,
-        showContent: false
-    }),
-    async mounted() {
-        const data = await $fetch(this.$config.public.API_BASE_URL + '/api/announcement/slug/' + this.$route.params.id)
-        this.post.title = data.title
-        this.post.content = data.content
-
-        await this.loadData()
-        this.showContent = true
-    },
-    methods: {
-        async loadData() {
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/announcement?limit=5')
-            this.announcements = data
-        },
-    }
-}
 </script>
 <template>
     <AnimationLoading v-if="!showContent" />
@@ -74,37 +67,8 @@ export default {
                 <div v-html="post.content"></div>
             </div>
             <div class="col-span-2">
-                <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-3 text-xl md:text-2xl font-semibold py-3">
-                    <span>Pengumuman Terbaru</span>
-                </div>
-                <div @click="$router.push('/pengumuman/' + announcement.slug)" class="cursor-pointer mb-2 py-1 flex"
-                    v-for="announcement in announcements">
-                    <div class="block ml-0">
-                        <div class="text-[#0088CC] text-md">
-                            <span>{{ announcement.title }}</span>
-                        </div>
-                        <div class="mt-1">
-                            <span>{{ moment(announcement.created_at).format("LL") }}</span>
-                        </div>
-                    </div>
-                </div>
+                <PartialsLatestAnnouncement />
             </div>
         </div>
     </div>
 </template>
-
-<style>
-.animation {
-    animation: fade-out 0.5s ease-out;
-}
-
-@keyframes fade-out {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-</style>
