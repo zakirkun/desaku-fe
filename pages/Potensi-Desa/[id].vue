@@ -15,15 +15,16 @@ const { data } = await useAsyncData(
     () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/potensi-desa/slug/' + route.params.id)
 )
 
+console.log(data.value)
 post.title = data.value.title
 post.content = data.value.content
+categoryName.value = data.value.name
 
 const { data: latestPotensiData } = await useAsyncData(
     () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/potensi-desa?limit=5')
 )
 
 latestPotensi.value = latestPotensiData.value.data
-categoryName.value = latestPotensiData.value.category_name
 showContent.value = true
 
 definePageMeta({
@@ -59,7 +60,7 @@ definePageMeta({
                     <IconsDate />
                     <span class="mx-2">{{ moment(post.created_at).format("LL") }}</span>
                     <IconsTag />
-                    <span class="ml-2">{{ post.category_name }}</span>
+                    <span class="ml-2">{{ categoryName }}</span>
                 </div>
                 <div class="w-full font-normal" v-html="post.content"></div>
             </div>
