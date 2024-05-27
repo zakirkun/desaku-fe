@@ -1,7 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     ssr: true,
-    devtools: { enabled: true },
     postcss: {
         plugins: {
             tailwindcss: {},
@@ -17,7 +16,7 @@ export default defineNuxtConfig({
                     id: 'theme-css',
                     rel: 'stylesheet',
                     type: 'text/css',
-                    href: '/themes/aura-light-green/theme.css'
+                    href: '/themes/main.css'
                 }
             ]
         }
