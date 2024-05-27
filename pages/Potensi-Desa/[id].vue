@@ -1,56 +1,36 @@
 <script setup>
+import moment from 'moment';
+
+const route = useRoute()
+const potensi = ref(null)
+const latestPotensi = ref(null)
+const categoryName = ref(null)
+const showContent = ref(null)
+const post = reactive({
+    title: null,
+    content: null
+})
+
+const { data } = await useAsyncData(
+    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/potensi-desa/slug/' + route.params.id)
+)
+
+post.title = data.value.title
+post.content = data.value.content
+
+const { data: latestPotensiData } = await useAsyncData(
+    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/potensi-desa?limit=5')
+)
+
+latestPotensi.value = latestPotensiData.value.data
+categoryName.value = latestPotensiData.value.category_name
+showContent.value = true
+
 definePageMeta({
     layout: 'app'
 });
 </script>
-<script>
-import moment from 'moment';
-
-export default {
-    data: () => ({
-        potensi: [],
-        latestPotensi: [],
-        moment: moment,
-        showContent: false,
-        post: {
-            title: null,
-            content: null,
-        },
-    }),
-    head() {
-        return {
-            title: this.post.title
-        }
-    },
-    async mounted() {
-        await this.loadData()
-        await this.loadLatestPotensi()
-        this.showContent = true
-    },
-    methods: {
-        async loadData() {
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/potensi-desa/slug/' + this.$route.params.id)
-            
-            if (!data.title) {
-                throw createError({
-                    statusCode: 404,
-                    message: 'not found',
-                    fatal: true
-                })
-            }
-
-            this.post = data
-        },
-
-        async loadLatestPotensi() {
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/potensi-desa?limit=5')
-            this.latestPotensi = data.data
-        },
-    }
-}
-</script>
 <template>
-
     <Head>
         <Title>{{ post.title }}</Title>
     </Head>
@@ -76,36 +56,25 @@ export default {
                     <span>{{ post.title }}</span>
                 </div>
                 <div class="text-md flex items-center font-medium mt-2 mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="1.5em" height="1.5em"
-                        viewBox="0 0 24 24">
-                        <g fill="none">
-                            <rect width="18" height="15" x="3" y="6" stroke="#A3A3A3" rx="2" />
-                            <path fill="black"
-                                d="M3 10c0-1.886 0-2.828.586-3.414C4.172 6 5.114 6 7 6h10c1.886 0 2.828 0 3.414.586C21 7.172 21 8.114 21 10z" />
-                            <path stroke="#A3A3A3" stroke-linecap="round" d="M7 3v3m10-3v3" />
-                            <rect width="4" height="2" x="7" y="12" fill="#A3A3A3" rx=".5" />
-                            <rect width="4" height="2" x="7" y="16" fill="#A3A3A3" rx=".5" />
-                            <rect width="4" height="2" x="13" y="12" fill="#A3A3A3" rx=".5" />
-                            <rect width="4" height="2" x="13" y="16" fill="#A3A3A3" rx=".5" />
-                        </g>
-                    </svg>
-                    <span>{{ moment(post.created_at).format("LL") }}</span>
+                    <IconsDate />
+                    <span class="mx-2">{{ moment(post.created_at).format("LL") }}</span>
+                    <IconsTag />
+                    <span class="ml-2">{{ post.category_name }}</span>
                 </div>
                 <div class="w-full font-normal" v-html="post.content"></div>
             </div>
             <div class="col-span-2">
-                <div
-                    class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-xl md:text-2xl font-semibold py-3">
+                <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-xl md:text-2xl font-semibold py-3">
                     <span>Potensi Desa Terbaru</span>
                 </div>
-                <div @click="$router.push('/berita/' + news.slug)" class="cursor-pointer mb-2 px-2 py-3 flex"
+                <div @click="$router.push('/berita/' + news.slug)" class="cursor-pointer mb-1 px-2 py-2 flex"
                     v-for="potensi in latestPotensi">
-                    <div class="w-[140px] h-full flex-none">
-                        <img class="rounded-md" :src="potensi.thumbnail" alt="">
+                    <div class="w-[140px] h-[90px] flex-none">
+                        <img class="rounded-md h-full" :src="potensi.thumbnail" alt="">
                     </div>
                     <div class="block ml-3">
                         <div class="text-[#0088CC] text-md font-medium">
-                            <span>{{ potensi.title }}</span>
+                            <span>{{ potensi.title.slice(0, 40) }}...</span>
                         </div>
                         <div class="mt-1">
                             <div class="text-sm flex items-center font-medium mt-2 mb-4">
