@@ -10,12 +10,7 @@ export default {
     data() {
         return {
             openMediaLibrary: false,
-            potensiCategory: [
-                {
-                    "name": "Potensi Pariwisata",
-                    "slug": "Potensi Pariwisata"
-                }
-            ],
+            potensiCategory: [],
             renderRichEditor: false,
             form: {
                 title: null,
@@ -30,11 +25,15 @@ export default {
     },
     async mounted() {
         await this.loadData()
+        await this.loadPotensiCategory()
         this.renderRichEditor = true
     },
     methods: {
         async loadData(){
             this.form = await $fetch(this.$config.public.API_BASE_URL + '/api/potensi-desa/' + this.$route.query.id)
+        },
+        async loadPotensiCategory(){
+            this.potensiCategory = await $fetch(this.$config.public.API_BASE_URL + '/api/potensi-category')
         },
         async updatePotensi() {
             const { valid } = await this.$refs.form.validate()
@@ -85,7 +84,7 @@ export default {
                                 label="Deskripsi Potensi Desa" clearable v-model="form.description"></v-textarea>
                         </div>
                         <v-select :rules="[v => !!v || 'Field is required']" v-model="form.category" variant="outlined"
-                            label="Kategori Potensi" :items="potensiCategory" item-value="slug"
+                            label="Kategori Potensi" :items="potensiCategory" item-value="uuid"
                             item-title="name"></v-select>
                         <div class="mb-1 text-lg font-medium my-1">Thumbnail Berita</div>
                         <div class="relative w-fit" v-if="form.thumbnail">
@@ -122,7 +121,7 @@ export default {
                     </div>
                 </v-form>
                 <div class="mb-3 text-lg font-medium my-1">Konten</div>
-                <RichEditor v-if="renderRichEditor" @contentChange="contentChange" />
+                <RichEditor v-if="renderRichEditor" :data="form.content" @contentChange="contentChange" />
                 <v-btn @click="updatePotensi" color="#10B981" class="mt-5 text-white px-3 py-2">
                     <span class="capitalize" v-if="!loading">Submit</span>
                     <Loader v-else />

@@ -24,9 +24,15 @@ export default {
         }
     },
     mounted() {
+        document.addEventListener('keydown', async (event) => {
+            if (event.key === 'Enter' || event.keyCode === 13) {
+                await this.login()
+            }
+        });
     },
     methods: {
         async login() {
+            console.log("kolak")
             this.loading = true
             this.form.content = this.data
 

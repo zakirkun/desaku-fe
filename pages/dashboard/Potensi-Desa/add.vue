@@ -10,12 +10,7 @@ export default {
     data() {
         return {
             openMediaLibrary: false,
-            potensiCategory: [
-                {
-                    "name": "Potensi Pariwisata",
-                    "slug": "Potensi Pariwisata"
-                }
-            ],
+            potensiCategory: [],
             renderRichEditor: false,
             form: {
                 title: null,
@@ -33,6 +28,7 @@ export default {
         }
     },
     async mounted() {
+        await this.loadPotensiCategory()
         this.renderRichEditor = true
     },
     methods: {
@@ -56,6 +52,9 @@ export default {
 
             this.loading = false
             this.$router.push('/dashboard/potensi-desa')
+        },
+        async loadPotensiCategory(){
+            this.potensiCategory = await $fetch(this.$config.public.API_BASE_URL + '/api/potensi-category')
         },
         contentChange(v) {
             this.form.content = v
@@ -85,7 +84,7 @@ export default {
                                 label="Deskripsi Potensi Desa" clearable v-model="form.description"></v-textarea>
                         </div>
                         <v-select :rules="[v => !!v || 'Field is required']" v-model="form.category" variant="outlined"
-                            label="Kategori Potensi" :items="potensiCategory" item-value="slug"
+                            label="Kategori Potensi" :items="potensiCategory" item-value="uuid"
                             item-title="name"></v-select>
                         <div class="mb-1 text-lg font-medium my-1">Thumbnail Berita</div>
                         <div class="relative w-fit" v-if="form.thumbnail">

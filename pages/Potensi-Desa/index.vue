@@ -4,7 +4,7 @@ definePageMeta({
 });
 
 useHead({
-    title: 'Potensi'
+    title: 'Potensi Desa'
 });
 </script>
 
@@ -13,25 +13,25 @@ import moment from 'moment';
 
 export default {
     data: () => ({
-        news: [],
-        newsCategory: [],
+        potensi: [],
+        potensiCategory: [],
         moment: moment,
         showContent: false
     }),
     async mounted() {
         await this.loadData()
-        await this.loadNewsCategory()
+        await this.loadPotensiCategory()
         this.showContent = true
     },
     methods: {
         async loadData() {
             const data = await $fetch(this.$config.public.API_BASE_URL + '/api/potensi-desa?limit=5')
-            this.news = data
-            this.latestNews = data
+            this.potensi = data
+            this.latestPotensi = data
         },
-        async loadNewsCategory() {
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/news-category')
-            this.newsCategory = data
+        async loadPotensiCategory() {
+            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/potensi-category')
+            this.potensiCategory = data
         },
     }
 }
@@ -57,29 +57,29 @@ export default {
                 <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
                     <span>Potensi Desa</span>
                 </div>
-                <div @click="$router.push('/potensi-desa/' + news.slug)"
-                    class="cursor-pointer flex mb-[0.5rem] md:mb-2 h-[160px] md:h-[200px]" v-for="news in news">
+                <div @click="$router.push('/potensi-desa/' + potensi.slug)"
+                    class="cursor-pointer flex mb-[0.5rem] md:mb-2 h-[160px] md:h-[200px]" v-for="potensi in potensi">
                     <div class="w-[160px] md:w-[240px] h-full flex-none">
-                        <img class="rounded-md h-[120px] md:h-[160px] w-full object-cover" :src="news.thumbnail" alt="">
+                        <img class="rounded-md h-[120px] md:h-[160px] w-full object-cover" :src="potensi.thumbnail" alt="">
                     </div>
                     <div class="block pl-4">
                         <div class="tetx-base md:text-xl font-semibold">
-                            <span class="hidden md:flex">{{ news.title }}</span>
-                            <span class="flex md:hidden">{{ news.title.slice(0, 40) }}...</span>
+                            <span class="hidden md:flex">{{ potensi.title }}</span>
+                            <span class="flex md:hidden">{{ potensi.title.slice(0, 30) }}...</span>
                         </div>
                         <div class="block md:flex">
-                            <div class="text-sm md:text-base flex items-center font-medium mt-2">
+                            <div class="text-xs md:text-base flex items-center font-medium mt-2">
                                 <IconsDate />
-                                <span class="mr-2">{{ moment(news.created_at).format("LL") }}</span>
+                                <span class="ml-1">{{ moment(potensi.created_at).format("LL") }}</span>
                             </div>
-                            <div class="text-sm md:text-base flex items-center font-medium mt-2">
+                            <div class="text-xs md:text-base flex items-center font-medium mt-2 ml-2">
                                 <IconsTag />
-                                <span>{{ news.category }}</span>
+                                <span class="ml-1">{{ potensi.category_name }}</span>
                             </div>
                         </div>
                         <div class="mt-2 text-sm md:text-base">
-                            <span class="hidden md:flex">{{ news.description }}</span>
-                            <span class="flex md:hidden">{{ news.description.slice(0, 50) }}...</span>
+                            <span class="hidden md:flex">{{ potensi.description }}</span>
+                            <span class="flex md:hidden">{{ potensi.description.slice(0, 40) }}...</span>
                         </div>
                     </div>
                 </div>
@@ -89,9 +89,9 @@ export default {
                     <span>Kategori</span>
                 </div>
                 <div class="flex flex-wrap">
-                    <div @click="$router.push('/Potensi/category/' + category.slug)"
+                    <div @click="$router.push('/potensi-desa/category/' + category.slug)"
                         class="bg-[#0088CC] cursor-pointer font-semibold text-white pa-2 mr-2 mt-2 text-sm w-fit rounded-full"
-                        v-for="category in newsCategory">
+                        v-for="category in potensiCategory">
                         <span>{{ category.name }}</span>
                     </div>
                 </div>
@@ -99,17 +99,17 @@ export default {
                     <span>Potensi Desa Terbaru</span>
                 </div>
                 <div class="mb-10">
-                    <div @click="$router.push('/Potensi/' + news.slug)" class="cursor-pointer mb-2 px-2 py-3 flex"
-                        v-for="news in latestNews">
+                    <div @click="$router.push('/potensi-desa/' + potensi.slug)" class="cursor-pointer mb-2 px-2 py-3 flex"
+                        v-for="potensi in latestPotensi">
                         <div class="w-[140px] h-full flex-none">
-                            <img class="rounded-md" :src="news.thumbnail" alt="">
+                            <img class="rounded-md" :src="potensi.thumbnail" alt="">
                         </div>
                         <div class="block ml-3">
                             <div class="text-[#0088CC] text-base font-medium">
-                                <span>{{ news.title }}</span>
+                                <span>{{ potensi.title }}</span>
                             </div>
                             <div class="mt-1">
-                                <span>{{ moment(news.created_at).format("LL") }}</span>
+                                <span>{{ moment(potensi.created_at).format("LL") }}</span>
                             </div>
                         </div>
                     </div>
