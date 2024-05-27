@@ -6,21 +6,20 @@ definePageMeta({
 useHead({
     title: "Sejarah Desa"
 })
-</script>
-<script>
-export default {
-    data: () => ({
-        data: null,
-        showContent: false
-    }),
-    async mounted() {
-        const data = await $fetch(this.$config.public.API_BASE_URL + '/api/sejarah')
-        this.data = data.sejarah
-        this.showContent = true
-    },
-}
-</script>
 
+const data = ref(null)
+const showContent = ref(false)
+
+const { data: dataSejarah } = await useAsyncData(
+    () => $fetch('http://127.0.0.1:8000/api/sejarah')
+)
+
+data.value = dataSejarah.value.sejarah
+
+setTimeout(() => {
+    showContent.value = true
+}, 500)
+</script>
 <template>
     <AnimationLoading v-if="!showContent" />
     <div v-else class="animate-fade flex-1 px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-[2.5rem] ">

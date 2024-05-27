@@ -6,40 +6,42 @@ definePageMeta({
 useHead({
     title: "Struktur Organisasi"
 })
-</script>
 
-<script>
-export default {
-    data: () => ({
-        jabatan: [],
-        selectedJabatan: null,
-        currentPerangkat: null,
-        showContent: false
-    }),
-    async mounted() {
-        await this.loadJabatan()
-        this.showContent = true
-    },
-    methods: {
-        async loadJabatan() {
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/jabatan')
-            this.jabatan = data
-        },
-        async getPerangkat(id) {
-            if (!id) {
-                id = this.selectedJabatan
-            }
+const jabatan = ref([])
+const selectedJabatan = ref(null)
+const currentPerangkat = ref(null)
+const showContent = ref(false)
 
-            this.currentPerangkat = await $fetch(this.$config.public.API_BASE_URL + '/api/jabatan/perangkat/' + id)
-        },
+onMounted(async () => {
+    await loadJabatan()
+    showContent.value = true
+})
+
+async function loadJabatan() {
+    const { data } = await useAsyncData(
+        () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/jabatan')
+    )
+
+    jabatan.value = data.value
+}
+
+async function getPerangkat(id) {
+    if (!id) {
+        id = selectedJabatan.value
     }
+
+    const { data } = await useAsyncData(
+        () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/jabatan/perangkat/' + id)
+    )
+    currentPerangkat.value = data.value
 }
 </script>
 
 <template>
     <AnimationLoading v-if="!showContent" />
-    <div v-else class="animate-fade flex-1 px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-[2.5rem] min-h-[35rem]">
-        <div class="flex mb-6 items-center bg-[#f0f0f0] px-2 py-3 rounded-lg">
+    <div v-else
+        class="animate-fade flex-1 px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-[2.5rem] min-h-[35rem]">
+        <div class="flex mb-6 items-cent</div>er bg-[#f0f0f0] px-2 py-3 rounded-lg">
             <div class="mr-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 1024 1024">
                     <path fill="#0088CC"
@@ -62,7 +64,7 @@ export default {
                 </div>
             </div>
             <div v-else>
-                <v-select v-model="selectedJabatan" @update:modelValue="getPerangkat(null)" label="Pilih Jabatan" 
+                <v-select v-model="selectedJabatan" @update:modelValue="getPerangkat(null)" label="Pilih Jabatan"
                     :items="jabatan" item-value="uuid" item-title="name"></v-select>
             </div>
 
@@ -73,9 +75,10 @@ export default {
                         src="https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/struktur_org_desa.png">
                 </div>
                 <div v-else>
-                    <p class="text-2xl mb-5 font-semibold">{{ currentPerangkat[0].job }}</p>
+                    <p class="text-2xl mb-5 font-semibold">{{ currentPerangkat[0]?.job ?? '-' }}</p>
                     <div class="grid grid-cols-1 gap-8 md:grid-cols-4">
-                        <div @click="" class="cursor-pointer rounded-lg block shadow-lg" v-for="item in currentPerangkat">
+                        <div @click="" class="cursor-pointer rounded-lg block shadow-lg"
+                            v-for="item in currentPerangkat">
                             <div class="w-full h-[180px]">
                                 <img :src="item.image" class="w-full h-full object-cover rounded-t-lg" />
                             </div>

@@ -10,11 +10,11 @@ useHead({
 const data = ref(null)
 const showContent = ref(false)
 
-const { data: dataVisi } = await useAsyncData(
-    () => $fetch('http://127.0.0.1:8000/api/visi')
+const { data: dataTentang } = await useAsyncData(
+    () => $fetch('http://127.0.0.1:8000/api/tentang')
 )
 
-data.value = dataVisi.value.visi
+data.value = dataTentang.value.tentang
 
 setTimeout(() => {
     showContent.value = true
