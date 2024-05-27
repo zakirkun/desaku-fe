@@ -11,9 +11,9 @@ news.value = data.value
 </script>
 <template>
     <div class="flex mb-10 cursor-pointer" @click="$router.push('/berita/' + news.slug)" v-for="news in news">
-        <div class="w-fit flex-none">
-            <img class="rounded-md w-[140px] sm:w-[200px] md:w-[250px] h-[110px] md:h-[140px]" :src="news.thumbnail"
-                alt="">
+        <div class="flex-none w-[240px]">
+            <v-img min-width="100%" class="rounded-md h-[110px] md:h-[140px]" :src="news.thumbnail"
+                alt=""/>
         </div>
         <div class="block pl-4">
             <div class="text-md md:text-xl font-semibold">
@@ -43,3 +43,10 @@ news.value = data.value
         </div>
     </div>
 </template>
+<style scoped>
+::v-deep img {
+    border-radius: 6px;
+    width: 100%;
+    object-fit: cover;
+}
+</style>

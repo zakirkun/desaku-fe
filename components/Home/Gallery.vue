@@ -32,7 +32,7 @@ onMounted(async () => {
         <div id="gallery" class="grid grid-cols-1 md:grid-cols-3 mb-2 gap-6">
             <a class="rounded-md h-full w-full relative" v-for="(image, key) in images" :key="key" :href="image.url"
                 data-pswp-width="600" data-pswp-height="400" target="_blank" rel="noreferrer">
-                <img class="rounded-md w-full h-full" :src="image.url" alt="" />
+                <v-img class="rounded-md w-full h-full" :src="image.url" alt="" />
                 <div
                     class="rounded-b-md z-50 py-1 backdrop-blur-xl opacity-90 pl-2 bg-[#0088CC] bottom-0 absolute w-full text-white">
                     <p class="truncate text-sm md:text-base">{{ image.description }}</p>
@@ -41,3 +41,10 @@ onMounted(async () => {
         </div>
     </div>
 </template>
+<style scoped>
+::v-deep img {
+    border-radius: 6px;
+    width: 100%;
+    object-fit: cover;
+}
+</style>

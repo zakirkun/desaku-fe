@@ -10,7 +10,10 @@ const navSelected = ref(null)
 
 const headerData = reactive({
     no_telp: null,
-    email: null
+    email: null,
+    logo: null,
+    site_name: null,
+    description: null,
 })
 
 onMounted(async () => {
@@ -33,6 +36,9 @@ const { data } = await useAsyncData(
 
 headerData.no_telp = data.value.no_telp
 headerData.email = data.value.email
+headerData.site_name = data.value.site_name
+headerData.description = data.value.description
+headerData.logo = data.value.logo
 
 function openNavMobile() {
     navMobile.value = !navMobile.value
@@ -128,14 +134,14 @@ export default {
                 <div class="flex justify-between cursor-pointer border-b border-slate-200 pb-4">
                     <div class="flex-none flex" @click="$router.push('/')">
                         <img width="40"
-                            src="https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/images/logo_header.png"
+                            :src="headerData.logo"
                             alt="">
                         <div class="ml-3 block font-semibold">
                             <div>
-                                <span>Desa Kertamulya</span>
+                                <span>{{ headerData.site_name }}</span>
                             </div>
                             <div class="text-sm">
-                                <span>Kabupaten Kulon Progo</span>
+                                <span>{{ headerData.description }}</span>
                             </div>
                         </div>
                     </div>
@@ -181,14 +187,14 @@ export default {
                 class="py-4 px-[1rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] w-full flex items-center bg-white/80 backdrop-blur-sm justify-between top-8">
                 <div class="flex cursor-pointer" @click="$router.push('/')">
                     <img width="40"
-                        src="https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/images/logo_header.png"
+                        :src="headerData.logo"
                         alt="">
                     <div class="ml-3 block font-semibold">
                         <div>
-                            <span>Desa Kertamulya</span>
+                            <span>{{ headerData.site_name }}</span>
                         </div>
                         <div class="text-sm">
-                            <span>Kabupaten Kulon Progo</span>
+                            <span>{{ headerData.description }}</span>
                         </div>
                     </div>
                 </div>
