@@ -16,11 +16,12 @@ news.value = data.value
         <div @click="$router.push('/berita/' + news.slug)"
             class="cursor-pointer mb-2 px-2 py-3 flex items-center" v-for="news in news">
             <div class="w-[140px] h-full flex-none">
-                <v-img  min-width="100%" class="rounded-md" :src="news.thumbnail" alt="" />
+                <v-img min-width="100%" class="rounded-md" :src="news.thumbnail" alt="" />
             </div>
             <div class="block ml-3">
                 <div class="text-[#0088CC] text-base font-medium">
-                    <span>{{ news.title }}</span>
+                    <span v-if="news.title.length > 60">{{ news.title.slice(0, 60) }}...</span>
+                    <span v-else>{{ news.title }}</span>
                 </div>
                 <div class="mt-1">
                     <span>{{ moment(news.created_at).format("LL") }}</span>
@@ -33,6 +34,7 @@ news.value = data.value
 ::v-deep img {
     border-radius: 6px;
     width: 100%;
+    height: 80px;
     object-fit: cover;
 }
 </style>

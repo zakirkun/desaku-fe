@@ -4,7 +4,6 @@ definePageMeta({
 });
 
 const route = useRouter().currentRoute.value
-const showContent = ref(false)
 const perangkatDesa = ref([])
 const data = reactive({
     name: null,
@@ -24,22 +23,16 @@ data.visi = dataPerangkatDesa.value.visi
 data.nip = dataPerangkatDesa.value.nip
 
 const { data: dataLatestPerangkatDesa } = await useAsyncData(
-    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/perangkat-desa')
+    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/perangkat-desa?limit=5')
 )
 
 perangkatDesa.value = dataLatestPerangkatDesa.value
-
-setTimeout(() => {
-    showContent.value = true
-}, 500)
 </script>
 <template>
     <Head>
         <Title>{{ data.name }} Perangkat Desa</Title>
     </Head>
-    <AnimationLoading v-if="!showContent" />
-    <div v-else
-        class="animate-fade flex-1 pb-8 px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-[2.5rem] min-h-[30rem]">
+    <div class="animate-fade flex-1 pb-8 px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-[2.5rem] min-h-[30rem]">
         <div class="flex mb-6 items-center bg-[#f0f0f0] px-2 py-3 rounded-lg">
             <div class="mr-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 1024 1024">
@@ -85,7 +78,7 @@ setTimeout(() => {
                         </div>
                         <div>
                             <p class="font-semibold mb-4 mt-3">Visi & Misi</p>
-                            <div v-html="data.visi"></div>
+                            <div v-html="data.visi ?? '-'"></div>
                         </div>
                     </div>
                 </div>
@@ -98,7 +91,7 @@ setTimeout(() => {
                     <div @click="$router.push('/perangkat-desa/' + perangkat.slug)" class="border-b border-slate-300 pb-5 cursor-pointer mb-1 py-2 flex"
                         v-for="perangkat in perangkatDesa">
                         <div class="flex-none mr-4">
-                            <img class="w-[75px] h-[60px] rounded-md" :src="perangkat.image" alt="">
+                            <v-img class="w-[70px] h-[60px] rounded-md" :src="perangkat.image" alt=""/>
                         </div>
                         <div class="block">
                             <div class="font-medium text-[#0088CC] text-base md:text-xl">
@@ -114,3 +107,10 @@ setTimeout(() => {
         </div>
     </div>
 </template>
+<style scoped>
+::v-deep img {
+    border-radius: 6px;
+    width: 100%;
+    object-fit: cover;
+}
+</style>

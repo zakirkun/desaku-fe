@@ -10,7 +10,7 @@ const route = useRouter().currentRoute.value
 const { data } = await useAsyncData(
     () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/news/slug/' + route.params.id)
 )
-console.log(data.value)
+
 post.value = data.value
 </script>
 <template>

@@ -29,7 +29,10 @@ newsCategory.value = data.value.category_name
                 </svg>
             </div>
             <div>
-                <span>/ Berita / {{ newsCategory }}</span>
+                <div class="ml-2 text-sm md:text-base">
+                    <span class="cursor-pointer" @click="$router.push('/berita')">/ &nbsp; Berita
+                        &nbsp;</span><span>/ &nbsp;{{ newsCategory }}</span>
+                </div>
             </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-6 md:gap-x-12">
