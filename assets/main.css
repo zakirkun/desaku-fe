@@ -16,6 +16,28 @@ body {
     font-family: 'General Sans', sans-serif !important;
 }
 
+.quill-content p:has(img) {
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.ql-editor {
+    font-family: 'General Sans', sans-serif !important;
+}
+
+.quill-content p:has(br) {
+    font-size: 90px !important;
+    line-height: 16px
+}
+
+.quill-content a {
+    font-weight: 500;
+}
+
+.ql-editor > ol {
+    font-size: 14px;
+}
+
 ol {
     margin: 1.5rem 2rem;
     list-style-type: decimal;
@@ -27,8 +49,7 @@ a {
     color: #0088CC;
 }
 
-p span,
-p{
+p span, p, ol, li{
     word-wrap: break-word;
     font-size: 14px;
     line-height: 1.8rem;
@@ -92,5 +113,4 @@ h3 {
         font-size: 14px;
         line-height: 1.8rem;
     }
-    
 }

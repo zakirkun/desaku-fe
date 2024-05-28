@@ -60,7 +60,7 @@ definePageMeta({
                     <IconsTag />
                     <span class="ml-1">{{ categoryName }}</span>
                 </div>
-                <div class="w-full font-normal" v-html="post.content"></div>
+                <div class="w-full font-normal quill-content" v-html="post.content"></div>
             </div>
             <div class="col-span-2">
                 <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-xl md:text-2xl font-semibold py-3">

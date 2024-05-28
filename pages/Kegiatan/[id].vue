@@ -45,7 +45,7 @@ definePageMeta({
                     <IconsDate />
                     <span class="ml-1">{{ moment(post.created_at).format("LL") }}</span>
                 </div>
-                <div v-html="post.content"></div>
+                <div class="quill-content" v-html="post.content"></div>
             </div>
             <div class="col-span-2">
                 <PartialsLatestActivities />

@@ -2,6 +2,7 @@
 import { QuillEditor } from '@vueup/vue-quill';
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import ImageUploader from 'quill-image-uploader';
+import BlotFormatter from 'quill-blot-formatter'
 </script>
 
 <script>
@@ -37,17 +38,19 @@ export default {
                     }
                 },
             },
+            formatter: {
+                name: 'blotFormatter',
+                module: BlotFormatter,
+                options: {},
+            },
             toolbarOptions: [
                 ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-                ['blockquote'],
-                ['link', 'image', 'video'],
+                ['link', 'image'],
 
                 [{ 'header': 1 }, { 'header': 2 }],               // custom button values
                 [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-                [{ 'direction': 'rtl' }],                         // text direction
 
-                [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                [{ 'header': [1, 2, 3, 4, 5, false] }],
 
                 [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
                 [{ 'align': [] }],
@@ -65,6 +68,6 @@ export default {
 </script>
 
 <template>
-    <QuillEditor @update:content="contentChange" v-model:content="content" :modules="module" contentType="html"
+    <QuillEditor  v-model:content="content" @update:content="contentChange" :modules="[module, formatter]" contentType="html"
         placeholder="Masukkan konten nya disini..." :toolbar="toolbarOptions" theme="snow" />
 </template>

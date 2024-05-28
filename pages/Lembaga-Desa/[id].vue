@@ -67,19 +67,19 @@ data.value = dataLembaga.value
                     <div class="bg-[#0088CC] text-white px-2 py-3 font-medium rounded-t-md">
                         Profil Lembaga
                     </div>
-                    <div class="px-3 py-5 text-[14px]" v-if="data.profile" v-html="data.profile"></div>
+                    <div class="px-3 py-5 text-[14px] quill-content" v-if="data.profile" v-html="data.profile"></div>
                 </div>
                 <div class="border border-[#0088CC] rounded-md mt-8">
                     <div class="bg-[#0088CC] text-white px-2 py-3 font-medium rounded-t-md">
                         Visi & Misi
                     </div>
-                    <div class="px-3 py-5 text-[14px]" v-if="data.visi" v-html="data.visi"></div>
+                    <div class="px-3 py-5 text-[14px] quill-content" v-if="data.visi" v-html="data.visi"></div>
                 </div>
                 <div class="border border-[#0088CC] rounded-md mt-8">
                     <div class="bg-[#0088CC] text-white px-2 py-3 font-medium rounded-t-md">
                         Tugas
                     </div>
-                    <div class="px-3 py-5 text-[14px]" v-if="data.tugas" v-html="data.tugas"></div>
+                    <div class="px-3 py-5 text-[14px] quill-content" v-if="data.tugas" v-html="data.tugas"></div>
                 </div>
             </div>
         </div>

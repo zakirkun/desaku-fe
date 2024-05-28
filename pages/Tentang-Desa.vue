@@ -30,7 +30,7 @@ data.value = dataTentang.value.tentang
         </div>
         <div class="pb-8">
             <h1 class="mb-4 font-semibold text-[#0088CC] text-2xl">Tentang Desa</h1>
-            <div v-if="data" v-html="data"></div>
+            <div class="quill-content" v-if="data" v-html="data"></div>
         </div>
     </div>
 </template>

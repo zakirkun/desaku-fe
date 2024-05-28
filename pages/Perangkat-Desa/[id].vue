@@ -83,7 +83,7 @@ perangkatDesa.value = dataLatestPerangkatDesa.value
                         </div>
                         <div>
                             <p class="font-semibold mb-4 mt-3">Visi & Misi</p>
-                            <div v-html="data.visi ?? '-'"></div>
+                            <div class="quill-content" v-html="data.visi ?? '-'"></div>
                         </div>
                     </div>
                 </div>

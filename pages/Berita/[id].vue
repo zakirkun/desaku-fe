@@ -41,7 +41,7 @@ post.value = data.value
                     <IconsDate />
                     <span class="ml-1">{{ moment(post.created_at).format("LL") }}</span>
                 </div>
-                <div class="w-full font-normal" v-html="post.content"></div>
+                <div class="w-full font-normal quill-content" v-html="post.content"></div>
             </div>
             <div class="col-span-2">
                 <PartialsNewsCategory />

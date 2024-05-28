@@ -1,6 +1,6 @@
 <script setup>
 useHead({
-    title: 'About Desa',
+    title: 'Tentang Desa',
 })
 </script>
 <script>
@@ -32,6 +32,7 @@ export default {
             this.loading = false
         },
         contentChange(v){
+            console.log(v)
             this.data = v
         }
     }

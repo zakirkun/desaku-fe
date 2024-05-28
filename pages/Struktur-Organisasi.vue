@@ -70,7 +70,7 @@ async function getPerangkat(id) {
             <div class="block flex-1 md:pl-10">
                 <div v-if="!currentPerangkat">
                     <h1 class="mb-4 font-semibold text-[#0088CC] text-2xl">Struktur Organisasi</h1>
-                    <div v-html="content"></div>
+                    <div class="quill-content" v-html="content"></div>
                 </div>
                 <div v-else>
                     <p class="text-xl md:text-2xl mb-5 mt-4 font-semibold">{{ currentPerangkat[0]?.job ?? '-' }}</p>
