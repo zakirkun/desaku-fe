@@ -1,65 +1,23 @@
 <script setup>
+import moment from 'moment';
+
 definePageMeta({
     layout: 'app'
 });
-</script>
-<script>
-import moment from 'moment';
 
-export default {
-    data: () => ({
-        news: [],
-        newsCategory: [],
-        moment: moment,
-        showContent: false,
-        post: {
-            title: null,
-            content: null,
-        },
-    }),
-    head() {
-        return {
-            title: this.post.title
-        }
-    },
-    async mounted() {
-        const data = await $fetch(this.$config.public.API_BASE_URL + '/api/news/slug/' + this.$route.params.id)
-
-        if (!data.title) {
-            throw createError({
-                statusCode: 404,
-                message: 'not found',
-                fatal: true
-            })
-        }
-
-        this.post.title = data.title
-        this.post.content = data.content
-
-        await this.loadData()
-        await this.loadNewsCategory()
-        this.showContent = true
-    },
-    methods: {
-        async loadData() {
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/news?limit=5')
-            this.news = data
-            this.latestNews = data
-        },
-        async loadNewsCategory() {
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/news-category')
-            this.newsCategory = data
-        },
-    }
-}
+const post = ref(null)
+const route = useRouter().currentRoute.value
+const { data } = await useAsyncData(
+    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/news/slug/' + route.params.id)
+)
+console.log(data.value)
+post.value = data.value
 </script>
 <template>
-
     <Head>
         <Title>{{ post.title }}</Title>
     </Head>
-    <AnimationLoading v-if="!showContent" />
-    <div v-else
+    <div
         class="animate-fade flex-1 block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem]  pt-6">
         <div class="flex mb-6 items-center bg-[#f0f0f0] pa-3 rounded-lg">
             <div class="flex items-center mr-2">
@@ -80,68 +38,14 @@ export default {
                     <span>{{ post.title }}</span>
                 </div>
                 <div class="text-md flex items-center font-medium mt-2 mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="1.5em" height="1.5em"
-                        viewBox="0 0 24 24">
-                        <g fill="none">
-                            <rect width="18" height="15" x="3" y="6" stroke="#A3A3A3" rx="2" />
-                            <path fill="black"
-                                d="M3 10c0-1.886 0-2.828.586-3.414C4.172 6 5.114 6 7 6h10c1.886 0 2.828 0 3.414.586C21 7.172 21 8.114 21 10z" />
-                            <path stroke="#A3A3A3" stroke-linecap="round" d="M7 3v3m10-3v3" />
-                            <rect width="4" height="2" x="7" y="12" fill="#A3A3A3" rx=".5" />
-                            <rect width="4" height="2" x="7" y="16" fill="#A3A3A3" rx=".5" />
-                            <rect width="4" height="2" x="13" y="12" fill="#A3A3A3" rx=".5" />
-                            <rect width="4" height="2" x="13" y="16" fill="#A3A3A3" rx=".5" />
-                        </g>
-                    </svg>
-                    <span>{{ moment(post.created_at).format("LL") }}</span>
+                    <IconsDate />
+                    <span class="ml-1">{{ moment(post.created_at).format("LL") }}</span>
                 </div>
                 <div class="w-full font-normal" v-html="post.content"></div>
             </div>
             <div class="col-span-2">
-                <div :class="$vuetify.display.mobile ? 'mt-4' : 'mt-0'"
-                    class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-xl md:text-2xl font-semibold py-3">
-                    <span>Kategori</span>
-                </div>
-                <div class="flex flex-wrap">
-                    <div @click="$router.push('/berita/category/' + category.slug)"
-                        class="bg-[#0088CC] cursor-pointer font-semibold text-white pa-2 mr-2 mt-2 text-sm w-fit rounded-full"
-                        v-for="category in newsCategory">
-                        <span>{{ category.name }}</span>
-                    </div>
-                </div>
-                <div
-                    class="text-[#0088CC] border-[#0088CC] border-b-2 mt-5 mb-6 text-xl md:text-2xl font-semibold py-3">
-                    <span>Berita Terbaru</span>
-                </div>
-                <div @click="$router.push('/berita/' + news.slug)" class="cursor-pointer mb-2 px-2 py-3 flex"
-                    v-for="news in latestNews">
-                    <div class="w-[300px] h-full">
-                        <img class="rounded-md" :src="news.thumbnail" alt="">
-                    </div>
-                    <div class="block ml-3">
-                        <div class="text-[#0088CC] text-md font-medium">
-                            <span>{{ news.title }}</span>
-                        </div>
-                        <div class="mt-1">
-                            <div class="text-sm flex items-center font-medium mt-2 mb-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="1.2em" height="1.2em"
-                                    viewBox="0 0 24 24">
-                                    <g fill="none">
-                                        <rect width="18" height="15" x="3" y="6" stroke="#A3A3A3" rx="2" />
-                                        <path fill="black"
-                                            d="M3 10c0-1.886 0-2.828.586-3.414C4.172 6 5.114 6 7 6h10c1.886 0 2.828 0 3.414.586C21 7.172 21 8.114 21 10z" />
-                                        <path stroke="#A3A3A3" stroke-linecap="round" d="M7 3v3m10-3v3" />
-                                        <rect width="4" height="2" x="7" y="12" fill="#A3A3A3" rx=".5" />
-                                        <rect width="4" height="2" x="7" y="16" fill="#A3A3A3" rx=".5" />
-                                        <rect width="4" height="2" x="13" y="12" fill="#A3A3A3" rx=".5" />
-                                        <rect width="4" height="2" x="13" y="16" fill="#A3A3A3" rx=".5" />
-                                    </g>
-                                </svg>
-                                <span>{{ moment(post.created_at).format("LL") }}</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <PartialsNewsCategory />
+                <PartialsLatestNews />
             </div>
         </div>
     </div>

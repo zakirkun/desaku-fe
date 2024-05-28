@@ -1,52 +1,26 @@
 <script setup>
+import moment from 'moment';
+
 definePageMeta({
     layout: 'app'
 });
 
-useHead({
-    title: 'Berita'
-});
+const route = useRouter().currentRoute.value
+const news = ref(null)
+const newsCategory = ref(null)
+
+const { data } = await useAsyncData(
+    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/news?category=' + route.params.id)
+)
+
+news.value = data.value.data
+newsCategory.value = data.value.category_name
 </script>
-
-<script>
-import moment from 'moment';
-
-export default {
-    data: () => ({
-        news: [],
-        latestNews: [],
-        newsCategory: [],
-        category_name: null,
-        moment: moment,
-        showContent: false
-    }),
-    async mounted() {
-        await this.loadData()
-        await this.loadLatestNews()
-        await this.loadNewsCategory()
-        this.showContent = true
-    },
-    methods: {
-        async loadData() {
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/news?category=' + this.$route.params.id)
-            this.category_name = data.category_name
-            this.news = data.data
-        },
-        async loadLatestNews() {
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/news?limit=5')
-            this.latestNews = data
-        },
-        async loadNewsCategory() {
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/news-category')
-            this.newsCategory = data
-        },
-    }
-}
-</script>
-
 <template>
-    <AnimationLoading v-if="!showContent" />
-    <div v-else class="animate-fade flex-1 block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem]  pt-6">
+    <Head>
+        <Title>Berita: {{ newsCategory }}</Title>
+    </Head>
+    <div class="animate-fade flex-1 block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem]  pt-6">
         <div class="flex mb-6 items-center bg-[#f0f0f0] pa-3 rounded-lg">
             <div class="mr-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 1024 1024">
@@ -55,13 +29,13 @@ export default {
                 </svg>
             </div>
             <div>
-                <span>/ Berita / {{ category_name }}</span>
+                <span>/ Berita / {{ newsCategory }}</span>
             </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-6 md:gap-x-12">
             <div class="block col-span-1 md:col-span-4">
-                <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
-                    <span>Berita: {{ category_name }}</span>
+                <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-xl sm:text-2xl font-semibold py-3">
+                    <span>Berita: {{ newsCategory }}</span>
                 </div>
                 <div @click="$router.push('/berita/' + news.slug)"
                     class="cursor-pointer flex mb-[0.5rem] md:mb-2 h-[160px] md:h-[200px]" v-for="news in news">
@@ -74,20 +48,8 @@ export default {
                             <span class="flex md:hidden">{{ news.title.slice(0, 40) }}...</span>
                         </div>
                         <div class="text-sm md:text-base flex items-center font-medium mt-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="1.5em" height="1.5em"
-                                viewBox="0 0 24 24">
-                                <g fill="none">
-                                    <rect width="18" height="15" x="3" y="6" stroke="#A3A3A3" rx="2" />
-                                    <path fill="black"
-                                        d="M3 10c0-1.886 0-2.828.586-3.414C4.172 6 5.114 6 7 6h10c1.886 0 2.828 0 3.414.586C21 7.172 21 8.114 21 10z" />
-                                    <path stroke="#A3A3A3" stroke-linecap="round" d="M7 3v3m10-3v3" />
-                                    <rect width="4" height="2" x="7" y="12" fill="#A3A3A3" rx=".5" />
-                                    <rect width="4" height="2" x="7" y="16" fill="#A3A3A3" rx=".5" />
-                                    <rect width="4" height="2" x="13" y="12" fill="#A3A3A3" rx=".5" />
-                                    <rect width="4" height="2" x="13" y="16" fill="#A3A3A3" rx=".5" />
-                                </g>
-                            </svg>
-                            <span>{{ moment(news.created_at).format("LL") }}</span>
+                            <IconsDate />
+                            <span class="ml-1">{{ moment(news.created_at).format("LL") }}</span>
                         </div>
                         <div class="mt-2 text-sm md:text-base">
                             <span class="hidden md:flex">{{ news.description }}</span>
@@ -97,34 +59,8 @@ export default {
                 </div>
             </div>
             <div class="col-span-2">
-                <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
-                    <span>Kategori</span>
-                </div>
-                <div class="flex flex-wrap">
-                    <div @click="$router.push('/berita/category/' + category.slug)" class="bg-[#0088CC] cursor-pointer font-semibold text-white pa-2 mr-2 mt-2 text-sm w-fit rounded-full"
-                        v-for="category in newsCategory">
-                        <span>{{ category.name }}</span>
-                    </div>
-                </div>
-                <div class="text-[#0088CC] border-[#0088CC] border-b-2 mt-5 mb-6 text-2xl font-semibold py-3">
-                    <span>Berita Terbaru</span>
-                </div>
-                <div class="mb-10">
-                    <div @click="$router.push('/berita/' + news.slug)"
-                        class="cursor-pointer mb-2 px-2 py-3 flex items-center" v-for="news in latestNews">
-                        <div class="w-[240px] h-full">
-                            <img class="rounded-md" :src="news.thumbnail" alt="">
-                        </div>
-                        <div class="block ml-3">
-                            <div class="text-[#0088CC] text-base font-medium">
-                                <span>{{ news.title }}</span>
-                            </div>
-                            <div class="mt-1">
-                                <span>{{ moment(news.created_at).format("LL") }}</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <PartialsNewsCategory />
+                <PartialsLatestNews />
             </div>
         </div>
     </div>
