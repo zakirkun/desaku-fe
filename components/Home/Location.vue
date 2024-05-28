@@ -19,7 +19,7 @@ address.value = addressData.value
         <div class="flex-none w-full md:w-[60%] mb-8 md:mb-2" v-html="location.maps">
         </div>
         <div class="ml-0 md:ml-6 md:pl-10 flex-1">
-            <p class="text-black font-semibold text-2xl">Lokasi Desa</p>
+            <p class="text-[#0088CC] font-semibold text-xl md:text-2xl">Lokasi Desa</p>
             <div class="block mt-3">
                 <div v-for="unit in address" class="flex text-base md:text-lg mb-2">
                     <div class="w-[60%]">

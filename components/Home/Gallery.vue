@@ -26,7 +26,7 @@ onMounted(async () => {
 </script>
 <template>
     <div class="block col-span-4">
-        <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
+        <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-xl md:text-2xl font-semibold py-3">
             <span>Galeri Desa</span>
         </div>
         <div id="gallery" class="grid grid-cols-1 md:grid-cols-3 mb-2 gap-6">

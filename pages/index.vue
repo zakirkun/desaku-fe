@@ -13,7 +13,7 @@ const perangkatDesa = ref(null)
 const showContent = ref(false)
 
 const { data } = await useAsyncData(
-    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/image-gallery')
+    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/image-homepage')
 )
 
 images.value = data.value
@@ -64,17 +64,17 @@ useHead({
         <div class="block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] bg-white pt-6">
             <div class="grid grid-cols-1 md:grid-cols-6 md:gap-x-12">
                 <div class="block col-span-1 md:col-span-4">
-                    <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
+                    <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-xl md:text-2xl font-semibold py-3">
                         <span>Berita Terkini</span>
                     </div>
                     <HomeLatestNews />
                 </div>
                 <div class="col-span-2">
-                    <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
+                    <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-xl md:text-2xl font-semibold py-3">
                         <span>Pengumuman</span>
                     </div>
                     <HomeLatestAnnouncement />
-                    <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
+                    <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-xl md:text-2xl font-semibold py-3">
                         <span>Agenda Kegiatan</span>
                     </div>
                     <HomeLatestActivities />
@@ -85,7 +85,7 @@ useHead({
             <div class="grid grid-cols-1 md:grid-cols-6 md:gap-x-12">
                 <HomeGallery />
                 <div class="col-span-2">
-                    <div class="text-[#0088CC] struktur border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
+                    <div class="text-[#0088CC] struktur border-[#0088CC] border-b-2 mb-6 text-xl md:text-2xl font-semibold py-3">
                         <span>Struktur Organisasi</span>
                     </div>
                     <div class="font-medium text-white px-2 rounded-md">
@@ -96,8 +96,8 @@ useHead({
                             <swiper-slide v-for="item in perangkatDesa" class="relative">
                                 <img class="rounded-md h-[360px] w-full" :src="item.image" />
                                 <div
-                                    class="rounded-b-md z-50 py-1 backdrop-blur-xl opacity-90 pl-2 bg-[#0088CC] bottom-0 absolute w-full text-white">
-                                    <p>{{ item.name }} - {{ item.job }}</p>
+                                    class="text-sm font-normal rounded-b-md z-50 py-1 backdrop-blur-xl opacity-90 pl-2 bg-[#0088CC] bottom-0 absolute w-full text-white">
+                                    <span>{{ item.name }} - {{ item.job }}</span>
                                 </div>
                             </swiper-slide>
                         </swiper>
