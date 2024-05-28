@@ -38,6 +38,7 @@ export default {
             })
 
             this.loading = false
+            location.reload()
         },
         onImageSelected(val) {
             this.form.logo = val

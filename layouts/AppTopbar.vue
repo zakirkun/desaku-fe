@@ -21,12 +21,14 @@ function logout() {
 </script>
 <script>
 export default {
-    data(){
+    data() {
         return {
-            data: {}
+            data: {},
+            logo: null,
         }
     },
     async mounted() {
+        await this.loadHeader()
         await this.loadData()
     },
     methods: {
@@ -39,21 +41,25 @@ export default {
             this.data.name = data.name
             this.data.email = data.email
         },
+        async loadHeader() {
+            const { logo } = await $fetch(this.$config.public.API_BASE_URL + '/api/header')
+            this.logo = logo
+        },
     }
 }
 </script>
 
 <template>
     <div class="layout-topbar">
-        <router-link to="/dashboard" class="layout-topbar-logo">
-            <img src="https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/images/logo_header.png"
-                alt="logo" />
-            <span class="font-medium">Dashboard</span>
-        </router-link>
-
-        <button class="ml-2 p-link layout-menu-button layout-topbar-button" @click="onMenuToggle()">
+        <button class="p-link layout-menu-button layout-topbar-button" @click="onMenuToggle()">
             <i class="pi pi-bars"></i>
         </button>
+        <router-link to="/dashboard" class="flex layout-topbar-logo items-center">
+            <div>
+                <v-img width="50" height="35" :src="logo" alt="logo" />
+            </div>
+            <span class="font-medium">Dashboard</span>
+        </router-link>
 
         <v-menu>
             <template v-slot:activator="{ props }">
