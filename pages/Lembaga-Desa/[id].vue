@@ -6,26 +6,18 @@ definePageMeta({
 useHead({
     title: "Lembaga Desa"
 })
-</script>
-<script>
-export default {
-    data: () => ({
-        data: {
-            name: null,
-        },
-        showContent: false
-    }),
-    async mounted() {
-        const data = await $fetch(this.$config.public.API_BASE_URL + '/api/lembaga/slug/' + this.$route.params.id)
-        this.data = data
-        this.showContent = true
-    },
-}
-</script>
 
+const route = useRouter().currentRoute.value
+const data = ref(null)
+
+const { data: dataLembaga } = await useAsyncData(
+    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/lembaga/slug/' + route.params.id)
+)
+
+data.value = dataLembaga.value
+</script>
 <template>
-    <AnimationLoading v-if="!showContent" />
-    <div v-else class="animate-fade flex-1 px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-[2.5rem] ">
+    <div class="animate-fade flex-1 px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-[2.5rem] ">
         <div class="flex mb-6 items-center bg-[#f0f0f0] px-3 py-3 rounded-lg">
             <div class="mr-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 1024 1024">
@@ -38,30 +30,30 @@ export default {
             </div>
         </div>
         <div class="pb-8">
-            <h1 class="mb-8 font-semibold text-[#0088CC] text-2xl md:text-3xl">{{ data.name }}</h1>
+            <h1 class="mb-8 font-semibold text-[#0088CC] text-2xl">{{ data.name }}</h1>
             <div class="block md:flex">
                 <div clas="flex-none w-full md:w-[300px]">
                     <img class="w-full md:w-[300px] rounded-md" :src="data.image" alt="">
                 </div>
-                <div class="block description-lembaga">
-                    <div class="flex text-lg md:text-xl font-medium py-3 border-b border-slate-300">
-                        <div class="flex-none w-[200px]">
+                <div class="block text-base md:text-lg font-medium description-lembaga">
+                    <div class="flex py-3 border-b border-slate-300">
+                        <div class="flex-none w-[140px] sm:w-[200px]">
                             Nama Lembaga
                         </div>
                         <div>
                             : {{ data.name }}
                         </div>
                     </div>
-                    <div class="flex text-lg md:text-xl font-medium py-3 border-b border-slate-300">
-                        <div class="flex-none w-[200px]">
+                    <div class="flex py-3 border-b border-slate-300">
+                        <div class="flex-none w-[140px] sm:w-[200px]">
                             Singkatan
                         </div>
                         <div>
                             : {{ data.surname }}
                         </div>
                     </div>
-                    <div class="flex text-lg md:text-xl font-medium py-3 border-b border-slate-300">
-                        <div class="flex-none w-[200px]">
+                    <div class="flex py-3 border-b border-slate-300">
+                        <div class="flex-none w-[140px] sm:w-[200px]">
                             Alamat Lengkap
                         </div>
                         <div>
@@ -70,24 +62,24 @@ export default {
                     </div>
                 </div>
             </div>
-            <div class="mt-8">
+            <div class="mt-8 text-lg sm:text-xl">
                 <div class="border border-[#0088CC] rounded-md">
-                    <div class="bg-[#0088CC] text-white px-2 text-xl py-3 font-medium rounded-t-md">
+                    <div class="bg-[#0088CC] text-white px-2 py-3 font-medium rounded-t-md">
                         Profil Lembaga
                     </div>
-                    <div class="px-3 py-5" v-if="data.profile" v-html="data.profile"></div>
+                    <div class="px-3 py-5 text-[14px]" v-if="data.profile" v-html="data.profile"></div>
                 </div>
                 <div class="border border-[#0088CC] rounded-md mt-8">
-                    <div class="bg-[#0088CC] text-white px-2 text-xl py-3 font-medium rounded-t-md">
+                    <div class="bg-[#0088CC] text-white px-2 py-3 font-medium rounded-t-md">
                         Visi & Misi
                     </div>
-                    <div class="px-3 py-5" v-if="data.visi" v-html="data.visi"></div>
+                    <div class="px-3 py-5 text-[14px]" v-if="data.visi" v-html="data.visi"></div>
                 </div>
                 <div class="border border-[#0088CC] rounded-md mt-8">
-                    <div class="bg-[#0088CC] text-white px-2 text-xl py-3 font-medium rounded-t-md">
+                    <div class="bg-[#0088CC] text-white px-2 py-3 font-medium rounded-t-md">
                         Tugas
                     </div>
-                    <div class="px-3 py-5" v-if="data.tugas" v-html="data.tugas"></div>
+                    <div class="px-3 py-5 text-[14px]" v-if="data.tugas" v-html="data.tugas"></div>
                 </div>
             </div>
         </div>

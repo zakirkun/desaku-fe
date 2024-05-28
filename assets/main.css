@@ -87,7 +87,7 @@ h3 {
 }
 
 @media screen and (max-width: 600px) {
-    p span, p, td {
+    p span, p, td, li {
         word-wrap: break-word;
         font-size: 14px;
         line-height: 1.8rem;

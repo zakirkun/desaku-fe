@@ -6,25 +6,17 @@ definePageMeta({
 useHead({
     title: "Lembaga Desa"
 })
-</script>
-<script>
-export default {
-    data: () => ({
-        data: null,
-        headerActive: false,
-        showContent: false
-    }),
-    async mounted() {
-        const data = await $fetch(this.$config.public.API_BASE_URL + '/api/lembaga')
-        this.data = data
-        this.showContent = true
-    },
-}
-</script>
 
+const data = ref(null)
+
+const { data: dataLembaga } = await useAsyncData(
+    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/lembaga')
+)
+
+data.value = dataLembaga.value
+</script>
 <template>
-    <AnimationLoading v-if="!showContent" />
-    <div v-else class="animate-fade flex-1 px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-[2.5rem] ">
+    <div class="animate-fade flex-1 px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-[2.5rem] ">
         <div class="flex mb-6 items-center bg-[#f0f0f0] px-3 py-3 rounded-lg">
             <div class="mr-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 1024 1024">
@@ -37,15 +29,15 @@ export default {
             </div>
         </div>
         <div class="pb-8">
-            <h1 class="mb-8 font-semibold text-[#0088CC] text-2xl md:text-3xl">Lembaga Desa</h1>
+            <h1 class="mb-8 font-semibold text-[#0088CC] text-2xl">Lembaga Desa</h1>
             <div class="w-full">
                 <div class="shadow overflow-hidden rounded border-b border-gray-200">
                     <table class="min-w-full bg-white">
                         <thead class="bg-gray-700 text-white">
                             <tr>
-                                <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Nama Lembaga</th>
-                                <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Alamat Kantor</th>
-                                <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Logo</th>
+                                <th class="w-1/3 text-left py-3 px-4 uppercase font-medium text-sm">Nama Lembaga</th>
+                                <th class="w-1/3 text-left py-3 px-4 uppercase font-medium text-sm">Alamat Kantor</th>
+                                <th class="text-left py-3 px-4 uppercase font-medium text-sm">Logo</th>
                             </tr>
                         </thead>
                         <tbody class="text-gray-700">
@@ -54,7 +46,7 @@ export default {
                                     <div>
                                         {{ item.name }}
                                     </div>
-                                    <div class="bg-[#0088CC] text-white w-fit px-2 text-base rounded-md py-1 mt-2">
+                                    <div class="bg-[#0088CC] text-white w-fit px-2 text-sm md:text-base rounded-md py-1 mt-2">
                                         {{  item.surname }}
                                     </div>
                                 </td>
