@@ -8,21 +8,15 @@ useHead({
 })
 
 const data = ref(null)
-const showContent = ref(false)
 
 const { data: dataTentang } = await useAsyncData(
-    () => $fetch('http://127.0.0.1:8000/api/tentang')
+    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/tentang')
 )
 
 data.value = dataTentang.value.tentang
-
-setTimeout(() => {
-    showContent.value = true
-}, 500)
 </script>
 <template>
-    <AnimationLoading v-if="!showContent" />
-    <div v-else class="animate-fade flex-1 px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-[2.5rem] ">
+    <div class="animate-fade flex-1 px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-[2.5rem] ">
         <div class="flex mb-6 items-center bg-[#f0f0f0] pa-3 rounded-lg">
             <div class="mr-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 1024 1024">

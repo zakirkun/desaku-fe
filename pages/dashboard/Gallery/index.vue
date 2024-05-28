@@ -176,7 +176,7 @@ export default {
                                 </svg>
                             </div>
                             <div class="flex justify-center">
-                                <div class="cursor-pointer" @click="openModalRemoveNews(item.uuid)">
+                                <div class="cursor-pointer" @click="openModalRemoveImages(item.uuid)">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em"
                                         viewBox="0 0 24 24">
                                         <path fill="#212121"

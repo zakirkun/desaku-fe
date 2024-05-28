@@ -31,11 +31,11 @@ export default {
             }
 
             this.loading = true
-            await $fetch(this.$config.public.API_BASE_URL + '/api/image-gallery', {
+            await $fetch(this.$config.public.API_BASE_URL + '/api/image-gallery/' + this.$route.query.id, {
                 headers: {
                     Authorization: "Bearer " + useToken().token
                 },
-                method: "POST",
+                method: "PATCH",
                 body: this.form
             })
 

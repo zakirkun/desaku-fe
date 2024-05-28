@@ -6,9 +6,22 @@ definePageMeta({
 useHead({
     title: "Perangkat Desa"
 })
+
+const perangkat = ref([])
+const showContent = ref(false)
+
+const { data } = await useAsyncData(
+    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/perangkat-desa')
+)
+
+perangkat.value = data.value
+
+setTimeout(() => {
+    showContent.value = true
+}, 500)
 </script>
 
-<script>
+<!-- <script>
 export default {
     data: () => ({
         perangkat: [],
@@ -25,11 +38,10 @@ export default {
         }
     }
 }
-</script>
+</script> -->
 
 <template>
-    <AnimationLoading v-if="!showContent" />
-    <div v-else class="animate-fade flex-1 px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-[2.5rem] min-h-[30rem]">
+    <div class="animate-fade flex-1 px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-[2.5rem] min-h-[30rem]">
         <div class="flex mb-6 items-center bg-[#f0f0f0] px-2 py-3 rounded-lg">
             <div class="mr-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 1024 1024">

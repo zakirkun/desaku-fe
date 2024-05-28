@@ -1,4 +1,29 @@
 <script setup>
+import PhotoSwipeLightbox from 'photoswipe/lightbox';
+import 'photoswipe/style.css';
+
+const lightbox = ref(null)
+const images = ref([])
+
+onMounted(async () => {
+    await nextTick(() => {
+        if (!lightbox.value) {
+            lightbox.value = new PhotoSwipeLightbox({
+                gallery: '#gallery',
+                children: 'a',
+                pswpModule: () => import('photoswipe'),
+            });
+            lightbox.value.init();
+        }
+    })
+})
+
+const { data } = await useAsyncData(
+    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/image-gallery')
+)
+
+images.value = data.value
+
 definePageMeta({
     layout: 'app'
 });
@@ -8,51 +33,8 @@ useHead({
 })
 </script>
 
-<script>
-import PhotoSwipeLightbox from 'photoswipe/lightbox';
-import 'photoswipe/style.css';
-
-export default {
-    data: () => ({
-        lightbox: null,
-        images: [],
-        showContent: false
-    }),
-    async mounted() {
-        await this.loadImages()
-
-        this.showContent = true
-
-        await this.$nextTick(() => {
-            if (!this.lightbox) {
-                this.lightbox = new PhotoSwipeLightbox({
-                    gallery: '#gallery',
-                    children: 'a',
-                    pswpModule: () => import('photoswipe'),
-                });
-                this.lightbox.init();
-            }
-        })
-    },
-    unmounted() {
-        if (this.lightbox) {
-            this.lightbox.destroy();
-            this.lightbox = null;
-        }
-    },
-    methods: {
-        async loadImages() {
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/image-gallery')
-            this.images = data
-        },
-    }
-}
-</script>
-
 <template>
-    <AnimationLoading v-if="!showContent" />
-    <div v-else
-        class="animate-fade flex-1 px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-[2.5rem] ">
+    <div class="animate-fade flex-1 px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-[2.5rem] ">
         <div class="flex mb-6 items-center bg-[#f0f0f0] px-2 py-3 rounded-lg">
             <div class="mr-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 1024 1024">
@@ -66,12 +48,13 @@ export default {
         </div>
         <div class="pb-[6rem]">
             <h1 class="mb-4 font-semibold text-[#0088CC] text-2xl">Galeri Desa</h1>
-            <div id="gallery" class="grid grid-cols-1 md:grid-cols-3 gap-[4rem] md:gap-8">
-                <a class="w-fit rounded-lg" v-for="(image, key) in images" :key="key" :href="image.url" data-pswp-width="600"
-                    data-pswp-height="400" target="_blank" rel="noreferrer">
+            <div id="gallery" class="grid grid-cols-1 md:grid-cols-3 gap-[5rem] md:gap-y-[6rem]">
+                <a class="w-fit rounded-lg" v-for="(image, key) in images" :key="key" :href="image.url"
+                    data-pswp-width="600" data-pswp-height="400" target="_blank" rel="noreferrer">
                     <img class="w-full h-full rounded-t-lg" :src="image.url" alt="" />
-                    <div class="rounded-b-lg py-3 px-2 font-semibold text-lg bg-[#F0F0F0]">
-                        <span>{{ image.description }}</span>
+                    <div class="rounded-b-lg py-3 px-2 font-medium text-base md:text-lg backdrop-blur-sm bg-white/30 shadow-sm border border-slate-100">
+                        <span v-if="image.description.length > 40 && $vuetify.display.mobile">{{ image.description.slice(0, 40) }}...</span>
+                        <span v-else>{{ image.description }}</span>
                     </div>
                 </a>
             </div>

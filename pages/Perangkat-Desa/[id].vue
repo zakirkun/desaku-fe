@@ -3,42 +3,40 @@ definePageMeta({
     layout: 'app'
 });
 
-useHead({
-    title: "Perangkat Desa"
+const route = useRouter().currentRoute.value
+const showContent = ref(false)
+const perangkatDesa = ref([])
+const data = reactive({
+    name: null,
+    job: null,
+    image: null,
+    nip: null,
+    visi: null,
 })
-</script>
 
-<script>
-export default {
-    data: () => ({
-        data: {
-            nama: null,
-            job: null,
-            nip: null,
-            image: null
-        },
-        perangkatDesa: [],
-        showContent: false
-    }),
-    async mounted() {
-        await this.loadData()
-        await this.loadPerangkatDesa()
-        this.showContent = true
-    },
-    methods: {
-        async loadData() {
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/perangkat-desa/slug/' + this.$route.params.id)
-            this.data = data
-        },
-        async loadPerangkatDesa() {
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/perangkat-desa')
-            this.perangkatDesa = data
-        }
-    }
-}
-</script>
+const { data: dataPerangkatDesa } = await useAsyncData(
+    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/perangkat-desa/slug/' + route.params.id)
+)
+data.name = dataPerangkatDesa.value.name
+data.job = dataPerangkatDesa.value.job
+data.image = dataPerangkatDesa.value.image
+data.visi = dataPerangkatDesa.value.visi
+data.nip = dataPerangkatDesa.value.nip
 
+const { data: dataLatestPerangkatDesa } = await useAsyncData(
+    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/perangkat-desa')
+)
+
+perangkatDesa.value = dataLatestPerangkatDesa.value
+
+setTimeout(() => {
+    showContent.value = true
+}, 500)
+</script>
 <template>
+    <Head>
+        <Title>{{ data.name }} Perangkat Desa</Title>
+    </Head>
     <AnimationLoading v-if="!showContent" />
     <div v-else
         class="animate-fade flex-1 pb-8 px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-[2.5rem] min-h-[30rem]">
@@ -50,7 +48,7 @@ export default {
                 </svg>
             </div>
             <div>
-                <span>/ Perangkat Desa / {{ data.name }}</span>
+                <span>/ <span @click="navigateTo('/perangkat-desa')">Perangkat Desa</span> / {{ data.name }}</span>
             </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-6 md:gap-x-12 gap-y-6">

@@ -10,7 +10,6 @@ useHead({
 const jabatan = ref([])
 const selectedJabatan = ref(null)
 const currentPerangkat = ref(null)
-const showContent = ref(false)
 
 onMounted(async () => {
     await loadJabatan()
@@ -38,8 +37,7 @@ async function getPerangkat(id) {
 </script>
 
 <template>
-    <AnimationLoading v-if="!showContent" />
-    <div v-else
+    <div
         class="animate-fade flex-1 px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-[2.5rem] min-h-[35rem]">
         <div class="flex mb-6 items-cent</div>er bg-[#f0f0f0] px-2 py-3 rounded-lg">
             <div class="mr-2">

@@ -8,21 +8,15 @@ useHead({
 })
 
 const data = ref(null)
-const showContent = ref(false)
 
 const { data: dataVisi } = await useAsyncData(
     () => $fetch('http://127.0.0.1:8000/api/visi')
 )
 
 data.value = dataVisi.value.visi
-
-setTimeout(() => {
-    showContent.value = true
-}, 500)
 </script>
 <template>
-    <AnimationLoading v-if="!showContent" />
-    <div v-else
+    <div
         class="animate-fade pb-6 px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-[2.5rem] ">
         <div class="flex mb-6 items-center bg-[#f0f0f0] px-3 py-3 rounded-lg">
             <div class="mr-2">
