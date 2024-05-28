@@ -29,10 +29,12 @@ const { data: dataLatestPerangkatDesa } = await useAsyncData(
 perangkatDesa.value = dataLatestPerangkatDesa.value
 </script>
 <template>
+
     <Head>
         <Title>{{ data.name }} Perangkat Desa</Title>
     </Head>
-    <div class="animate-fade flex-1 pb-8 px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-[2.5rem] min-h-[30rem]">
+    <div
+        class="animate-fade flex-1 pb-8 px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-[2.5rem] min-h-[30rem]">
         <div class="flex mb-6 items-center bg-[#f0f0f0] px-2 py-3 rounded-lg">
             <div class="mr-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 1024 1024">
@@ -50,7 +52,10 @@ perangkatDesa.value = dataLatestPerangkatDesa.value
                     <span>{{ data.name }}</span>
                 </div>
                 <div class="block md:flex">
-                    <img class="w-[200px] h-full rounded-lg flex-none mx-auto mb-6 md:mb-0" :src="data.image" alt="">
+                    <div class="w-full md:w-[240px]">
+                        <v-img class="w-full rounded-lg flex-none mx-auto mb-6 md:mb-0" :src="data.image"
+                            alt="" />
+                    </div>
                     <div class="md:ml-6 flex-1 py-5 md:pl-4 md:pr-10 md:border rounded-md h-fit border-slate-300">
                         <div class="flex border-b border-slate-300 pb-3 text-base md:text-lg mb-2">
                             <div class="font-semibold w-[140px]">
@@ -88,13 +93,14 @@ perangkatDesa.value = dataLatestPerangkatDesa.value
                     <span>Perangkat Desa Lainya</span>
                 </div>
                 <div class="mb-3 bg-white px-5 py-3 rounded-md border border-slate-300">
-                    <div @click="$router.push('/perangkat-desa/' + perangkat.slug)" class="border-b border-slate-300 pb-5 cursor-pointer mb-1 py-2 flex"
+                    <div @click="$router.push('/perangkat-desa/' + perangkat.slug)"
+                        class="border-b border-slate-300 pb-5 cursor-pointer mb-1 py-2 flex"
                         v-for="perangkat in perangkatDesa">
                         <div class="flex-none mr-4">
-                            <v-img class="w-[70px] h-[60px] rounded-md" :src="perangkat.image" alt=""/>
+                            <v-img class="w-[70px] h-[60px] rounded-md" :src="perangkat.image" alt="" />
                         </div>
                         <div class="block">
-                            <div class="font-medium text-[#0088CC] text-base md:text-xl">
+                            <div class="font-medium text-[#0088CC] text-base md:text-lg">
                                 <span>{{ perangkat.name }}</span>
                             </div>
                             <div class="font-medium text-sm md:text-base">
