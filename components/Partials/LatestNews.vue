@@ -6,7 +6,7 @@ const { data } = await useAsyncData(
     () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/news?limit=5')
 )
 
-news.value = data.value
+news.value = data.value.data
 </script>
 <template>
     <div class="text-[#0088CC] border-[#0088CC] border-b-2 mt-5 mb-6 text-xl sm:text-2xl font-semibold py-3">
@@ -14,14 +14,13 @@ news.value = data.value
     </div>
     <div class="mb-10">
         <div @click="$router.push('/berita/' + news.slug)"
-            class="cursor-pointer mb-2 px-2 py-3 flex items-center" v-for="news in news">
-            <div class="w-[140px] h-full flex-none">
+            class="cursor-pointer mb-2 px-2 py-3 flex" v-for="news in news">
+            <div class="w-[140px] flex-none">
                 <v-img min-width="100%" class="rounded-md" :src="news.thumbnail" alt="" />
             </div>
             <div class="block ml-3">
                 <div class="text-[#0088CC] text-base font-medium">
-                    <span v-if="news.title.length > 60">{{ news.title.slice(0, 60) }}...</span>
-                    <span v-else>{{ news.title }}</span>
+                    <span class="line-clamp-2">{{ news.title }}</span>
                 </div>
                 <div class="mt-1">
                     <span>{{ moment(news.created_at).format("LL") }}</span>

@@ -7,7 +7,7 @@ const { data } = await useAsyncData(
     () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/news?limit=5')
 )
 
-news.value = data.value
+news.value = data.value.data
 </script>
 <template>
     <div class="flex mb-10 cursor-pointer" @click="$router.push('/berita/' + news.slug)" v-for="news in news">
