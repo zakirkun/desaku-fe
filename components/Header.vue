@@ -130,7 +130,7 @@ export default {
     <Transition>
         <div ref="target" v-if="navMobile" class="bg-white shadow-lg h-screen fixed w-3/4 right-0"
             style="z-index: 9999;">
-            <div class="block min-h-screen pb-10 px-3 py-4">
+            <div class="block h-fit pb-10 px-3 py-4">
                 <div class="flex justify-between cursor-pointer border-b border-slate-200 pb-4">
                     <div class="flex-none flex" @click="$router.push('/')">
                         <img width="40"
