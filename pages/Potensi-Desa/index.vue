@@ -1,4 +1,28 @@
 <script setup>
+import moment from 'moment';
+
+const potensi = ref([])
+const latestPotensi = ref([])
+const potensiCategory = ref([])
+
+const { data } = await useAsyncData(
+    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/potensi-desa')
+)
+
+potensi.value = data.value.data
+
+const { data: latestPotensiData } = await useAsyncData(
+    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/potensi-desa?limit=5')
+)
+
+latestPotensi.value = latestPotensiData.value.data
+
+const { data: potensiCategoryData } = await useAsyncData(
+    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/potensi-category')
+)
+
+potensiCategory.value = potensiCategoryData.value
+
 definePageMeta({
     layout: 'app'
 });
@@ -8,39 +32,8 @@ useHead({
 });
 </script>
 
-<script>
-import moment from 'moment';
-
-export default {
-    data: () => ({
-        potensi: [],
-        potensiCategory: [],
-        moment: moment,
-        showContent: false
-    }),
-    async mounted() {
-        await this.loadData()
-        await this.loadPotensiCategory()
-        this.showContent = true
-    },
-    methods: {
-        async loadData() {
-            const { data: data } = await $fetch(this.$config.public.API_BASE_URL + '/api/potensi-desa?limit=5')
-            this.potensi = data
-            this.latestPotensi = data
-        },
-        async loadPotensiCategory() {
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/potensi-category')
-            this.potensiCategory = data
-        },
-    }
-}
-</script>
-
 <template>
-    <AnimationLoading v-if="!showContent" />
-    <div v-else
-        class="flex-1 animate-fade block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem]  pt-6">
+    <div class="flex-1 animate-fade block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem]  pt-6">
         <div class="flex mb-6 items-center bg-[#f0f0f0] pa-3 rounded-lg">
             <div class="mr-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 1024 1024">
@@ -54,14 +47,14 @@ export default {
         </div>
         <div class="grid grid-cols-1 md:grid-cols-6 md:gap-x-12 h-full">
             <div class="block col-span-1 md:col-span-4">
-                <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
+                <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-xl md:text-2xl font-semibold py-3">
                     <span>Potensi Desa</span>
                 </div>
                 <div v-if="potensi.length > 0" @click="navigateTo('/potensi-desa/' + potensi.slug)"
                     class="cursor-pointer flex mb-[0.5rem] md:mb-2 h-[160px] md:h-[200px]" v-for="potensi in potensi">
-                    <div class="w-[160px] md:w-[240px] h-full flex-none">
-                        <img class="rounded-md h-[120px] md:h-[160px] w-full object-cover" :src="potensi.thumbnail"
-                            alt="">
+                    <div class="w-[140px] sm:w-[240px] h-full flex-none">
+                        <v-img class="h-[100px] md:h-[160px] w-full" :src="potensi.thumbnail"
+                            alt=""/>
                     </div>
                     <div class="block pl-4">
                         <div class="tetx-base md:text-xl font-semibold">
@@ -73,38 +66,38 @@ export default {
                                 <IconsDate />
                                 <span class="ml-1">{{ moment(potensi.created_at).format("LL") }}</span>
                             </div>
-                            <div class="text-xs md:text-base flex items-center font-medium mt-2 ml-2">
+                            <div class="text-xs md:text-base flex items-center font-medium mt-2 sm:ml-2">
                                 <IconsTag />
                                 <span class="ml-1">{{ potensi.category_name }}</span>
                             </div>
                         </div>
                         <div class="mt-2 text-sm md:text-base">
-                            <span class="hidden md:flex">{{ potensi.description }}</span>
-                            <span class="flex md:hidden">{{ potensi.description.slice(0, 40) }}...</span>
+                            <span class="hidden sm:flex">{{ potensi.description }}</span>
+                            <span class="flex sm:hidden">{{ potensi.description.slice(0, 50) }}...</span>
                         </div>
                     </div>
                 </div>
                 <EmptyData v-else />
             </div>
             <div class="col-span-2">
-                <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
+                <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-xl md:text-2xl font-semibold py-3">
                     <span>Kategori</span>
                 </div>
                 <div class="flex flex-wrap">
                     <div @click="navigateTo('/potensi-desa/category/' + category.slug)"
-                        class="bg-[#0088CC] cursor-pointer font-semibold text-white pa-2 mr-2 mt-2 text-sm w-fit rounded-full"
+                        class="bg-[#0088CC] cursor-pointer font-medium text-white pa-2 mr-2 mt-2 text-sm w-fit rounded-full"
                         v-for="category in potensiCategory">
                         <span>{{ category.name }}</span>
                     </div>
                 </div>
-                <div class="text-[#0088CC] border-[#0088CC] border-b-2 mt-5 mb-6 text-2xl font-semibold py-3">
+                <div class="text-[#0088CC] border-[#0088CC] border-b-2 mt-5 mb-6 text-xl md:text-2xl font-semibold py-3">
                     <span>Potensi Desa Terbaru</span>
                 </div>
                 <div class="mb-10">
-                    <div @click="navigateTo('/potensi-desa/' + potensi.slug)"
-                        class="cursor-pointer mb-2 px-2 py-3 flex" v-for="potensi in latestPotensi">
+                    <div @click="navigateTo('/potensi-desa/' + potensi.slug)" class="cursor-pointer mb-2 px-2 py-3 flex"
+                        v-for="potensi in latestPotensi">
                         <div class="w-[140px] h-full flex-none">
-                            <img class="rounded-md" :src="potensi.thumbnail" alt="">
+                            <v-img :src="potensi.thumbnail" alt=""/>
                         </div>
                         <div class="block ml-3">
                             <div class="text-[#0088CC] text-base font-medium">
@@ -120,3 +113,10 @@ export default {
         </div>
     </div>
 </template>
+<style scoped>
+::v-deep img {
+    border-radius: 6px;
+    width: 100%;
+    object-fit: cover;
+}
+</style>

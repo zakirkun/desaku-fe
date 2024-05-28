@@ -27,10 +27,15 @@ a {
     color: #0088CC;
 }
 
-p span, p, td {
+p span,
+p{
     word-wrap: break-word;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 1.8rem;
+}
+
+td {
+    font-size: 14px;
 }
 
 h1 {
@@ -79,4 +84,13 @@ h3 {
 .fade-enter-from,
 .fade-leave-to {
     opacity: 0;
+}
+
+@media screen and (max-width: 600px) {
+    p span, p, td {
+        word-wrap: break-word;
+        font-size: 14px;
+        line-height: 1.8rem;
+    }
+    
 }

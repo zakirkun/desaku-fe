@@ -10,19 +10,20 @@ useHead({
 const jabatan = ref([])
 const selectedJabatan = ref(null)
 const currentPerangkat = ref(null)
+const content = ref(null)
 
-onMounted(async () => {
-    await loadJabatan()
-    showContent.value = true
-})
+const { data } = await useAsyncData(
+    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/jabatan')
+)
 
-async function loadJabatan() {
-    const { data } = await useAsyncData(
-        () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/jabatan')
-    )
+jabatan.value = data.value
 
-    jabatan.value = data.value
-}
+const { data: contentStrukturOrganisasi } = await useAsyncData(
+    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/struktur-organisasi')
+)
+
+content.value = contentStrukturOrganisasi.value.content
+
 
 async function getPerangkat(id) {
     if (!id) {
@@ -66,16 +67,15 @@ async function getPerangkat(id) {
                     :items="jabatan" item-value="uuid" item-title="name"></v-select>
             </div>
 
-            <div class="block flex-1" :class="$vuetify.display.mobile ? 'pl-0' : 'pl-10'">
+            <div class="block flex-1 md:pl-10">
                 <div v-if="!currentPerangkat">
                     <h1 class="mb-4 font-semibold text-[#0088CC] text-3xl">Struktur Organisasi</h1>
-                    <img
-                        src="https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/struktur_org_desa.png">
+                    <div v-html="content"></div>
                 </div>
                 <div v-else>
-                    <p class="text-2xl mb-5 font-semibold">{{ currentPerangkat[0]?.job ?? '-' }}</p>
-                    <div class="grid grid-cols-1 gap-8 md:grid-cols-4">
-                        <div @click="" class="cursor-pointer rounded-lg block shadow-lg"
+                    <p class="text-xl md:text-2xl mb-5 mt-4 font-semibold">{{ currentPerangkat[0]?.job ?? '-' }}</p>
+                    <div class="animate-fade grid grid-cols-1 gap-8 md:grid-cols-4">
+                        <div @click="navigateTo('/perangkat-desa/' + item.slug)" class="cursor-pointer rounded-lg block shadow-lg"
                             v-for="item in currentPerangkat">
                             <div class="w-full h-[180px]">
                                 <img :src="item.image" class="w-full h-full object-cover rounded-t-lg" />

@@ -21,6 +21,9 @@ export default {
 
                             await $fetch(this.$config.public.API_BASE_URL + '/api/image', {
                                 body: formData,
+                                headers: {
+                                    Authorization: "Bearer " + useToken().token
+                                },
                                 method: "POST"
                             })
                                 .then(res => {
@@ -47,7 +50,6 @@ export default {
                 [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
 
                 [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-                [{ 'font': [] }],
                 [{ 'align': [] }],
 
                 ['clean']                                         // remove formatting button
@@ -55,7 +57,7 @@ export default {
         }
     },
     methods: {
-        contentChange(){
+        contentChange() {
             this.$emit('contentChange', this.content)
         }
     }
@@ -63,6 +65,6 @@ export default {
 </script>
 
 <template>
-    <QuillEditor @update:content="contentChange" v-model:content="content" :modules="module" contentType="html" placeholder="Masukkan konten nya disini..."
-        :toolbar="toolbarOptions" theme="snow" />
+    <QuillEditor @update:content="contentChange" v-model:content="content" :modules="module" contentType="html"
+        placeholder="Masukkan konten nya disini..." :toolbar="toolbarOptions" theme="snow" />
 </template>

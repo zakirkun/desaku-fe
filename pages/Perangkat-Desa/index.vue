@@ -8,37 +8,13 @@ useHead({
 })
 
 const perangkat = ref([])
-const showContent = ref(false)
 
 const { data } = await useAsyncData(
     () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/perangkat-desa')
 )
 
 perangkat.value = data.value
-
-setTimeout(() => {
-    showContent.value = true
-}, 500)
 </script>
-
-<!-- <script>
-export default {
-    data: () => ({
-        perangkat: [],
-        showContent: false
-    }),
-    async mounted() {
-        await this.loadPerangkatDesa()
-        this.showContent = true
-    },
-    methods: {
-        async loadPerangkatDesa() {
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/perangkat-desa')
-            this.perangkat = data
-        }
-    }
-}
-</script> -->
 
 <template>
     <div class="animate-fade flex-1 px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-[2.5rem] min-h-[30rem]">
@@ -53,10 +29,11 @@ export default {
                 <span>/ Perangkat Desa</span>
             </div>
         </div>
+        <h1 class="mb-4 font-semibold text-[#0088CC] text-2xl">Perangkat Desa</h1>
         <div class="mt-8 grid grid-cols-1 md:grid-cols-5 pb-8 gap-x-8 gap-y-10">
             <div class="rounded-lg block shadow-lg cursor-pointer" @click="$router.push('/perangkat-desa/' + item.slug)" v-for="item in perangkat">
                 <div class="w-full h-[180px]">
-                    <img :src="item.image" class="w-full h-full object-cover rounded-t-lg" />
+                    <v-img :src="item.image" class="w-full h-full rounded-t-lg" />
                 </div>
                 <div class="bg-[#0088CC] rounded-b-lg text-white text-base font-medium pa-2">
                     <span>{{ item.name }}</span>
@@ -67,3 +44,9 @@ export default {
         </div>
     </div>
 </template>
+<style scoped>
+::v-deep img {
+    width: 100%;
+    object-fit: cover;
+}
+</style>

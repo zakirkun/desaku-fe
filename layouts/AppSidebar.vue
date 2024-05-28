@@ -32,6 +32,7 @@ const model = ref([
                     { label: 'Perangkat Desa', to: "/dashboard/perangkat-desa" },
                     { label: 'Jabatan', to: "/dashboard/jabatan" },
                     { label: 'Lembaga', to: "/dashboard/lembaga" },
+                    { label: 'Struktur Organisasi', to: "/dashboard/struktur-organisasi" },
                 ]
             },
             {
