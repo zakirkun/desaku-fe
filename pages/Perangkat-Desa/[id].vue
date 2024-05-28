@@ -48,7 +48,7 @@ perangkatDesa.value = dataLatestPerangkatDesa.value
         </div>
         <div class="grid grid-cols-1 md:grid-cols-6 md:gap-x-12 gap-y-6">
             <div class="block col-span-1 md:col-span-4">
-                <div class="text-[#0088CC] mb-6 text-2xl md:text-3xl font-semibold py-3">
+                <div class="text-[#0088CC] mb-6 text-2xl md:text-2xl font-semibold py-3">
                     <span>{{ data.name }}</span>
                 </div>
                 <div class="block md:flex">

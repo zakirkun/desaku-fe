@@ -29,7 +29,7 @@ data.value = dataSejarah.value.sejarah
             </div>
         </div>
         <div class="pb-8">
-            <h1 class="mb-4 font-semibold text-[#0088CC] text-3xl">Sejarah Desa</h1>
+            <h1 class="mb-4 font-semibold text-[#0088CC] text-2xl">Sejarah Desa</h1>
             <div v-if="data" v-html="data"></div>
         </div>
     </div>

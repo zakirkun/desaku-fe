@@ -69,7 +69,7 @@ async function getPerangkat(id) {
 
             <div class="block flex-1 md:pl-10">
                 <div v-if="!currentPerangkat">
-                    <h1 class="mb-4 font-semibold text-[#0088CC] text-3xl">Struktur Organisasi</h1>
+                    <h1 class="mb-4 font-semibold text-[#0088CC] text-2xl">Struktur Organisasi</h1>
                     <div v-html="content"></div>
                 </div>
                 <div v-else>

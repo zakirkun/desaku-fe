@@ -30,7 +30,7 @@ data.value = dataVisi.value.visi
             </div>
         </div>
         <div class="pb-8">
-            <h1 class="mb-4 font-semibold text-[#0088CC] text-3xl">Visi & Misi</h1>
+            <h1 class="mb-4 font-semibold text-[#0088CC] text-2xl">Visi & Misi</h1>
             <div v-if="data" v-html="data"></div>
         </div>
     </div>

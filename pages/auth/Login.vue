@@ -76,7 +76,7 @@ export default {
                 style="border-radius: 36px; padding: 0.3rem; background: linear-gradient(180deg, #0088CC 10%, rgba(33, 150, 243, 0) 30%)">
                 <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius: 53px">
                     <div class="text-center mb-5 text-white">
-                        <div class="text-900 text-3xl font-medium mb-3">Welcome Back!</div>
+                        <div class="text-900 text-2xl font-medium mb-3">Welcome Back!</div>
                         <span class="text-600 font-medium">Sign in to continue</span>
                     </div>
 
