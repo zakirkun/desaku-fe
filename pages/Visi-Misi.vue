@@ -8,10 +8,13 @@ useHead({
 })
 
 const data = ref(null)
+console.log("makan")
 
 const { data: dataVisi } = await useAsyncData(
-    () => $fetch('http://127.0.0.1:8000/api/visi')
+    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/visi')
 )
+
+console.log(dataVisi.value)
 
 data.value = dataVisi.value.visi
 </script>
