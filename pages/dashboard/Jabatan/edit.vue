@@ -14,7 +14,7 @@ export default {
         }
     },
     async mounted() {
-        const data = await $fetch(this.$config.public.API_BASE_URL + '/api/jabatan/' + this.$route.query.id)
+        const data = await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/jabatan/' + this.$route.query.id)
         this.form.job = data.name
     },
     methods: {
@@ -27,7 +27,7 @@ export default {
 
             this.loading = true
 
-            await $fetch(this.$config.public.API_BASE_URL + '/api/jabatan/' + this.$route.query.id, {
+            await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/jabatan/' + this.$route.query.id, {
                 method: "PATCH",
                 headers: {
                     Authorization: "Bearer " + useToken().token

@@ -29,13 +29,13 @@ export default {
     },
     async mounted() {
         await this.loadJabatan()
-        const data = await $fetch(this.$config.public.API_BASE_URL + '/api/perangkat-desa/' + this.$route.query.id)
+        const data = await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/perangkat-desa/' + this.$route.query.id)
         this.form = data
         this.renderRichEditor = true
     },
     methods: {
         async loadJabatan() {
-            this.jabatan = await $fetch(this.$config.public.API_BASE_URL + '/api/jabatan')
+            this.jabatan = await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/jabatan')
             this.jabatanName = this.jabatan.map(v => v.name)
         },
         async updatePerangkat() {
@@ -49,7 +49,7 @@ export default {
             this.form.slug = createSlug(this.form.name)
             this.loading = true
 
-            await $fetch(this.$config.public.API_BASE_URL + '/api/perangkat-desa/' + this.$route.query.id, {
+            await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/perangkat-desa/' + this.$route.query.id, {
                 method: "PATCH",
                 headers: {
                     Authorization: "Bearer " + useToken().token

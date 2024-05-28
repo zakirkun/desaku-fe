@@ -28,14 +28,14 @@ export default {
     async mounted() {
         await this.loadCategories()
 
-        const data = await $fetch(this.$config.public.API_BASE_URL + '/api/news/' + this.$route.query.id)
+        const data = await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/news/' + this.$route.query.id)
         this.form = data
         this.data = data.content
         this.renderRichEditor = true
     },
     methods: {
         async loadCategories() {
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/news-category/')
+            const data = await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/news-category/')
             this.categories = data
         },
         async updateNews() {
@@ -49,7 +49,7 @@ export default {
             this.form.content = this.data
             this.form.slug = createSlug(this.form.title)
 
-            await $fetch(this.$config.public.API_BASE_URL + '/api/news/' + this.$route.query.id, {
+            await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/news/' + this.$route.query.id, {
                 method: "PATCH",
                 headers: {
                     Authorization: "Bearer " + useToken().token

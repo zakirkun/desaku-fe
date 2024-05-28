@@ -31,7 +31,7 @@ export default {
     methods: {
         async loadData() {
             this.loadingData = true
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/admin/list/all', {
+            const data = await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/admin/list/all', {
                 headers: {
                     Authorization: "Bearer " + useToken().token
                 },
@@ -44,7 +44,7 @@ export default {
             this.removedNewsId = id
         },
         async removeNews() {
-            await $fetch(this.$config.public.API_BASE_URL + '/api/news/' + this.removedNewsId, {
+            await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/news/' + this.removedNewsId, {
                 method: "DELETE",
                 headers: {
                     Authorization: "Bearer " + useToken().token

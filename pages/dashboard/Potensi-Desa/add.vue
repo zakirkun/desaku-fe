@@ -42,7 +42,7 @@ export default {
             this.loading = true
             this.form.slug = createSlug(this.form.title)
 
-            await $fetch(this.$config.public.API_BASE_URL + '/api/potensi-desa', {
+            await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/potensi-desa', {
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + useToken().token
@@ -54,7 +54,7 @@ export default {
             this.$router.push('/dashboard/potensi-desa')
         },
         async loadPotensiCategory(){
-            this.potensiCategory = await $fetch(this.$config.public.API_BASE_URL + '/api/potensi-category')
+            this.potensiCategory = await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/potensi-category')
         },
         contentChange(v) {
             this.form.content = v

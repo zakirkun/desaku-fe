@@ -35,7 +35,7 @@ export default {
         async loadData() {
             this.loadData = true
 
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/potensi-desa')
+            const data = await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/potensi-desa')
             this.items = data
             
             this.loadData = false
@@ -43,7 +43,7 @@ export default {
         async loadPotensiCategory() {
             this.loadingCategory = true
 
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/potensi-category')
+            const data = await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/potensi-category')
             this.potensiCategory = data
 
             this.loadingCategory = false
@@ -53,7 +53,7 @@ export default {
             this.removedPotensiId = id
         },
         async removePotensi() {
-            await $fetch(this.$config.public.API_BASE_URL + '/api/potensi-desa/' + this.removedPotensiId, {
+            await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/potensi-desa/' + this.removedPotensiId, {
                 method: "DELETE",
                 headers: {
                     Authorization: "Bearer " + useToken().token

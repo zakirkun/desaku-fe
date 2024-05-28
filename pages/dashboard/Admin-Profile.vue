@@ -21,7 +21,7 @@ export default {
     },
     methods: {
         async loadData() {
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/admin', {
+            const data = await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/admin', {
                 headers: {
                     Authorization: "Bearer " + useToken().token
                 },
@@ -33,7 +33,7 @@ export default {
         async updateAdmin() {
             this.loading = true
 
-            await $fetch(this.$config.public.API_BASE_URL + '/api/admin-profile/', {
+            await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/admin-profile/', {
                 method: "PATCH",
                 headers: {
                     Authorization: "Bearer " + useToken().token

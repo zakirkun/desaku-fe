@@ -33,7 +33,7 @@ export default {
     },
     methods: {
         async loadData() {
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/admin', {
+            const data = await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/admin', {
                 headers: {
                     Authorization: "Bearer " + useToken().token
                 },
@@ -42,7 +42,7 @@ export default {
             this.data.email = data.email
         },
         async loadHeader() {
-            const { logo } = await $fetch(this.$config.public.API_BASE_URL + '/api/header')
+            const { logo } = await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/header')
             this.logo = logo
         },
     }

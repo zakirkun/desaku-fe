@@ -19,7 +19,7 @@ export default {
         }
     },
     async mounted() {
-        const data = await $fetch(this.$config.public.API_BASE_URL + '/api/news-category')
+        const data = await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/news-category')
         this.items = data
         this.renderRichEditor = true
     },
@@ -34,7 +34,7 @@ export default {
             this.loading = true
             this.form.slug = createSlug(this.form.name)
 
-            await $fetch(this.$config.public.API_BASE_URL + '/api/news-category', {
+            await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/news-category', {
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + useToken().token

@@ -19,7 +19,7 @@ export default {
         }
     },
     async mounted() {
-        const data = await $fetch(this.$config.public.API_BASE_URL + '/api/news-category/' + this.$route.query.id)
+        const data = await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/news-category/' + this.$route.query.id)
         this.form.name = data.name
     },
     methods: {
@@ -33,7 +33,7 @@ export default {
             this.loading = true
             this.form.slug = createSlug(this.form.name)
 
-            await $fetch(this.$config.public.API_BASE_URL + '/api/news-category/' + this.$route.query.id, {
+            await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/news-category/' + this.$route.query.id, {
                 method: "PATCH",
                 headers: {
                     Authorization: "Bearer " + useToken().token

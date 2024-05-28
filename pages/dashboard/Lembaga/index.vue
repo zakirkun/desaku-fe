@@ -32,7 +32,7 @@ export default {
         async loadData() {
             this.loadingData = true
 
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/lembaga')
+            const data = await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/lembaga')
             this.items = data
 
             this.loadingData = false
@@ -42,7 +42,7 @@ export default {
             this.removedLembagaId = id
         },
         async removeLembaga() {
-            await $fetch(this.$config.public.API_BASE_URL + '/api/lembaga/' + this.removedLembagaId, {
+            await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/lembaga/' + this.removedLembagaId, {
                 method: "DELETE",
                 headers: {
                     Authorization: "Bearer " + useToken().token

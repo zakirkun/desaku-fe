@@ -34,7 +34,7 @@ export default {
     methods: {
         async loadData() {
             this.loadingData = true
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/jabatan')
+            const data = await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/jabatan')
             this.items = data
             this.list = data
             this.loadingData = false
@@ -44,7 +44,7 @@ export default {
             this.removedJabatanId = id
         },
         async removeJabatan() {
-            await $fetch(this.$config.public.API_BASE_URL + '/api/jabatan/' + this.removedJabatanId, {
+            await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/jabatan/' + this.removedJabatanId, {
                 method: "DELETE",
                 headers: {
                     Authorization: "Bearer " + useToken().token
@@ -57,7 +57,7 @@ export default {
         async updateOrderJabatan() {
             this.loading = true
 
-            await $fetch(this.$config.public.API_BASE_URL + '/api/jabatan/order', {
+            await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/jabatan/order', {
                 method: "PATCH",
                 headers: {
                     Authorization: "Bearer " + useToken().token

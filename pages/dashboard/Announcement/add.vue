@@ -45,7 +45,7 @@ export default {
             this.form.content = this.data
             this.form.slug = createSlug(this.form.title)
 
-            await $fetch(this.$config.public.API_BASE_URL + '/api/announcement', {
+            await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/announcement', {
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + useToken().token

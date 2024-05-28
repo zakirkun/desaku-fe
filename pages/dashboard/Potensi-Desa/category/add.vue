@@ -27,7 +27,7 @@ export default {
             this.loading = true
             this.form.slug = createSlug(this.form.name)
 
-            await $fetch(this.$config.public.API_BASE_URL + '/api/potensi-category', {
+            await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/potensi-category', {
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + useToken().token

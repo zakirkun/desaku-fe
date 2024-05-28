@@ -23,13 +23,13 @@ export default {
     },
     methods: {
         async loadData() {
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/header')
+            const data = await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/header')
             this.form = data
         },
         async updateHeader() {
             this.loading = true
 
-            await $fetch(this.$config.public.API_BASE_URL + '/api/header', {
+            await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/header', {
                 method: "PATCH",
                 headers: {
                     Authorization: "Bearer " + useToken().token

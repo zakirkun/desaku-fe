@@ -32,11 +32,11 @@ export default {
     },
     methods: {
         async loadData() {
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/location')
+            const data = await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/location')
             this.form = data
         },
         async loadAlamat() {
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/address')
+            const data = await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/address')
             this.formAlamat = data
         },
         async updateLocation() {
@@ -49,7 +49,7 @@ export default {
             this.loading = true
 
             await this.updateAlamat()
-            await $fetch(this.$config.public.API_BASE_URL + '/api/location', {
+            await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/location', {
                 method: "PATCH",
                 headers: {
                     Authorization: "Bearer " + useToken().token
@@ -59,7 +59,7 @@ export default {
             this.loading = false
         },
         async updateAlamat() {
-            await $fetch(this.$config.public.API_BASE_URL + '/api/address', {
+            await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/address', {
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + useToken().token
