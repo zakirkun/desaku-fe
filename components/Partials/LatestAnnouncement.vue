@@ -1,15 +1,15 @@
 <script setup>
 import moment from 'moment';
 
-const activities = ref(null)
+const announcements = ref(null)
 const { data } = await useAsyncData(
-    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/annnouncement?limit=5')
+    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/announcement?limit=5')
 )
 
-activities.value = data.value
+announcements.value = data.value
 </script>
 <template>
-    <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
+    <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-4 text-2xl font-semibold py-3">
         <span>Pengumuman Terbaru</span>
     </div>
     <div class="mb-3">

@@ -1,14 +1,12 @@
 <script setup>
 import moment from 'moment';
 
+const route = useRouter().currentRoute.value
 const post = reactive({
     title: null,
     content: null,
     created_at: null,
 })
-const route = useRouter().currentRoute.value
-const showContent = ref(false)
-
 const { data } = await useAsyncData(
     () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/announcement/slug/' + route.params.id)
 )
@@ -17,16 +15,11 @@ post.title = data.value.title
 post.content = data.value.content
 post.created_at = data.value.created_at
 
-setTimeout(() => {
-    showContent.value = true
-}, 500)
-
 definePageMeta({
     layout: 'app'
 });
 </script>
 <template>
-    <AnimationLoading v-if="!showContent" />
     <Head>
         <Title>{{ post.title }}</Title>
     </Head>
@@ -49,20 +42,8 @@ definePageMeta({
                     <span>{{ post.title }}</span>
                 </div>
                 <div class="text-md flex items-center font-medium mt-2 mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="1.5em" height="1.5em"
-                        viewBox="0 0 24 24">
-                        <g fill="none">
-                            <rect width="18" height="15" x="3" y="6" stroke="#A3A3A3" rx="2" />
-                            <path fill="black"
-                                d="M3 10c0-1.886 0-2.828.586-3.414C4.172 6 5.114 6 7 6h10c1.886 0 2.828 0 3.414.586C21 7.172 21 8.114 21 10z" />
-                            <path stroke="#A3A3A3" stroke-linecap="round" d="M7 3v3m10-3v3" />
-                            <rect width="4" height="2" x="7" y="12" fill="#A3A3A3" rx=".5" />
-                            <rect width="4" height="2" x="7" y="16" fill="#A3A3A3" rx=".5" />
-                            <rect width="4" height="2" x="13" y="12" fill="#A3A3A3" rx=".5" />
-                            <rect width="4" height="2" x="13" y="16" fill="#A3A3A3" rx=".5" />
-                        </g>
-                    </svg>
-                    <span>{{ moment(post.created_at).format("LL") }}</span>
+                    <IconsDate />
+                    <span class="ml-1">{{ moment(post.created_at).format("LL") }}</span>
                 </div>
                 <div v-html="post.content"></div>
             </div>

@@ -61,7 +61,7 @@ export default {
             <template v-slot:title>
                 <div class="flex items-center justify-between">
                     <div class="text-xl font-semibold">
-                        <span>Hapus Berita?</span>
+                        <span>Hapus Pengumuman?</span>
                     </div>
                     <div @click="modalRemoveNews = false" class="cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
@@ -75,7 +75,7 @@ export default {
             </template>
             <template v-slot:text>
                 <div>
-                    <span>Berita yang dihapus tidak bisa dikembalikan kembali.</span>
+                    <span>Pengumuman yang dihapus tidak bisa dikembalikan kembali.</span>
                 </div>
             </template>
             <template v-slot:actions>

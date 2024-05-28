@@ -1,9 +1,6 @@
-<script setup>
-useHead({
-    title: 'Edit Announcement',
-})
-</script>
 <script>
+import { createSlug } from "@/helpers/createSlug" 
+
 export default {
     data() {
         return {
@@ -18,7 +15,8 @@ export default {
                 category: null,
                 description: null,
                 content: null,
-                thumbnail: ''
+                thumbnail: null,
+                slug: null
             },
         }
     },
@@ -37,6 +35,7 @@ export default {
             }
 
             this.form.content = this.data
+            this.form.slug = createSlug(this.form.title)
 
             await $fetch(this.$config.public.API_BASE_URL + '/api/announcement/' + this.$route.query.id, {
                 method: "PATCH",
@@ -58,6 +57,9 @@ export default {
 </script>
 
 <template>
+    <Head>
+        <Title>Edit Pengumuman</Title>
+    </Head>
     <div class="grid animate-fade">
         <div class="col-12">
             <div class="card">
