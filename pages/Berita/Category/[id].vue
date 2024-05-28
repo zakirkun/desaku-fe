@@ -1,25 +1,38 @@
 <script setup>
-import moment from 'moment';
-
 definePageMeta({
     layout: 'app'
 });
 
+useHead({
+    title: 'Berita'
+});
+
+import moment from 'moment';
+
 const route = useRouter().currentRoute.value
 const news = ref(null)
-const newsCategory = ref(null)
+const categoryName = ref(1)
+const page = ref(1)
+const pageLength = ref(0)
 
 const { data } = await useAsyncData(
-    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/news?category=' + route.params.id)
+    () => $fetch(useRuntimeConfig().public.API_BASE_URL + `/api/news?limit=5&page=${page.value}&category=${route.params.id}`)
 )
 
 news.value = data.value.data
-newsCategory.value = data.value.category_name
+categoryName.value = data.value.category_name
+pageLength.value = Math.ceil(data.value.total / 5)
+
+async function changePage() {
+    const { data } = await useAsyncData(
+        () => $fetch(useRuntimeConfig().public.API_BASE_URL + `/api/news?limit=5&page=${page.value}&category=${route.params.id}`)
+    )
+
+    news.value = data.value.data
+    document.getElementById("list_berita").scrollIntoView({ behavior: 'smooth' })
+}
 </script>
 <template>
-    <Head>
-        <Title>Berita: {{ newsCategory }}</Title>
-    </Head>
     <div class="animate-fade flex-1 block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem]  pt-6">
         <div class="flex mb-6 items-center bg-[#f0f0f0] pa-3 rounded-lg">
             <div class="mr-2">
@@ -28,38 +41,43 @@ newsCategory.value = data.value.category_name
                         d="M946.5 505L534.6 93.4a31.93 31.93 0 0 0-45.2 0L77.5 505c-12 12-18.8 28.3-18.8 45.3c0 35.3 28.7 64 64 64h43.4V908c0 17.7 14.3 32 32 32H448V716h112v224h265.9c17.7 0 32-14.3 32-32V614.3h43.4c17 0 33.3-6.7 45.3-18.8c24.9-25 24.9-65.5-.1-90.5" />
                 </svg>
             </div>
-            <div>
-                <div class="ml-2 text-sm md:text-base">
-                    <span class="cursor-pointer" @click="$router.push('/berita')">/ &nbsp; Berita
-                        &nbsp;</span><span>/ &nbsp;{{ newsCategory }}</span>
-                </div>
+            <div id="list_berita">
+                <span>/ <span class="cursor-pointer" @click="navigateTo('/berita')">Berita</span> / {{ categoryName
+                    }}</span>
             </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-6 md:gap-x-12">
             <div class="block col-span-1 md:col-span-4">
                 <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-xl sm:text-2xl font-semibold py-3">
-                    <span>Berita: {{ newsCategory }}</span>
+                    <span>Berita <span v-if="page != 1">: Halaman {{ page }}</span></span>
                 </div>
                 <div @click="$router.push('/berita/' + news.slug)"
-                    class="cursor-pointer flex mb-[0.5rem] md:mb-2 h-[160px] md:h-[200px]" v-for="news in news">
+                    class="cursor-pointer animate-fade flex mb-[0.5rem] md:mb-2 h-[160px] md:h-[200px]"
+                    v-for="news in news">
                     <div class="w-[160px] md:w-[240px] h-full flex-none">
                         <img class="rounded-md h-[120px] md:h-[160px] w-full object-cover" :src="news.thumbnail" alt="">
                     </div>
                     <div class="block pl-4">
                         <div class="tetx-base md:text-xl font-semibold">
-                            <span class="hidden md:flex">{{ news.title }}</span>
-                            <span class="flex md:hidden">{{ news.title.slice(0, 40) }}...</span>
+                            <span class="line-clamp-2">{{ news.title }}</span>
                         </div>
-                        <div class="text-sm md:text-base flex items-center font-medium mt-2">
-                            <IconsDate />
-                            <span class="ml-1">{{ moment(news.created_at).format("LL") }}</span>
+                        <div class="text-sm md:text-base block sm:flex items-center font-medium mt-2">
+                            <div class="flex">
+                                <IconsDate />
+                                <span class="ml-1 mr-2">{{ moment(news.created_at).format("LL") }}</span>
+                            </div>
+                            <div class="flex sm:mt-0 mt-1">
+                                <IconsTag />
+                                <span class="ml-1">{{ news.name }}</span>
+                            </div>
                         </div>
                         <div class="mt-2 text-sm md:text-base">
-                            <span class="hidden md:flex">{{ news.description }}</span>
-                            <span class="flex md:hidden">{{ news.description.slice(0, 50) }}...</span>
+                            <span class="line-clamp-3">{{ news.description }}</span>
                         </div>
                     </div>
                 </div>
+                <v-pagination class="mt-4 mb-14" v-model="page" @update:modelValue="changePage" :total-visible="5"
+                    :length="pageLength"></v-pagination>
             </div>
             <div class="col-span-2">
                 <PartialsNewsCategory />

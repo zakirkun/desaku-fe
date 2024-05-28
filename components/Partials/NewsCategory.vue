@@ -2,7 +2,7 @@
 const newsCategory = ref(null)
 
 const { data } = await useAsyncData(
-    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/news-category')
+    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/news-category?allow_empty=false')
 )
 
 newsCategory.value = data.value

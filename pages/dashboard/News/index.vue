@@ -41,7 +41,7 @@ export default {
         async loadData() {
             this.loadingData = true
 
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/news')
+            const { data } = await $fetch(this.$config.public.API_BASE_URL + '/api/news')
             this.items = data
             this.renderRichEditor = true
 
