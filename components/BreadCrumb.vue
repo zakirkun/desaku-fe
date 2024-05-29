@@ -13,9 +13,9 @@ const props = defineProps(['child'])
         <div class="whitespace-nowrap">
             <slot name="root" />
         </div>
-        <span class="mx-2">/</span>
-        <div class="truncate w-[240px] sm:w-fit">
-            {{  props.child }}
+        <div v-if="props.child" class="truncate w-[200px] sm:w-fit">
+            <span class="mx-2">/</span>
+            {{ props.child }}
         </div>
     </div>
 </template>

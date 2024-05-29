@@ -2,11 +2,8 @@
 import moment from 'moment';
 
 const activities = ref(null)
-const { data } = await useAsyncData(
-    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/activities?limit=5')
-)
+activities.value = await $fetch('/api/kegiatan?limit=5')
 
-activities.value = data.value
 </script>
 <template>
     <div class="mb-2 py-2 flex font-medium" v-for="activity in activities">

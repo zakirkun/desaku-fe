@@ -2,17 +2,8 @@
 const location = ref(null)
 const address = ref(null)
 
-const { data } = await useAsyncData(
-    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/location')
-)
-
-location.value = data.value
-
-const { data: addressData } = await useAsyncData(
-    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/address')
-)
-
-address.value = addressData.value
+location.value = await $fetch('/api/location')
+address.value = await $fetch('/api/address')
 </script>
 <template>
     <div class="block md:flex px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] w-ful l bg-white py-12">

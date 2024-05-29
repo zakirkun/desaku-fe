@@ -12,17 +12,8 @@ const images = ref(null)
 const perangkatDesa = ref(null)
 const showContent = ref(false)
 
-const { data } = await useAsyncData(
-    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/image-homepage')
-)
-
-images.value = data.value
-
-const { data: perangkatDesaData } = await useAsyncData(
-    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/perangkat-desa')
-)
-
-perangkatDesa.value = perangkatDesaData.value
+images.value = await $fetch('/api/image-homepage')
+perangkatDesa.value = await $fetch('/api/perangkat-desa')
 
 function backgroundImage(url) {
     return `background-image: url(${url});`
