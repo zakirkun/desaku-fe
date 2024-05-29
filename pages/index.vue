@@ -28,9 +28,11 @@ function backgroundImage(url) {
     return `background-image: url(${url});`
 }
 
-setTimeout(() => {
-    showContent.value = true
-}, 500)
+onMounted(() => {
+    setTimeout(() => {
+        showContent.value = true
+    }, 500)
+})
 
 definePageMeta({
     layout: 'app'
@@ -41,8 +43,8 @@ useHead({
 })
 </script>
 <template>
-    <AnimationLoading v-if="!showContent" />
-    <div v-else class="animate-fade flex-1">
+    <AnimationLoading v-show="!showContent" />
+    <div v-show="showContent" class="animate-fade flex-1">
         <div id="hero" class="flex flex-column overflow-hidden">
             <swiper :autoplay="{
                 delay: 4000,
@@ -85,7 +87,8 @@ useHead({
             <div class="grid grid-cols-1 md:grid-cols-6 md:gap-x-12">
                 <HomeGallery />
                 <div class="col-span-2">
-                    <div class="text-[#0088CC] struktur border-[#0088CC] border-b-2 mb-6 text-xl md:text-2xl font-semibold py-3">
+                    <div
+                        class="text-[#0088CC] struktur border-[#0088CC] border-b-2 mb-6 text-xl md:text-2xl font-semibold py-3">
                         <span>Struktur Organisasi</span>
                     </div>
                     <div class="font-medium text-white px-2 rounded-md">
