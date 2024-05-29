@@ -2,17 +2,8 @@
 const data = ref([])
 const socialMedia = ref([])
 
-const { data: footer } = await useAsyncData(
-    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/footer')
-)
-
-data.value = footer.value
-
-const { data: social_media } = await useAsyncData(
-    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/social-media')
-)
-
-socialMedia.value = social_media.value
+socialMedia.value = await $fetch('/api/social-media')
+data.value = await $fetch('/api/footer')
 </script>
 <template>
     <div class="flex-none">

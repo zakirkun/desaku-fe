@@ -41,20 +41,20 @@ export default {
         async loadData() {
             this.loadingData = true
 
-            const { data } = await $fetch(this.$config.public.API_BASE_URL + '/api/news')
+            const { data } = await $fetch(this.$config.public.API_PUBLIC_URL + '/api/news')
             this.items = data
             this.renderRichEditor = true
 
             this.loadingData = false
         },
         async loadNewsCategory() {
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/news-category')
+            const data = await $fetch(this.$config.public.API_PUBLIC_URL + '/api/news-category')
             this.itemsCategory = data
         },
         async addNews() {
             this.form.content = this.data
 
-            await $fetch(this.$config.public.API_BASE_URL + '/api/news', {
+            await $fetch(this.$config.public.API_PUBLIC_URL + '/api/news', {
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + useToken().token
@@ -74,7 +74,7 @@ export default {
             this.removedNewsCategoryId = id
         },
         async removeNews() {
-            await $fetch(this.$config.public.API_BASE_URL + '/api/news/' + this.removedNewsId, {
+            await $fetch(this.$config.public.API_PUBLIC_URL + '/api/news/' + this.removedNewsId, {
                 method: "DELETE",
                 headers: {
                     Authorization: "Bearer " + useToken().token
@@ -85,7 +85,7 @@ export default {
             await this.loadData()
         },
         async removeNewsCategory() {
-            await $fetch(this.$config.public.API_BASE_URL + '/api/news-category/' + this.removedNewsCategoryId, {
+            await $fetch(this.$config.public.API_PUBLIC_URL + '/api/news-category/' + this.removedNewsCategoryId, {
                 method: "DELETE",
                 headers: {
                     Authorization: "Bearer " + useToken().token

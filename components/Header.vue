@@ -30,15 +30,13 @@ onMounted(async () => {
     });
 })
 
-const { data } = await useAsyncData(
-    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/header')
-)
+const data = await $fetch('/api/header')
 
-headerData.no_telp = data.value.no_telp
-headerData.email = data.value.email
-headerData.site_name = data.value.site_name
-headerData.description = data.value.description
-headerData.logo = data.value.logo
+headerData.no_telp = data.no_telp
+headerData.email = data.email
+headerData.site_name = data.site_name
+headerData.description = data.description
+headerData.logo = data.logo
 
 function openNavMobile() {
     navMobile.value = !navMobile.value

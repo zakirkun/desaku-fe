@@ -24,7 +24,7 @@ export default {
     },
     methods: {
         async loadData() {
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/image-homepage')
+            const data = await $fetch(this.$config.public.API_PUBLIC_URL + '/api/image-homepage')
             this.items = data
         },
         openModalRemoveImage(id) {
@@ -32,7 +32,7 @@ export default {
             this.removedImageId = id
         },
         async removeNews() {
-            await $fetch(this.$config.public.API_BASE_URL + '/api/image-homepage/' + this.removedImageId, {
+            await $fetch(this.$config.public.API_PUBLIC_URL + '/api/image-homepage/' + this.removedImageId, {
                 method: "DELETE",
             })
 

@@ -34,13 +34,13 @@ export default {
     async mounted() {
         await this.loadCategories()
 
-        const data = await $fetch(this.$config.public.API_BASE_URL + '/api/news')
+        const data = await $fetch(this.$config.public.API_PUBLIC_URL + '/api/news')
         this.items = data
         this.renderRichEditor = true
     },
     methods: {
         async loadCategories() {
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/news-category/')
+            const data = await $fetch(this.$config.public.API_PUBLIC_URL + '/api/news-category/')
             this.categories = data.map(v => v.name)
         },
         async addNews() {
@@ -54,7 +54,7 @@ export default {
             this.form.content = this.data
             this.form.slug = createSlug(this.form.title)
 
-            await $fetch(this.$config.public.API_BASE_URL + '/api/news', {
+            await $fetch(this.$config.public.API_PUBLIC_URL + '/api/news', {
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + useToken().token

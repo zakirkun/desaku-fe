@@ -13,14 +13,14 @@ export default {
         }
     },
     async mounted() {
-        const data = await $fetch(this.$config.public.API_BASE_URL + '/api/visi')
+        const data = await $fetch(this.$config.public.API_PUBLIC_URL + '/api/visi')
         this.data = data.visi
         this.renderRichEditor = true
     },
     methods: {
         async updateContent() {
             this.loading = true
-            await $fetch(this.$config.public.API_BASE_URL + '/api/visi', {
+            await $fetch(this.$config.public.API_PUBLIC_URL + '/api/visi', {
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + useToken().token

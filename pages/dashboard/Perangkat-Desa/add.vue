@@ -32,7 +32,7 @@ export default {
     },
     methods: {
         async loadJabatan() {
-            this.jabatan = await $fetch(this.$config.public.API_BASE_URL + '/api/jabatan')
+            this.jabatan = await $fetch(this.$config.public.API_PUBLIC_URL + '/api/jabatan')
             this.jabatanName = this.jabatan.map(v => v.name)
         },
         async addAnnouncement() {
@@ -46,7 +46,7 @@ export default {
             this.form.slug = createSlug(this.form.name)
             this.loading = true
 
-            await $fetch(this.$config.public.API_BASE_URL + '/api/perangkat-desa', {
+            await $fetch(this.$config.public.API_PUBLIC_URL + '/api/perangkat-desa', {
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + useToken().token

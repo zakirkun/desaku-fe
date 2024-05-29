@@ -13,14 +13,14 @@ export default {
         }
     },
     async mounted() {
-        const data = await $fetch(this.$config.public.API_BASE_URL + '/api/struktur-organisasi')
+        const data = await $fetch(this.$config.public.API_PUBLIC_URL + '/api/struktur-organisasi')
         this.data = data.content
         this.renderRichEditor = true
     },
     methods: {
         async updateContent() {
             this.loading = true
-            await $fetch(this.$config.public.API_BASE_URL + '/api/struktur-organisasi', {
+            await $fetch(this.$config.public.API_PUBLIC_URL + '/api/struktur-organisasi', {
                 method: "PATCH",
                 headers: {
                     Authorization: "Bearer " + useToken().token

@@ -13,14 +13,14 @@ export default {
         }
     },
     async mounted() {
-        const data = await $fetch(this.$config.public.API_BASE_URL + '/api/sejarah')
+        const data = await $fetch(this.$config.public.API_PUBLIC_URL + '/api/sejarah')
         this.data = data.sejarah
         this.renderRichEditor = true
     },
     methods: {
         async updateContent() {
             this.loading = true
-            await $fetch(this.$config.public.API_BASE_URL + '/api/sejarah', {
+            await $fetch(this.$config.public.API_PUBLIC_URL + '/api/sejarah', {
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + useToken().token

@@ -27,11 +27,11 @@ export default {
     },
     methods: {
         async loadData() {
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/footer')
+            const data = await $fetch(this.$config.public.API_PUBLIC_URL + '/api/footer')
             this.form = data
         },
         async loadSocialMedia() {
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/social-media')
+            const data = await $fetch(this.$config.public.API_PUBLIC_URL + '/api/social-media')
             this.formSocialMedia = data
         },
         async updateFooter() {
@@ -44,7 +44,7 @@ export default {
             this.loading = true
 
             await this.updateSocialMedia()
-            await $fetch(this.$config.public.API_BASE_URL + '/api/footer', {
+            await $fetch(this.$config.public.API_PUBLIC_URL + '/api/footer', {
                 method: "PATCH",
                 headers: {
                     Authorization: "Bearer " + useToken().token
@@ -55,7 +55,7 @@ export default {
             this.loading = false
         },
         async updateSocialMedia() {
-            await $fetch(this.$config.public.API_BASE_URL + '/api/social-media', {
+            await $fetch(this.$config.public.API_PUBLIC_URL + '/api/social-media', {
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + useToken().token

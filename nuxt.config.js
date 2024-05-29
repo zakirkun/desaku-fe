@@ -1,4 +1,3 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     ssr: true,
     postcss: {
@@ -33,7 +32,8 @@ export default defineNuxtConfig({
     },
     runtimeConfig: {
         public: {
-            API_BASE_URL: process.env.API_URL,
+            API_BASE_URL: process.env.API_BASE_URL,
+            API_PUBLIC_URL: process.env.API_PUBLIC_URL,
         },
     },
     plugins: [{ src: '~/plugins/scrollTo.js', mode: 'client' }],

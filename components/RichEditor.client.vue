@@ -20,7 +20,7 @@ export default {
                             const formData = new FormData();
                             formData.append("image", file);
 
-                            await $fetch(this.$config.public.API_BASE_URL + '/api/image', {
+                            await $fetch(this.$config.public.API_PUBLIC_URL + '/api/image', {
                                 body: formData,
                                 headers: {
                                     Authorization: "Bearer " + useToken().token

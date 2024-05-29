@@ -13,14 +13,14 @@ export default {
         }
     },
     async mounted() {
-        const data = await $fetch(this.$config.public.API_BASE_URL + '/api/tentang')
+        const data = await $fetch(this.$config.public.API_PUBLIC_URL + '/api/tentang')
         this.data = data.tentang
         this.renderRichEditor = true
     },
     methods: {
         async updateContent() {
             this.loading = true
-            await $fetch(this.$config.public.API_BASE_URL + '/api/tentang', {
+            await $fetch(this.$config.public.API_PUBLIC_URL + '/api/tentang', {
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + useToken().token

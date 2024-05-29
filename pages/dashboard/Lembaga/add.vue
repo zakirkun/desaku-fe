@@ -40,7 +40,7 @@ export default {
             this.loading = true
             this.form.slug = createSlug(this.form.name)
 
-            await $fetch(this.$config.public.API_BASE_URL + '/api/lembaga', {
+            await $fetch(this.$config.public.API_PUBLIC_URL + '/api/lembaga', {
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + useToken().token
