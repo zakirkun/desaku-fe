@@ -34,7 +34,7 @@ useHead({
 });
 </script>
 <template>
-    <div class="animate-fade flex-1 block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem]  pt-6">
+    <div id="list_berita" class="animate-fade flex-1 block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem]  pt-6">
         <div class="flex mb-6 items-center bg-[#f0f0f0] pa-3 rounded-lg">
             <div class="mr-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 1024 1024">
