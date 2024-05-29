@@ -48,9 +48,11 @@ useHead({
             <div id="gallery" class="grid grid-cols-1 md:grid-cols-3 gap-[5rem] md:gap-y-[6rem]">
                 <a class="w-full rounded-lg" v-for="(image, key) in images" :key="key" :href="image.url"
                     data-pswp-width="600" data-pswp-height="400" target="_blank" rel="noreferrer">
-                    <v-img class="w-full h-full rounded-t-lg" :src="image.url" alt="" />
-                    <div class="rounded-b-lg py-3 px-2 font-medium text-base md:text-lg backdrop-blur-sm bg-white/30 shadow-sm border border-slate-100">
-                        <span v-if="image.description.length > 40 && $vuetify.display.mobile">{{ image.description.slice(0, 40) }}...</span>
+                    <v-img :lazy-src="image.url" class="w-full rounded-t-lg" height="300" :src="image.url" alt="" />
+                    <div
+                        class="rounded-b-lg py-3 px-2 font-medium text-base md:text-lg backdrop-blur-sm bg-white/30 shadow-sm border border-slate-100">
+                        <span v-if="image.description.length > 40 && $vuetify.display.mobile">{{
+                            image.description.slice(0, 40) }}...</span>
                         <span v-else>{{ image.description }}</span>
                     </div>
                 </a>

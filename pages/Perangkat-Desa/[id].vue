@@ -87,10 +87,10 @@ perangkatDesa.value = await $fetch('/api/perangkat-desa?limit=5')
                 <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
                     <span>Perangkat Desa Lainya</span>
                 </div>
-                <div class="mb-3 bg-white px-5 py-3 rounded-md border border-slate-300">
+                <div class="mb-3 px-5 pt-3 rounded-md border border-slate-300">
                     <div @click="$router.push('/perangkat-desa/' + perangkat.slug)"
-                        class="border-b border-slate-300 pb-5 cursor-pointer mb-1 py-2 flex"
-                        v-for="perangkat in perangkatDesa">
+                        class="border-slate-300 pb-5 cursor-pointer mb-1 py-2 flex"
+                        v-for="(perangkat,index) in perangkatDesa" :class="index != perangkatDesa.length - 1 ? 'border-b' : ''">
                         <div class="flex-none mr-4">
                             <v-img class="w-[70px] h-[60px] rounded-md" :src="perangkat.image" alt="" />
                         </div>
