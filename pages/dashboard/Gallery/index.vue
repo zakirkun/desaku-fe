@@ -42,7 +42,7 @@ export default {
         async loadImage() {
             this.loadingImage = true
 
-            const data = await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/image-gallery')
+            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/image-gallery')
             this.images = data
 
             this.loadingImage = false
@@ -50,7 +50,7 @@ export default {
         async loadVideo() {
             this.loadingVideo = true
 
-            const data = await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/video-gallery')
+            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/video-gallery')
             this.videos = data
 
             this.loadingVideo = false
@@ -64,7 +64,7 @@ export default {
             this.removedVideoId = id
         },
         async removeImageGallery() {
-            await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/image-gallery/' + this.removedImageId, {
+            await $fetch(this.$config.public.API_BASE_URL + '/api/image-gallery/' + this.removedImageId, {
                 method: "DELETE",
                 headers: {
                     Authorization: "Bearer " + useToken().token
@@ -75,7 +75,7 @@ export default {
             await this.loadImage()
         },
         async removeVideoGallery() {
-            await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/video-gallery/' + this.removedVideoId, {
+            await $fetch(this.$config.public.API_BASE_URL + '/api/video-gallery/' + this.removedVideoId, {
                 method: "DELETE",
                 headers: {
                     Authorization: "Bearer " + useToken().token

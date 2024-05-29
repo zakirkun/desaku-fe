@@ -29,7 +29,7 @@ export default {
         async loadData() {
             this.loadingData = true
 
-            const data = await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/perangkat-desa')
+            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/perangkat-desa')
             this.items = data
 
             this.loadingData = false
@@ -39,7 +39,7 @@ export default {
             this.removedPerangkatId = id
         },
         async removePerangkat() {
-            await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/perangkat-desa/' + this.removedPerangkatId, {
+            await $fetch(this.$config.public.API_BASE_URL + '/api/perangkat-desa/' + this.removedPerangkatId, {
                 method: "DELETE",
                 headers: {
                     Authorization: "Bearer " + useToken().token
@@ -50,7 +50,7 @@ export default {
             await this.loadData()
         },
         async updatePerangkatOrder() {
-            await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/perangkat-desa/' + this.removedPerangkatId, {
+            await $fetch(this.$config.public.API_BASE_URL + '/api/perangkat-desa/' + this.removedPerangkatId, {
                 method: "DELETE",
                 headers: {
                     Authorization: "Bearer " + useToken().token

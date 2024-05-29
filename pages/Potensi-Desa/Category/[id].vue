@@ -26,14 +26,14 @@ export default {
     },
     methods: {
         async loadData() {
-            const { data: data, category_name } = await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/potensi-desa?category=' + this.$route.params.id)
+            const { data: data, category_name } = await $fetch(this.$config.public.API_BASE_URL + '/api/potensi-desa?category=' + this.$route.params.id)
 
             this.potensi = data
             this.latestPotensi = data
             this.category_name = category_name
         },
         async loadPotensiCategory() {
-            const data = await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/potensi-category')
+            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/potensi-category')
             this.potensiCategory = data
         },
     }

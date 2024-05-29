@@ -26,7 +26,7 @@ export default {
             }
 
             this.loading = true
-            await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/image-homepage', {
+            await $fetch(this.$config.public.API_BASE_URL + '/api/image-homepage', {
                 method: "POST",
                 headers: {
                     Authorization: "Bearer " + useToken().token

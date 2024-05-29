@@ -39,7 +39,7 @@ export default {
 
             if (valid) {
                 try {
-                    const resp = await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/auth/login', {
+                    const resp = await $fetch(this.$config.public.API_BASE_URL + '/api/auth/login', {
                         method: "POST",
                         body: this.form
                     })

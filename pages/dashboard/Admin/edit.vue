@@ -18,7 +18,7 @@ export default {
         }
     },
     async mounted() {
-        const data = await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/admin/' + this.$route.query.id, {
+        const data = await $fetch(this.$config.public.API_BASE_URL + '/api/admin/' + this.$route.query.id, {
             headers: {
                 Authorization: "Bearer " + useToken().token
             },
@@ -35,7 +35,7 @@ export default {
 
             this.loading = true
 
-            await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/admin/' + this.$route.query.id, {
+            await $fetch(this.$config.public.API_BASE_URL + '/api/admin/' + this.$route.query.id, {
                 method: "PATCH",
                 headers: {
                     Authorization: "Bearer " + useToken().token

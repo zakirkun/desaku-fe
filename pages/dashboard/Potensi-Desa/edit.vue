@@ -30,10 +30,10 @@ export default {
     },
     methods: {
         async loadData(){
-            this.form = await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/potensi-desa/' + this.$route.query.id)
+            this.form = await $fetch(this.$config.public.API_BASE_URL + '/api/potensi-desa/' + this.$route.query.id)
         },
         async loadPotensiCategory(){
-            this.potensiCategory = await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/potensi-category')
+            this.potensiCategory = await $fetch(this.$config.public.API_BASE_URL + '/api/potensi-category')
         },
         async updatePotensi() {
             const { valid } = await this.$refs.form.validate()
@@ -45,7 +45,7 @@ export default {
             this.loading = true
             this.form.slug = createSlug(this.form.title)
 
-            await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/potensi-desa/' + this.$route.query.id, {
+            await $fetch(this.$config.public.API_BASE_URL + '/api/potensi-desa/' + this.$route.query.id, {
                 method: "PATCH",
                 headers: {
                     Authorization: "Bearer " + useToken().token

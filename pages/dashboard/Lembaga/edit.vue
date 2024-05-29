@@ -37,7 +37,7 @@ export default {
     },
     methods: {
         async loadData() {
-            const data = await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/lembaga/' + this.$route.query.id)
+            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/lembaga/' + this.$route.query.id)
             this.form = data
 
             this.data.tugas = data.tugas
@@ -54,7 +54,7 @@ export default {
             this.loading = true
             this.form.slug = createSlug(this.form.name)
 
-            await $fetch(this.$config.public.PUBLIC_API_BASE_URL + '/api/lembaga/' + this.$route.query.id, {
+            await $fetch(this.$config.public.API_BASE_URL + '/api/lembaga/' + this.$route.query.id, {
                 method: "PATCH",
                 headers: {
                     Authorization: "Bearer " + useToken().token
