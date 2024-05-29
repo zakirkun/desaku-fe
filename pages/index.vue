@@ -54,7 +54,7 @@ useHead({
             </swiper>
         </div>
         <HomeFeatures />
-        <div class="block pb-6 px-[2rem]sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] bg-white pt-6">
+        <div class="block pb-6 px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] bg-white pt-6">
             <div class="grid grid-cols-1 md:grid-cols-6 md:gap-x-12">
                 <div class="block col-span-1 md:col-span-4">
                     <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-xl md:text-2xl font-semibold py-3">
