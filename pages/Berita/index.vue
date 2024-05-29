@@ -65,7 +65,7 @@ async function changePage() {
                             </div>
                         </div>
                         <div class="mt-2 text-sm md:text-base">
-                            <span class="line-clamp-3">{{ news.description }}</span>
+                            <span class="line-clamp-2 sm:line-clamp-3">{{ news.description }}</span>
                         </div>
                     </div>
                 </div>

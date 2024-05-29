@@ -5,23 +5,8 @@ const potensi = ref([])
 const latestPotensi = ref([])
 const potensiCategory = ref([])
 
-const { data } = await useAsyncData(
-    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/potensi-desa')
-)
-
-potensi.value = data.value.data
-
-const { data: latestPotensiData } = await useAsyncData(
-    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/potensi-desa?limit=5')
-)
-
-latestPotensi.value = latestPotensiData.value.data
-
-const { data: potensiCategoryData } = await useAsyncData(
-    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/potensi-category')
-)
-
-potensiCategory.value = potensiCategoryData.value
+potensi.value = (await $fetch('/api/potensi-desa')).data
+potensiCategory.value = await $fetch('/api/potensi-category')
 
 definePageMeta({
     layout: 'app'
@@ -52,14 +37,13 @@ useHead({
                 </div>
                 <div v-if="potensi.length > 0" @click="navigateTo('/potensi-desa/' + potensi.slug)"
                     class="cursor-pointer flex mb-[0.5rem] md:mb-2 h-[160px] md:h-[200px]" v-for="potensi in potensi">
-                    <div class="w-[140px] sm:w-[240px] h-full flex-none">
-                        <v-img class="h-[100px] md:h-[160px] w-full" :src="potensi.thumbnail"
-                            alt=""/>
+                    <div class="h-[120px] sm:h-[160px] w-[140px] sm:w-[220px] md:w-[260px] flex-none">
+                        <v-img :lazy-src="potensi.thumbnail" height="100%" aspect-ratio="4/3"
+                            :src="potensi.thumbnail" />
                     </div>
                     <div class="block pl-4">
                         <div class="tetx-base md:text-xl font-semibold">
-                            <span class="hidden md:flex">{{ potensi.title }}</span>
-                            <span class="flex md:hidden">{{ potensi.title.slice(0, 30) }}...</span>
+                            <span class="line-clamp-2">{{ potensi.title }}</span>
                         </div>
                         <div class="block md:flex">
                             <div class="text-xs md:text-base flex items-center font-medium mt-2">
@@ -72,43 +56,15 @@ useHead({
                             </div>
                         </div>
                         <div class="mt-2 text-sm md:text-base">
-                            <span class="hidden sm:flex">{{ potensi.description }}</span>
-                            <span class="flex sm:hidden">{{ potensi.description.slice(0, 50) }}...</span>
+                            <span class="line-clamp-2 sm:line-clamp-3">{{ potensi.description }}</span>
                         </div>
                     </div>
                 </div>
                 <EmptyData v-else />
             </div>
             <div class="col-span-2">
-                <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-xl md:text-2xl font-semibold py-3">
-                    <span>Kategori</span>
-                </div>
-                <div class="flex flex-wrap">
-                    <div @click="navigateTo('/potensi-desa/category/' + category.slug)"
-                        class="bg-[#0088CC] cursor-pointer font-medium text-white pa-2 mr-2 mt-2 text-sm w-fit rounded-full"
-                        v-for="category in potensiCategory">
-                        <span>{{ category.name }}</span>
-                    </div>
-                </div>
-                <div class="text-[#0088CC] border-[#0088CC] border-b-2 mt-5 mb-6 text-xl md:text-2xl font-semibold py-3">
-                    <span>Potensi Desa Terbaru</span>
-                </div>
-                <div class="mb-10">
-                    <div @click="navigateTo('/potensi-desa/' + potensi.slug)" class="cursor-pointer mb-2 px-2 py-3 flex"
-                        v-for="potensi in latestPotensi">
-                        <div class="w-[140px] h-full flex-none">
-                            <v-img :src="potensi.thumbnail" alt=""/>
-                        </div>
-                        <div class="block ml-3">
-                            <div class="text-[#0088CC] text-base font-medium">
-                                <span>{{ potensi.title }}</span>
-                            </div>
-                            <div class="mt-1">
-                                <span>{{ moment(potensi.created_at).format("LL") }}</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <PartialsPotensiCategory />
+                <PartialsLatestPotensi />
             </div>
         </div>
     </div>

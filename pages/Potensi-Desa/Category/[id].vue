@@ -1,49 +1,25 @@
 <script setup>
+import moment from 'moment';
+
+const route = useRouter().currentRoute.value
+const potensi = ref(null)
+const categoryName = ref(null)
+
+const { data, category_name } = await $fetch('/api/potensi-desa?category=' + route.params.id)
+
+potensi.value = data
+categoryName.value = category_name
+
 definePageMeta({
     layout: 'app'
 });
 
 useHead({
-    title: 'Potensi Desa'
+    title: 'Potensi Desa: ' + category_name
 });
 </script>
-
-<script>
-import moment from 'moment';
-
-export default {
-    data: () => ({
-        category_name: null,
-        potensi: [],
-        potensiCategory: [],
-        moment: moment,
-        showContent: false
-    }),
-    async mounted() {
-        await this.loadData()
-        await this.loadPotensiCategory()
-        this.showContent = true
-    },
-    methods: {
-        async loadData() {
-            const { data: data, category_name } = await $fetch(this.$config.public.API_BASE_URL + '/api/potensi-desa?category=' + this.$route.params.id)
-
-            this.potensi = data
-            this.latestPotensi = data
-            this.category_name = category_name
-        },
-        async loadPotensiCategory() {
-            const data = await $fetch(this.$config.public.API_BASE_URL + '/api/potensi-category')
-            this.potensiCategory = data
-        },
-    }
-}
-</script>
-
 <template>
-    <AnimationLoading v-if="!showContent" />
-    <div v-else
-        class="flex-1 animate-fade block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem]  pt-6">
+    <div class="flex-1 animate-fade block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem]  pt-6">
         <div class="flex mb-6 items-center bg-[#f0f0f0] pa-3 rounded-lg">
             <div class="mr-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 1024 1024">
@@ -93,35 +69,8 @@ export default {
                 <EmptyData v-else />
             </div>
             <div class="col-span-2">
-                <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
-                    <span>Kategori</span>
-                </div>
-                <div class="flex flex-wrap">
-                    <div @click="$router.push('/potensi-desa/category/' + category.slug)"
-                        class="bg-[#0088CC] cursor-pointer font-semibold text-white pa-2 mr-2 mt-2 text-sm w-fit rounded-full"
-                        v-for="category in potensiCategory">
-                        <span>{{ category.name }}</span>
-                    </div>
-                </div>
-                <div class="text-[#0088CC] border-[#0088CC] border-b-2 mt-5 mb-6 text-2xl font-semibold py-3">
-                    <span>Potensi Desa Terbaru</span>
-                </div>
-                <div class="mb-10">
-                    <div @click="$router.push('/potensi-desa/' + potensi.slug)"
-                        class="cursor-pointer mb-2 px-2 py-3 flex" v-for="potensi in latestPotensi">
-                        <div class="w-[140px] h-full flex-none">
-                            <img class="rounded-md" :src="potensi.thumbnail" alt="">
-                        </div>
-                        <div class="block ml-3">
-                            <div class="text-[#0088CC] text-base font-medium">
-                                <span>{{ potensi.title }}</span>
-                            </div>
-                            <div class="mt-1">
-                                <span>{{ moment(potensi.created_at).format("LL") }}</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <PartialsPotensiCategory />
+                <PartialsLatestPotensi />
             </div>
         </div>
     </div>

@@ -2,28 +2,17 @@
 import moment from 'moment';
 
 const route = useRouter().currentRoute.value
-const latestPotensi = ref(null)
 const categoryName = ref(null)
-const showContent = ref(null)
 const post = reactive({
     title: null,
     content: null
 })
 
-const { data } = await useAsyncData(
-    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/potensi-desa/slug/' + route.params.id)
-)
+const { title, name, content } = await $fetch('/api/potensi-desa/slug/' + route.params.id)
 
-post.title = data.value.title
-post.content = data.value.content
-categoryName.value = data.value.name
-
-const { data: latestPotensiData } = await useAsyncData(
-    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/potensi-desa?limit=5')
-)
-
-latestPotensi.value = latestPotensiData.value.data
-showContent.value = true
+post.title = title
+post.content = content
+categoryName.value = name
 
 definePageMeta({
     layout: 'app'
@@ -33,8 +22,7 @@ definePageMeta({
     <Head>
         <Title>{{ post.title }}</Title>
     </Head>
-    <AnimationLoading v-if="!showContent" />
-    <div v-else
+    <div
         class="animate-fade flex-1 block pb-[5rem] px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem]  pt-6">
         <div class="flex mb-6 items-center bg-[#f0f0f0] pa-3 rounded-lg">
             <div class="flex items-center mr-2">
@@ -49,7 +37,8 @@ definePageMeta({
                 </div>
             </div>
         </div>
-        <div :class="$vuetify.display.mobile ? 'pb-12' : 'pb-4'" class="grid grid-cols-1 md:grid-cols-6 md:gap-x-12 gap-y-8">
+        <div :class="$vuetify.display.mobile ? 'pb-12' : 'pb-4'"
+            class="grid grid-cols-1 md:grid-cols-6 md:gap-x-12 gap-y-8">
             <div class="block col-span-1 md:col-span-4">
                 <div class="text-[#0088CC] text-2xl mb-2 font-semibold py-3">
                     <span>{{ post.title }}</span>
@@ -63,38 +52,8 @@ definePageMeta({
                 <div class="w-full font-normal quill-content" v-html="post.content"></div>
             </div>
             <div class="col-span-2">
-                <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-xl md:text-2xl font-semibold py-3">
-                    <span>Potensi Desa Terbaru</span>
-                </div>
-                <div @click="$router.push('/potensi-desa/' + news.slug)" class="cursor-pointer mb-1 px-2 py-2 flex"
-                    v-for="potensi in latestPotensi">
-                    <div class="w-[140px] h-[90px] flex-none">
-                        <img class="rounded-md h-full" :src="potensi.thumbnail" alt="">
-                    </div>
-                    <div class="block ml-3">
-                        <div class="text-[#0088CC] text-md font-medium">
-                            <span>{{ potensi.title.slice(0, 40) }}...</span>
-                        </div>
-                        <div class="mt-1">
-                            <div class="text-sm flex items-center font-medium mt-2 mb-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="1.2em" height="1.2em"
-                                    viewBox="0 0 24 24">
-                                    <g fill="none">
-                                        <rect width="18" height="15" x="3" y="6" stroke="#A3A3A3" rx="2" />
-                                        <path fill="black"
-                                            d="M3 10c0-1.886 0-2.828.586-3.414C4.172 6 5.114 6 7 6h10c1.886 0 2.828 0 3.414.586C21 7.172 21 8.114 21 10z" />
-                                        <path stroke="#A3A3A3" stroke-linecap="round" d="M7 3v3m10-3v3" />
-                                        <rect width="4" height="2" x="7" y="12" fill="#A3A3A3" rx=".5" />
-                                        <rect width="4" height="2" x="7" y="16" fill="#A3A3A3" rx=".5" />
-                                        <rect width="4" height="2" x="13" y="12" fill="#A3A3A3" rx=".5" />
-                                        <rect width="4" height="2" x="13" y="16" fill="#A3A3A3" rx=".5" />
-                                    </g>
-                                </svg>
-                                <span>{{ moment(post.created_at).format("LL") }}</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <PartialsPotensiCategory />
+                <PartialsLatestPotensi />
             </div>
         </div>
     </div>
