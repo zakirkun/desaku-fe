@@ -13,20 +13,16 @@ const news = ref(null)
 const page = ref(1)
 const pageLength = ref(0)
 
-const { data } = await useAsyncData(
-    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/news?limit=5&page=1')
-)
+const { data, total } = await $fetch('/api/berita?limit=5&page=1')
 
-news.value = data.value.data
-pageLength.value = Math.ceil(data.value.total / 5)
+news.value = data
+pageLength.value = Math.ceil(total / 5)
 
 async function changePage() {
-    const { data } = await useAsyncData(
-        () => $fetch(useRuntimeConfig().public.API_BASE_URL + `/api/news?limit=5&page=${page.value}`)
-    )
+    const { data } = await $fetch(`/api/berita?limit=5&page=${page.value}`)
 
-    news.value = data.value.data
-    document.getElementById("list_berita").scrollIntoView({behavior: 'smooth'})
+    news.value = data
+    document.getElementById("list_berita").scrollIntoView({ behavior: 'smooth' })
 }
 </script>
 <template>
@@ -48,20 +44,25 @@ async function changePage() {
                     <span>Berita <span v-if="page != 1">: Halaman {{ page }}</span></span>
                 </div>
                 <div @click="$router.push('/berita/' + news.slug)"
-                    class="cursor-pointer animate-fade flex mb-[0.5rem] md:mb-2 h-[160px] md:h-[200px]"
+                    class="cursor-pointer animate-fade flex mb-10"
                     v-for="news in news">
-                    <div class="w-[160px] md:w-[240px] h-full flex-none">
-                        <img class="rounded-md h-[120px] md:h-[160px] w-full object-cover" :src="news.thumbnail" alt="">
+                    <div class="h-[120px] sm:h-[160px] w-[140px] sm:w-[220px] md:w-[260px] flex-none">
+                        <v-img :lazy-src="news.thumbnail" height="100%" aspect-ratio="4/3"
+                            :src="news.thumbnail" />
                     </div>
                     <div class="block pl-4">
                         <div class="tetx-base md:text-xl font-semibold">
                             <span class="line-clamp-2">{{ news.title }}</span>
                         </div>
-                        <div class="text-sm md:text-base flex items-center font-medium mt-2">
-                            <IconsDate />
-                            <span class="ml-1 mr-2">{{ moment(news.created_at).format("LL") }}</span>
-                            <IconsTag />
-                            <span class="ml-1">{{ news.name }}</span>
+                        <div class="text-xs md:text-base block md:flex items-center font-medium mt-2">
+                            <div class="flex">
+                                <IconsDate />
+                                <span class="ml-1 mr-2">{{ moment(news.created_at).format("LL") }}</span>
+                            </div>
+                            <div class="hidden sm:flex">
+                                <IconsTag />
+                                <span class="ml-1">{{ news.name }}</span>
+                            </div>
                         </div>
                         <div class="mt-2 text-sm md:text-base">
                             <span class="line-clamp-3">{{ news.description }}</span>
@@ -78,3 +79,9 @@ async function changePage() {
         </div>
     </div>
 </template>
+<style scoped>
+::v-deep img {
+    border-radius: 6px;
+    object-fit: cover;
+}
+</style>

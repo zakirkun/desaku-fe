@@ -16,7 +16,7 @@ news.value = data.value.data
         <div @click="$router.push('/berita/' + news.slug)"
             class="cursor-pointer px-2 py-3 flex" v-for="news in news">
             <div class="w-[140px] flex-none">
-                <v-img height="80" :src="news.thumbnail" alt="" />
+                <v-img :lazy-src="news.thumbnail" class="w-full" height="80" :src="news.thumbnail" alt="" />
             </div>
             <div class="block ml-3">
                 <div class="text-[#0088CC] text-base font-medium">

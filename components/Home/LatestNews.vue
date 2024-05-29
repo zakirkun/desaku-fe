@@ -3,17 +3,12 @@ import moment from 'moment';
 
 const news = ref(null)
 
-const { data } = await useAsyncData(
-    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/news?limit=5')
-)
-
-news.value = data.value.data
+news.value = (await $fetch('/api/berita?limit=5')).data
 </script>
 <template>
     <div class="flex mb-10 cursor-pointer" @click="$router.push('/berita/' + news.slug)" v-for="news in news">
         <div class="flex-none w-[140px] md:w-[240px]">
-            <v-img min-width="100%" class="rounded-md h-[110px] md:h-[140px]" :src="news.thumbnail"
-                alt=""/>
+            <v-img min-width="100%" class="rounded-md h-[110px] md:h-[140px]" :src="news.thumbnail"/>
         </div>
         <div class="block pl-4">
             <div class="text-md md:text-xl font-semibold">

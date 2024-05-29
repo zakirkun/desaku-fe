@@ -3,14 +3,14 @@ definePageMeta({
     layout: 'app'
 });
 
-useHead({
-    title: "Lembaga Desa"
-})
-
 const route = useRouter().currentRoute.value
 const data = ref(null)
 
 data.value = await $fetch('/api/lembaga/slug/' + route.params.id)
+
+useHead({
+    title: data.value.name + " Lembaga Desa"
+})
 </script>
 <template>
     <div class="animate-fade flex-1 px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-[2.5rem] ">
@@ -27,9 +27,9 @@ data.value = await $fetch('/api/lembaga/slug/' + route.params.id)
         </div>
         <div class="pb-8">
             <h1 class="mb-8 font-semibold text-[#0088CC] text-2xl">{{ data.name }}</h1>
-            <div class="block md:flex">
-                <div clas="flex-none w-full md:w-[300px]">
-                    <img class="w-full md:w-[300px] rounded-md" :src="data.image" alt="">
+            <div class="block md:flex items-center">
+                <div clas="flex-none w-full">
+                    <v-img :lazy-src="data.image" :src="data.image" class="rounded-md mx-auto" cover width="240" aspect-ratio="16/9"/>
                 </div>
                 <div class="block text-base md:text-lg font-medium description-lembaga">
                     <div class="flex py-3 border-b border-slate-300">

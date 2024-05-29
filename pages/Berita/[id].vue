@@ -7,11 +7,8 @@ definePageMeta({
 
 const post = ref(null)
 const route = useRouter().currentRoute.value
-const { data } = await useAsyncData(
-    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/news/slug/' + route.params.id)
-)
 
-post.value = data.value
+post.value = await $fetch('/api/berita/slug/' + route.params.id)
 </script>
 <template>
     <Head>
@@ -32,7 +29,7 @@ post.value = data.value
                 </div>
             </div>
         </div>
-        <div :class="$vuetify.display.mobile ? 'pb-12' : 'pb-4'" class="grid grid-cols-1 md:grid-cols-6 md:gap-x-12">
+        <div :class="$vuetify.display.mobile ? 'pb-12' : 'pb-4'" class="grid grid-cols-1 md:grid-cols-6 gap-y-8 md:gap-x-12">
             <div class="block col-span-1 md:col-span-4">
                 <div class="text-[#0088CC] text-2xl mb-2 md:text-2xl font-semibold py-3">
                     <span>{{ post.title }}</span>
