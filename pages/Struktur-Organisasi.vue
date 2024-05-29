@@ -12,28 +12,15 @@ const selectedJabatan = ref(null)
 const currentPerangkat = ref(null)
 const content = ref(null)
 
-const { data } = await useAsyncData(
-    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/jabatan')
-)
-
-jabatan.value = data.value
-
-const { data: contentStrukturOrganisasi } = await useAsyncData(
-    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/struktur-organisasi')
-)
-
-content.value = contentStrukturOrganisasi.value.content
-
+jabatan.value = await $fetch('/api/jabatan')
+content.value = (await $fetch('/api/struktur-organisasi')).content
 
 async function getPerangkat(id) {
     if (!id) {
         id = selectedJabatan.value
     }
 
-    const { data } = await useAsyncData(
-        () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/jabatan/perangkat/' + id)
-    )
-    currentPerangkat.value = data.value
+    currentPerangkat.value = await $fetch('/api/jabatan/perangkat/' + id)
 }
 </script>
 
@@ -75,8 +62,8 @@ async function getPerangkat(id) {
                 <div v-else>
                     <p class="text-xl md:text-2xl mb-5 mt-4 font-semibold">{{ currentPerangkat[0]?.job ?? '-' }}</p>
                     <div class="animate-fade grid grid-cols-1 gap-8 md:grid-cols-4">
-                        <div @click="navigateTo('/perangkat-desa/' + item.slug)" class="cursor-pointer rounded-lg block shadow-lg"
-                            v-for="item in currentPerangkat">
+                        <div @click="navigateTo('/perangkat-desa/' + item.slug)"
+                            class="cursor-pointer rounded-lg block shadow-lg" v-for="item in currentPerangkat">
                             <div class="w-full h-[180px]">
                                 <img :src="item.image" class="w-full h-full object-cover rounded-t-lg" />
                             </div>

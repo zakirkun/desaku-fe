@@ -9,11 +9,7 @@ useHead({
 
 const perangkat = ref([])
 
-const { data } = await useAsyncData(
-    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/perangkat-desa')
-)
-
-perangkat.value = data.value
+perangkat.value = await $fetch('/api/perangkat-desa')
 </script>
 
 <template>

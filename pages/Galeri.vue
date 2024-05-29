@@ -18,11 +18,8 @@ onMounted(async () => {
     })
 })
 
-const { data } = await useAsyncData(
-    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/image-gallery')
-)
-
-images.value = data.value
+const data = await $fetch('/api/image-gallery')
+images.value = data
 
 definePageMeta({
     layout: 'app'

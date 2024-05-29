@@ -9,11 +9,8 @@ useHead({
 
 const data = ref(null)
 
-const { data: dataSejarah } = await useAsyncData(
-    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/sejarah')
-)
-
-data.value = dataSejarah.value.sejarah
+const { sejarah } = await $fetch('/api/sejarah')
+data.value = sejarah
 </script>
 <template>
     <div class="animate-fade flex-1 px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-[2.5rem] ">

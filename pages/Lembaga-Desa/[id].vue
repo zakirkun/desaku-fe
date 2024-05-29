@@ -10,11 +10,7 @@ useHead({
 const route = useRouter().currentRoute.value
 const data = ref(null)
 
-const { data: dataLembaga } = await useAsyncData(
-    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/lembaga/slug/' + route.params.id)
-)
-
-data.value = dataLembaga.value
+data.value = await $fetch('/api/lembaga/slug/' + route.params.id)
 </script>
 <template>
     <div class="animate-fade flex-1 px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-[2.5rem] ">

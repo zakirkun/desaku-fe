@@ -13,20 +13,15 @@ const data = reactive({
     visi: null,
 })
 
-const { data: dataPerangkatDesa } = await useAsyncData(
-    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/perangkat-desa/slug/' + route.params.id)
-)
-data.name = dataPerangkatDesa.value.name
-data.job = dataPerangkatDesa.value.job
-data.image = dataPerangkatDesa.value.image
-data.visi = dataPerangkatDesa.value.visi
-data.nip = dataPerangkatDesa.value.nip
+const dataPerangkatDesa = await $fetch('/api/perangkat-desa/slug/' + route.params.id)
 
-const { data: dataLatestPerangkatDesa } = await useAsyncData(
-    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/perangkat-desa?limit=5')
-)
+data.name = dataPerangkatDesa.name
+data.job = dataPerangkatDesa.job
+data.image = dataPerangkatDesa.image
+data.visi = dataPerangkatDesa.visi
+data.nip = dataPerangkatDesa.nip
 
-perangkatDesa.value = dataLatestPerangkatDesa.value
+perangkatDesa.value = await $fetch('/api/perangkat-desa?limit=5')
 </script>
 <template>
 
