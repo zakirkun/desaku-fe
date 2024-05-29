@@ -9,11 +9,8 @@ useHead({
 
 const data = ref(null)
 
-const { data: dataTentang } = await useAsyncData(
-    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/tentang')
-)
-
-data.value = dataTentang.value.tentang
+const { visi } = await $fetch('/api/tentang')
+data.value = visi
 </script>
 <template>
     <div class="animate-fade flex-1 px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-[2.5rem] ">
