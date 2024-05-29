@@ -1,11 +1,7 @@
 <script setup>
 const newsCategory = ref(null)
 
-const { data } = await useAsyncData(
-    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/news-category?allow_empty=false')
-)
-
-newsCategory.value = data.value
+newsCategory.value = await $fetch('/api/news-category?allow_empty=false')
 </script>
 <template>
     <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-4 text-xl sm:text-2xl font-semibold py-3">

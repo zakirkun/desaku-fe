@@ -2,11 +2,7 @@
 import moment from 'moment';
 
 const news = ref(null)
-const { data } = await useAsyncData(
-    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/news?limit=5')
-)
-
-news.value = data.value.data
+news.value = (await $fetch('/api/berita?limit=5')).data
 </script>
 <template>
     <div class="text-[#0088CC] border-[#0088CC] border-b-2 mt-5 mb-6 text-xl sm:text-2xl font-semibold py-3">
