@@ -34,6 +34,9 @@ export default {
         async removeNews() {
             await $fetch(this.$config.public.API_PUBLIC_URL + '/api/image-homepage/' + this.removedImageId, {
                 method: "DELETE",
+                headers: {
+                    Authorization: "Bearer " + useToken().token
+                },
             })
 
             this.modalRemoveImage = false
