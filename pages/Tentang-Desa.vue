@@ -16,7 +16,7 @@ data.value = tentang
     <div class="animate-fade flex-1 px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-[2.5rem] ">
         <BreadCrumb>
             <template v-slot:root>
-                <span>Tentang Desa</span>
+                <span @click="navigateTo('tentang-desa')">Tentang Desa</span>
             </template>
         </BreadCrumb>
         <div class="pb-8">

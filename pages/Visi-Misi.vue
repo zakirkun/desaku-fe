@@ -17,7 +17,7 @@ data.value = visi
         class="animate-fade pb-6 px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-[2.5rem] ">
         <BreadCrumb>
             <template v-slot:root>
-                <span>Visi & Misi</span>
+                <span @click="navigateTo('visi-misi')">Visi & Misi</span>
             </template>
         </BreadCrumb>
         <div class="pb-8">

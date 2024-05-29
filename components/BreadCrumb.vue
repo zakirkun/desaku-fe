@@ -14,7 +14,7 @@ const props = defineProps(['child'])
             <slot name="root" />
         </div>
         <span class="mx-2">/</span>
-        <div class="truncate max-w-[240px] sm:w-fit">
+        <div class="truncate w-[240px] sm:w-fit">
             {{  props.child }}
         </div>
     </div>
