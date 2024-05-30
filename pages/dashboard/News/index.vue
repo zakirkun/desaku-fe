@@ -18,10 +18,11 @@ export default {
                 content: null
             },
             headers: [
-                { title: 'Title', align: 'start', sortable: false, key: 'title', width: "300px" },
+                { title: 'Title', align: 'start', sortable: false, key: 'title', width: "250" },
                 { title: 'Category', align: 'start', key: 'name' },
-                { title: 'Thumbnail', align: 'start', key: 'thumbnail' },
-                { title: 'Content', align: 'end', key: 'content' },
+                { title: 'Description', align: 'end', key: 'description'},
+                { title: 'Thumbnail', align: 'end', key: 'thumbnail' },
+                { title: 'Created By', align: 'start', key: 'created_by', width: "150" },
                 { title: 'Actions', align: 'center', key: 'actions', sortable: false },
             ],
             headersCategory: [
@@ -173,11 +174,11 @@ export default {
             <div class="card">
                 <v-data-table :loading="loadingData" :headers="headers" :items="items" item-key="name">
                     <template #bottom></template>
-                    <template v-slot:item.content="{ value }">
-                        <span v-html="value.slice(0, 100)"></span>
+                    <template v-slot:item.description="{ value }">
+                        <span v-html="value.slice(0, 60)"></span>...
                     </template>
                     <template v-slot:item.thumbnail="{ value }">
-                        <v-img :src="value" width="100" height="100"></v-img>
+                        <v-img :lazy-src="value" :src="value" width="100" height="100"></v-img>
                     </template>
                     <template v-slot:item.actions="{ item }">
                         <div class="flex justify-center">

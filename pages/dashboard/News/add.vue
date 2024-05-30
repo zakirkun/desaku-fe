@@ -40,8 +40,7 @@ export default {
     },
     methods: {
         async loadCategories() {
-            const data = await $fetch(this.$config.public.API_PUBLIC_URL + '/api/news-category/')
-            this.categories = data.map(v => v.name)
+            this.categories = await $fetch(this.$config.public.API_PUBLIC_URL + '/api/news-category/')
         },
         async addNews() {
             const { valid } = await this.$refs.form.validate()
