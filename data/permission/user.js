@@ -1,5 +1,6 @@
 // allowing user (not admin) to access this dashboard page
 export default [
+    "Dashboard",
     "Dashboard-News",
     "Dashboard-News-add",
     "Dashboard-News-edit",

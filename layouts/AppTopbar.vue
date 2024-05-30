@@ -16,7 +16,7 @@ const topbarMenuClasses = computed(() => {
 
 function logout() {
     useToken().token = null
-    router.push('/')
+    router.push('/auth/login')
 }
 </script>
 <script>

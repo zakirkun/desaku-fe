@@ -10,7 +10,6 @@ import 'swiper/css/pagination';
 const modules = ref([Autoplay, EffectFade, Navigation, Pagination])
 const images = ref(null)
 const perangkatDesa = ref(null)
-const showContent = ref(false)
 
 images.value = await $fetch('/api/image-homepage')
 perangkatDesa.value = await $fetch('/api/perangkat-desa')
@@ -18,12 +17,6 @@ perangkatDesa.value = await $fetch('/api/perangkat-desa')
 function backgroundImage(url) {
     return `background-image: url(${url});`
 }
-
-onMounted(() => {
-    setTimeout(() => {
-        showContent.value = true
-    }, 1000)
-})
 
 definePageMeta({
     layout: 'app'
@@ -34,8 +27,7 @@ useHead({
 })
 </script>
 <template>
-    <AnimationLoading v-show="!showContent" />
-    <div v-show="showContent" class="animate-fade flex-1">
+    <div class="animate-fade flex-1">
         <div id="hero" class="flex flex-column overflow-hidden">
             <swiper :autoplay="{
                 delay: 4000,
@@ -88,7 +80,7 @@ useHead({
                             disableOnInteraction: false,
                         }" :spaceBetween="30" :effect="'fade'" :navigation="true" :modules="modules" class="w-full">
                             <swiper-slide v-for="item in perangkatDesa" class="relative">
-                                <img class="rounded-md h-[320px] w-full" :src="item.image" />
+                                <v-img class="rounded-md" cover width="100%" aspect-ratio="1" :lazysrc="item.image" :src="item.image" />
                                 <div
                                     class="text-sm sm:text-base font-normal rounded-b-md z-50 py-1 backdrop-blur-xl opacity-90 pl-2 bg-[#0088CC] bottom-0 absolute w-full text-white">
                                     <span>{{ item.name }} - {{ item.job }}</span>
