@@ -2,7 +2,7 @@
 const props = defineProps(['child'])
 </script>
 <template>
-    <div class="flex mb-6 items-center bg-[#f0f0f0] pa-3 w-full rounded-lg">
+    <div class="flex mb-6 text-sm sm:text-base items-center bg-[#f0f0f0] pa-3 w-full rounded-lg">
         <div class="flex-none">
             <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 1024 1024">
                 <path fill="#0088CC"
@@ -13,7 +13,7 @@ const props = defineProps(['child'])
         <div class="whitespace-nowrap cursor-pointer font-medium">
             <slot name="root" />
         </div>
-        <div v-if="props.child" class="truncate w-[200px] sm:w-fit">
+        <div v-if="props.child" class="truncate max-[300px]:w-[100px] w-[200px] sm:w-fit">
             <span class="mx-2">/</span>
             {{ props.child }}
         </div>

@@ -7,13 +7,12 @@ const post = reactive({
     content: null,
     created_at: null,
 })
-const { data } = await useAsyncData(
-    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/announcement/slug/' + route.params.id)
-)
 
-post.title = data.value.title
-post.content = data.value.content
-post.created_at = data.value.created_at
+const data = await $fetch('/api/pengumuman/slug/' + route.params.id)
+
+post.title = data.title
+post.content = data.content
+post.created_at = data.created_at
 
 definePageMeta({
     layout: 'app'
@@ -38,7 +37,7 @@ definePageMeta({
                     <IconsDate />
                     <span class="ml-1">{{ moment(post.created_at).format("LL") }}</span>
                 </div>
-                <div class="quill-content" v-html="post.content"></div>
+                <div class="quill-content" v-html="post.content ?? ''"></div>
             </div>
             <div class="col-span-2">
                 <PartialsLatestAnnouncement />

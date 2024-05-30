@@ -10,11 +10,8 @@ useHead({
 })
 
 const announcements = ref(null)
-const { data } = await useAsyncData(
-    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/announcement')
-)
 
-announcements.value = data.value
+announcements.value = await $fetch('/api/pengumuman')
 </script>
 <template>
     <div class="animate-fade flex-1 block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem]  pt-6">

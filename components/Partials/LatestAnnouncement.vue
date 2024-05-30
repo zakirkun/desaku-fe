@@ -2,11 +2,8 @@
 import moment from 'moment';
 
 const announcements = ref(null)
-const { data } = await useAsyncData(
-    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/announcement?limit=5')
-)
 
-announcements.value = data.value
+announcements.value = await $fetch('/api/pengumuman?limit=5')
 </script>
 <template>
     <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-4 text-2xl font-semibold py-3">

@@ -2,8 +2,7 @@
 const features = ref([
     {
         img: "https://kertamulya-padalarang.desa.id/themes/default/assets/images/illustrator/services.svg",
-        name: "Pengumuman",
-        href: "/pengumuman"
+        name: "Layanan Masyarakat",
     },
     {
         img: "https://kertamulya-padalarang.desa.id/themes/default/assets/images/illustrator/Asset186.svg",
@@ -17,7 +16,8 @@ const features = ref([
     },
     {
         img: "https://kertamulya-padalarang.desa.id/themes/default/assets/images/illustrator/Asset192.svg",
-        name: "Keuangan Desa"
+        name: "Pengumuman Desa",
+        href: "/pengumuman"
     }
 ],)
 </script>
