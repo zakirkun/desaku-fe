@@ -1,11 +1,13 @@
 <script setup>
 import { ref } from 'vue';
 import AppMenuItem from './AppMenuItem.vue';
+
 const model = ref([
     {
         label: 'Menu',
         items: [
             {
+                user: false,
                 label: 'Profil Desa',
                 icon: 'pi pi-fw pi-user',
                 items: [
@@ -15,6 +17,7 @@ const model = ref([
                 ]
             },
             {
+                user: true,
                 label: 'Informasi Publik',
                 icon: 'pi pi-fw pi-book',
                 items: [
@@ -26,6 +29,7 @@ const model = ref([
                 ]
             },
             {
+                user: false,
                 label: 'Pemerintahan',
                 icon: 'pi pi-fw pi-sitemap',
                 items: [
@@ -36,6 +40,7 @@ const model = ref([
                 ]
             },
             {
+                user: false,
                 label: 'Pengaturan',
                 icon: 'pi pi-fw pi-cog',
                 items: [
@@ -46,6 +51,7 @@ const model = ref([
                 ]
             },
             {
+                user: false,
                 label: 'Admin',
                 icon: 'pi pi-fw pi-users',
                 to: '/dashboard/admin'
@@ -53,6 +59,14 @@ const model = ref([
         ]
     },
 ]);
+
+model.value[0].items = model.value[0].items.filter((v) => {
+    if (useParseJWT().value.is_admin == 1) {
+        return v
+    } else {
+        return v.user
+    }
+})
 </script>
 
 
@@ -60,7 +74,7 @@ const model = ref([
     <ul class="layout-menu">
         <template v-for="(item, i) in model" :key="item">
             <app-menu-item v-if="!item.separator" :item="item" :index="i"></app-menu-item>
-            <li v-if="item.separator" class="menu-separator"></li>
+            <li v-else class="menu-separator"></li>
         </template>
     </ul>
 </template>
