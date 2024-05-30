@@ -3,7 +3,6 @@ import user from '../data/permission/user'
 
 export default defineNuxtRouteMiddleware((to, from) => {
     let token = useToken().token
-    console.log(to)
 
     if (to.path.includes('/dashboard')) {
         if (!token){
