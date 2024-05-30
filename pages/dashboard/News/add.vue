@@ -14,6 +14,7 @@ export default {
             categories: [],
             renderRichEditor: false,
             data: null,
+            toast: false,
             form: {
                 title: null,
                 description: null,
@@ -49,6 +50,11 @@ export default {
                 return
             }
 
+            if (!this.form.thumbnail) {
+                this.toast = true
+                return
+            }
+
             this.loading = true
             this.form.content = this.data
             this.form.slug = createSlug(this.form.title)
@@ -75,6 +81,14 @@ export default {
 </script>
 
 <template>
+    <v-snackbar v-model="toast" color="red" :timeout="3000">
+        Thumbnail wajib diisi!
+        <template v-slot:actions>
+            <v-btn color="white" variant="text" @click="toastUnauthorized = false">
+                Tutup
+            </v-btn>
+        </template>
+    </v-snackbar>
     <MediaLibrary @onImageSelected="onImageSelected" @onCloseModal="openMediaLibrary = false"
         :open="openMediaLibrary" />
     <div class="grid animate-fade">
@@ -84,17 +98,18 @@ export default {
                 <v-form ref="form">
                     <div class="grid grid-cols-3 gap-3">
                         <div class="col-span-2">
-                            <v-text-field :rules="[v => !!v || 'Field is required']" v-model="form.title" variant="outlined" hide-details="auto"
-                                label="Judul Berita"></v-text-field>
+                            <v-text-field :rules="[v => !!v || 'Field is required']" v-model="form.title"
+                                variant="outlined" hide-details="auto" label="Judul Berita"></v-text-field>
                         </div>
                         <div>
-                            <v-select :rules="[v => !!v || 'Field is required']" item-value="uuid" item-title="name" v-model="form.category_id" label="Kategori Berita"
-                                :items="categories" variant="outlined"></v-select>
+                            <v-select :rules="[v => !!v || 'Field is required']" item-value="uuid" item-title="name"
+                                v-model="form.category_id" label="Kategori Berita" :items="categories"
+                                variant="outlined"></v-select>
                         </div>
                     </div>
                     <div class="mt-3">
-                        <v-textarea :rules="[v => !!v || 'Field is required']" rows="3" variant="outlined" label="Deskripsi Berita" clearable
-                            v-model="form.description"></v-textarea>
+                        <v-textarea :rules="[v => !!v || 'Field is required']" rows="3" variant="outlined"
+                            label="Deskripsi Berita" clearable v-model="form.description"></v-textarea>
                     </div>
                 </v-form>
                 <div class="mb-3 text-lg font-medium my-1">Thumbnail Berita</div>

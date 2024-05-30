@@ -20,6 +20,7 @@ export default {
                 thumbnail: null
             },
             items: [],
+            toast: false,
             loading: false
         }
     },
@@ -39,6 +40,11 @@ export default {
             const { valid } = await this.$refs.form.validate()
 
             if (!valid) {
+                return
+            }
+
+            if (!this.form.thumbnail) {
+                this.toast = true
                 return
             }
 
@@ -67,6 +73,14 @@ export default {
 </script>
 
 <template>
+    <v-snackbar v-model="toast" color="red" :timeout="3000">
+        Thumbnail wajib diisi!
+        <template v-slot:actions>
+            <v-btn color="white" variant="text" @click="toastUnauthorized = false">
+                Tutup
+            </v-btn>
+        </template>
+    </v-snackbar>
     <MediaLibrary @onImageSelected="onImageSelected" @onCloseModal="openMediaLibrary = false"
         :open="openMediaLibrary" />
     <div class="grid animate-fade">

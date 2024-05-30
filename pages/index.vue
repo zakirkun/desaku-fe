@@ -34,7 +34,7 @@ useHead({
                 disableOnInteraction: false,
             }" :spaceBetween="30" :effect="'fade'" :navigation="true" :pagination="{
                 clickable: true,
-            }" :modules="modules" class="w-full h-[500px] md:h-[600px]">
+            }" :modules="modules" class="w-full h-[420px] md:h-[600px]">
                 <swiper-slide v-for="image in images">
                     <div class="w-screen h-full bg-cover relative bg-center" :style="backgroundImage(image.url)">
                         <div
@@ -78,11 +78,11 @@ useHead({
                         <swiper :autoplay="{
                             delay: 4000,
                             disableOnInteraction: false,
-                        }" :spaceBetween="30" :effect="'fade'" :navigation="true" :modules="modules" class="w-full">
-                            <swiper-slide v-for="item in perangkatDesa" class="relative">
-                                <v-img class="rounded-md" cover width="100%" aspect-ratio="1" :lazysrc="item.image" :src="item.image" />
+                        }" :spaceBetween="30" :effect="'fade'" :navigation="true" :modules="modules" class="w-full rounded-lg">
+                            <swiper-slide v-for="item in perangkatDesa" class="relative rounded-lg">
+                                <v-img class="rounded-lg" cover width="100%" aspect-ratio="1" :lazysrc="item.image" :src="item.image" />
                                 <div
-                                    class="text-sm sm:text-base font-normal rounded-b-md z-50 py-1 backdrop-blur-xl opacity-90 pl-2 bg-[#0088CC] bottom-0 absolute w-full text-white">
+                                    class="rounded-lg text-sm sm:text-base font-normal rounded-b-md z-50 py-1 backdrop-blur-xl opacity-90 pl-2 bg-[#0088CC] bottom-0 absolute w-full text-white">
                                     <span>{{ item.name }} - {{ item.job }}</span>
                                 </div>
                             </swiper-slide>

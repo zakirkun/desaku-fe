@@ -71,7 +71,7 @@ useHead({
                         </div>
                     </div>
                 </div>
-                <v-pagination class="mt-4 mb-14" v-model="page" @update:modelValue="changePage" :total-visible="5"
+                <v-pagination :size="$vuetify.display.mobile ? 'small' : 'default'" class="mt-4 mb-14" v-model="page" @update:modelValue="changePage" :total-visible="5"
                     :length="pageLength"></v-pagination>
             </div>
             <div class="col-span-2">

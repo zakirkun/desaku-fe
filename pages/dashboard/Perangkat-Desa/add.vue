@@ -14,6 +14,7 @@ export default {
             renderRichEditor: false,
             data: null,
             jabatan: [],
+            toast: null,
             form: {
                 name: null,
                 job: null,
@@ -39,6 +40,11 @@ export default {
             const { valid } = await this.$refs.form.validate()
 
             if (!valid) {
+                return
+            }
+
+            if (!this.form.image){
+                this.toast = true
                 return
             }
 
@@ -68,6 +74,14 @@ export default {
 </script>
 
 <template>
+    <v-snackbar v-model="toast" color="red" :timeout="3000">
+        Thumbnail wajib diisi!
+        <template v-slot:actions>
+            <v-btn color="white" variant="text" @click="toastUnauthorized = false">
+                Tutup
+            </v-btn>
+        </template>
+    </v-snackbar>
     <MediaLibrary @onImageSelected="onImageSelected" @onCloseModal="openMediaLibrary = false"
         :open="openMediaLibrary" />
     <div class="grid animate-fade">
@@ -80,16 +94,17 @@ export default {
                             <v-text-field :rules="[v => !!v || 'Field is required']" v-model="form.name"
                                 variant="outlined" hide-details="auto" label="Nama"></v-text-field>
                         </div>
-                        <div class="col-span-1 mt-3">
-                            <v-text-field v-model="form.nip" variant="outlined" hide-details="auto"
-                                label="NIP (Nomor Identitas Pegawai)"></v-text-field>
-                        </div>
                         <div class="mt-3">
                             <v-select :rules="[v => !!v || 'Field is required']" v-model="form.job" :items="jabatanName"
                                 variant="outlined" hide-details="auto" label="Jabatan"></v-select>
                         </div>
+                        <div class="col-span-1 mt-3">
+                            <v-text-field v-model="form.nip" variant="outlined" hide-details="auto"
+                                label="NIP (Nomor Identitas Pegawai)"></v-text-field>
+                        </div>
                         <div class="mb-3 text-lg font-medium my-1">Visi & Misi</div>
                         <RichEditor v-if="renderRichEditor" @contentChange="contentChange" />
+                        <div class="mb-3 text-lg font-medium my-1">Gambar Profil</div>
                         <div class="relative w-fit mt-4" v-if="form.image">
                             <v-img :src="form.image" width="300" />
                             <div @click="form.image = null" class="absolute cursor-pointer right-3 top-3 z-50">

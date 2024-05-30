@@ -42,7 +42,11 @@ export default {
         async loadData() {
             this.loadingData = true
 
-            const { data } = await $fetch(this.$config.public.API_PUBLIC_URL + '/api/news')
+            const { data } = await $fetch(this.$config.public.API_PUBLIC_URL + '/api/news', {
+                headers: {
+                    Authorization: "Bearer " + useToken().token
+                },
+            })
             this.items = data
             this.renderRichEditor = true
 
@@ -172,7 +176,7 @@ export default {
     <div class="grid animate-fade mb-6">
         <div class="col-12">
             <div class="card">
-                <v-data-table :loading="loadingData" :headers="headers" :items="items" item-key="name">
+                <v-data-table items-per-page="-1" :loading="loadingData" :headers="headers" :items="items" item-key="name">
                     <template #bottom></template>
                     <template v-slot:item.description="{ value }">
                         <span v-html="value.slice(0, 60)"></span>...
@@ -181,15 +185,16 @@ export default {
                         <v-img :lazy-src="value" :src="value" width="100" height="100"></v-img>
                     </template>
                     <template v-slot:item.actions="{ item }">
-                        <div class="flex justify-center">
-                            <div @click="$router.push(`/berita/${item.slug}`)" class="cursor-pointer">
+                        <div class="flex justify-end">
+                            <a :href="`/berita/${item.slug}`" target="_blank" class="cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em"
                                     viewBox="0 0 24 24">
                                     <path fill="#212121"
                                         d="M12 9a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5a5 5 0 0 1 5-5a5 5 0 0 1 5 5a5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5" />
                                 </svg>
-                            </div>
-                            <div @click="$router.push('/dashboard/news/edit?id=' + item.uuid)"
+                            </a>
+                            {{  }}
+                            <div v-if="useParseJWT().value.is_admin == 1 || useParseJWT().value.user == item.user_id" @click="$router.push('/dashboard/news/edit?id=' + item.uuid)"
                                 class="cursor-pointer mx-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em"
                                     viewBox="0 0 24 24">
@@ -198,7 +203,7 @@ export default {
                                         clip-rule="evenodd" />
                                 </svg>
                             </div>
-                            <div class="cursor-pointer" @click="openModalRemoveNews(item.uuid)">
+                            <div v-if="useParseJWT().value.is_admin == 1 || useParseJWT().value.user == item.user_id" class="cursor-pointer" @click="openModalRemoveNews(item.uuid)">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em"
                                     viewBox="0 0 24 24">
                                     <path fill="#212121"
@@ -224,7 +229,7 @@ export default {
     <div class="grid animate-fade mb-6">
         <div class="col-12">
             <div class="card">
-                <v-data-table :headers="headersCategory" :items="itemsCategory" item-key="name">
+                <v-data-table items-per-page="-1" :headers="headersCategory" :items="itemsCategory" item-key="name">
                     <template #bottom></template>
                     <template v-slot:item.content="{ value }">
                         <span v-html="value.slice(0, 100)"></span>

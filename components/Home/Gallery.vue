@@ -25,12 +25,12 @@ onMounted(async () => {
         <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-xl md:text-2xl font-semibold py-3">
             <span>Galeri Desa</span>
         </div>
-        <div id="gallery" class="grid grid-cols-1 md:grid-cols-3 mb-2 gap-6">
-            <a class="rounded-md h-full w-full relative" v-for="(image, key) in images" :key="key" :href="image.url"
+        <div id="gallery" class="rounded-lg grid grid-cols-1 md:grid-cols-3 mb-2 gap-6">
+            <a class="rounded-lg h-full w-full relative" v-for="(image, key) in images" :key="key" :href="image.url"
                 data-pswp-width="600" data-pswp-height="400" target="_blank" rel="noreferrer">
                 <v-img :lazy-src="image.url" class="rounded-md" cover width="100%" aspect-ratio="1" :src="image.url" />
                 <div
-                    class="rounded-b-md z-50 py-1 backdrop-blur-xl opacity-90 pl-2 bg-[#0088CC] bottom-0 absolute w-full text-white">
+                    class="rounded-b-lg z-50 py-1 backdrop-blur-xl opacity-90 pl-2 bg-[#0088CC] bottom-0 absolute w-full text-white">
                     <p class="truncate text-sm md:text-base">{{ image.description }}</p>
                 </div>
             </a>

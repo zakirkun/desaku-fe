@@ -24,6 +24,7 @@ export default {
                 { title: 'Content', align: 'end', key: 'content' },
             ],
             items: [],
+            toast: false,
             loading: false
         }
     },
@@ -36,6 +37,11 @@ export default {
             const { valid } = await this.$refs.form.validate()
 
             if (!valid) {
+                return
+            }
+
+            if (!this.form.thumbnail) {
+                this.toast = true
                 return
             }
 
@@ -53,7 +59,7 @@ export default {
             this.loading = false
             this.$router.push('/dashboard/potensi-desa')
         },
-        async loadPotensiCategory(){
+        async loadPotensiCategory() {
             this.potensiCategory = await $fetch(this.$config.public.API_PUBLIC_URL + '/api/potensi-category')
         },
         contentChange(v) {
@@ -67,6 +73,14 @@ export default {
 </script>
 
 <template>
+    <v-snackbar v-model="toast" color="red" :timeout="3000">
+        Thumbnail wajib diisi!
+        <template v-slot:actions>
+            <v-btn color="white" variant="text" @click="toastUnauthorized = false">
+                Tutup
+            </v-btn>
+        </template>
+    </v-snackbar>
     <MediaLibrary @onImageSelected="onImageSelected" @onCloseModal="openMediaLibrary = false"
         :open="openMediaLibrary" />
     <div class="grid animate-fade">

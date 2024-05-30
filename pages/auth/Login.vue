@@ -4,7 +4,7 @@ definePageMeta({
 });
 
 useHead({
-    title: 'Login',
+    title: 'Login - Desaku',
 })
 </script>
 
@@ -46,7 +46,7 @@ export default {
 
                     useToken().token = resp.token
 
-                    this.$router.push('/dashboard/news')
+                    location.href = '/dashboard/news'
                 } catch (err) {
                     this.toastUnauthorized = true
                 }

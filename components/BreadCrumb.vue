@@ -10,7 +10,7 @@ const props = defineProps(['child'])
             </svg>
         </div>
         <span class="mx-2">/</span>
-        <div class="whitespace-nowrap">
+        <div class="whitespace-nowrap cursor-pointer font-medium">
             <slot name="root" />
         </div>
         <div v-if="props.child" class="truncate w-[200px] sm:w-fit">

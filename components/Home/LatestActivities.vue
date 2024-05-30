@@ -16,7 +16,7 @@ activities.value = await $fetch('/api/kegiatan?limit=5')
                 <span>{{ activity.title }}</span>
             </div>
             <div class="text-base">
-                <span>Lokasi {{ activity.location }}</span>
+                <span class="line-clamp-2">{{ activity.description }}</span>
             </div>
         </div>
     </div>

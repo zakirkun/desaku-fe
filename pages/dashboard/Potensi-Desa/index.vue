@@ -33,12 +33,12 @@ export default {
     },
     methods: {
         async loadData() {
-            this.loadData = true
+            this.loadingData = true
 
             const { data } = await $fetch(this.$config.public.API_PUBLIC_URL + '/api/potensi-desa')
             this.items = data
 
-            this.loadData = false
+            this.loadingData = false
         },
         async loadPotensiCategory() {
             this.loadingCategory = true
