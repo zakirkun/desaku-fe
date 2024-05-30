@@ -33,7 +33,7 @@ async function getPerangkat(id) {
             </template>
         </BreadCrumb>
         <div class="pb-8 block md:flex">
-            <div v-if="!$vuetify.display.mobile" class="md:block flex-none w-[240px] hidden">
+            <div class="hidden md:block flex-none w-[240px]">
                 <div class="border-b cursor-pointer border-slate-300 py-2 flex" @click="getPerangkat(item.uuid)"
                     v-for="item in jabatan">
                     <svg xmlns="http://www.w3.org/2000/svg" width="1.8em" height="1.8em" viewBox="0 0 24 24">
@@ -43,11 +43,10 @@ async function getPerangkat(id) {
                     <span>{{ item.name }}</span>
                 </div>
             </div>
-            <div v-else>
+            <div class="flex md:hidden">
                 <v-select v-model="selectedJabatan" @update:modelValue="getPerangkat(null)" label="Pilih Jabatan"
                     :items="jabatan" item-value="uuid" item-title="name"></v-select>
             </div>
-
             <div class="block flex-1 md:pl-10">
                 <div v-if="!currentPerangkat">
                     <h1 class="mb-4 font-semibold text-[#0088CC] text-2xl">Struktur Organisasi</h1>
