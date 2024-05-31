@@ -1,1 +1,0 @@
-import{_ as c,f as r,w as e,r as o,o as s,b as t}from"./entry.b204a2c1.js";const l={};function p(u,f){const n=o("router-view"),_=o("v-app"),a=o("v-layout");return s(),r(a,null,{default:e(()=>[t(_,null,{default:e(()=>[t(n)]),_:1})]),_:1})}const v=c(l,[["render",p]]);export{v as default};
