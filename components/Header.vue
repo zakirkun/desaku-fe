@@ -43,15 +43,18 @@ function openNavMobile() {
 
     if (navMobile.value){
         document.documentElement.classList.add('overflow-hidden');
-    } else {
-        document.documentElement.classList.remove('overflow-hidden');
     }
 }
 
 function changePage() {
     navMobile.value = false
+    document.documentElement.classList.remove('overflow-hidden');
     setTimeout(() => {
-        useRouter().push(`${navSelected.value}`)
+        if (navSelected.value == "/"){
+            useRouter().push('/')
+            return
+        }
+        useRouter().push(`/${navSelected.value}`)
     }, 500)
 }
 
