@@ -40,6 +40,12 @@ headerData.logo = data.logo
 
 function openNavMobile() {
     navMobile.value = !navMobile.value
+
+    if (navMobile.value){
+        document.documentElement.classList.add('overflow-hidden');
+    } else {
+        document.documentElement.classList.remove('overflow-hidden');
+    }
 }
 
 function changePage() {
