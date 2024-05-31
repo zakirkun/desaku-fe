@@ -27,36 +27,31 @@ useHead({
         </BreadCrumb>
         <div class="grid grid-cols-1 md:grid-cols-6 md:gap-x-12">
             <div class="block col-span-1 md:col-span-4">
-                <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
+                <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-xl md:text-2xl font-semibold py-3">
                     <span>Potensi Desa: {{ category_name }}</span>
                 </div>
-                <div v-if="potensi.length > 0">
-                    <div @click="$router.push('/potensi-desa/' + potensi.slug)"
-                        class="cursor-pointer flex mb-[0.5rem] md:mb-2 h-[160px] md:h-[200px]"
-                        v-for="potensi in potensi">
-                        <div class="w-[160px] md:w-[240px] h-full flex-none">
-                            <img class="rounded-md h-[120px] md:h-[160px] w-full object-cover" :src="potensi.thumbnail"
-                                alt="">
+                <div v-if="potensi.length > 0" @click="navigateTo('/potensi-desa/' + potensi.slug)"
+                    class="cursor-pointer flex mb-[0.5rem] md:mb-2 h-[160px] md:h-[200px]" v-for="potensi in potensi">
+                    <div class="h-[120px] sm:h-[160px] w-[140px] sm:w-[220px] md:w-[260px] flex-none">
+                        <v-img :lazy-src="potensi.thumbnail" height="100%" aspect-ratio="4/3"
+                            :src="potensi.thumbnail" />
+                    </div>
+                    <div class="block pl-4">
+                        <div class="tetx-base md:text-xl font-semibold">
+                            <span class="line-clamp-2">{{ potensi.title }}</span>
                         </div>
-                        <div class="block pl-4">
-                            <div class="tetx-base md:text-xl font-semibold">
-                                <span class="hidden md:flex">{{ potensi.title }}</span>
-                                <span class="flex md:hidden">{{ potensi.title.slice(0, 30) }}...</span>
+                        <div class="block md:flex">
+                            <div class="text-xs md:text-base flex items-center font-medium mt-2">
+                                <IconsDate />
+                                <span class="ml-1">{{ moment(potensi.created_at).format("LL") }}</span>
                             </div>
-                            <div class="block md:flex">
-                                <div class="text-xs md:text-base flex items-center font-medium mt-2">
-                                    <IconsDate />
-                                    <span class="ml-1">{{ moment(potensi.created_at).format("LL") }}</span>
-                                </div>
-                                <div class="text-xs md:text-base flex items-center font-medium mt-2 ml-2">
-                                    <IconsTag />
-                                    <span class="ml-1">{{ potensi.category_name }}</span>
-                                </div>
+                            <div class="text-xs md:text-base flex items-center font-medium mt-2 sm:ml-2">
+                                <IconsTag />
+                                <span class="ml-1">{{ potensi.category_name }}</span>
                             </div>
-                            <div class="mt-2 text-sm md:text-base">
-                                <span class="hidden md:flex">{{ potensi.description }}</span>
-                                <span class="flex md:hidden">{{ potensi.description.slice(0, 40) }}...</span>
-                            </div>
+                        </div>
+                        <div class="mt-2 text-sm md:text-base">
+                            <span class="line-clamp-2 sm:line-clamp-3">{{ potensi.description }}</span>
                         </div>
                     </div>
                 </div>
@@ -69,3 +64,10 @@ useHead({
         </div>
     </div>
 </template>
+<style scoped>
+::v-deep img {
+    border-radius: 6px;
+    width: 100%;
+    object-fit: cover;
+}
+</style>

@@ -1,11 +1,7 @@
 <script setup>
 const potensiCategory = ref(null)
 
-const { data } = await useAsyncData(
-    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/potensi-category?allow_empty=false')
-)
-
-potensiCategory.value = data.value
+potensiCategory.value = await $fetch('/api/potensi-category?limit=5')
 </script>
 <template>
     <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-4 text-xl sm:text-2xl font-semibold py-3">

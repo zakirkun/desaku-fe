@@ -13,7 +13,7 @@ const props = defineProps(['child'])
         <div class="whitespace-nowrap cursor-pointer font-medium">
             <slot name="root" />
         </div>
-        <div v-if="props.child" class="truncate max-[300px]:w-[100px] w-[200px] sm:w-fit">
+        <div v-if="props.child" class="truncate max-[300px]:w-[100px] max-[450px]:w-[150px] w-[200px] sm:w-fit">
             <span class="mx-2">/</span>
             {{ props.child }}
         </div>

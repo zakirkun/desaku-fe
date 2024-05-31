@@ -30,10 +30,10 @@ definePageMeta({
         </BreadCrumb>
         <div class="pb-12 grid grid-cols-1 md:grid-cols-6 md:gap-x-12 gap-y-8 ">
             <div class="block col-span-1 md:col-span-4">
-                <div class="text-[#0088CC] mb-2 text-2xl md:text-2xl font-semibold py-3">
+                <div class="text-[#0088CC] mb-2 text-xl md:text-2xl font-semibold py-3">
                     <span>{{ post.title }}</span>
                 </div>
-                <div class="text-md flex items-center font-medium mt-2 mb-4">
+                <div class="text-sm flex items-center font-medium mt-2 mb-4">
                     <IconsDate />
                     <span class="ml-1">{{ moment(post.created_at).format("LL") }}</span>
                 </div>

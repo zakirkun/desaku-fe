@@ -8,12 +8,12 @@ data.value = await $fetch('/api/footer')
 <template>
     <div class="flex-none">
         <div
-            class="grid grid-cols-1 md:grid-cols-3 gap-x-[6rem] gap-y-8 px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] bg-[#0088CC] text-white py-8">
+            class="grid text-sm sm:text-base grid-cols-1 md:grid-cols-3 gap-x-[6rem] gap-y-8 px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] bg-[#0088CC] text-white py-8">
             <div class="block">
                 <div class="text-xl md:text-2xl font-semibold">
                     <span>Profil</span>
                 </div>
-                <div class="text-sm mt-3 leading-6">
+                <div class="mt-3 leading-6">
                     <span>
                         {{ data.profile }}
                     </span>
@@ -24,7 +24,7 @@ data.value = await $fetch('/api/footer')
                     <span>Sosial Media</span>
                 </div>
                 <div class="text-sm mt-3">
-                    <ul class="text-base">
+                    <ul>
                         <li v-for="item in socialMedia" class="flex items-center">
                             <IconsInstagram v-if="item.name == 'Instagram'" />
                             <IconsFacebook v-if="item.name == 'Facebook'" />
@@ -40,7 +40,7 @@ data.value = await $fetch('/api/footer')
                 <div class="text-xl md:text-2xl font-semibold">
                     <span>Alamat Lengkap</span>
                 </div>
-                <div class="text-sm mt-3">
+                <div class="mt-3">
                     <span>{{ data.address }}</span>
                 </div>
             </div>

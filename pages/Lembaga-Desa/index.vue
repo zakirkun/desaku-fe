@@ -21,19 +21,19 @@ data.value = await $fetch('/api/lembaga')
         <div class="pb-8">
             <h1 class="mb-8 font-semibold text-[#0088CC] text-2xl">Lembaga Desa</h1>
             <div class="w-full">
-                <div class="shadow overflow-hidden rounded border-b border-gray-200">
-                    <table class="min-w-full bg-white overflow-x-auto">
-                        <thead class="bg-gray-700 text-white">
-                            <tr>
-                                <th class="w-1/3 text-left py-3 px-4 uppercase font-medium text-sm">Nama Lembaga</th>
-                                <th class="w-1/3 text-left py-3 px-4 uppercase font-medium text-sm">Alamat Kantor</th>
-                                <th class="text-left py-3 px-4 uppercase font-medium text-sm">Logo</th>
+                <div class="shadow rounded-lg border-b border-gray-200">
+                    <table class="w-full bg-white">
+                        <thead class="bg-gray-700 rounded-lg text-white">
+                            <tr class="rounded-lg">
+                                <th class="w-1/3 text-left py-3 px-4 font-medium text-sm">Nama Lembaga</th>
+                                <th class="w-1/3 text-left py-3 px-4 font-medium text-sm">Alamat Kantor</th>
+                                <th class="text-left py-3 px-4 font-medium text-sm">Logo</th>
                             </tr>
                         </thead>
-                        <tbody class="text-gray-700">
+                        <tbody class="text-gray-700 overflow-x-scroll">
                             <tr v-for="(item, index) in data" @click="$router.push('/lembaga-desa/' + item.slug)"
                                 class="cursor-pointer" :class="index % 2 == 0 ? 'bg-gray-100' : ''">
-                                <td class="text-[#0088CC] font-normal tw-1/3 text-left text-base md:text-xl  py-3 px-4">
+                                <td class="text-[#0088CC] font-normal tw-1/3 text-left text-sm md:text-xl  py-3 px-4">
                                     <div>
                                         {{ item.name }}
                                     </div>
@@ -42,10 +42,12 @@ data.value = await $fetch('/api/lembaga')
                                         {{ item.surname }}
                                     </div>
                                 </td>
-                                <td class="w-1/3 text-left py-3 px-4 text-base md:text-xl ">{{ item.address }}</td>
+                                <td class="w-1/3 text-left py-3 px-4 text-sm md:text-lg">{{ item.address }}</td>
                                 <td class="text-left py-3 px-4">
-                                    <v-img :lazy-src="item.image" :src="item.image" class="rounded-md" cover width="160"
-                                        aspect-ratio="16/9" />
+                                    <v-img v-if="$vuetify.display.mobile" :lazy-src="item.image" :src="item.image"
+                                        class="rounded-md" cover width="100%" aspect-ratio="16/9" />
+                                    <v-img v-else :lazy-src="item.image" :src="item.image"
+                                        class="rounded-md" cover width="160" aspect-ratio="16/9" />
                                 </td>
                             </tr>
                         </tbody>
@@ -55,3 +57,8 @@ data.value = await $fetch('/api/lembaga')
         </div>
     </div>
 </template>
+<style scoped>
+thead {
+    border-radius: 10px !important;
+}
+</style>

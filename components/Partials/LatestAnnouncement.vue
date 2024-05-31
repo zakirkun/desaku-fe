@@ -6,7 +6,7 @@ const announcements = ref(null)
 announcements.value = (await $fetch('/api/pengumuman?limit=5')).data
 </script>
 <template>
-    <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-4 text-2xl font-semibold py-3">
+    <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-4 text-xl md:text-2xl font-semibold py-3">
         <span>Pengumuman Terbaru</span>
     </div>
     <div class="mb-3">

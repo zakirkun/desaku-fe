@@ -40,13 +40,13 @@ async function changePage() {
         </BreadCrumb>
         <div class="grid grid-cols-1 md:grid-cols-6 md:gap-x-12">
             <div class="block col-span-1 md:col-span-4 pb-6">
-                <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-2xl font-semibold py-3">
+                <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-xl md:text-2xl font-semibold py-3">
                     <span>Pengumuman</span>
                 </div>
                 <div @click="$router.push('/pengumuman/' + announcement.slug)" class="cursor-pointer flex mb-7"
                     v-for="announcement in announcements">
                     <div class="block">
-                        <div class="text-lg md:text-xl font-semibold">
+                        <div class="text-base md:text-lg font-semibold">
                             <span class="line-clamp-2">{{ announcement.title }}</span>
                         </div>
                         <div class="text-md flex items-center font-medium mt-2">
@@ -54,7 +54,7 @@ async function changePage() {
                             <span class="ml-1">{{ moment(announcement.created_at).format("LL") }}</span>
                         </div>
                         <div class="mt-3">
-                            <span class="line-clamp-2 sm:line-clamp-3">{{ announcement.description }}</span>
+                            <span class="text-md sm:text-base line-clamp-2 sm:line-clamp-3">{{ announcement.description }}</span>
                         </div>
                     </div>
                 </div>
