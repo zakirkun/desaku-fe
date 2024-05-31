@@ -18073,7 +18073,7 @@ const layouts = {
   "app-menu-item": () => import('./AppMenuItem-66160126.mjs').then((m) => m.default || m),
   "app-sidebar": () => import('./AppSidebar-03398e8d.mjs').then((m) => m.default || m),
   "app-topbar": () => import('./AppTopbar-efa624dc.mjs').then((m) => m.default || m),
-  app: () => import('./app-ae95ef8d.mjs').then((m) => m.default || m),
+  app: () => import('./app-75b16036.mjs').then((m) => m.default || m),
   blank: () => import('./blank-0125dac0.mjs').then((m) => m.default || m),
   default: () => import('./default-e1b92e12.mjs').then((m) => m.default || m)
 };

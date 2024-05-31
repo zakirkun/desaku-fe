@@ -57,7 +57,7 @@ function changePage() {
 
 onClickOutside(target, event => {
     navMobile.value = false
-    document.body.style.overflow = '';
+    document.documentElement.classList.remove('overflow-hidden');
 })
 
 definePageMeta({
@@ -79,6 +79,7 @@ export default {
             ['Delete', 'mdi-delete'],
         ],
         items: [
+            { type: 'header', title: 'Beranda', value: "/" },
             { type: 'subheader', title: 'Profil Desa' },
             {
                 title: 'Tentang Desa',
