@@ -1,0 +1,1 @@
+.v-enter-from{height:100vh;width:0}.v-enter-to,.v-leave-from{width:75%}.v-leave-to{width:0}.v-enter-active,.v-leave-active{transition:all .5s ease}.animation{animation:fade-out .5s ease-out}@keyframes fade-out{0%{opacity:0}to{opacity:1}}li[data-v-28756a9a]{margin-bottom:6px}

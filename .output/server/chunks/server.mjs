@@ -905,7 +905,7 @@ const _routes = [
     meta: __nuxt_page_meta$j || {},
     alias: (__nuxt_page_meta$j == null ? void 0 : __nuxt_page_meta$j.alias) || [],
     redirect: (__nuxt_page_meta$j == null ? void 0 : __nuxt_page_meta$j.redirect) || void 0,
-    component: () => import('./_id_-13f43891.mjs').then((m) => m.default || m)
+    component: () => import('./_id_-24980903.mjs').then((m) => m.default || m)
   },
   {
     name: (__nuxt_page_meta$i == null ? void 0 : __nuxt_page_meta$i.name) ?? "Berita-id",
@@ -913,7 +913,7 @@ const _routes = [
     meta: __nuxt_page_meta$i || {},
     alias: (__nuxt_page_meta$i == null ? void 0 : __nuxt_page_meta$i.alias) || [],
     redirect: (__nuxt_page_meta$i == null ? void 0 : __nuxt_page_meta$i.redirect) || void 0,
-    component: () => import('./_id_-f0fb62f6.mjs').then((m) => m.default || m)
+    component: () => import('./_id_-77db2055.mjs').then((m) => m.default || m)
   },
   {
     name: (__nuxt_page_meta$h == null ? void 0 : __nuxt_page_meta$h.name) ?? "Berita",
@@ -921,7 +921,7 @@ const _routes = [
     meta: __nuxt_page_meta$h || {},
     alias: (__nuxt_page_meta$h == null ? void 0 : __nuxt_page_meta$h.alias) || [],
     redirect: (__nuxt_page_meta$h == null ? void 0 : __nuxt_page_meta$h.redirect) || void 0,
-    component: () => import('./index-72a27424.mjs').then((m) => m.default || m)
+    component: () => import('./index-7d22554c.mjs').then((m) => m.default || m)
   },
   {
     name: "Dashboard-Activities-add",
@@ -1273,7 +1273,7 @@ const _routes = [
     meta: __nuxt_page_meta$g || {},
     alias: (__nuxt_page_meta$g == null ? void 0 : __nuxt_page_meta$g.alias) || [],
     redirect: (__nuxt_page_meta$g == null ? void 0 : __nuxt_page_meta$g.redirect) || void 0,
-    component: () => import('./Galeri-62166be2.mjs').then((m) => m.default || m)
+    component: () => import('./Galeri-ce287062.mjs').then((m) => m.default || m)
   },
   {
     name: (__nuxt_page_meta$f == null ? void 0 : __nuxt_page_meta$f.name) ?? "Kegiatan-id",
@@ -1281,7 +1281,7 @@ const _routes = [
     meta: __nuxt_page_meta$f || {},
     alias: (__nuxt_page_meta$f == null ? void 0 : __nuxt_page_meta$f.alias) || [],
     redirect: (__nuxt_page_meta$f == null ? void 0 : __nuxt_page_meta$f.redirect) || void 0,
-    component: () => import('./_id_-c37eb8fd.mjs').then((m) => m.default || m)
+    component: () => import('./_id_-8c458504.mjs').then((m) => m.default || m)
   },
   {
     name: (__nuxt_page_meta$e == null ? void 0 : __nuxt_page_meta$e.name) ?? "Kegiatan",
@@ -1289,7 +1289,7 @@ const _routes = [
     meta: __nuxt_page_meta$e || {},
     alias: (__nuxt_page_meta$e == null ? void 0 : __nuxt_page_meta$e.alias) || [],
     redirect: (__nuxt_page_meta$e == null ? void 0 : __nuxt_page_meta$e.redirect) || void 0,
-    component: () => import('./index-75ccd1b6.mjs').then((m) => m.default || m)
+    component: () => import('./index-48ae37ef.mjs').then((m) => m.default || m)
   },
   {
     name: (__nuxt_page_meta$d == null ? void 0 : __nuxt_page_meta$d.name) ?? "Lembaga-Desa-id",
@@ -1297,7 +1297,7 @@ const _routes = [
     meta: __nuxt_page_meta$d || {},
     alias: (__nuxt_page_meta$d == null ? void 0 : __nuxt_page_meta$d.alias) || [],
     redirect: (__nuxt_page_meta$d == null ? void 0 : __nuxt_page_meta$d.redirect) || void 0,
-    component: () => import('./_id_-9ec1aadc.mjs').then((m) => m.default || m)
+    component: () => import('./_id_-c3386536.mjs').then((m) => m.default || m)
   },
   {
     name: (__nuxt_page_meta$c == null ? void 0 : __nuxt_page_meta$c.name) ?? "Lembaga-Desa",
@@ -1305,7 +1305,7 @@ const _routes = [
     meta: __nuxt_page_meta$c || {},
     alias: (__nuxt_page_meta$c == null ? void 0 : __nuxt_page_meta$c.alias) || [],
     redirect: (__nuxt_page_meta$c == null ? void 0 : __nuxt_page_meta$c.redirect) || void 0,
-    component: () => import('./index-173a2998.mjs').then((m) => m.default || m)
+    component: () => import('./index-bca5aa50.mjs').then((m) => m.default || m)
   },
   {
     name: (__nuxt_page_meta$b == null ? void 0 : __nuxt_page_meta$b.name) ?? "Pengumuman-id",
@@ -1313,7 +1313,7 @@ const _routes = [
     meta: __nuxt_page_meta$b || {},
     alias: (__nuxt_page_meta$b == null ? void 0 : __nuxt_page_meta$b.alias) || [],
     redirect: (__nuxt_page_meta$b == null ? void 0 : __nuxt_page_meta$b.redirect) || void 0,
-    component: () => import('./_id_-492af706.mjs').then((m) => m.default || m)
+    component: () => import('./_id_-bcb83945.mjs').then((m) => m.default || m)
   },
   {
     name: (__nuxt_page_meta$a == null ? void 0 : __nuxt_page_meta$a.name) ?? "Pengumuman",
@@ -1321,7 +1321,7 @@ const _routes = [
     meta: __nuxt_page_meta$a || {},
     alias: (__nuxt_page_meta$a == null ? void 0 : __nuxt_page_meta$a.alias) || [],
     redirect: (__nuxt_page_meta$a == null ? void 0 : __nuxt_page_meta$a.redirect) || void 0,
-    component: () => import('./index-6c6f44ff.mjs').then((m) => m.default || m)
+    component: () => import('./index-b7693c5b.mjs').then((m) => m.default || m)
   },
   {
     name: (__nuxt_page_meta$9 == null ? void 0 : __nuxt_page_meta$9.name) ?? "Perangkat-Desa-id",
@@ -1329,7 +1329,7 @@ const _routes = [
     meta: __nuxt_page_meta$9 || {},
     alias: (__nuxt_page_meta$9 == null ? void 0 : __nuxt_page_meta$9.alias) || [],
     redirect: (__nuxt_page_meta$9 == null ? void 0 : __nuxt_page_meta$9.redirect) || void 0,
-    component: () => import('./_id_-54f17968.mjs').then((m) => m.default || m)
+    component: () => import('./_id_-c61c21d5.mjs').then((m) => m.default || m)
   },
   {
     name: (__nuxt_page_meta$8 == null ? void 0 : __nuxt_page_meta$8.name) ?? "Perangkat-Desa",
@@ -1337,7 +1337,7 @@ const _routes = [
     meta: __nuxt_page_meta$8 || {},
     alias: (__nuxt_page_meta$8 == null ? void 0 : __nuxt_page_meta$8.alias) || [],
     redirect: (__nuxt_page_meta$8 == null ? void 0 : __nuxt_page_meta$8.redirect) || void 0,
-    component: () => import('./index-9d74f0b5.mjs').then((m) => m.default || m)
+    component: () => import('./index-869a4ae4.mjs').then((m) => m.default || m)
   },
   {
     name: (__nuxt_page_meta$7 == null ? void 0 : __nuxt_page_meta$7.name) ?? "Potensi-Desa-Category-id",
@@ -1345,7 +1345,7 @@ const _routes = [
     meta: __nuxt_page_meta$7 || {},
     alias: (__nuxt_page_meta$7 == null ? void 0 : __nuxt_page_meta$7.alias) || [],
     redirect: (__nuxt_page_meta$7 == null ? void 0 : __nuxt_page_meta$7.redirect) || void 0,
-    component: () => import('./_id_-bdba19f0.mjs').then((m) => m.default || m)
+    component: () => import('./_id_-83466acf.mjs').then((m) => m.default || m)
   },
   {
     name: (__nuxt_page_meta$6 == null ? void 0 : __nuxt_page_meta$6.name) ?? "Potensi-Desa-id",
@@ -1353,7 +1353,7 @@ const _routes = [
     meta: __nuxt_page_meta$6 || {},
     alias: (__nuxt_page_meta$6 == null ? void 0 : __nuxt_page_meta$6.alias) || [],
     redirect: (__nuxt_page_meta$6 == null ? void 0 : __nuxt_page_meta$6.redirect) || void 0,
-    component: () => import('./_id_-b25edb13.mjs').then((m) => m.default || m)
+    component: () => import('./_id_-f3f05caf.mjs').then((m) => m.default || m)
   },
   {
     name: (__nuxt_page_meta$5 == null ? void 0 : __nuxt_page_meta$5.name) ?? "Potensi-Desa",
@@ -1361,7 +1361,7 @@ const _routes = [
     meta: __nuxt_page_meta$5 || {},
     alias: (__nuxt_page_meta$5 == null ? void 0 : __nuxt_page_meta$5.alias) || [],
     redirect: (__nuxt_page_meta$5 == null ? void 0 : __nuxt_page_meta$5.redirect) || void 0,
-    component: () => import('./index-27f5a941.mjs').then((m) => m.default || m)
+    component: () => import('./index-8713997e.mjs').then((m) => m.default || m)
   },
   {
     name: (__nuxt_page_meta$4 == null ? void 0 : __nuxt_page_meta$4.name) ?? "Sejarah-Desa",
@@ -1369,7 +1369,7 @@ const _routes = [
     meta: __nuxt_page_meta$4 || {},
     alias: (__nuxt_page_meta$4 == null ? void 0 : __nuxt_page_meta$4.alias) || [],
     redirect: (__nuxt_page_meta$4 == null ? void 0 : __nuxt_page_meta$4.redirect) || void 0,
-    component: () => import('./Sejarah-Desa-b169749c.mjs').then((m) => m.default || m)
+    component: () => import('./Sejarah-Desa-1ea13b6e.mjs').then((m) => m.default || m)
   },
   {
     name: (__nuxt_page_meta$3 == null ? void 0 : __nuxt_page_meta$3.name) ?? "Struktur-Organisasi",
@@ -1377,7 +1377,7 @@ const _routes = [
     meta: __nuxt_page_meta$3 || {},
     alias: (__nuxt_page_meta$3 == null ? void 0 : __nuxt_page_meta$3.alias) || [],
     redirect: (__nuxt_page_meta$3 == null ? void 0 : __nuxt_page_meta$3.redirect) || void 0,
-    component: () => import('./Struktur-Organisasi-d12365fb.mjs').then((m) => m.default || m)
+    component: () => import('./Struktur-Organisasi-1b14e377.mjs').then((m) => m.default || m)
   },
   {
     name: (__nuxt_page_meta$2 == null ? void 0 : __nuxt_page_meta$2.name) ?? "Tentang-Desa",
@@ -1385,7 +1385,7 @@ const _routes = [
     meta: __nuxt_page_meta$2 || {},
     alias: (__nuxt_page_meta$2 == null ? void 0 : __nuxt_page_meta$2.alias) || [],
     redirect: (__nuxt_page_meta$2 == null ? void 0 : __nuxt_page_meta$2.redirect) || void 0,
-    component: () => import('./Tentang-Desa-dbcefde0.mjs').then((m) => m.default || m)
+    component: () => import('./Tentang-Desa-99a7a380.mjs').then((m) => m.default || m)
   },
   {
     name: (__nuxt_page_meta$1 == null ? void 0 : __nuxt_page_meta$1.name) ?? "Visi-Misi",
@@ -1393,7 +1393,7 @@ const _routes = [
     meta: __nuxt_page_meta$1 || {},
     alias: (__nuxt_page_meta$1 == null ? void 0 : __nuxt_page_meta$1.alias) || [],
     redirect: (__nuxt_page_meta$1 == null ? void 0 : __nuxt_page_meta$1.redirect) || void 0,
-    component: () => import('./Visi-Misi-2af17cee.mjs').then((m) => m.default || m)
+    component: () => import('./Visi-Misi-763ce6df.mjs').then((m) => m.default || m)
   },
   {
     name: (__nuxt_page_meta == null ? void 0 : __nuxt_page_meta.name) ?? "index",
@@ -18073,7 +18073,7 @@ const layouts = {
   "app-menu-item": () => import('./AppMenuItem-66160126.mjs').then((m) => m.default || m),
   "app-sidebar": () => import('./AppSidebar-03398e8d.mjs').then((m) => m.default || m),
   "app-topbar": () => import('./AppTopbar-efa624dc.mjs').then((m) => m.default || m),
-  app: () => import('./app-847bb5d6.mjs').then((m) => m.default || m),
+  app: () => import('./app-07b7a248.mjs').then((m) => m.default || m),
   blank: () => import('./blank-0125dac0.mjs').then((m) => m.default || m),
   default: () => import('./default-e1b92e12.mjs').then((m) => m.default || m)
 };
