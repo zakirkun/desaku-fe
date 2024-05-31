@@ -10,9 +10,9 @@ const post = reactive({
 
 const data = await $fetch('/api/kegiatan/slug/' + route.params.id)
 
-post.title = data.value.title
-post.content = data.value.content
-post.created_at = data.value.created_at
+post.title = data.title
+post.content = data.content
+post.created_at = data.created_at
 
 definePageMeta({
     layout: 'app'
