@@ -18,7 +18,7 @@ import 'node:url';
 import 'pathe';
 
 const _id_ = defineEventHandler(async (event) => {
-  return await $fetch(useRuntimeConfig().public.API_BASE_URL + "/api/announcement/slug/" + getRouterParam(event, "id"));
+  return await $fetch(useRuntimeConfig().public.API_BASE_URL + "/api/lembaga/slug/" + getRouterParam(event, "id"));
 });
 
 export { _id_ as default };
