@@ -22,7 +22,7 @@ definePageMeta({
     <Head>
         <Title>{{ post.title }}</Title>
     </Head>
-    <div class="animate-fade block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem]  pt-6">
+    <div class="animate-fade block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-6">
         <BreadCrumb :child="post.title">
             <template v-slot:root>
                 <span @click="navigateTo('/kegiatan')">Kegiatan</span>

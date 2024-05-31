@@ -26,7 +26,7 @@ async function changePage() {
 }
 </script>
 <template>
-    <div class="animate-fade flex-1 block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem]  pt-6">
+    <div class="animate-fade flex-1 block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-6">
         <BreadCrumb>
             <template v-slot:root>
                 <span>Berita</span>

@@ -15,7 +15,7 @@ post.value = await $fetch('/api/berita/slug/' + route.params.id)
     <Head>
         <Title>{{ post.title }}</Title>
     </Head>
-    <div class="animate-fade flex-1 block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem]  pt-6">
+    <div class="animate-fade flex-1 block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-6">
         <BreadCrumb :child="post.title">
             <template v-slot:root>
                 <span @click="navigateTo('/berita')">Berita</span>
@@ -31,7 +31,7 @@ post.value = await $fetch('/api/berita/slug/' + route.params.id)
                     <IconsAuthor />
                     <div class="ml-2">
                         <span class="font-normal">Ditulis oleh</span>
-                        <span class="ml-1 text-base font-normal">{{ post.created_by }}</span>
+                        <span class="ml-1 font-normal">{{ post.created_by }}</span>
                     </div>
                 </div>
                 <div class="text-md flex items-center font-normal my-4">

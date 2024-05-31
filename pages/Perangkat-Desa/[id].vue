@@ -24,12 +24,11 @@ data.nip = dataPerangkatDesa.nip
 perangkatDesa.value = await $fetch('/api/perangkat-desa?limit=5')
 </script>
 <template>
-
     <Head>
         <Title>{{ data.name }} Perangkat Desa</Title>
     </Head>
     <div
-        class="animate-fade flex-1 pb-8 px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-[2.5rem] min-h-[30rem]">
+        class="animate-fade flex-1 pb-8 px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-6 min-h-[30rem]">
         <BreadCrumb :child="data.name">
             <template v-slot:root>
                 <span @click="navigateTo('/perangkat-desa')">Perangkat Desa</span>

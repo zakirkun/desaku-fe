@@ -19,7 +19,7 @@ useHead({
 });
 </script>
 <template>
-    <div class="flex-1 animate-fade block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem]  pt-6">
+    <div class="flex-1 animate-fade block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-6">
         <BreadCrumb :child="category_name">
             <template v-slot:root>
                 <span @click="navigateTo('/potensi-desa')">Potensi Desa</span>

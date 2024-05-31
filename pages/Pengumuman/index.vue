@@ -27,7 +27,7 @@ async function changePage() {
 </script>
 <template>
     <div id="list_pengumuman"
-        class="animate-fade flex-1 block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem]  pt-6">
+        class="animate-fade flex-1 block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-6">
         <BreadCrumb>
             <template v-slot:root>
                 <span @click="navigateTo('/pengumuman')">Pengumuman</span>
@@ -41,7 +41,7 @@ async function changePage() {
                 <div @click="$router.push('/pengumuman/' + announcement.slug)" class="cursor-pointer flex mb-7"
                     v-for="announcement in announcements">
                     <div class="block">
-                        <div class="text-xl font-semibold">
+                        <div class="text-lg md:text-xl font-semibold">
                             <span class="line-clamp-2">{{ announcement.title }}</span>
                         </div>
                         <div class="text-md flex items-center font-medium mt-2">

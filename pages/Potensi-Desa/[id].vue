@@ -23,7 +23,7 @@ definePageMeta({
         <Title>{{ post.title }}</Title>
     </Head>
     <div
-        class="animate-fade flex-1 block pb-[5rem] px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem]  pt-6">
+        class="animate-fade flex-1 block pb-[5rem] px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-6">
         <BreadCrumb :child="post.title">
             <template v-slot:root>
                 <span @click="navigateTo('/potensi-desa')">Potensi Desa</span>

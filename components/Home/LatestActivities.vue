@@ -13,10 +13,10 @@ activities.value = (await $fetch('/api/kegiatan?limit=5')).data
         </div>
         <div class="block ml-3 cursor-pointer" @click="$router.push('/kegiatan/' + activity.slug)">
             <div class="text-[#0088CC] text-base">
-                <span>{{ activity.title }}</span>
+                <span class="line-clamp-2">{{ activity.title }}</span>
             </div>
             <div class="text-base">
-                <span class="line-clamp-2">{{ activity.description }}</span>
+                <span class="line-clamp-2 sm:line-clamp-3">{{ activity.description }}</span>
             </div>
         </div>
     </div>

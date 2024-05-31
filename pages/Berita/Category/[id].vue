@@ -34,7 +34,7 @@ useHead({
 });
 </script>
 <template>
-    <div id="list_berita" class="animate-fade flex-1 block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem]  pt-6">
+    <div id="list_berita" class="animate-fade flex-1 block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-6">
         <BreadCrumb :child="categoryName">
             <template v-slot:root>
                 <span @click="navigateTo('/berita')">Berita</span>
