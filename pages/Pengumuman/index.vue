@@ -22,12 +22,17 @@ async function changePage() {
     const { data } = await $fetch(`/api/pengumuman?limit=5&page=${page.value}`)
 
     announcements.value = data
-    document.getElementById("list_pengumuman").scrollIntoView({ behavior: 'smooth' })
+
+    if (navigator.userAgent.includes("Chrome")) {
+        window.scrollTo({ behavior: "smooth", top: 0, left: 0 })
+        return
+    }
+
+    windowScrollTo(window, { behavior: "smooth", top: 0, left: 0 });
 }
 </script>
 <template>
-    <div id="list_pengumuman"
-        class="animate-fade flex-1 block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-6">
+    <div class="animate-fade flex-1 block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-6">
         <BreadCrumb>
             <template v-slot:root>
                 <span @click="navigateTo('/pengumuman')">Pengumuman</span>

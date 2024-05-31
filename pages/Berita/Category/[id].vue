@@ -26,7 +26,13 @@ async function changePage() {
 
     news.value = data
     categoryName.value = category_name
-    document.getElementById("list_berita").scrollIntoView({ behavior: 'smooth' })
+    
+    if (navigator.userAgent.includes("Chrome")) {
+        window.scrollTo({ behavior: "smooth", top: 0, left: 0 })
+        return
+    }
+
+    windowScrollTo(window, { behavior: "smooth", top: 0, left: 0 });
 }
 
 useHead({
@@ -34,7 +40,7 @@ useHead({
 });
 </script>
 <template>
-    <div id="list_berita" class="animate-fade flex-1 block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-6">
+    <div class="animate-fade flex-1 block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-6">
         <BreadCrumb :child="categoryName">
             <template v-slot:root>
                 <span @click="navigateTo('/berita')">Berita</span>

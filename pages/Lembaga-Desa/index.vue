@@ -22,7 +22,7 @@ data.value = await $fetch('/api/lembaga')
             <h1 class="mb-8 font-semibold text-[#0088CC] text-2xl">Lembaga Desa</h1>
             <div class="w-full">
                 <div class="shadow overflow-hidden rounded border-b border-gray-200">
-                    <table class="min-w-full bg-white">
+                    <table class="min-w-full bg-white overflow-x-auto">
                         <thead class="bg-gray-700 text-white">
                             <tr>
                                 <th class="w-1/3 text-left py-3 px-4 uppercase font-medium text-sm">Nama Lembaga</th>

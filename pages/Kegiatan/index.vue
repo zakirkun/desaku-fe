@@ -22,7 +22,13 @@ async function changePage() {
     const { data } = await $fetch(`/api/kegiatan?limit=5&page=${page.value}`)
 
     news.value = data
-    document.getElementById("list_kegiatan").scrollIntoView({ behavior: 'smooth' })
+    
+    if (navigator.userAgent.includes("Chrome")) {
+        window.scrollTo({ behavior: "smooth", top: 0, left: 0 })
+        return
+    }
+
+    windowScrollTo(window, { behavior: "smooth", top: 0, left: 0 });
 }
 </script>
 <template>

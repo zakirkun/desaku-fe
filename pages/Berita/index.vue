@@ -1,4 +1,6 @@
 <script setup>
+import { windowScrollTo } from "seamless-scroll-polyfill";
+
 definePageMeta({
     layout: 'app'
 });
@@ -22,11 +24,18 @@ async function changePage() {
     const { data } = await $fetch(`/api/berita?limit=5&page=${page.value}`)
 
     news.value = data
-    document.getElementById("list_berita").scrollIntoView({ behavior: 'smooth' })
+    
+    if (navigator.userAgent.includes("Chrome")) {
+        window.scrollTo({ behavior: "smooth", top: 0, left: 0 })
+        return
+    }
+
+    windowScrollTo(window, { behavior: "smooth", top: 0, left: 0 });
 }
 </script>
 <template>
-    <div class="animate-fade flex-1 block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-6">
+    <div id="target"
+        class="animate-fade flex-1 block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem] pt-6">
         <BreadCrumb>
             <template v-slot:root>
                 <span>Berita</span>
@@ -37,12 +46,10 @@ async function changePage() {
                 <div class="text-[#0088CC] border-[#0088CC] border-b-2 mb-6 text-xl sm:text-2xl font-semibold py-3">
                     <span>Berita <span v-if="page != 1">: Halaman {{ page }}</span></span>
                 </div>
-                <div @click="$router.push('/berita/' + news.slug)"
-                    class="cursor-pointer animate-fade flex mb-10"
+                <div @click="$router.push('/berita/' + news.slug)" class="cursor-pointer animate-fade flex mb-10"
                     v-for="news in news">
                     <div class="h-[120px] sm:h-[160px] w-[140px] sm:w-[220px] md:w-[260px] flex-none">
-                        <v-img :lazy-src="news.thumbnail" height="100%" aspect-ratio="4/3"
-                            :src="news.thumbnail" />
+                        <v-img :lazy-src="news.thumbnail" height="100%" aspect-ratio="4/3" :src="news.thumbnail" />
                     </div>
                     <div class="block pl-4">
                         <div class="tetx-base md:text-xl font-semibold">
@@ -63,8 +70,8 @@ async function changePage() {
                         </div>
                     </div>
                 </div>
-                <v-pagination :size="$vuetify.display.mobile ? 'small' : 'default'" class="mt-4 mb-14" v-model="page" @update:modelValue="changePage" :total-visible="5"
-                    :length="pageLength"></v-pagination>
+                <v-pagination :size="$vuetify.display.mobile ? 'small' : 'default'" class="mt-4 mb-14" v-model="page"
+                    @update:modelValue="changePage" :total-visible="5" :length="pageLength"></v-pagination>
             </div>
             <div class="col-span-2">
                 <PartialsNewsCategory />

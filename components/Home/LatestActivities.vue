@@ -15,8 +15,8 @@ activities.value = (await $fetch('/api/kegiatan?limit=5')).data
             <div class="text-[#0088CC] text-base">
                 <span class="line-clamp-2">{{ activity.title }}</span>
             </div>
-            <div class="text-base">
-                <span class="line-clamp-2 sm:line-clamp-3">{{ activity.description }}</span>
+            <div class="text-base mt-1">
+                <span class="line-clamp-2">{{ activity.description }}</span>
             </div>
         </div>
     </div>
