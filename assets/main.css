@@ -16,6 +16,10 @@ body {
     font-family: 'General Sans', sans-serif !important;
 }
 
+.ql-toolbar.ql-snow {
+    border-radius: 6px 6px 0 0;
+}
+
 .quill-content p:has(img) {
     width: fit-content;
     margin: 0 auto;
@@ -23,6 +27,10 @@ body {
 
 .ql-editor {
     font-family: 'General Sans', sans-serif !important;
+}
+
+.ql-container {
+    border-radius: 0 0 6px 6px;
 }
 
 .quill-content p:has(br) {
@@ -49,7 +57,7 @@ a {
     color: #0088CC;
 }
 
-p span, p, ol, li{
+p span, p, td, ol, li{
     word-wrap: break-word;
     font-size: 14px;
     line-height: 1.8rem;
@@ -108,7 +116,7 @@ h3 {
 }
 
 @media screen and (max-width: 600px) {
-    p span, p, td, li {
+    p span, p, td, ol, li {
         word-wrap: break-word;
         font-size: 14px;
         line-height: 1.8rem;

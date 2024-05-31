@@ -1,15 +1,15 @@
 <script setup>
 useHead({
-    title: 'Pengumuman',
+    title: 'Kegiatan',
 })
 </script>
 <script>
 export default {
     data() {
         return {
-            modalRemoveNews: false,
-            modalRemoveNewsCategory: false,
-            removedAnnouncementId: null,
+            modalRemoveActivity: false,
+            modalRemoveActivityCategory: false,
+            removedActivityId: null,
             data: null,
             form: {
                 title: null,
@@ -20,6 +20,7 @@ export default {
             headers: [
                 { title: 'Title', align: 'start', sortable: false, key: 'title', width: "300px" },
                 { title: 'Description', align: 'start', sortable: false, key: 'description', width: "300px" },
+                { title: 'Thumbnail', align: 'start', key: 'thumbnail' },
                 { title: 'Content', align: 'end', key: 'content' },
                 { title: 'Actions', align: 'center', key: 'actions', sortable: false },
             ],
@@ -32,23 +33,23 @@ export default {
     methods: {
         async loadData() {
             this.loadingData = true
-            const data = await $fetch(this.$config.public.API_PUBLIC_URL + '/api/activities')
+            const { data } = await $fetch(this.$config.public.API_PUBLIC_URL + '/api/activities')
             this.items = data
             this.loadingData = false
         },
-        openModalRemoveAnnouncement(id) {
-            this.modalRemoveNews = true
-            this.removedAnnouncementId = id
+        openModalRemoveActivity(id) {
+            this.modalRemoveActivity = true
+            this.removedActivityId = id
         },
-        async removeNews() {
-            await $fetch(this.$config.public.API_PUBLIC_URL + '/api/activities/' + this.removedAnnouncementId, {
+        async removeActivity() {
+            await $fetch(this.$config.public.API_PUBLIC_URL + '/api/activities/' + this.removedActivityId, {
                 method: "DELETE",
                 headers: {
                     Authorization: "Bearer " + useToken().token
                 },
             })
 
-            this.modalRemoveNews = false
+            this.modalRemoveActivity = false
             await this.loadData()
         },
     }
@@ -56,14 +57,14 @@ export default {
 </script>
 
 <template>
-    <v-dialog v-model="modalRemoveNews" width="auto">
+    <v-dialog v-model="modalRemoveActivity" width="auto">
         <v-card height="auto" style="scrollbar-width: none">
             <template v-slot:title>
                 <div class="flex items-center justify-between">
                     <div class="text-xl font-semibold">
-                        <span>Hapus Berita?</span>
+                        <span>Hapus Kegiatan?</span>
                     </div>
-                    <div @click="modalRemoveNews = false" class="cursor-pointer">
+                    <div @click="modalRemoveActivity = false" class="cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
                             <g fill="none" stroke="black" stroke-width="1.5">
                                 <circle cx="12" cy="12" r="10" />
@@ -75,12 +76,12 @@ export default {
             </template>
             <template v-slot:text>
                 <div>
-                    <span>Berita yang dihapus tidak bisa dikembalikan kembali.</span>
+                    <span>Kegiatan yang dihapus tidak bisa dikembalikan kembali.</span>
                 </div>
             </template>
             <template v-slot:actions>
                 <div class="w-full flex justify-end">
-                    <v-btn variant="flat" @click="removeNews" color="#FC4100"
+                    <v-btn variant="flat" @click="removeActivity" color="#FC4100"
                         class="w-fit mt-6 text-white px-3 mx-1 mb-2 py-2 text-md">
                         <span class="capitalize">Hapus</span>
                     </v-btn>
@@ -103,6 +104,9 @@ export default {
             <div class="card">
                 <v-data-table :loading="loadingData" :headers="headers" :items="items" item-key="name">
                     <template #bottom></template>
+                    <template v-slot:item.thumbnail="{ value }">
+                        <v-img :lazy-src="value" :src="value" width="100" height="100"></v-img>
+                    </template>
                     <template v-slot:item.content="{ value }">
                         <span v-if="value" v-html="value.slice(0, 100)"></span>
                         <span v-else>-</span>
@@ -130,7 +134,7 @@ export default {
                                         clip-rule="evenodd" />
                                 </svg>
                             </div>
-                            <div class="cursor-pointer" @click="openModalRemoveAnnouncement(item.uuid)">
+                            <div class="cursor-pointer" @click="openModalRemoveActivity(item.uuid)">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em"
                                     viewBox="0 0 24 24">
                                     <path fill="#212121"

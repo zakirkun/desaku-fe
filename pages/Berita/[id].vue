@@ -18,7 +18,7 @@ post.value = await $fetch('/api/berita/slug/' + route.params.id)
     <div class="animate-fade flex-1 block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem]  pt-6">
         <BreadCrumb :child="post.title">
             <template v-slot:root>
-                <span>Berita</span>
+                <span @click="navigateTo('/berita')">Berita</span>
             </template>
         </BreadCrumb>
         <div :class="$vuetify.display.mobile ? 'pb-12' : 'pb-4'"

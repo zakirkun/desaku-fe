@@ -37,7 +37,7 @@ useHead({
     <div id="list_berita" class="animate-fade flex-1 block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem]  pt-6">
         <BreadCrumb :child="categoryName">
             <template v-slot:root>
-                <span>Visi & Misi</span>
+                <span @click="navigateTo('/berita')">Berita</span>
             </template>
         </BreadCrumb>
         <div class="grid grid-cols-1 md:grid-cols-6 md:gap-x-12">
