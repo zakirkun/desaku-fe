@@ -38,7 +38,6 @@ export default defineNuxtConfig({
     },
     plugins: [
         { src: '~/plugins/scrollTo.js', mode: 'client' },
-        { src: '~/plugins/quill.js', ssr: false }
     ],
     css: ['vuetify/lib/styles/main.sass', 'primeicons/primeicons.css', '@/assets/styles.scss', '@/assets/main.css']
 });

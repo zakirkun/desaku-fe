@@ -1,10 +1,7 @@
-
 <script>
 import { QuillEditor } from '@vueup/vue-quill';
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import ImageUploader from 'quill-image-uploader';
-import BlotFormatter from 'quill-blot-formatter'
-
 export default {
     components: {
         QuillEditor
@@ -40,11 +37,6 @@ export default {
                     }
                 },
             },
-            formatter: {
-                name: 'blotFormatter',
-                module: BlotFormatter,
-                options: {},
-            },
             toolbarOptions: [
                 ['bold', 'italic', 'underline'],        // toggled buttons
                 ['link', 'image'],
@@ -72,6 +64,6 @@ export default {
 <template>
     <ClientOnly>
         <QuillEditor v-model:content="content" @update:content="contentChange" :modules="[module]" contentType="html"
-        placeholder="Masukkan konten nya disini..." :toolbar="toolbarOptions" theme="snow" />
+            placeholder="Masukkan konten nya disini..." :toolbar="toolbarOptions" theme="snow" />
     </ClientOnly>
 </template>

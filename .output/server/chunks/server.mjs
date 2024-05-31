@@ -1089,7 +1089,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import('./add-32059dbb.mjs').then((m) => m.default || m)
+    component: () => import('./add-8e4f6c00.mjs').then((m) => m.default || m)
   },
   {
     name: "Dashboard-News-category-add",
@@ -1113,7 +1113,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import('./edit-94d3fff2.mjs').then((m) => m.default || m)
+    component: () => import('./edit-3dc954de.mjs').then((m) => m.default || m)
   },
   {
     name: "Dashboard-News",
