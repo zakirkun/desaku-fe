@@ -70,6 +70,8 @@ export default {
 </script>
 
 <template>
-    <QuillEditor  v-model:content="content" @update:content="contentChange" :modules="[module]" contentType="html"
+    <ClientOnly>
+        <QuillEditor v-model:content="content" @update:content="contentChange" :modules="[module]" contentType="html"
         placeholder="Masukkan konten nya disini..." :toolbar="toolbarOptions" theme="snow" />
+    </ClientOnly>
 </template>
