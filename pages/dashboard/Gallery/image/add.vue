@@ -13,6 +13,7 @@ export default {
                 description: null,
                 image: null
             },
+            toast: false,
             openMediaLibrary: false
         }
     },
@@ -21,6 +22,11 @@ export default {
             const { valid } = await this.$refs.form.validate()
 
             if (!valid) {
+                return
+            }
+
+            if (!this.form.image){
+                this.toast = true
                 return
             }
 
@@ -44,6 +50,14 @@ export default {
 </script>
 
 <template>
+    <v-snackbar v-model="toast" color="red" :timeout="3000">
+        Gambar wajib diisi!
+        <template v-slot:actions>
+            <v-btn color="white" variant="text" @click="toastUnauthorized = false">
+                Tutup
+            </v-btn>
+        </template>
+    </v-snackbar>
     <MediaLibrary @onImageSelected="onImageSelected" @onCloseModal="openMediaLibrary = false"
         :open="openMediaLibrary" />
     <div class="grid animate-fade">
@@ -56,6 +70,7 @@ export default {
                             label="Deskripsi Gambar" clearable v-model="form.description"></v-textarea>
                     </div>
                 </v-form>
+                <div class="mb-3 text-xl font-medium my-1">Gambar</div>
                 <div class="relative w-fit" v-if="form.image">
                     <v-img :src="form.image" width="300" />
                     <div @click="form.image = null" class="absolute cursor-pointer right-3 top-3 z-50">

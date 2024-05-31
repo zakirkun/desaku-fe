@@ -9,12 +9,25 @@ useHead({
     title: "Pengumuman"
 })
 
+const page = ref(1)
+const pageLength = ref(0)
 const announcements = ref(null)
 
-announcements.value = await $fetch('/api/pengumuman')
+const { data, total } = await $fetch('/api/pengumuman?limit=5&page=1')
+
+announcements.value = data
+pageLength.value = Math.ceil(total / 5)
+
+async function changePage() {
+    const { data } = await $fetch(`/api/pengumuman?limit=5&page=${page.value}`)
+
+    announcements.value = data
+    document.getElementById("list_pengumuman").scrollIntoView({ behavior: 'smooth' })
+}
 </script>
 <template>
-    <div class="animate-fade flex-1 block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem]  pt-6">
+    <div id="list_pengumuman"
+        class="animate-fade flex-1 block px-[2rem] sm:px-[6rem] md:px-[3rem] lg:px-[10rem] xl:px-[14rem]  pt-6">
         <BreadCrumb>
             <template v-slot:root>
                 <span @click="navigateTo('/pengumuman')">Pengumuman</span>
@@ -29,29 +42,19 @@ announcements.value = await $fetch('/api/pengumuman')
                     v-for="announcement in announcements">
                     <div class="block">
                         <div class="text-xl font-semibold">
-                            <span>{{ announcement.title }}</span>
+                            <span class="line-clamp-2">{{ announcement.title }}</span>
                         </div>
                         <div class="text-md flex items-center font-medium mt-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="1.5em" height="1.5em"
-                                viewBox="0 0 24 24">
-                                <g fill="none">
-                                    <rect width="18" height="15" x="3" y="6" stroke="#A3A3A3" rx="2" />
-                                    <path fill="black"
-                                        d="M3 10c0-1.886 0-2.828.586-3.414C4.172 6 5.114 6 7 6h10c1.886 0 2.828 0 3.414.586C21 7.172 21 8.114 21 10z" />
-                                    <path stroke="#A3A3A3" stroke-linecap="round" d="M7 3v3m10-3v3" />
-                                    <rect width="4" height="2" x="7" y="12" fill="#A3A3A3" rx=".5" />
-                                    <rect width="4" height="2" x="7" y="16" fill="#A3A3A3" rx=".5" />
-                                    <rect width="4" height="2" x="13" y="12" fill="#A3A3A3" rx=".5" />
-                                    <rect width="4" height="2" x="13" y="16" fill="#A3A3A3" rx=".5" />
-                                </g>
-                            </svg>
-                            <span>{{ moment(announcement.created_at).format("LL") }}</span>
+                            <IconsDate />
+                            <span class="ml-1">{{ moment(announcement.created_at).format("LL") }}</span>
                         </div>
                         <div class="mt-3">
-                            <span>{{ announcement.description }}</span>
+                            <span class="line-clamp-2 sm:line-clamp-3">{{ announcement.description }}</span>
                         </div>
                     </div>
                 </div>
+                <v-pagination :size="$vuetify.display.mobile ? 'small' : 'default'" class="mt-4 mb-14" v-model="page"
+                    @update:modelValue="changePage" :total-visible="5" :length="pageLength"></v-pagination>
             </div>
             <div class="col-span-2">
                 <PartialsLatestAnnouncement />

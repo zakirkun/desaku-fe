@@ -12,8 +12,9 @@
     font-style: normal;
 }
 
-body {
+html, body {
     font-family: 'General Sans', sans-serif !important;
+    scroll-behavior: smooth;
 }
 
 .ql-toolbar.ql-snow {

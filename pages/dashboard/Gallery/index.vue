@@ -50,7 +50,7 @@ export default {
         async loadVideo() {
             this.loadingVideo = true
 
-            const data = await $fetch(this.$config.public.API_PUBLIC_URL + '/api/video-gallery')
+            const { data } = await $fetch(this.$config.public.API_PUBLIC_URL + '/api/video-gallery')
             this.videos = data
 
             this.loadingVideo = false
@@ -114,7 +114,8 @@ export default {
             </template>
             <template v-slot:actions>
                 <div class="w-full flex justify-end">
-                    <v-btn @click="removeImageGallery" variant="flat" color="#FC4100" class="mt-6 text-white px-3 py-2  text-md">
+                    <v-btn @click="removeImageGallery" variant="flat" color="#FC4100"
+                        class="mt-6 text-white px-3 py-2  text-md">
                         <span class="capitalize">Hapus</span>
                     </v-btn>
                 </div>
@@ -125,7 +126,7 @@ export default {
         <v-card height="auto" style="scrollbar-width: none" class="pa-4 px-4">
             <div class="flex items-center justify-between">
                 <div class="text-xl font-semibold">
-                    <span>Hapus Video Galeri?</span>
+                    <span>Hapus Video?</span>
                 </div>
                 <div @click="modalRemoveVideo = false" class="cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
@@ -140,7 +141,8 @@ export default {
                 <span>Video yang dihapus tidak bisa dikembalikan kembali.</span>
             </div>
             <template v-slot:actions>
-                <v-btn @click="removeVideoGallery" variant="flat" color="#FC4100" class="mt-6 text-white px-3 py-2  text-md">
+                <v-btn @click="removeVideoGallery" variant="flat" color="#FC4100"
+                    class="mt-6 text-white px-3 py-2  text-md">
                     <span class="capitalize">Hapus</span>
                 </v-btn>
             </template>
@@ -190,7 +192,7 @@ export default {
             </div>
         </div>
     </div>
-    <!-- <div class="flex justify-between items-center mb-3">
+    <div class="flex justify-between items-center mb-3">
         <div class="text-2xl font-semibold mb-2">Video</div>
         <div class="text-md font-semibold mb-2">
             <NuxtLink to="/dashboard/gallery/video/add">
@@ -206,10 +208,7 @@ export default {
                 <v-data-table :loading="loadingVideo" :headers="headersVideos" :items="videos" item-key="name">
                     <template #bottom></template>
                     <template v-slot:item.url="{ value }">
-                        <iframe class="my-6" width="260" height="165" :src="value" title="YouTube video player"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <a target="_blank" :href="value">{{ value }}</a>
                     </template>
                     <template v-slot:item.actions="{ item }">
                         <div class="flex float-right">
@@ -225,5 +224,5 @@ export default {
                 </v-data-table>
             </div>
         </div>
-    </div> -->
+    </div>
 </template>
