@@ -1,0 +1,1 @@
+import{u as t,j as s,q as n}from"./entry.572b7778.js";const _={__name:"index",async setup(o){let a,e;return t({title:"Dashboard"}),[a,e]=s(()=>n("/dashboard/news")),await a,e(),()=>{}}};export{_ as default};

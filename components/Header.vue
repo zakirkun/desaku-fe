@@ -51,7 +51,7 @@ function openNavMobile() {
 function changePage() {
     navMobile.value = false
     setTimeout(() => {
-        useRouter().push(`/${navSelected.value}`)
+        useRouter().push(`${navSelected.value}`)
     }, 500)
 }
 
