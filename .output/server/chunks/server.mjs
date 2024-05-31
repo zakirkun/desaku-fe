@@ -905,7 +905,7 @@ const _routes = [
     meta: __nuxt_page_meta$j || {},
     alias: (__nuxt_page_meta$j == null ? void 0 : __nuxt_page_meta$j.alias) || [],
     redirect: (__nuxt_page_meta$j == null ? void 0 : __nuxt_page_meta$j.redirect) || void 0,
-    component: () => import('./_id_-c29f2bb8.mjs').then((m) => m.default || m)
+    component: () => import('./_id_-c30db83e.mjs').then((m) => m.default || m)
   },
   {
     name: (__nuxt_page_meta$i == null ? void 0 : __nuxt_page_meta$i.name) ?? "Berita-id",
@@ -913,7 +913,7 @@ const _routes = [
     meta: __nuxt_page_meta$i || {},
     alias: (__nuxt_page_meta$i == null ? void 0 : __nuxt_page_meta$i.alias) || [],
     redirect: (__nuxt_page_meta$i == null ? void 0 : __nuxt_page_meta$i.redirect) || void 0,
-    component: () => import('./_id_-a92d54f6.mjs').then((m) => m.default || m)
+    component: () => import('./_id_-41d23380.mjs').then((m) => m.default || m)
   },
   {
     name: (__nuxt_page_meta$h == null ? void 0 : __nuxt_page_meta$h.name) ?? "Berita",
@@ -929,7 +929,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import('./add-562b8b30.mjs').then((m) => m.default || m)
+    component: () => import('./add-b20643e2.mjs').then((m) => m.default || m)
   },
   {
     name: "Dashboard-Activities-edit",
@@ -937,7 +937,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import('./edit-aac790c4.mjs').then((m) => m.default || m)
+    component: () => import('./edit-9756e9ab.mjs').then((m) => m.default || m)
   },
   {
     name: "Dashboard-Activities",
@@ -945,7 +945,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import('./index-52d2f0d7.mjs').then((m) => m.default || m)
+    component: () => import('./index-e963866f.mjs').then((m) => m.default || m)
   },
   {
     name: "Dashboard-Admin-Profile",
@@ -1281,7 +1281,7 @@ const _routes = [
     meta: __nuxt_page_meta$f || {},
     alias: (__nuxt_page_meta$f == null ? void 0 : __nuxt_page_meta$f.alias) || [],
     redirect: (__nuxt_page_meta$f == null ? void 0 : __nuxt_page_meta$f.redirect) || void 0,
-    component: () => import('./_id_-b7432027.mjs').then((m) => m.default || m)
+    component: () => import('./_id_-7e6e92d8.mjs').then((m) => m.default || m)
   },
   {
     name: (__nuxt_page_meta$e == null ? void 0 : __nuxt_page_meta$e.name) ?? "Kegiatan",
@@ -1289,7 +1289,7 @@ const _routes = [
     meta: __nuxt_page_meta$e || {},
     alias: (__nuxt_page_meta$e == null ? void 0 : __nuxt_page_meta$e.alias) || [],
     redirect: (__nuxt_page_meta$e == null ? void 0 : __nuxt_page_meta$e.redirect) || void 0,
-    component: () => import('./index-f8fc7724.mjs').then((m) => m.default || m)
+    component: () => import('./index-8ba79cbc.mjs').then((m) => m.default || m)
   },
   {
     name: (__nuxt_page_meta$d == null ? void 0 : __nuxt_page_meta$d.name) ?? "Lembaga-Desa-id",
@@ -1401,7 +1401,7 @@ const _routes = [
     meta: __nuxt_page_meta || {},
     alias: (__nuxt_page_meta == null ? void 0 : __nuxt_page_meta.alias) || [],
     redirect: (__nuxt_page_meta == null ? void 0 : __nuxt_page_meta.redirect) || void 0,
-    component: () => import('./index-6cd38261.mjs').then((m) => m.default || m)
+    component: () => import('./index-156f967c.mjs').then((m) => m.default || m)
   }
 ];
 const routerOptions0 = {
