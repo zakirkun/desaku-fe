@@ -7,9 +7,8 @@ const post = reactive({
     content: null,
     created_at: null,
 })
-const { data } = await useAsyncData(
-    () => $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/activities/slug/' + route.params.id)
-)
+
+const data = await $fetch('/api/kegiatan/slug/' + route.params.id)
 
 post.title = data.value.title
 post.content = data.value.content
