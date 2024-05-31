@@ -44,7 +44,9 @@ function openNavMobile() {
 
 function changePage() {
     navMobile.value = false
-    useRouter().push(`/${navSelected.value}`)
+    setTimeout(() => {
+        useRouter().push(`/${navSelected.value}`)
+    }, 500)
 }
 
 onClickOutside(target, event => {
