@@ -2,7 +2,7 @@
 import moment from 'moment';
 
 const activities = ref(null)
-activities.value = await $fetch('/api/kegiatan?limit=5')
+activities.value = (await $fetch('/api/kegiatan?limit=5')).data
 
 </script>
 <template>

@@ -124,10 +124,10 @@ export default {
                                 </v-btn>
                             </div>
                         </div>
-                        <div class="w-full md:w-3/4 md:mt-0 mt-10 px-3 md:px-8 grid grid-cols-2 md:grid-cols-4 gap-8">
+                        <div :class="$vuetify.display.mobile ? 'mt-10' : 'mt-0'" class="w-full md:w-3/4 md:mt-1 px-3 md:px-8 grid grid-cols-2 md:grid-cols-4 gap-8">
                             <div @click="imageSelected = image"
                                 :class="{ 'border-4 border-[#10B981]': imageSelected == image }"
-                                class="relative rounded-lg cursor-pointer h-[146px] items-center flex" v-for="image in images">
+                                class="relative rounded-lg cursor-pointer items-center flex" v-for="image in images">
                                 <v-img width="100%" class="rounded-md" aspect-ratio="1" cover :lazy-src="image"
                                     :src="image" />
                                 <svg v-if="imageSelected == image" class="rounded-md absolute right-[2px] top-0"

@@ -116,6 +116,11 @@ h3 {
     opacity: 0;
 }
 
+p img {
+    margin-bottom: 16px;
+    border-radius: 10px;
+}
+
 @media screen and (max-width: 600px) {
     p span, p, td, ol, li {
         word-wrap: break-word;

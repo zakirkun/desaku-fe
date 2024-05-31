@@ -1,6 +1,6 @@
 <script setup>
 useHead({
-    title: 'Setting Location',
+    title: 'Pengaturan Lokasi',
 })
 </script>
 <script>

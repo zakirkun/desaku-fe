@@ -82,7 +82,7 @@ useHead({
                             <swiper-slide v-for="item in perangkatDesa" class="relative rounded-lg">
                                 <v-img class="rounded-b-lg" cover width="100%" aspect-ratio="1" :lazysrc="item.image" :src="item.image" />
                                 <div
-                                    class="text-sm sm:text-lg font-normal rounded-b-md z-50 py-1 backdrop-blur-xl opacity-90 pl-2 bg-[#0088CC] bottom-0 absolute w-full text-white">
+                                    class="text-sm sm:text-lg font-normal rounded-b-md z-10 py-1 backdrop-blur-xl opacity-90 pl-2 bg-[#0088CC] bottom-0 absolute w-full text-white">
                                     <span>{{ item.name }} - {{ item.job }}</span>
                                 </div>
                             </swiper-slide>

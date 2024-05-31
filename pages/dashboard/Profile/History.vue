@@ -1,6 +1,6 @@
 <script setup>
 useHead({
-    title: 'History',
+    title: 'Sejarah Desa',
 })
 </script>
 <script>

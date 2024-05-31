@@ -1,6 +1,6 @@
 <script setup>
 useHead({
-    title: 'Tambah Perangkat Desa',
+    title: 'Tambah Jabatan',
 })
 </script>
 <script>

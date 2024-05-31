@@ -1,6 +1,6 @@
 <script setup>
 useHead({
-    title: 'Edit Activity',
+    title: 'Ubah Kegiatan',
 })
 </script>
 <script>

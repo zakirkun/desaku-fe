@@ -1,6 +1,6 @@
 <script setup>
 useHead({
-    title: 'Setting Header',
+    title: 'Pengaturan Header',
 })
 </script>
 <script>

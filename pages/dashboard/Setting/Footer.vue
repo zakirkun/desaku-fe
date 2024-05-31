@@ -1,6 +1,6 @@
 <script setup>
 useHead({
-    title: 'Setting Footer',
+    title: 'Pengaturan Footer',
 })
 </script>
 <script>
