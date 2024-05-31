@@ -143,9 +143,7 @@ export default {
                     </v-btn>
                 </div>
                 <div class="mb-3 text-lg font-medium my-1">Konten</div>
-                <ClientOnly>
-                    <RichEditor v-if="renderRichEditor" :data="data" @contentChange="contentChange" />
-                </ClientOnly>
+                <RichEditor v-if="renderRichEditor" :data="data" @contentChange="contentChange" />
                 <v-btn @click="addNews" color="#10B981" class="mt-5 text-white px-3 py-2">
                     <span class="capitalize" v-if="!loading">Submit</span>
                     <Loader v-else />
