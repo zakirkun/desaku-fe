@@ -50,12 +50,12 @@ const model = ref([
                     { label: 'Header', to: "/dashboard/setting/header" },
                 ]
             },
-            {
-                user: false,
-                label: 'Admin',
-                icon: 'pi pi-fw pi-users',
-                to: '/dashboard/admin'
-            },
+            // {
+            //     user: false,
+            //     label: 'Admin',
+            //     icon: 'pi pi-fw pi-users',
+            //     to: '/dashboard/admin'
+            // },
         ]
     },
 ]);

@@ -1217,7 +1217,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import('./Footer-7f2ec915.mjs').then((m) => m.default || m)
+    component: () => import('./Footer-38494b16.mjs').then((m) => m.default || m)
   },
   {
     name: "Dashboard-Setting-Header",
@@ -1225,7 +1225,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0,
-    component: () => import('./Header-8f0e41aa.mjs').then((m) => m.default || m)
+    component: () => import('./Header-11089faa.mjs').then((m) => m.default || m)
   },
   {
     name: "Dashboard-Setting-HomepageImage-add",
@@ -1401,7 +1401,7 @@ const _routes = [
     meta: __nuxt_page_meta || {},
     alias: (__nuxt_page_meta == null ? void 0 : __nuxt_page_meta.alias) || [],
     redirect: (__nuxt_page_meta == null ? void 0 : __nuxt_page_meta.redirect) || void 0,
-    component: () => import('./index-949f3538.mjs').then((m) => m.default || m)
+    component: () => import('./index-1efd1867.mjs').then((m) => m.default || m)
   }
 ];
 const routerOptions0 = {
@@ -18069,13 +18069,13 @@ const _wrapIf = (component, props, slots) => {
   return { default: () => props ? h(component, props === true ? {} : props, slots) : h(Fragment, {}, slots) };
 };
 const layouts = {
-  "app-layout": () => import('./AppLayout-30ae8018.mjs').then((m) => m.default || m),
+  "app-layout": () => import('./AppLayout-6d8c18ee.mjs').then((m) => m.default || m),
   "app-menu-item": () => import('./AppMenuItem-66160126.mjs').then((m) => m.default || m),
-  "app-sidebar": () => import('./AppSidebar-03398e8d.mjs').then((m) => m.default || m),
+  "app-sidebar": () => import('./AppSidebar-eaed5dc7.mjs').then((m) => m.default || m),
   "app-topbar": () => import('./AppTopbar-efa624dc.mjs').then((m) => m.default || m),
-  app: () => import('./app-07b7a248.mjs').then((m) => m.default || m),
+  app: () => import('./app-2f95c562.mjs').then((m) => m.default || m),
   blank: () => import('./blank-0125dac0.mjs').then((m) => m.default || m),
-  default: () => import('./default-e1b92e12.mjs').then((m) => m.default || m)
+  default: () => import('./default-647c9557.mjs').then((m) => m.default || m)
 };
 const LayoutLoader = /* @__PURE__ */ defineComponent$1({
   name: "LayoutLoader",

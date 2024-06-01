@@ -43,6 +43,8 @@ function openNavMobile() {
 
     if (navMobile.value){
         document.documentElement.classList.add('overflow-hidden');
+    } else {
+        document.documentElement.classList.remove('overflow-hidden');
     }
 }
 
@@ -125,13 +127,11 @@ export default {
                 value: 'pengumuman',
             },
             {
-                title: 'Kegiatan',
+                title: 'Kegiatan Hhaha',
                 value: 'kegiatan',
             },
-            {
-                title: 'Potensi Desa',
-                value: 'potensi-desa',
-            },
+            { type: 'divider' },
+            { type: 'header', title: 'Potensi Desa', value: 'potensi-desa' },
         ],
     }),
 }
@@ -164,7 +164,7 @@ export default {
                         </svg>
                     </div>
                 </div>
-                <div class="overflow-y-scroll pb-7" style="height: calc(100vh - 60px);">
+                <div class="overflow-y-scroll pb-7 h-screen">
                     <v-list selectable v-model:selected="navSelected" @update:selected="changePage"
                         :items="items"></v-list>
                 </div>

@@ -5,7 +5,7 @@ import 'photoswipe/style.css';
 const images = ref(null)
 const lightbox = ref(null)
 
-images.value = await $fetch('/api/image-homepage?limit=6')
+images.value = await $fetch('/api/image-gallery?limit=6')
 
 onMounted(async () => {
     await nextTick(() => {
