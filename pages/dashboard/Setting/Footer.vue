@@ -18,6 +18,7 @@ export default {
                     link: null
                 }
             ],
+            social_media: ["Instagram", "Facebook", "Whatsapp", "Twitter", "Youtube"],
             loading: false
         }
     },
@@ -98,8 +99,8 @@ export default {
                     <div class="block">
                         <div v-for="(sosmed, index) in formSocialMedia" class="mb-6 flex w-full">
                             <div class="w-1/3 flex-none">
-                                <v-text-field :rules="[v => !!v || 'Field is required']" v-model="sosmed.name"
-                                    variant="outlined" hide-details="auto" label="Nama Sosial Media"></v-text-field>
+                                <v-select :items="social_media" :rules="[v => !!v || 'Field is required']" v-model="sosmed.name"
+                                    variant="outlined" hide-details="auto" label="Nama Sosial Media"></v-select>
                             </div>
                             <v-text-field :rules="[v => !!v || 'Field is required']" class="mx-3" v-model="sosmed.link"
                                 variant="outlined" hide-details="auto" label="Link"></v-text-field>
