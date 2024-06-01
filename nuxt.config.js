@@ -29,6 +29,7 @@ export default defineNuxtConfig({
     },
     build: {
         transpile: ['vuetify'],
+        client: false
     },
     runtimeConfig: {
         public: {

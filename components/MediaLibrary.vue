@@ -13,7 +13,7 @@ onMounted(async () => {
 })
 
 async function loadImages() {
-    images.value = await $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/image', {
+    images.value = await $fetch(useRuntimeConfig().public.API_PUBLIC_URL + '/api/image', {
         headers: {
             Authorization: "Bearer " + useToken().token
         },
@@ -27,7 +27,7 @@ async function onDrop(files) {
     formData.append("image", files[0]);
 
     loading.value = true
-    await $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/image', {
+    await $fetch(useRuntimeConfig().public.API_PUBLIC_URL + '/api/image', {
         body: formData,
         headers: {
             Authorization: "Bearer " + useToken().token
@@ -43,9 +43,9 @@ async function onDrop(files) {
 }
 
 async function removeImage() {
-    imageSelected.value = imageSelected.value.replace(useRuntimeConfig().public.API_BASE_URL + '/storage/', '')
+    imageSelected.value = imageSelected.value.replace(useRuntimeConfig().public.API_PUBLIC_URL + '/storage/', '')
 
-    await $fetch(useRuntimeConfig().public.API_BASE_URL + '/api/image/' + imageSelected.value, {
+    await $fetch(useRuntimeConfig().public.API_PUBLIC_URL + '/api/image/' + imageSelected.value, {
         method: "DELETE",
         headers: {
             Authorization: "Bearer " + useToken().token
